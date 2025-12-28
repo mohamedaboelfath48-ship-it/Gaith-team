@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team Exam</title>
+
+<style>
+:root{
+  --primary:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --question:#cffafe;
+  --option:#f0f9ff;
+  --selected:#67e8f9;
+  --success:#16a34a;
+  --danger:#dc2626;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{margin-top:6px;font-size:18px;font-weight:800}
+.timer{margin-top:8px;font-size:18px;font-weight:800}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+.question{
+  background:var(--question);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.option{
+  background:var(--option);
+  padding:16px;
+  border-radius:14px;
+  margin:10px 0;
+  cursor:pointer;
+  font-weight:700;
+}
+.option.selected{background:var(--selected)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:900;
+}
+.correct{color:var(--success)}
+.wrong{color:var(--danger)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:20px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  font-size:16px;
+  font-weight:900;
+  border:none;
+  border-radius:14px;
+}
+.next{background:var(--primary);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+/* ================= QUESTIONS ================= */
+const questions = [
+{type:"tf",q:"Neonates lose heat faster due to thin skin and low subcutaneous fat.",a:true},
+{type:"tf",q:"Skin-to-skin contact helps prevent neonatal hypothermia.",a:true},
+{type:"tf",q:"Organic constipation has no underlying disease.",a:false},
+{type:"tf",q:"Hypothyroidism can cause constipation in children.",a:true},
+{type:"tf",q:"Protein-energy malnutrition includes kwashiorkor and marasmus.",a:true},
+{type:"tf",q:"Kwashiorkor commonly presents with muscle wasting without edema.",a:false},
+{type:"tf",q:"Marasmus children appear with old man facies.",a:true},
+{type:"tf",q:"Neonatal bleeding may present with intracranial hemorrhage.",a:true},
+{type:"tf",q:"Low Apgar score is a sign of birth asphyxia.",a:true},
+{type:"tf",q:"Congenital heart disease is always symptomatic at birth.",a:false},
+
+/* MCQs example (full set continues) */
+{type:"mcq",q:"The normal delivery room temperature to prevent hypothermia should be:",o:["20°C","22°C","25°C","30°C"],a:2},
+{type:"mcq",q:"Which newborn is at highest risk of hypothermia?",o:["Term infant","Post-term infant","Premature infant","Macrosomic infant"],a:2}
+];
+
+/* ================= STATE ================= */
+let i=0;
+let answers = Array(questions.length).fill(null);
+let time=40*60;
+
+/* TIMER */
+setInterval(()=>{
+  let m=Math.floor(time/60), s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--;
+  if(time<0) finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText = answers.filter(a=>a!==null).length;
+  remaining.innerText = questions.length - answered.innerText;
+}
+
+function showQ(){
+  const q=questions[i];
+  const sel=answers[i];
+  nextBtn.disabled = sel===null;
+
+  let html=`<div class="question">${q.q}</div>`;
+
+  if(q.type==="tf"){
+    html+=`
+      <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+      <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }else{
+    q.o.forEach((op,idx)=>{
+      html+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
+    });
+  }
+
+  if(sel!==null){
+    const correct = sel===q.a;
+    html+=`<div class="feedback ${correct?"correct":"wrong"}">
+      ${correct?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+
+  box.innerHTML=html;
+  updateCounter();
+}
+
+function choose(v){
+  if(answers[i]!==null) return;
+  answers[i]=v;
+  showQ();
+}
+
+function nextQ(){
+  if(i<questions.length-1){i++;showQ();}
+  else finish();
+}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let correct=0;
+  answers.forEach((a,idx)=>{if(a===questions[idx].a)correct++;});
+  document.body.innerHTML=`
+    <header>
+      <div class="logo">Gaith Team</div>
+      <div class="slogan">الإمتحان في جيبك</div>
+    </header>
+    <div class="container">
+      <div class="card" style="text-align:center">
+        <p style="color:green;font-size:22px;font-weight:900">Correct: ${correct}</p>
+        <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-correct}</p>
+        <p style="font-size:20px">Score: ${Math.round(correct/questions.length*100)}%</p>
+        <p style="margin-top:16px;font-size:22px;font-weight:900;color:#0891b2">
+          فخورين بيك وأشطر شطور 🌟
+        </p>
+      </div>
+    </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
