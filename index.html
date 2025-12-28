@@ -48,17 +48,26 @@ body{
 /* الحاوية */
 .container{
   width:90%;
-  max-width:680px;
+  max-width:700px;
   margin:auto;
 }
 
-/* عنوان القسم */
-.section-title{
-  text-align:right;
-  font-size:20px;
+/* ===== عنوان القسم في النص ===== */
+.section-center{
+  margin:35px 0 20px;
+  font-size:28px;
   font-weight:900;
-  margin:25px 0 10px;
   color:#0f172a;
+  position:relative;
+}
+.section-center::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:4px;
+  background:#0f172a;
+  margin:10px auto 0;
+  border-radius:4px;
 }
 
 /* كارت موحّد */
@@ -74,6 +83,10 @@ body{
   font-size:18px;
   font-weight:900;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
+  transition:.2s;
+}
+.exam-card:hover{
+  transform:scale(1.02);
 }
 
 /* الجزء الشمال */
@@ -108,16 +121,6 @@ body{
 .obgyn{background:#fff1f2;}
 .obgyn .exam-icon{background:#be123c;}
 .obgyn .arrow{color:#be123c;}
-
-/* ===== مقفول ===== */
-.locked{
-  opacity:.55;
-  pointer-events:none;
-}
-.locked .lock-icon{
-  font-size:20px;
-  color:#374151;
-}
 </style>
 </head>
 
@@ -134,7 +137,7 @@ body{
 <div class="container">
 
   <!-- ===== طب أطفال ===== -->
-  <div class="section-title">🩺 طب أطفال</div>
+  <div class="section-center">🩺 طب أطفال</div>
 
   <a class="exam-card pediatrics" href="exam1/">
     <div class="exam-left">
@@ -177,7 +180,7 @@ body{
   </a>
 
   <!-- ===== طب نسا ===== -->
-  <div class="section-title">🤰 طب نِسا</div>
+  <div class="section-center">🤰 طب نسا</div>
 
   <a class="exam-card obgyn" href="exam6/">
     <div class="exam-left">
@@ -203,22 +206,21 @@ body{
     <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
   </a>
 
-  <!-- مثال مقفول -->
-  <div class="exam-card obgyn locked">
+  <a class="exam-card obgyn" href="exam9/">
     <div class="exam-left">
       <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
       شامل طب نسا 4
     </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
 
-  <div class="exam-card obgyn locked">
+  <a class="exam-card obgyn" href="exam10/">
     <div class="exam-left">
       <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
       شامل طب نسا 5
     </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
 
 </div>
 
