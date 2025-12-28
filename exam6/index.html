@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{margin-top:12px;font-size:18px;font-weight:900}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* EASY (1–25) */
+{t:"Fertilization normally occurs in the ampulla of the fallopian tube.",a:true},
+{t:"Normal pregnancy results from fertilization, implantation, and embryogenesis.",a:true},
+{t:"The placenta is fully formed at 40 weeks of gestation.",a:false},
+{t:"The fetal surface of the placenta is smooth and shiny.",a:true},
+{t:"The maternal surface of the placenta is rough and dull.",a:true},
+{t:"The normal weight of the placenta at full term is about 500 grams.",a:true},
+{t:"The umbilical cord normally contains one vein and two arteries.",a:true},
+{t:"The normal length of the umbilical cord is about 50 cm.",a:true},
+{t:"Amniotic fluid is alkaline in reaction.",a:true},
+{t:"Amniotic fluid protects the fetus from external trauma.",a:true},
+{t:"The fetus at full term usually weighs around 3–3.5 kg.",a:true},
+{t:"Vernix caseosa covers the skin of the fetus.",a:true},
+{t:"Antenatal care aims only to detect abnormalities.",a:false},
+{t:"Antenatal care includes health education.",a:true},
+{t:"Minor discomforts are common during pregnancy.",a:true},
+{t:"Heartburn is more common in late pregnancy.",a:true},
+{t:"Frequency of micturition is common in early pregnancy.",a:true},
+{t:"Vaginal discharge is always pathological in pregnancy.",a:false},
+{t:"Backache may increase as pregnancy advances.",a:true},
+{t:"Abortion is defined as loss of pregnancy before fetal viability.",a:true},
+{t:"Threatened abortion presents with vaginal bleeding.",a:true},
+{t:"In threatened abortion, the cervix is closed.",a:true},
+{t:"Complete abortion means all products of conception are expelled.",a:true},
+{t:"Septic abortion involves infection of uterine contents.",a:true},
+{t:"Missed abortion means fetal death with retention inside the uterus.",a:true},
+
+/* MODERATE (26–55) */
+{t:"Capacitation is required for sperm to fertilize the ovum.",a:true},
+{t:"Acrosome reaction helps sperm penetrate the ovum.",a:true},
+{t:"Cleavage occurs after implantation.",a:false},
+{t:"The blastocyst is the stage of implantation.",a:true},
+{t:"Implantation usually occurs in the upper uterine segment.",a:true},
+{t:"Placenta previa occurs due to implantation in the lower uterine segment.",a:true},
+{t:"Placenta accreta means invasion into the myometrium.",a:true},
+{t:"Placenta percreta reaches the perimetrium.",a:true},
+{t:"Increased placental weight is seen in twins.",a:true},
+{t:"Battledore insertion is a marginal insertion of the umbilical cord.",a:true},
+{t:"Velamentous insertion increases risk of hemorrhage.",a:true},
+{t:"True knots of the umbilical cord may cause fetal distress.",a:true},
+{t:"Chorion lines the uterine wall.",a:true},
+{t:"Amnion covers the placenta and umbilical cord.",a:true},
+{t:"Oligohydramnios means excessive amniotic fluid.",a:false},
+{t:"Polyhydramnios is defined as amniotic fluid more than 2 liters.",a:true},
+{t:"Antenatal screening is done only for high-risk women.",a:false},
+{t:"Blood pressure is checked at every antenatal visit.",a:true},
+{t:"Hemoglobin estimation is part of routine antenatal investigations.",a:true},
+{t:"Anemia is a maternal cause of abortion.",a:true},
+{t:"Chromosomal abnormalities are common fetal causes of abortion.",a:true},
+{t:"Trisomy 21 is a numerical chromosomal abnormality.",a:true},
+{t:"Cervical incompetence can cause recurrent abortion.",a:true},
+{t:"In inevitable abortion, the cervix is dilated.",a:true},
+{t:"In incomplete abortion, some products remain inside the uterus.",a:true},
+{t:"Curettage may be required in incomplete abortion.",a:true},
+{t:"Septic abortion can lead to septic shock.",a:true},
+{t:"DIC is a possible complication of septic abortion.",a:true},
+{t:"Missed abortion may lead to hypofibrinogenemia.",a:true},
+{t:"Pregnancy test becomes negative immediately after fetal death.",a:false},
+
+/* HARD (56–80) */
+{t:"Preterm labor occurs after 37 weeks of gestation.",a:false},
+{t:"Preterm labor is a major cause of perinatal mortality.",a:true},
+{t:"Previous preterm labor increases the risk of recurrence.",a:true},
+{t:"Smoking is a social risk factor for preterm labor.",a:true},
+{t:"Polyhydramnios increases the risk of preterm labor.",a:true},
+{t:"PROM is a fetal factor causing preterm labor.",a:true},
+{t:"Threatened preterm labor presents with regular uterine contractions.",a:true},
+{t:"Cervical effacement and dilatation indicate established preterm labor.",a:true},
+{t:"Red skin and weak cry are signs of prematurity.",a:true},
+{t:"The best predictor of preterm labor is bad obstetric history.",a:true},
+{t:"Bed rest is part of management of threatened preterm labor.",a:true},
+{t:"Tocolytic drugs are used to enhance uterine contractions.",a:false},
+{t:"Tocolysis is contraindicated in cases of APH.",a:true},
+{t:"Beta-adrenergic agonists are used as tocolytics.",a:true},
+{t:"Ritodrine may cause maternal tachycardia.",a:true},
+{t:"Indomethacin may cause premature closure of ductus arteriosus.",a:true},
+{t:"Magnesium sulfate can be used as a tocolytic drug.",a:true},
+{t:"Neonatal hypoglycemia is a complication of prematurity.",a:true},
+{t:"Respiratory distress syndrome is common in preterm infants.",a:true},
+{t:"Infection risk is higher in preterm babies.",a:true},
+{t:"Long-term mental impairment may occur in prematurity.",a:true},
+{t:"Incubator temperature should be kept warm for preterm infants.",a:true},
+{t:"Early feeding helps prevent hypoglycemia in preterm babies.",a:true},
+{t:"Oxygen concentration in incubator should exceed 60%.",a:false},
+{t:"Proper antenatal care reduces the risk of preterm labor.",a:true}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>
+  <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+  <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
