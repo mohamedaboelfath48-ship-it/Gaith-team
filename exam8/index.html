@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{margin-top:12px;font-size:18px;font-weight:900}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* 🟢 EASY (1–25) */
+{t:"Pregnancy is counted from the first day of the last menstrual period.",a:true},
+{t:"The ovary releases one ovum during ovulation in most cycles.",a:true},
+{t:"Fertilization usually happens in the uterus.",a:false},
+{t:"The zygote is formed after fertilization.",a:true},
+{t:"Morula stage occurs before blastocyst stage.",a:true},
+{t:"Implantation normally occurs in the endometrium.",a:true},
+{t:"The placenta connects the fetus to the uterine wall.",a:true},
+{t:"Placenta allows exchange of gases and nutrients.",a:true},
+{t:"The placenta prevents passage of all infections to the fetus.",a:false},
+{t:"The umbilical cord connects the fetus to the placenta.",a:true},
+{t:"Amniotic fluid surrounds the fetus during pregnancy.",a:true},
+{t:"Amniotic fluid is clear and colorless.",a:true},
+{t:"Fetal movements are usually felt by the mother after mid-pregnancy.",a:true},
+{t:"Antenatal care begins after labor starts.",a:false},
+{t:"Antenatal care includes nutritional advice.",a:true},
+{t:"Nausea and vomiting are common in early pregnancy.",a:true},
+{t:"Ptyalism refers to decreased salivation.",a:false},
+{t:"Heartburn occurs due to relaxation of esophageal sphincter.",a:true},
+{t:"Backache is uncommon during pregnancy.",a:false},
+{t:"Leg edema is common in late pregnancy.",a:true},
+{t:"Abortion can occur in the first trimester.",a:true},
+{t:"Vaginal bleeding in early pregnancy is always normal.",a:false},
+{t:"Threatened abortion may continue to full term.",a:true},
+{t:"Complete abortion usually requires surgical evacuation.",a:false},
+{t:"Septic abortion is a medical emergency.",a:true},
+
+/* 🟡 MODERATE (26–55) */
+{t:"Decidua is the modified endometrium during pregnancy.",a:true},
+{t:"Decidua basalis forms the fetal part of placenta.",a:false},
+{t:"Chorionic villi arise from trophoblast.",a:true},
+{t:"Placental circulation begins after implantation.",a:true},
+{t:"Human placental lactogen affects maternal metabolism.",a:true},
+{t:"hCG levels rise rapidly in early pregnancy.",a:true},
+{t:"The umbilical vein carries blood from placenta to fetus.",a:true},
+{t:"Two umbilical veins are normally present.",a:false},
+{t:"Amniotic fluid volume is about 1 liter at term.",a:true},
+{t:"Amniotic fluid helps maintain fetal temperature.",a:true},
+{t:"Oligohydramnios increases risk of fetal deformities.",a:true},
+{t:"Polyhydramnios may be associated with diabetes.",a:true},
+{t:"Antenatal screening includes blood grouping and Rh typing.",a:true},
+{t:"Fundal height assessment helps assess fetal growth.",a:true},
+{t:"Fetal heart rate is normally between 60–80 bpm.",a:false},
+{t:"Abortion before 24 weeks is considered miscarriage.",a:true},
+{t:"Maternal anemia increases risk of abortion.",a:true},
+{t:"Cervical incompetence leads to painless abortion.",a:true},
+{t:"In inevitable abortion, bleeding is usually mild.",a:false},
+{t:"In incomplete abortion, cervix is usually open.",a:true},
+{t:"Complete abortion shows empty uterus on ultrasound.",a:true},
+{t:"Septic abortion may result in pelvic peritonitis.",a:true},
+{t:"Missed abortion may show absent fetal heart sounds.",a:true},
+{t:"Pregnancy test may remain positive in missed abortion.",a:true},
+{t:"Recurrent abortion means three or more consecutive abortions.",a:true},
+{t:"Uterine fibroids can cause recurrent abortion.",a:true},
+{t:"Preterm labor is labor before fetal maturity.",a:true},
+{t:"Smoking increases risk of preterm labor.",a:true},
+{t:"PROM increases risk of infection.",a:true},
+{t:"Preterm infants have thin skin.",a:true},
+
+/* 🔴 HARD (56–80) */
+{t:"Preterm labor accounts for significant neonatal mortality.",a:true},
+{t:"Cervical length assessment helps predict preterm labor.",a:true},
+{t:"Regular uterine contractions alone confirm preterm labor.",a:false},
+{t:"Progressive cervical dilatation confirms true labor.",a:true},
+{t:"Fetal fibronectin is a marker for preterm labor risk.",a:true},
+{t:"Tocolytic drugs are given to delay delivery.",a:true},
+{t:"Tocolysis is contraindicated in severe bleeding.",a:true},
+{t:"Beta-agonists act by relaxing uterine muscles.",a:true},
+{t:"Ritodrine may cause maternal hypotension.",a:true},
+{t:"Indomethacin reduces prostaglandin synthesis.",a:true},
+{t:"Nifedipine decreases uterine contractions.",a:true},
+{t:"Magnesium sulfate toxicity includes loss of reflexes.",a:true},
+{t:"Preterm infants are at risk of hypothermia.",a:true},
+{t:"Brown fat is poorly developed in preterm babies.",a:true},
+{t:"Respiratory distress syndrome is due to surfactant deficiency.",a:true},
+{t:"Hypoglycemia is common in low birth weight infants.",a:true},
+{t:"Infection risk is low in premature infants.",a:false},
+{t:"Excess oxygen can damage retinal vessels.",a:true},
+{t:"Incubators help maintain thermal stability.",a:true},
+{t:"Early feeding reduces risk of hypoglycemia.",a:true},
+{t:"Breast milk is ideal for preterm infants.",a:true},
+{t:"Kangaroo care improves bonding and temperature control.",a:true},
+{t:"Premature infants may develop long-term neurological problems.",a:true},
+{t:"Good antenatal care reduces preterm birth risk.",a:true},
+{t:"Prevention is better than treatment in obstetric care.",a:true}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>
+  <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+  <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
