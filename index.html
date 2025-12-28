@@ -3,263 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH Team | Exam</title>
+<title>GAITH Team</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{
-  --primary:#0891b2;
-  --secondary:#06b6d4;
-  --bg:#ecfeff;
-  --card:#ffffff;
-  --border:#bae6fd;
-  --question:#cffafe;
-  --option:#f0f9ff;
-  --selected:#67e8f9;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --text:#0f172a;
-}
-*{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-
-/* منع التحديد */
-body{user-select:none}
-
-/* زر الرجوع */
-.back-btn{
-  position:fixed;
-  top:12px;
-  left:12px;
-  background:#ccc;
-  color:#666;
-  padding:8px 14px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-  z-index:9999;
-  pointer-events:none; /* مقفول */
-}
-
-/* HEADER */
-header{
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  color:#fff;
-  padding:18px;
+  font-family:Arial, Tahoma;
+  background:#87CEEB;
   text-align:center;
 }
-.logo{font-size:22px;font-weight:900}
-.slogan{font-size:14px;font-weight:800}
-.timer{font-size:14px;font-weight:700;margin-top:4px}
 
-/* CONTAINER */
-.container{max-width:900px;margin:auto;padding:16px}
+/* اللوجو */
+.logo{
+  margin-top:40px;
+  font-size:42px;
+  font-weight:900;
+  color:#fff;
+}
+.subtitle{
+  color:#fff;
+  font-size:18px;
+  margin-bottom:30px;
+}
 
-/* COUNTER */
-.counter-box{
-  background:#fff;
-  padding:14px;
-  border-radius:16px;
+/* الحاوية */
+.container{
+  width:90%;
+  max-width:600px;
+  margin:auto;
+}
+
+/* شكل واحد للامتحان */
+.exam-card{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  font-weight:800;
-}
-.done{color:var(--success)}
-.left{color:var(--danger)}
-
-/* CARD */
-.card{
-  background:#fff;
-  padding:22px;
-  border-radius:20px;
-  margin-top:18px;
-}
-
-/* QUESTION */
-.question-title{
-  background:var(--question);
-  padding:16px;
-  border-radius:16px;
+  padding:18px;
+  margin:14px 0;
+  background:#ffffff;
+  border-radius:18px;
+  text-decoration:none;
+  color:#0f172a;
   font-size:18px;
   font-weight:900;
-  margin-bottom:16px;
-  border-left:6px solid var(--primary);
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  transition:.2s;
 }
 
-/* OPTIONS */
-.option{
-  background:var(--option);
-  border:2px solid var(--border);
-  border-radius:16px;
-  padding:14px;
-  margin:10px 0;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-}
-.option.correct{
-  background:#dcfce7;
-  border-color:var(--success);
-  animation:pop .4s ease;
-}
-.option.wrong{
-  background:#fee2e2;
-  border-color:var(--danger);
-  animation:shake .4s ease;
-}
-.option.disabled{pointer-events:none}
-
-/* Animations */
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}
-  75%{transform:translateX(-6px)}
-  100%{transform:translateX(0)}
-}
-@keyframes pop{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-  100%{transform:scale(1)}
+.exam-card:hover{
+  transform:scale(1.02);
+  background:#ecfeff;
 }
 
-/* NAV */
-.nav{display:flex;gap:12px;margin-top:18px}
-.nav button{
-  flex:1;
-  padding:14px;
-  border:none;
-  border-radius:16px;
-  font-weight:800;
+/* الجزء الشمال */
+.exam-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
-.prev{background:#e0f2fe}
-.next{background:var(--primary);color:#fff}
-.next:disabled{background:#7dd3fc}
-
-/* RESULT */
-.result{
-  background:#fff;
-  padding:24px;
-  border-radius:20px;
-  text-align:center;
-  font-size:18px;
+.exam-icon{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:#0891b2;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
 }
-.good{color:var(--success);font-weight:900}
-.bad{color:var(--danger);font-weight:900}
 
-/* Mobile */
-@media(max-width:768px){
-  .nav{flex-direction:column}
+/* السهم */
+.arrow{
+  font-size:20px;
+  color:#0891b2;
 }
 </style>
 </head>
 
 <body>
 
-<div class="back-btn">⬅️ الرئيسية</div>
-
-<header>
-  <div class="logo">Gaith Team</div>
-  <div class="slogan">الإمتحان في جيبك</div>
-  <div class="timer" id="timer">30:00</div>
-</header>
+<div class="logo">GAITH TEAM</div>
+<div class="subtitle">الامتحان في جيبك</div>
 
 <div class="container">
 
-<div class="counter-box">
-  <div class="done">Answered: <span id="answered">0</span></div>
-  <div class="left">Remaining: <span id="remaining">0</span></div>
+  <!-- نفس الشكل لكل الامتحانات -->
+  <a class="exam-card" href="exam1/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 1
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card" href="exam2/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 2
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card" href="exam6/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل نسا 1
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card" href="exam7/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل نسا 2
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
 </div>
-
-<div class="card" id="questionBox"></div>
-
-<div class="nav">
-  <button class="prev" onclick="prevQ()">Previous</button>
-  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
-</div>
-
-</div>
-
-<script>
-/* ===== Fullscreen ===== */
-document.documentElement.requestFullscreen?.();
-
-/* ===== منع الرجوع ===== */
-history.pushState(null,null,location.href);
-window.onpopstate=()=>history.pushState(null,null,location.href);
-
-/* ===== QUESTIONS ===== */
-const questions=[
-{t:"Placenta previa causes painless vaginal bleeding.",a:true},
-{t:"Implantation occurs in lower uterine segment.",a:false},
-{t:"Amniotic fluid allows fetal movements.",a:true},
-{t:"Umbilical cord has two veins.",a:false},
-{t:"Fertilization occurs in ampulla.",a:true}
-];
-
-let i=0,answers=Array(questions.length).fill(null),time=30*60;
-
-/* TIMER */
-setInterval(()=>{
-  let m=Math.floor(time/60),s=time%60;
-  timer.innerText=`${m}:${s<10?"0":""}${s}`;
-  if(--time<0)finish();
-},1000);
-
-function updateCounter(){
-  answered.innerText=answers.filter(a=>a!==null).length;
-  remaining.innerText=questions.length-answers.filter(a=>a!==null).length;
-}
-
-function showQ(){
-  let sel=answers[i];
-  nextBtn.disabled=sel===null;
-  questionBox.innerHTML=`
-    <div class="question-title">${questions[i].t}</div>
-    <div class="option" onclick="choose(true,this)">True</div>
-    <div class="option" onclick="choose(false,this)">False</div>
-  `;
-  updateCounter();
-}
-
-function choose(v,el){
-  if(answers[i]!==null)return;
-  answers[i]=v;
-  let correct=v===questions[i].a;
-  el.classList.add(correct?"correct":"wrong","disabled");
-  if(!correct) navigator.vibrate?.(200);
-  nextBtn.disabled=false;
-}
-
-function nextQ(){ i<questions.length-1? (i++,showQ()):finish();}
-function prevQ(){ if(i>0){i--;showQ()}}
-
-function finish(){
-  let correct=answers.filter((a,idx)=>a===questions[idx].a).length;
-  document.body.innerHTML=`
-    <header>
-      <div class="logo">Gaith Team</div>
-      <div class="slogan">الإمتحان في جيبك</div>
-    </header>
-    <div class="container">
-      <div class="result">
-        <p class="good">Correct: ${correct}</p>
-        <p class="bad">Wrong: ${questions.length-correct}</p>
-        <p>Score: ${Math.round(correct/questions.length*100)}%</p>
-        <div style="margin-top:16px;font-size:20px;font-weight:900;color:#0891b2">
-          🎉 فخورين بيك وأشطر شطور 🎉
-        </div>
-      </div>
-    </div>`;
-}
-
-showQ();
-</script>
 
 </body>
 </html>
