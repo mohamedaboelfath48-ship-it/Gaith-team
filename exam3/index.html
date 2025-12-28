@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:var(--bg);
+}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:5px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:var(--card);
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:900;
+}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* ===== True / False (1–20) ===== */
+{t:"Newborns have limited ability to produce heat by shivering.",a:true},
+{t:"Radiant warmers are used to prevent neonatal hypothermia.",a:true},
+{t:"Constipation is defined as passage of stools more than 3 times daily.",a:false},
+{t:"Stool withholding behavior is common in functional constipation.",a:true},
+{t:"Protein-energy malnutrition affects immunity in children.",a:true},
+{t:"Edema is absent in all forms of malnutrition.",a:false},
+{t:"Neonatal bleeding may result from sepsis.",a:true},
+{t:"Apnea can occur in severe neonatal hypothermia.",a:true},
+{t:"Patent ductus arteriosus is classified as cyanotic heart disease.",a:false},
+{t:"Heart murmur indicates abnormal blood flow.",a:true},
+{t:"Rheumatic fever is an autoimmune disease.",a:true},
+{t:"Fever alone is sufficient to diagnose rheumatic fever.",a:false},
+{t:"Poor sanitation increases the risk of gastroenteritis.",a:true},
+{t:"ORS should be stopped once diarrhea starts.",a:false},
+{t:"Typhoid fever is transmitted via the fecal–oral route.",a:true},
+{t:"Type 1 diabetes is more common in obese children.",a:false},
+{t:"Wheezing is a common symptom of bronchiolitis.",a:true},
+{t:"Pneumonia can be caused by bacteria, viruses, or fungi.",a:true},
+{t:"Hypoalbuminemia is a feature of nephrotic syndrome.",a:true},
+{t:"Acute kidney injury is always irreversible.",a:false},
+
+/* ===== MCQs (21–60) ===== */
+{t:"The main method of heat production in newborns is:",o:["Shivering","Brown fat metabolism","Muscle contraction","Sweating"],a:1},
+{t:"Which practice best prevents heat loss immediately after birth?",o:["Bathing the newborn","Early weighing","Immediate drying","Delayed feeding"],a:2},
+{t:"A child passing hard stools less than twice weekly has:",o:["Normal habit","Diarrhea","Constipation","IBS"],a:2},
+{t:"Delayed passage of meconium is seen in:",o:["Functional constipation","Hirschsprung disease","Gastroenteritis","Typhoid"],a:1},
+{t:"Main cause of edema in kwashiorkor:",o:["Sodium excess","Hypoalbuminemia","Renal failure","Infection"],a:1},
+{t:"Severe wasting with no edema indicates:",o:["Kwashiorkor","Rickets","Marasmus","Obesity"],a:2},
+{t:"Vitamin K is needed for synthesis of:",o:["Hemoglobin","Platelets","Clotting factors","Antibodies"],a:2},
+{t:"Earliest sign of birth asphyxia:",o:["Cyanosis","Seizures","Weak cry","Hypothermia"],a:2},
+{t:"Which is NOT a complication of birth asphyxia?",o:["Seizures","Multiorgan failure","HIE","Constipation"],a:3},
+{t:"Left-to-right shunt is seen in:",o:["TOF","TGA","VSD","Truncus"],a:2},
+
+{t:"Cyanosis appears when deoxygenated Hb exceeds:",o:["2 g/dL","3 g/dL","5 g/dL","10 g/dL"],a:2},
+{t:"Jones criteria diagnose:",o:["Typhoid","Rheumatic fever","Nephrotic syndrome","Pneumonia"],a:1},
+{t:"Minor Jones criterion:",o:["Carditis","Chorea","Fever","Nodules"],a:2},
+{t:"Best prevention of rheumatic fever:",o:["Vaccine","Early sore throat treatment","Bed rest","Steroids"],a:1},
+{t:"Most common cause of gastroenteritis:",o:["Bacteria","Parasites","Viruses","Fungi"],a:2},
+{t:"Bloody diarrhea organism:",o:["Rotavirus","Shigella","Norovirus","Giardia"],a:1},
+{t:"Sunken eyes indicate:",o:["Overhydration","Mild illness","Dehydration","Hypoglycemia"],a:2},
+{t:"Gold standard for typhoid:",o:["Widal","Blood culture","Stool exam","CBC"],a:1},
+{t:"Step-ladder fever is seen in:",o:["Malaria","Pneumonia","Typhoid","Dengue"],a:2},
+{t:"Hormone deficient in type 1 DM:",o:["Glucagon","Insulin","Cortisol","Thyroxine"],a:1},
+
+{t:"DKA is characterized by:",o:["Alkalosis","Hypoglycemia","Metabolic acidosis","Respiratory alkalosis"],a:2},
+{t:"Most common virus in bronchiolitis:",o:["Influenza","RSV","Adenovirus","Parainfluenza"],a:1},
+{t:"Poor feeding in bronchiolitis is due to:",o:["Fever","Hypoglycemia","Increased work of breathing","Diarrhea"],a:2},
+{t:"Cyanosis in pneumonia is due to:",o:["Anemia","Poor perfusion","Hypoxia","Hypoglycemia"],a:2},
+{t:"Most common cause of CAP:",o:["Viruses","Fungi","Parasites","TB"],a:0},
+{t:"Crackles indicate:",o:["Obstruction","Fluid in alveoli","Bronchospasm","Effusion"],a:1},
+{t:"Hallmark of nephrotic syndrome:",o:["Hematuria","Massive proteinuria","Hypertension","Renal failure"],a:1},
+{t:"Hyperlipidemia occurs due to:",o:["High intake","Liver overproduction","Infection","Renal loss"],a:1},
+{t:"Cola-colored urine suggests:",o:["UTI","Nephrotic","AGN","Stones"],a:2},
+{t:"Post-strep GN organism:",o:["Staph","Group A strep","Pneumococcus","E. coli"],a:1}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>`;
+  if(q.o){
+    q.o.forEach((op,idx)=>{
+      h+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
+    });
+  }else{
+    h+=`
+    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
