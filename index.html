@@ -15,7 +15,6 @@ body{
   text-align:center;
 }
 
-/* اللوجو */
 .logo{
   margin-top:40px;
   font-size:42px;
@@ -28,7 +27,6 @@ body{
   margin-bottom:15px;
 }
 
-/* زر الانضمام */
 .join-main{
   display:inline-flex;
   align-items:center;
@@ -45,14 +43,13 @@ body{
 }
 .join-main:hover{background:#16a34a}
 
-/* الحاوية */
 .container{
   width:90%;
   max-width:700px;
   margin:auto;
 }
 
-/* ===== عنوان القسم في النص ===== */
+/* عنوان القسم */
 .section-center{
   margin:35px 0 20px;
   font-size:28px;
@@ -70,7 +67,7 @@ body{
   border-radius:4px;
 }
 
-/* كارت موحّد */
+/* كارت موحد */
 .exam-card{
   display:flex;
   align-items:center;
@@ -83,13 +80,8 @@ body{
   font-size:18px;
   font-weight:900;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
-  transition:.2s;
-}
-.exam-card:hover{
-  transform:scale(1.02);
 }
 
-/* الجزء الشمال */
 .exam-left{
   display:flex;
   align-items:center;
@@ -105,19 +97,16 @@ body{
   font-size:22px;
   color:#fff;
 }
-
-/* السهم */
 .arrow{
   font-size:20px;
 }
 
-/* ===== ألوان المواد ===== */
-/* طب أطفال */
+/* أطفال */
 .pediatrics{background:#ecfeff;}
 .pediatrics .exam-icon{background:#0891b2;}
 .pediatrics .arrow{color:#0891b2;}
 
-/* طب نسا */
+/* نسا */
 .obgyn{background:#fff1f2;}
 .obgyn .exam-icon{background:#be123c;}
 .obgyn .arrow{color:#be123c;}
@@ -137,7 +126,7 @@ body{
 <div class="container">
 
   <!-- ===== طب أطفال ===== -->
-  <div class="section-center">🩺 طب أطفال</div>
+  <div class="section-center" id="pediatrics">🩺 طب أطفال</div>
 
   <a class="exam-card pediatrics" href="exam1/">
     <div class="exam-left">
@@ -180,7 +169,7 @@ body{
   </a>
 
   <!-- ===== طب نسا ===== -->
-  <div class="section-center">🤰 طب نسا</div>
+  <div class="section-center" id="obgyn">🤰 طب نِسا</div>
 
   <a class="exam-card obgyn" href="exam6/">
     <div class="exam-left">
