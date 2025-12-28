@@ -4,136 +4,155 @@
   <meta charset="UTF-8">
   <title>GAITH Team</title>
 
-  <!-- أيقونة Telegram الرسمية -->
+  <!-- Font Awesome (Telegram icon) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    body {
-      margin: 0;
+    body{
+      margin:0;
       font-family: Arial, Tahoma, sans-serif;
-      background-color: #87CEEB;
-      text-align: center;
+      background:#87CEEB;
+      text-align:center;
     }
 
     /* زر المينيو */
-    .menu-btn {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      font-size: 32px;
-      color: white;
-      cursor: pointer;
-      z-index: 1001;
+    .menu-btn{
+      position:fixed;
+      top:15px;
+      right:20px;
+      font-size:32px;
+      color:#fff;
+      cursor:pointer;
+      z-index:1002;
     }
 
-    /* خلفية شفافة */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      display: none;
-      z-index: 1000;
+    /* overlay */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.4);
+      display:none;
+      z-index:1000;
     }
 
     /* المينيو */
-    .side-menu {
-      position: fixed;
-      top: 0;
-      right: -260px;
-      width: 260px;
-      height: 100%;
-      background-color: #00a3cc;
-      padding-top: 70px;
-      transition: 0.3s;
-      z-index: 1002;
+    .side-menu{
+      position:fixed;
+      top:0;
+      right:-260px;
+      width:260px;
+      height:100%;
+      background:#00a3cc;
+      transition:.3s;
+      z-index:1003;
+      padding-top:15px;
+      text-align:left;
     }
 
-    .side-menu a {
-      display: block;
-      padding: 18px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
+    .close-btn{
+      color:#fff;
+      font-size:28px;
+      padding:10px 15px;
+      cursor:pointer;
+      text-align:right;
     }
 
-    .side-menu a:hover {
-      background-color: #007fa3;
+    .side-menu a{
+      display:block;
+      padding:18px;
+      color:#fff;
+      text-decoration:none;
+      font-size:18px;
     }
 
-    /* اللوجو + حركة */
-    .logo {
-      margin-top: 70px;
-      font-size: 50px;
-      font-weight: bold;
-      color: white;
-      letter-spacing: 3px;
-      animation: floatLogo 2.5s ease-in-out infinite;
+    .side-menu a:hover{
+      background:#007fa3;
     }
 
-    @keyframes floatLogo {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    /* اللوجو */
+    .logo{
+      margin-top:70px;
+      font-size:50px;
+      font-weight:bold;
+      color:#fff;
+      letter-spacing:3px;
+      animation:floatLogo 2.5s ease-in-out infinite;
     }
 
-    .subtitle {
-      color: white;
-      font-size: 18px;
-      margin-bottom: 40px;
+    @keyframes floatLogo{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+      100%{transform:translateY(0)}
     }
 
-    .container {
-      background: white;
-      width: 80%;
-      max-width: 500px;
-      margin: auto;
-      padding: 30px;
-      border-radius: 15px;
+    .subtitle{
+      color:#fff;
+      font-size:18px;
+      margin-bottom:10px;
     }
 
-    .container a {
-      display: block;
-      margin: 15px 0;
-      padding: 12px;
-      background-color: #00a3cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
+    .counter{
+      color:#fff;
+      font-size:16px;
+      margin-bottom:30px;
     }
 
-    .container a:hover {
-      background-color: #007fa3;
+    .container{
+      background:#fff;
+      width:80%;
+      max-width:500px;
+      margin:auto;
+      padding:30px;
+      border-radius:15px;
+    }
+
+    .container a{
+      display:block;
+      margin:15px 0;
+      padding:12px;
+      background:#00a3cc;
+      color:#fff;
+      text-decoration:none;
+      border-radius:8px;
+      font-size:18px;
+    }
+
+    .container a:hover{
+      background:#007fa3;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- صوت خفيف -->
+  <!-- صوت -->
   <audio id="menuSound">
-    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
   </audio>
 
-  <!-- زر المينيو -->
+  <!-- زر ☰ -->
   <div class="menu-btn" onclick="openMenu()">☰</div>
 
-  <!-- خلفية -->
+  <!-- overlay -->
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
   <!-- المينيو -->
   <div class="side-menu" id="sideMenu">
+    <div class="close-btn" onclick="closeMenu()">×</div>
     <a href="https://t.me/nursing2bu" target="_blank">
       <i class="fab fa-telegram"></i> للإنضمام لينا
     </a>
+    <a href="about.html">ℹ️ About GAITH Team</a>
   </div>
 
   <!-- اللوجو -->
   <div class="logo">GAITH TEAM</div>
   <div class="subtitle">الامتحان في جيبك</div>
+
+  <!-- عدّاد -->
+  <div class="counter">
+    عدد الامتحانات المتاحة: <b>2</b>
+  </div>
 
   <!-- الامتحانات -->
   <div class="container">
@@ -142,15 +161,14 @@
   </div>
 
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.right = "0";
-      document.getElementById("overlay").style.display = "block";
+    function openMenu(){
+      document.getElementById("sideMenu").style.right="0";
+      document.getElementById("overlay").style.display="block";
       document.getElementById("menuSound").play();
     }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").style.right = "-260px";
-      document.getElementById("overlay").style.display = "none";
+    function closeMenu(){
+      document.getElementById("sideMenu").style.right="-260px";
+      document.getElementById("overlay").style.display="none";
     }
   </script>
 
