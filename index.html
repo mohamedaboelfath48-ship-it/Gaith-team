@@ -2,17 +2,157 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>Gaith Team - Exams</title>
+  <title>GAITH Team</title>
+
+  <!-- أيقونة Telegram الرسمية -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background-color: #87CEEB;
+      text-align: center;
+    }
+
+    /* زر المينيو */
+    .menu-btn {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      font-size: 32px;
+      color: white;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* خلفية شفافة */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      z-index: 1000;
+    }
+
+    /* المينيو */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #00a3cc;
+      padding-top: 70px;
+      transition: 0.3s;
+      z-index: 1002;
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 18px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .side-menu a:hover {
+      background-color: #007fa3;
+    }
+
+    /* اللوجو + حركة */
+    .logo {
+      margin-top: 70px;
+      font-size: 50px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 3px;
+      animation: floatLogo 2.5s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .subtitle {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .container {
+      background: white;
+      width: 80%;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    .container a {
+      display: block;
+      margin: 15px 0;
+      padding: 12px;
+      background-color: #00a3cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+
+    .container a:hover {
+      background-color: #007fa3;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>📘 الامتحان في جيبك</h1>
-<p>اختار الامتحان 👇</p>
+  <!-- صوت خفيف -->
+  <audio id="menuSound">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+  </audio>
 
-<ul>
-  <li><a href="exam1/">📝 امتحان 1</a></li>
-  <li><a href="exam2/">📝 امتحان 2</a></li>
-</ul>
+  <!-- زر المينيو -->
+  <div class="menu-btn" onclick="openMenu()">☰</div>
+
+  <!-- خلفية -->
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+  <!-- المينيو -->
+  <div class="side-menu" id="sideMenu">
+    <a href="https://t.me/nursing2bu" target="_blank">
+      <i class="fab fa-telegram"></i> للإنضمام لينا
+    </a>
+  </div>
+
+  <!-- اللوجو -->
+  <div class="logo">GAITH TEAM</div>
+  <div class="subtitle">الامتحان في جيبك</div>
+
+  <!-- الامتحانات -->
+  <div class="container">
+    <a href="exam1/">📝 امتحان 1</a>
+    <a href="exam2/">📝 امتحان 2</a>
+  </div>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").style.right = "0";
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("menuSound").play();
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.right = "-260px";
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
