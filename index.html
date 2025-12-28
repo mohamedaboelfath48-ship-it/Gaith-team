@@ -3,86 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH Team | Exam</title>
+<title>GAITH Team</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* زر الرجوع الذكي */
-.back-section{
-  position:fixed;
-  top:15px;
-  left:15px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 16px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:800;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 6px 16px rgba(0,0,0,.25);
-  z-index:9999;
-  transition:.3s;
-}
-
-/* ألوان تلقائية */
-.back-pediatrics{ background:#0891b2; }
-.back-obgyn{ background:#be123c; }
-
-/* مثال شكل الصفحة */
 body{
   margin:0;
   font-family:Arial, Tahoma;
-  background:#ecfeff;
-}
-header{
-  background:#0ea5e9;
-  color:#fff;
-  padding:20px;
+  background:#87CEEB;
   text-align:center;
 }
+
+.logo{
+  margin-top:40px;
+  font-size:42px;
+  font-weight:900;
+  color:#fff;
+}
+.subtitle{
+  color:#fff;
+  font-size:18px;
+  margin-bottom:15px;
+}
+
+.join-main{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#22c55e;
+  color:#fff;
+  padding:12px 22px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  margin-bottom:30px;
+}
+.join-main:hover{background:#16a34a}
+
+.container{
+  width:90%;
+  max-width:700px;
+  margin:auto;
+}
+
+/* عنوان القسم */
+.section-center{
+  margin:35px 0 20px;
+  font-size:28px;
+  font-weight:900;
+  color:#0f172a;
+  position:relative;
+}
+.section-center::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:4px;
+  background:#0f172a;
+  margin:10px auto 0;
+  border-radius:4px;
+}
+
+/* كارت موحد */
+.exam-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px;
+  margin:14px 0;
+  border-radius:18px;
+  text-decoration:none;
+  color:#0f172a;
+  font-size:18px;
+  font-weight:900;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.exam-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.exam-icon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  color:#fff;
+}
+.arrow{
+  font-size:20px;
+}
+
+/* أطفال */
+.pediatrics{background:#ecfeff;}
+.pediatrics .exam-icon{background:#0891b2;}
+.pediatrics .arrow{color:#0891b2;}
+
+/* نسا */
+.obgyn{background:#fff1f2;}
+.obgyn .exam-icon{background:#be123c;}
+.obgyn .arrow{color:#be123c;}
 </style>
 </head>
 
-<!-- =========================
-     غير السطر ده فقط
-     pediatrics  |  obgyn
-     ========================= -->
-<body data-subject="obgyn">
+<body>
 
-<!-- زر الرجوع -->
-<a href="../index.html" id="backBtn" class="back-section">
-  <i class="fa-solid fa-layer-group"></i>
-  الرجوع للرئيسية
+<div class="logo">GAITH TEAM</div>
+<div class="subtitle">الامتحان في جيبك</div>
+
+<a class="join-main" href="https://t.me/nursing2bu" target="_blank">
+  <i class="fa-brands fa-telegram"></i>
+  انضم إلينا على Telegram
 </a>
 
-<header>
-  <h2>GAITH TEAM</h2>
-  <p>الامتحان في جيبك</p>
-</header>
+<div class="container">
 
-<!-- ===== محتوى الامتحان هنا ===== -->
+  <!-- ===== طب أطفال ===== -->
+  <div class="section-center" id="pediatrics">🩺 طب أطفال</div>
 
+  <a class="exam-card pediatrics" href="exam1/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 1
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
 
-<script>
-/* زر ذكي يحدد اللون والرابط تلقائي */
-const subject = document.body.dataset.subject;
-const backBtn = document.getElementById("backBtn");
+  <a class="exam-card pediatrics" href="exam2/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 2
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
 
-if(subject === "pediatrics"){
-  backBtn.classList.add("back-pediatrics");
-  backBtn.href = "../index.html#pediatrics";
-  backBtn.innerHTML = '<i class="fa-solid fa-layer-group"></i> الرئيسية – طب أطفال';
-}
+  <a class="exam-card pediatrics" href="exam3/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 3
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
 
-if(subject === "obgyn"){
-  backBtn.classList.add("back-obgyn");
-  backBtn.href = "../index.html#obgyn";
-  backBtn.innerHTML = '<i class="fa-solid fa-layer-group"></i> الرئيسية – طب نِسا';
-}
-</script>
+  <a class="exam-card pediatrics" href="exam4/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 4
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card pediatrics" href="exam5/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
+      شامل طب أطفال 5
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <!-- ===== طب نسا ===== -->
+  <div class="section-center" id="obgyn">🤰 طب نِسا</div>
+
+  <a class="exam-card obgyn" href="exam6/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل طب نسا 1
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card obgyn" href="exam7/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل طب نسا 2
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card obgyn" href="exam8/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل طب نسا 3
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card obgyn" href="exam9/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل طب نسا 4
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+  <a class="exam-card obgyn" href="exam10/">
+    <div class="exam-left">
+      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      شامل طب نسا 5
+    </div>
+    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  </a>
+
+</div>
 
 </body>
 </html>
