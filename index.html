@@ -3,23 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH Team</title>
+<title>GAITH Team | Exam</title>
 
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* ===== أزرار ثابتة موحّدة ===== */
-.fixed-actions{
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  display: flex;
-  gap: 10px;
-  z-index: 9999;
+:root{
+  --pediatrics:#0891b2;
+  --obgyn:#be123c;
+  --success:#16a34a;
+  --danger:#dc2626;
 }
 
-/* زر عام */
+body{
+  margin:0;
+  font-family:Arial, Tahoma;
+  background:#ecfeff;
+}
+
+/* ===== الأزرار الثابتة ===== */
+.fixed-actions{
+  position:fixed;
+  top:15px;
+  left:15px;
+  display:flex;
+  gap:10px;
+  z-index:9999;
+}
 .action-btn{
   display:flex;
   align-items:center;
@@ -32,78 +42,182 @@
   color:#fff;
   box-shadow:0 6px 16px rgba(0,0,0,.25);
 }
+.pediatrics{background:var(--pediatrics)}
+.obgyn{background:var(--obgyn)}
+.join{background:#22c55e}
+.hidden{display:none}
 
-/* ===== ألوان حسب المادة ===== */
-/* أطفال */
-.pediatrics{ background:#0891b2; }
-.pediatrics:hover{ background:#0369a1; }
+/* ===== Header ===== */
+header{
+  background:linear-gradient(90deg,var(--pediatrics),#06b6d4);
+  color:#fff;
+  padding:18px;
+  text-align:center;
+}
+.logo{font-size:22px;font-weight:900}
+.slogan{font-size:14px;font-weight:800}
 
-/* نسا */
-.obgyn{ background:#be123c; }
-.obgyn:hover{ background:#9f1239; }
+/* ===== محتوى ===== */
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.question{
+  background:#cffafe;
+  padding:16px;
+  border-radius:14px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+.option{
+  background:#f0f9ff;
+  border:2px solid #bae6fd;
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:800;
+  cursor:pointer;
+}
+.option.correct{
+  background:#dcfce7;
+  border-color:var(--success);
+}
+.option.wrong{
+  background:#fee2e2;
+  border-color:var(--danger);
+}
+.option.disabled{pointer-events:none}
 
-/* زر الانضمام */
-.join{ background:#22c55e; }
-.join:hover{ background:#16a34a; }
+/* ===== أزرار ===== */
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:16px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:800;
+}
+.next{background:var(--pediatrics);color:#fff}
 
-/* إخفاء */
-.hidden{ display:none; }
+/* ===== نتيجة ===== */
+.result{
+  text-align:center;
+  padding:30px;
+}
+.good{color:var(--success);font-weight:900}
+.bad{color:var(--danger);font-weight:900}
+.retry{
+  margin-top:16px;
+  background:#0ea5e9;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:14px;
+  border:none;
+  font-weight:900;
+  cursor:pointer;
+}
 
 /* موبايل */
-@media (max-width:768px){
-  .fixed-actions{ top:10px; left:10px; }
+@media(max-width:768px){
+  .nav{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== الأزرار (نفسها في كل الصفحات) ===== -->
-<div class="fixed-actions" id="actionButtons">
-  <!-- زر الرجوع (عدّل اللون حسب المادة) -->
-  <a href="../index.html" class="action-btn pediatrics" id="backBtn">
-    <i class="fa-solid fa-house"></i>
-    الرئيسية
+<!-- ===== الأزرار ===== -->
+<div class="fixed-actions hidden" id="actions">
+  <a href="../index.html" class="action-btn pediatrics">
+    <i class="fa-solid fa-house"></i> الرئيسية
   </a>
-
-  <!-- زر الانضمام -->
   <a href="https://t.me/nursing2bu" target="_blank" class="action-btn join">
-    <i class="fa-brands fa-telegram"></i>
-    انضمّ إلينا
+    <i class="fa-brands fa-telegram"></i> انضم إلينا
   </a>
 </div>
 
-<!-- ===== محتوى الصفحة تحت هنا ===== -->
+<header>
+  <div class="logo">GAITH TEAM</div>
+  <div class="slogan">الامتحان في جيبك</div>
+</header>
 
+<div class="container">
+  <div class="card" id="examBox"></div>
+</div>
 
 <script>
-/* ===== إعدادات عامة ===== */
+/* ===== إعدادات ===== */
+const questions=[
+ {q:"Placenta previa causes painless bleeding.",a:true},
+ {q:"Implantation occurs in lower uterine segment.",a:false},
+ {q:"Amniotic fluid allows fetal movement.",a:true}
+];
 
-/* لو الصفحة هي الواجهة الرئيسية:
-   غيّر الرابط تلقائيًا */
-if(location.pathname.endsWith('/index.html') || location.pathname.endsWith('/')){
-  const back = document.getElementById('backBtn');
-  if(back) back.setAttribute('href','index.html');
-}
+let i=0,score=0;
 
 /* ===== إخفاء الأزرار أثناء الامتحان ===== */
-/* استدعِ الدالة دي عند بدء الامتحان */
 function hideActions(){
-  const box=document.getElementById("actionButtons");
-  if(box) box.classList.add("hidden");
+  document.getElementById("actions").classList.add("hidden");
 }
-
-/* ===== إظهار الأزرار بعد النتيجة ===== */
-/* استدعِ الدالة دي داخل finish() */
 function showActions(){
-  const box=document.getElementById("actionButtons");
-  if(box) box.classList.remove("hidden");
+  document.getElementById("actions").classList.remove("hidden");
 }
 
-/* مثال:
-   hideActions();   // عند بداية الامتحان
-   showActions();   // بعد ظهور النتيجة
-*/
+/* ===== عرض السؤال ===== */
+function showQ(){
+  hideActions();
+  examBox.innerHTML=`
+    <div class="question">${questions[i].q}</div>
+    <div class="option" onclick="choose(true,this)">True</div>
+    <div class="option" onclick="choose(false,this)">False</div>
+  `;
+}
+
+/* ===== اختيار ===== */
+function choose(v,el){
+  let correct=v===questions[i].a;
+  el.classList.add(correct?"correct":"wrong","disabled");
+  if(correct) score++;
+  document.querySelectorAll(".option").forEach(o=>o.classList.add("disabled"));
+
+  setTimeout(()=>{
+    i<questions.length-1? (i++,showQ()):finish();
+  },600);
+}
+
+/* ===== إنهاء ===== */
+function finish(){
+  showActions();
+  examBox.innerHTML=`
+    <div class="result">
+      <i class="fa-solid fa-trophy" style="font-size:42px;color:#f59e0b"></i>
+      <p class="good">الإجابات الصحيحة: ${score}</p>
+      <p class="bad">الإجابات الخطأ: ${questions.length-score}</p>
+      <p>النسبة: ${Math.round(score/questions.length*100)}%</p>
+      <p style="font-weight:900;color:#0891b2">فخورين بيك وأشطر شطور 🌟</p>
+      <button class="retry" onclick="restart()">🔄 إعادة المحاولة</button>
+    </div>
+  `;
+}
+
+/* ===== إعادة ===== */
+function restart(){
+  i=0; score=0;
+  showQ();
+}
+
+showQ();
 </script>
 
 </body>
