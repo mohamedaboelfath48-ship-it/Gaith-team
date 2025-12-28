@@ -5,125 +5,106 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH Team</title>
 
+<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, Tahoma;
-  background:#87CEEB;
-  text-align:center;
+/* ===== أزرار ثابتة موحّدة ===== */
+.fixed-actions{
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 10px;
+  z-index: 9999;
 }
 
-/* اللوجو */
-.logo{
-  margin-top:40px;
-  font-size:42px;
-  font-weight:900;
-  color:#fff;
-}
-.subtitle{
-  color:#fff;
-  font-size:18px;
-  margin-bottom:30px;
-}
-
-/* الحاوية */
-.container{
-  width:90%;
-  max-width:600px;
-  margin:auto;
-}
-
-/* شكل واحد للامتحان */
-.exam-card{
+/* زر عام */
+.action-btn{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:18px;
-  margin:14px 0;
-  background:#ffffff;
-  border-radius:18px;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:800;
   text-decoration:none;
-  color:#0f172a;
-  font-size:18px;
-  font-weight:900;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
-  transition:.2s;
-}
-
-.exam-card:hover{
-  transform:scale(1.02);
-  background:#ecfeff;
-}
-
-/* الجزء الشمال */
-.exam-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.exam-icon{
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:#0891b2;
   color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
 }
 
-/* السهم */
-.arrow{
-  font-size:20px;
-  color:#0891b2;
+/* ===== ألوان حسب المادة ===== */
+/* أطفال */
+.pediatrics{ background:#0891b2; }
+.pediatrics:hover{ background:#0369a1; }
+
+/* نسا */
+.obgyn{ background:#be123c; }
+.obgyn:hover{ background:#9f1239; }
+
+/* زر الانضمام */
+.join{ background:#22c55e; }
+.join:hover{ background:#16a34a; }
+
+/* إخفاء */
+.hidden{ display:none; }
+
+/* موبايل */
+@media (max-width:768px){
+  .fixed-actions{ top:10px; left:10px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="logo">GAITH TEAM</div>
-<div class="subtitle">الامتحان في جيبك</div>
-
-<div class="container">
-
-  <!-- نفس الشكل لكل الامتحانات -->
-  <a class="exam-card" href="exam1/">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 1
-    </div>
-    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+<!-- ===== الأزرار (نفسها في كل الصفحات) ===== -->
+<div class="fixed-actions" id="actionButtons">
+  <!-- زر الرجوع (عدّل اللون حسب المادة) -->
+  <a href="../index.html" class="action-btn pediatrics" id="backBtn">
+    <i class="fa-solid fa-house"></i>
+    الرئيسية
   </a>
 
-  <a class="exam-card" href="exam2/">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 2
-    </div>
-    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  <!-- زر الانضمام -->
+  <a href="https://t.me/nursing2bu" target="_blank" class="action-btn join">
+    <i class="fa-brands fa-telegram"></i>
+    انضمّ إلينا
   </a>
-
-  <a class="exam-card" href="exam6/">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل نسا 1
-    </div>
-    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
-  </a>
-
-  <a class="exam-card" href="exam7/">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل نسا 2
-    </div>
-    <div class="arrow"><i class="fa-solid fa-chevron-left"></i></div>
-  </a>
-
 </div>
+
+<!-- ===== محتوى الصفحة تحت هنا ===== -->
+
+
+<script>
+/* ===== إعدادات عامة ===== */
+
+/* لو الصفحة هي الواجهة الرئيسية:
+   غيّر الرابط تلقائيًا */
+if(location.pathname.endsWith('/index.html') || location.pathname.endsWith('/')){
+  const back = document.getElementById('backBtn');
+  if(back) back.setAttribute('href','index.html');
+}
+
+/* ===== إخفاء الأزرار أثناء الامتحان ===== */
+/* استدعِ الدالة دي عند بدء الامتحان */
+function hideActions(){
+  const box=document.getElementById("actionButtons");
+  if(box) box.classList.add("hidden");
+}
+
+/* ===== إظهار الأزرار بعد النتيجة ===== */
+/* استدعِ الدالة دي داخل finish() */
+function showActions(){
+  const box=document.getElementById("actionButtons");
+  if(box) box.classList.remove("hidden");
+}
+
+/* مثال:
+   hideActions();   // عند بداية الامتحان
+   showActions();   // بعد ظهور النتيجة
+*/
+</script>
 
 </body>
 </html>
