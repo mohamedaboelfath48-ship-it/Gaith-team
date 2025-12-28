@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:var(--bg);
+}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:5px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:950px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:var(--card);
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:900;
+}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* ===== TRUE / FALSE (1–20) ===== */
+{t:"Newborns are at risk of hypothermia due to immature thermoregulation.",a:true},
+{t:"Early bathing of the newborn helps prevent heat loss.",a:false},
+{t:"Constipation in infants may be due to inadequate fluid intake.",a:true},
+{t:"Organic constipation is more common than functional constipation.",a:false},
+{t:"Protein-energy malnutrition can impair brain development.",a:true},
+{t:"Edema in kwashiorkor masks muscle wasting.",a:true},
+{t:"Marasmus is associated with severe loss of subcutaneous fat.",a:true},
+{t:"Neonatal bleeding usually occurs after the first year of life.",a:false},
+{t:"Birth asphyxia may lead to multiorgan dysfunction.",a:true},
+{t:"A heart murmur is always pathological.",a:false},
+{t:"Cyanotic congenital heart disease results in low oxygen saturation.",a:true},
+{t:"Rheumatic fever is caused by a viral infection.",a:false},
+{t:"Chorea is a neurological manifestation of rheumatic fever.",a:true},
+{t:"Viral gastroenteritis usually requires antibiotic therapy.",a:false},
+{t:"Severe dehydration may cause convulsions in children.",a:true},
+{t:"Typhoid fever is more common in areas with poor sanitation.",a:true},
+{t:"Type 1 diabetes mellitus is preventable by diet control.",a:false},
+{t:"Bronchiolitis often presents with tachypnea and wheezing.",a:true},
+{t:"Pneumonia may cause impaired gas exchange.",a:true},
+{t:"Nephrotic syndrome is associated with increased risk of infection.",a:true},
+
+/* ===== MCQs (21–60) ===== */
+{t:"The best method to prevent neonatal hypothermia immediately after birth is:",o:["Oxygen therapy","Immediate drying and wrapping","Early bathing","Delayed feeding"],a:1},
+{t:"Which newborn is most susceptible to hypothermia?",o:["Term infant with normal weight","Post-term infant","Low birth weight infant","Macrosomic infant"],a:2},
+{t:"Functional constipation is commonly caused by:",o:["Hirschsprung disease","Hypothyroidism","Stool withholding","Spinal cord lesion"],a:2},
+{t:"Failure to pass meconium within 48 hours suggests:",o:["Gastroenteritis","Functional constipation","Hirschsprung disease","Intestinal worms"],a:2},
+{t:"Moon face and pedal edema are typical features of:",o:["Marasmus","Kwashiorkor","Rickets","Iron deficiency anemia"],a:1},
+{t:"Which feature differentiates marasmus from kwashiorkor?",o:["Growth retardation","Muscle wasting","Absence of edema","Anemia"],a:2},
+{t:"Vitamin K deficiency mainly affects:",o:["RBC production","Platelet count","Clotting factor synthesis","Hemoglobin level"],a:2},
+{t:"A baby with poor Apgar score and weak cry is likely suffering from:",o:["Neonatal sepsis","Birth asphyxia","Congenital heart disease","Hypoglycemia"],a:1},
+{t:"The most important immediate management of birth asphyxia is:",o:["Antibiotics","IV fluids","Airway and breathing support","Blood transfusion"],a:2},
+{t:"Persistent cyanosis is a feature of:",o:["ASD","VSD","Tetralogy of Fallot","PDA"],a:2},
+
+{t:"Squatting position improves cyanosis by:",o:["Decreasing cardiac output","Increasing pulmonary blood flow","Increasing systemic vascular resistance","Reducing oxygen demand"],a:2},
+{t:"The most serious long-term complication of rheumatic fever is:",o:["Arthritis","Chorea","Rheumatic heart disease","Fever"],a:2},
+{t:"Which is a major Jones criterion?",o:["Fever","Polyarthralgia","Carditis","Elevated ESR"],a:2},
+{t:"Early treatment of streptococcal pharyngitis prevents:",o:["Pneumonia","Rheumatic fever","Typhoid fever","Bronchiolitis"],a:1},
+{t:"The most common cause of gastroenteritis in young children is:",o:["Bacteria","Parasites","Viruses","Fungi"],a:2},
+{t:"Which sign indicates severe dehydration?",o:["Moist mucosa","Sunken eyes","Normal urine output","Normal skin turgor"],a:1},
+{t:"Pea-soup diarrhea is classically seen in:",o:["Cholera","Shigellosis","Typhoid fever","Amebiasis"],a:2},
+{t:"The definitive diagnosis of typhoid fever is made by:",o:["Widal test","Blood culture","Stool microscopy","CBC"],a:1},
+{t:"Fruity odor of breath in a child suggests:",o:["Hypoglycemia","Diabetic ketoacidosis","Pneumonia","Uremia"],a:1},
+{t:"Kussmaul respiration is best described as:",o:["Shallow breathing","Irregular breathing","Deep and labored breathing","Slow breathing"],a:2},
+
+{t:"The most common cause of bronchiolitis is:",o:["Influenza virus","Adenovirus","Respiratory syncytial virus","Parainfluenza virus"],a:2},
+{t:"Increased work of breathing in bronchiolitis includes:",o:["Bradycardia","Nasal flaring","Cyanosis only","Hypertension"],a:1},
+{t:"The most common cause of pneumonia in neonates is:",o:["RSV","Group B streptococcus","Mycoplasma pneumoniae","Influenza virus"],a:1},
+{t:"A sign of respiratory distress in pneumonia is:",o:["Polyuria","Chest retractions","Constipation","Bradycardia"],a:1},
+{t:"Massive proteinuria is the hallmark of:",o:["Acute glomerulonephritis","Nephrotic syndrome","UTI","Renal stones"],a:1},
+{t:"Hyperlipidemia in nephrotic syndrome is due to:",o:["Renal lipid loss","Liver compensation","Poor diet","Infection"],a:1},
+{t:"Cola-colored urine is most suggestive of:",o:["UTI","Nephrotic syndrome","Acute glomerulonephritis","Renal calculi"],a:2},
+{t:"Hypertension in acute GN is mainly due to:",o:["Dehydration","Fluid retention","Infection","Anemia"],a:1},
+{t:"Increased reticulocyte count indicates:",o:["Bone marrow failure","Hemolysis","Iron deficiency","Infection"],a:1},
+{t:"Sickle cell disease is a disorder of:",o:["RBC membrane","Hemoglobin structure","Enzyme deficiency","Platelet function"],a:1}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>`;
+  if(q.o){
+    q.o.forEach((op,idx)=>{
+      h+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
+    });
+  }else{
+    h+=`
+    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
