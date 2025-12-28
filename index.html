@@ -3,222 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH Team | Exam</title>
+<title>GAITH Team</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{
-  --pediatrics:#0891b2;
-  --obgyn:#be123c;
-  --success:#16a34a;
-  --danger:#dc2626;
-}
-
 body{
   margin:0;
   font-family:Arial, Tahoma;
-  background:#ecfeff;
+  background:#87CEEB;
+  text-align:center;
 }
 
-/* ===== الأزرار الثابتة ===== */
-.fixed-actions{
-  position:fixed;
-  top:15px;
-  left:15px;
-  display:flex;
-  gap:10px;
-  z-index:9999;
+/* اللوجو */
+.logo{
+  margin-top:40px;
+  font-size:42px;
+  font-weight:900;
+  color:#fff;
 }
-.action-btn{
+.subtitle{
+  color:#fff;
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+/* الحاوية */
+.container{
+  width:90%;
+  max-width:650px;
+  margin:auto;
+}
+
+/* كارت موحّد */
+.exam-card{
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:800;
-  text-decoration:none;
-  color:#fff;
-  box-shadow:0 6px 16px rgba(0,0,0,.25);
-}
-.pediatrics{background:var(--pediatrics)}
-.obgyn{background:var(--obgyn)}
-.join{background:#22c55e}
-.hidden{display:none}
-
-/* ===== Header ===== */
-header{
-  background:linear-gradient(90deg,var(--pediatrics),#06b6d4);
-  color:#fff;
+  justify-content:space-between;
   padding:18px;
-  text-align:center;
-}
-.logo{font-size:22px;font-weight:900}
-.slogan{font-size:14px;font-weight:800}
-
-/* ===== محتوى ===== */
-.container{
-  max-width:800px;
-  margin:auto;
-  padding:20px;
-}
-.card{
-  background:#fff;
-  padding:22px;
-  border-radius:20px;
+  margin:14px 0;
+  border-radius:18px;
+  text-decoration:none;
+  color:#0f172a;
+  font-size:18px;
+  font-weight:900;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
-.question{
-  background:#cffafe;
-  padding:16px;
-  border-radius:14px;
-  font-weight:900;
-  margin-bottom:14px;
-}
-.option{
-  background:#f0f9ff;
-  border:2px solid #bae6fd;
-  padding:14px;
-  border-radius:14px;
-  margin:10px 0;
-  font-weight:800;
-  cursor:pointer;
-}
-.option.correct{
-  background:#dcfce7;
-  border-color:var(--success);
-}
-.option.wrong{
-  background:#fee2e2;
-  border-color:var(--danger);
-}
-.option.disabled{pointer-events:none}
 
-/* ===== أزرار ===== */
-.nav{
+/* الجزء الشمال */
+.exam-left{
   display:flex;
-  gap:12px;
-  margin-top:16px;
+  align-items:center;
+  gap:14px;
 }
-.nav button{
-  flex:1;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  font-weight:800;
-}
-.next{background:var(--pediatrics);color:#fff}
-
-/* ===== نتيجة ===== */
-.result{
-  text-align:center;
-  padding:30px;
-}
-.good{color:var(--success);font-weight:900}
-.bad{color:var(--danger);font-weight:900}
-.retry{
-  margin-top:16px;
-  background:#0ea5e9;
+.exam-icon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
   color:#fff;
-  padding:12px 20px;
-  border-radius:14px;
-  border:none;
-  font-weight:900;
-  cursor:pointer;
 }
 
-/* موبايل */
-@media(max-width:768px){
-  .nav{flex-direction:column}
+/* السهم */
+.arrow{
+  font-size:20px;
+}
+
+/* ===== ألوان المواد ===== */
+/* طب أطفال */
+.pediatrics{
+  background:#ecfeff;
+}
+.pediatrics .exam-icon{
+  background:#0891b2;
+}
+.pediatrics .arrow{
+  color:#0891b2;
+}
+
+/* نسا */
+.obgyn{
+  background:#fff1f2;
+}
+.obgyn .exam-icon{
+  background:#be123c;
+}
+.obgyn .arrow{
+  color:#be123c;
+}
+
+/* ===== مقفول ===== */
+.locked{
+  opacity:.55;
+  pointer-events:none;
+}
+.locked .lock-icon{
+  font-size:20px;
+  color:#374151;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== الأزرار ===== -->
-<div class="fixed-actions hidden" id="actions">
-  <a href="../index.html" class="action-btn pediatrics">
-    <i class="fa-solid fa-house"></i> الرئيسية
-  </a>
-  <a href="https://t.me/nursing2bu" target="_blank" class="action-btn join">
-    <i class="fa-brands fa-telegram"></i> انضم إلينا
-  </a>
-</div>
-
-<header>
-  <div class="logo">GAITH TEAM</div>
-  <div class="slogan">الامتحان في جيبك</div>
-</header>
+<div class="logo">GAITH TEAM</div>
+<div class="subtitle">الامتحان في جيبك</div>
 
 <div class="container">
-  <div class="card" id="examBox"></div>
-</div>
 
-<script>
-/* ===== إعدادات ===== */
-const questions=[
- {q:"Placenta previa causes painless bleeding.",a:true},
- {q:"Implantation occurs in lower uterine segment.",a:false},
- {q:"Amniotic fluid allows fetal movement.",a:true}
-];
-
-let i=0,score=0;
-
-/* ===== إخفاء الأزرار أثناء الامتحان ===== */
-function hideActions(){
-  document.getElementById("actions").classList.add("hidden");
-}
-function showActions(){
-  document.getElementById("actions").classList.remove("hidden");
-}
-
-/* ===== عرض السؤال ===== */
-function showQ(){
-  hideActions();
-  examBox.innerHTML=`
-    <div class="question">${questions[i].q}</div>
-    <div class="option" onclick="choose(true,this)">True</div>
-    <div class="option" onclick="choose(false,this)">False</div>
-  `;
-}
-
-/* ===== اختيار ===== */
-function choose(v,el){
-  let correct=v===questions[i].a;
-  el.classList.add(correct?"correct":"wrong","disabled");
-  if(correct) score++;
-  document.querySelectorAll(".option").forEach(o=>o.classList.add("disabled"));
-
-  setTimeout(()=>{
-    i<questions.length-1? (i++,showQ()):finish();
-  },600);
-}
-
-/* ===== إنهاء ===== */
-function finish(){
-  showActions();
-  examBox.innerHTML=`
-    <div class="result">
-      <i class="fa-solid fa-trophy" style="font-size:42px;color:#f59e0b"></i>
-      <p class="good">الإجابات الصحيحة: ${score}</p>
-      <p class="bad">الإجابات الخطأ: ${questions.length-score}</p>
-      <p>النسبة: ${Math.round(score/questions.length*100)}%</p>
-      <p style="font-weight:900;color:#0891b2">فخورين بيك وأشطر شطور 🌟</p>
-      <button class="retry" onclick="restart()">🔄 إعادة المحاولة</button>
+  <!-- ===== طب أطفال ===== -->
+  <a class="exam-card pediatrics" href="exam1/">
+    <div class="exam-left">
+      <div class="exam-icon">
+        <i class="fa-solid fa-stethoscope"></i>
+      </div>
+      شامل طب أطفال 1
     </div>
-  `;
-}
+    <div class="arrow">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
+  </a>
 
-/* ===== إعادة ===== */
-function restart(){
-  i=0; score=0;
-  showQ();
-}
+  <a class="exam-card pediatrics" href="exam2/">
+    <div class="exam-left">
+      <div class="exam-icon">
+        <i class="fa-solid fa-stethoscope"></i>
+      </div>
+      شامل طب أطفال 2
+    </div>
+    <div class="arrow">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
+  </a>
 
-showQ();
-</script>
+  <!-- ===== نسا ===== -->
+  <a class="exam-card obgyn" href="exam6/">
+    <div class="exam-left">
+      <div class="exam-icon">
+        <i class="fa-solid fa-person-pregnant"></i>
+      </div>
+      شامل نسا 1
+    </div>
+    <div class="arrow">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
+  </a>
+
+  <!-- مثال امتحان مقفول -->
+  <div class="exam-card obgyn locked">
+    <div class="exam-left">
+      <div class="exam-icon">
+        <i class="fa-solid fa-person-pregnant"></i>
+      </div>
+      شامل نسا 2
+    </div>
+    <div class="lock-icon">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>
