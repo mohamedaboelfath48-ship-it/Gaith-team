@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --main:#0891b2; --bg:#ecfeff; --card:#fff; --qbg:#cffafe;
+  --opt:#f0f9ff; --sel:#67e8f9; --ok:#16a34a; --bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{background:var(--main);color:#fff;padding:20px;text-align:center}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+.container{max-width:900px;margin:auto;padding:20px}
+.counter{background:#fff;padding:14px;border-radius:14px;display:flex;justify-content:space-between;font-weight:800;margin-bottom:18px}
+.card{background:#fff;padding:26px;border-radius:20px;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.question{background:var(--qbg);padding:18px;border-radius:14px;font-size:20px;font-weight:900;margin-bottom:16px}
+.option{background:var(--opt);padding:14px;border-radius:14px;margin:10px 0;font-weight:700;cursor:pointer}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+.feedback{margin-top:12px;font-size:18px;font-weight:900}
+.correct{color:var(--ok)} .wrong{color:var(--bad)}
+.nav{display:flex;gap:12px;margin-top:18px}
+.nav button{flex:1;padding:14px;border:none;border-radius:14px;font-weight:900}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+  <div class="counter">
+    <div>Answered: <span id="answered">0</span></div>
+    <div>Remaining: <span id="remaining">0</span></div>
+  </div>
+
+  <div class="card" id="box"></div>
+
+  <div class="nav">
+    <button class="prev" onclick="prevQ()">Previous</button>
+    <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+/* 🟢 Easy (1–25) */
+{t:"The menstrual cycle is regulated by hormonal interaction between ovary and pituitary gland.",a:true},
+{t:"Estrogen is secreted mainly by ovarian follicles.",a:true},
+{t:"Progesterone prepares the uterus for implantation.",a:true},
+{t:"Fertilization leads to formation of a diploid cell.",a:true},
+{t:"The zygote undergoes mitotic divisions called cleavage.",a:true},
+{t:"The morula enters the uterine cavity before implantation.",a:true},
+{t:"Implantation occurs in the myometrium.",a:false},
+{t:"Trophoblast contributes to placental formation.",a:true},
+{t:"Placenta allows passage of nutrients and waste products.",a:true},
+{t:"Placenta completely blocks drugs from reaching fetus.",a:false},
+{t:"Umbilical cord vessels are embedded in Wharton’s jelly.",a:true},
+{t:"The fetus swallows amniotic fluid.",a:true},
+{t:"Amniotic fluid helps prevent fetal adhesions.",a:true},
+{t:"Fetal movements indicate fetal well-being.",a:true},
+{t:"Antenatal care begins at the first trimester.",a:true},
+{t:"Increased appetite is common in pregnancy.",a:true},
+{t:"Heartburn results from gastric hyperacidity only.",a:false},
+{t:"Constipation is related to decreased bowel motility.",a:true},
+{t:"Varicose veins may result from venous congestion.",a:true},
+{t:"Pregnancy causes physiological anemia.",a:true},
+{t:"Abortion can be spontaneous or induced.",a:true},
+{t:"Bleeding in early pregnancy should always be evaluated.",a:true},
+{t:"Threatened abortion presents with closed cervix.",a:true},
+{t:"Complete abortion involves expulsion of all products.",a:true},
+{t:"Septic abortion requires urgent treatment.",a:true},
+
+/* 🟡 Moderate (26–55) */
+{t:"Decidua parietalis lines the rest of uterine cavity.",a:true},
+{t:"Placenta has endocrine and metabolic functions.",a:true},
+{t:"Placental hormones include estrogen, progesterone, and hPL.",a:true},
+{t:"The placental barrier becomes thinner with gestation.",a:true},
+{t:"The umbilical vein carries oxygen-poor blood.",a:false},
+{t:"Amniotic fluid volume increases until late pregnancy.",a:true},
+{t:"Oligohydramnios is associated with fetal renal agenesis.",a:true},
+{t:"Polyhydramnios may cause maternal respiratory discomfort.",a:true},
+{t:"Antenatal visits are more frequent in third trimester.",a:true},
+{t:"Blood pressure measurement is essential in ANC.",a:true},
+{t:"Fundal height less than gestational age suggests IUGR.",a:true},
+{t:"Ultrasound is useful for dating pregnancy.",a:true},
+{t:"Abortion before 12 weeks is more common.",a:true},
+{t:"Maternal diabetes increases abortion risk.",a:true},
+{t:"Cervical incompetence often causes painless abortion.",a:true},
+{t:"Inevitable abortion presents with open cervix.",a:true},
+{t:"Heavy bleeding is uncommon in incomplete abortion.",a:false},
+{t:"Septic abortion may lead to renal failure.",a:true},
+{t:"Missed abortion may be asymptomatic.",a:true},
+{t:"Pregnancy test may stay positive after fetal death.",a:true},
+{t:"Recurrent abortion requires investigation.",a:true},
+{t:"Preterm labor is defined as labor before 37 weeks.",a:true},
+{t:"Uterine overdistension is a risk factor for preterm labor.",a:true},
+{t:"Genital tract infection increases preterm labor risk.",a:true},
+{t:"PROM increases risk of chorioamnionitis.",a:true},
+{t:"Preterm babies have less body fat.",a:true},
+{t:"Preterm infants lose heat easily.",a:true},
+{t:"Low birth weight is common in preterm infants.",a:true},
+{t:"Incubator care reduces heat loss.",a:true},
+{t:"Oxygen therapy must be carefully regulated.",a:true},
+
+/* 🔴 Hard (56–80) */
+{t:"Preterm labor accounts for majority of neonatal deaths.",a:true},
+{t:"Cervical cerclage may prevent preterm birth.",a:true},
+{t:"Regular contractions without cervical change indicate false labor.",a:true},
+{t:"Progressive cervical effacement confirms true labor.",a:true},
+{t:"Fetal fibronectin is normally absent after 22 weeks.",a:true},
+{t:"Tocolytic therapy aims to delay delivery for steroid benefit.",a:true},
+{t:"Tocolysis is contraindicated in severe pre-eclampsia.",a:true},
+{t:"Beta-agonists increase uterine tone.",a:false},
+{t:"Ritodrine side effects include tachycardia and tremor.",a:true},
+{t:"Indomethacin may cause oligohydramnios.",a:true},
+{t:"Nifedipine is associated with hypotension.",a:true},
+{t:"Magnesium sulfate toxicity causes absent deep tendon reflexes.",a:true},
+{t:"Preterm infants are at risk of hypoglycemia.",a:true},
+{t:"Surfactant deficiency causes alveolar collapse.",a:true},
+{t:"Respiratory distress syndrome presents with grunting.",a:true},
+{t:"Preterm infants have immature liver function.",a:true},
+{t:"Hyperbilirubinemia is common in prematurity.",a:true},
+{t:"Infection is a leading cause of neonatal morbidity.",a:true},
+{t:"Excess oxygen can cause bronchopulmonary dysplasia.",a:true},
+{t:"Incubator humidity reduces insensible water loss.",a:true},
+{t:"Early breastfeeding improves immunity.",a:true},
+{t:"Kangaroo care reduces neonatal mortality.",a:true},
+{t:"Prematurity increases risk of cerebral palsy.",a:true},
+{t:"Prevention of complications is part of ANC goals.",a:true},
+{t:"Quality obstetric care improves maternal outcomes.",a:true}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>
+  <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+  <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h; updateCounter();
+}
+function choose(v){ if(answers[i]!==null) return; answers[i]=v; showQ(); }
+function nextQ(){ if(i<questions.length-1){ i++; showQ(); } else finish(); }
+function prevQ(){ if(i>0){ i--; showQ(); } }
+function finish(){
+  let c=0; answers.forEach((a,idx)=>{ if(a===questions[idx].a) c++; });
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+showQ();
+</script>
+</body>
+</html>
