@@ -124,6 +124,7 @@ header{
 <script>
 /* ================= QUESTIONS ================= */
 const questions = [
+/* ---------- True / False (1–20) ---------- */
 {type:"tf",q:"Neonates lose heat faster due to thin skin and low subcutaneous fat.",a:true},
 {type:"tf",q:"Skin-to-skin contact helps prevent neonatal hypothermia.",a:true},
 {type:"tf",q:"Organic constipation has no underlying disease.",a:false},
@@ -134,88 +135,121 @@ const questions = [
 {type:"tf",q:"Neonatal bleeding may present with intracranial hemorrhage.",a:true},
 {type:"tf",q:"Low Apgar score is a sign of birth asphyxia.",a:true},
 {type:"tf",q:"Congenital heart disease is always symptomatic at birth.",a:false},
+{type:"tf",q:"Tetralogy of Fallot is an acyanotic heart disease.",a:false},
+{type:"tf",q:"Recurrent chest infection may indicate congenital heart disease.",a:true},
+{type:"tf",q:"Rheumatic fever can affect the heart, joints, skin, and CNS.",a:true},
+{type:"tf",q:"Subcutaneous nodules are painless in rheumatic fever.",a:true},
+{type:"tf",q:"Bacterial gastroenteritis is more common than viral.",a:false},
+{type:"tf",q:"Hypernatremia can occur as a complication of gastroenteritis.",a:true},
+{type:"tf",q:"Typhoid fever is transmitted only from animals to humans.",a:false},
+{type:"tf",q:"Type 1 diabetes usually presents during childhood.",a:true},
+{type:"tf",q:"Bronchiolitis is mainly managed with oxygen and hydration.",a:true},
+{type:"tf",q:"Nephrotic syndrome causes hyperlipidemia.",a:true},
 
-/* MCQs example (full set continues) */
+/* ---------- MCQs (21–80) ---------- */
 {type:"mcq",q:"The normal delivery room temperature to prevent hypothermia should be:",o:["20°C","22°C","25°C","30°C"],a:2},
-{type:"mcq",q:"Which newborn is at highest risk of hypothermia?",o:["Term infant","Post-term infant","Premature infant","Macrosomic infant"],a:2}
+{type:"mcq",q:"Which newborn is at highest risk of hypothermia?",o:["Term infant","Post-term infant","Premature infant","Macrosomic infant"],a:2},
+{type:"mcq",q:"Functional constipation is mainly related to:",o:["Hirschsprung disease","Behavioral issues","Neurological defects","Metabolic disorders"],a:1},
+{type:"mcq",q:"Which is an organic cause of constipation?",o:["Toilet training","Low fiber diet","Spinal cord abnormality","Painful defecation"],a:2},
+{type:"mcq",q:"Bilateral pitting edema is typical of:",o:["Marasmus","Kwashiorkor","Iron deficiency anemia","Rickets"],a:1},
+{type:"mcq",q:"Ascites in kwashiorkor is caused by:",o:["Hyperglycemia","Hypoproteinemia","Dehydration","Hypertension"],a:1},
+{type:"mcq",q:"Which feature is absent in marasmus?",o:["Muscle wasting","Loss of subcutaneous fat","Edema","Weight loss"],a:2},
+{type:"mcq",q:"First sign of birth asphyxia is:",o:["Fever","Failure to cry","Jaundice","Anemia"],a:1},
+{type:"mcq",q:"Oxygen deprivation in birth asphyxia leads to:",o:["Increased ATP","Cellular injury","Dehydration","Hypothermia only"],a:1},
+{type:"mcq",q:"Most effective prevention of neonatal bleeding:",o:["Blood transfusion","Vitamin K injection","Antibiotics","Steroids"],a:1},
+
+{type:"mcq",q:"Which heart defect causes cyanosis?",o:["ASD","VSD","PDA","Tetralogy of Fallot"],a:3},
+{type:"mcq",q:"Squatting relieves symptoms in cyanotic heart disease by:",o:["Decreasing preload","Increasing pulmonary blood flow","Increasing systemic resistance","Reducing heart rate"],a:2},
+{type:"mcq",q:"Carditis is diagnosed in rheumatic fever by:",o:["CBC","ECG only","Echocardiography","Chest X-ray only"],a:2},
+{type:"mcq",q:"The most serious complication of rheumatic fever is:",o:["Arthritis","Skin rash","Rheumatic heart disease","Fever"],a:2},
+{type:"mcq",q:"The most common viral cause of gastroenteritis is:",o:["Norovirus","Adenovirus","Rotavirus","Astrovirus"],a:2},
+{type:"mcq",q:"Which is NOT a complication of gastroenteritis?",o:["Metabolic acidosis","Electrolyte imbalance","Hypertension","Dehydration"],a:2},
+{type:"mcq",q:"Pea-soup diarrhea is characteristic of:",o:["Cholera","Typhoid fever","Shigellosis","Amebiasis"],a:1},
+{type:"mcq",q:"Gold standard diagnosis of typhoid fever:",o:["Widal test","Blood culture","Stool examination","PCR"],a:1},
+{type:"mcq",q:"Fruity breath odor indicates:",o:["Hypoglycemia","Ketoacidosis","Pneumonia","Asthma"],a:1},
+{type:"mcq",q:"Kussmaul respiration is:",o:["Shallow breathing","Rapid shallow breathing","Deep labored breathing","Irregular breathing"],a:2},
+
+{type:"mcq",q:"RSV infection commonly causes:",o:["Asthma","Pneumonia","Bronchiolitis","Tuberculosis"],a:2},
+{type:"mcq",q:"Nasal flaring indicates:",o:["Normal respiration","Mild illness","Respiratory distress","Recovery phase"],a:2},
+{type:"mcq",q:"The most common organism causing pneumonia in neonates:",o:["RSV","Streptococcus pneumoniae","Group B streptococcus","Mycoplasma"],a:2},
+{type:"mcq",q:"Lobar pneumonia affects:",o:["Bronchi only","One lung lobe","Whole lung","Pleura"],a:1},
+{type:"mcq",q:"Frothy urine is due to:",o:["RBCs","Ketones","Protein","Glucose"],a:2},
+{type:"mcq",q:"Nephrotic syndrome edema results from:",o:["Sodium retention only","Hypoalbuminemia","Infection","Hypertension"],a:1},
+{type:"mcq",q:"Hematuria with RBC casts suggests:",o:["UTI","Nephrotic syndrome","Acute glomerulonephritis","Renal stones"],a:2},
+{type:"mcq",q:"Post-streptococcal GN usually occurs after:",o:["2–3 days","1 week","2–3 weeks","6 months"],a:2},
+{type:"mcq",q:"G6PD deficiency causes hemolysis after exposure to:",o:["Insulin","Oxidative drugs","Iron","Calcium"],a:1},
+{type:"mcq",q:"Dark urine in hemolytic anemia is due to:",o:["Protein","Bilirubin","Hemoglobin","Glucose"],a:2},
+
+{type:"mcq",q:"Barking cough with stridor is typical of:",o:["Asthma","Pneumonia","Croup","Bronchiolitis"],a:2},
+{type:"mcq",q:"First-line drug in moderate to severe croup:",o:["Antibiotics","Steroids","Antihistamines","Diuretics"],a:1},
+{type:"mcq",q:"Asthma is characterized by:",o:["Permanent airway obstruction","Reversible airway obstruction","Lung fibrosis","Infection"],a:1},
+{type:"mcq",q:"Wheezing occurs due to:",o:["Fluid in pleura","Airway narrowing","Lung collapse","Alveolar edema"],a:1},
+{type:"mcq",q:"Oxygen therapy in asthma aims to keep saturation above:",o:["85%","88%","90–92%","100%"],a:2},
+{type:"mcq",q:"Nephrotic syndrome increases risk of:",o:["Thrombosis","Hypotension","Hypoglycemia","Bradycardia"],a:0},
+{type:"mcq",q:"The most common presenting sign of nephrotic syndrome:",o:["Hematuria","Facial edema","Fever","Hypertension"],a:1},
+{type:"mcq",q:"Most important nursing intervention in pneumonia:",o:["Bed rest","Oxygenation monitoring","IV antibiotics only","Chest X-ray"],a:1},
+{type:"mcq",q:"Failure to thrive is commonly seen in:",o:["Nephrotic syndrome","Congenital heart disease","Acute asthma","Croup"],a:1},
+{type:"mcq",q:"Early detection and management in pediatrics leads to:",o:["More complications","Better prognosis","Longer hospital stay","Increased cost"],a:1}
 ];
 
-/* ================= STATE ================= */
+/* ================= LOGIC ================= */
 let i=0;
-let answers = Array(questions.length).fill(null);
+let answers=Array(questions.length).fill(null);
 let time=40*60;
 
-/* TIMER */
 setInterval(()=>{
-  let m=Math.floor(time/60), s=time%60;
+  let m=Math.floor(time/60),s=time%60;
   timer.innerText=`${m}:${s<10?"0":""}${s}`;
   time--;
-  if(time<0) finish();
+  if(time<0)finish();
 },1000);
 
 function updateCounter(){
-  answered.innerText = answers.filter(a=>a!==null).length;
-  remaining.innerText = questions.length - answered.innerText;
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
 }
 
 function showQ(){
-  const q=questions[i];
-  const sel=answers[i];
-  nextBtn.disabled = sel===null;
-
+  const q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
   let html=`<div class="question">${q.q}</div>`;
-
   if(q.type==="tf"){
     html+=`
-      <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
-      <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
   }else{
     q.o.forEach((op,idx)=>{
       html+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
     });
   }
-
   if(sel!==null){
-    const correct = sel===q.a;
-    html+=`<div class="feedback ${correct?"correct":"wrong"}">
-      ${correct?"✔️ Correct":"😞 Wrong"}
+    html+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
     </div>`;
   }
-
   box.innerHTML=html;
   updateCounter();
 }
 
-function choose(v){
-  if(answers[i]!==null) return;
-  answers[i]=v;
-  showQ();
-}
-
-function nextQ(){
-  if(i<questions.length-1){i++;showQ();}
-  else finish();
-}
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
 function prevQ(){if(i>0){i--;showQ();}}
 
 function finish(){
   let correct=0;
   answers.forEach((a,idx)=>{if(a===questions[idx].a)correct++;});
   document.body.innerHTML=`
-    <header>
-      <div class="logo">Gaith Team</div>
-      <div class="slogan">الإمتحان في جيبك</div>
-    </header>
-    <div class="container">
-      <div class="card" style="text-align:center">
-        <p style="color:green;font-size:22px;font-weight:900">Correct: ${correct}</p>
-        <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-correct}</p>
-        <p style="font-size:20px">Score: ${Math.round(correct/questions.length*100)}%</p>
-        <p style="margin-top:16px;font-size:22px;font-weight:900;color:#0891b2">
-          فخورين بيك وأشطر شطور 🌟
-        </p>
-      </div>
-    </div>`;
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${correct}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-correct}</p>
+      <p style="font-size:20px">Score: ${Math.round(correct/questions.length*100)}%</p>
+      <p style="margin-top:16px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
 }
 
 showQ();
