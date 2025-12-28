@@ -25,7 +25,26 @@ body{
 .subtitle{
   color:#fff;
   font-size:18px;
+  margin-bottom:20px;
+}
+
+/* زر الانضمام */
+.join-main{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#22c55e;
+  color:#fff;
+  padding:12px 22px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
   margin-bottom:30px;
+}
+.join-main:hover{
+  background:#16a34a;
 }
 
 /* الحاوية */
@@ -112,6 +131,12 @@ body{
 <div class="logo">GAITH TEAM</div>
 <div class="subtitle">الامتحان في جيبك</div>
 
+<!-- زر الانضمام -->
+<a class="join-main" href="https://t.me/nursing2bu" target="_blank">
+  <i class="fa-brands fa-telegram"></i>
+  انضم إلينا على Telegram
+</a>
+
 <div class="container">
 
   <!-- ===== طب أطفال ===== -->
@@ -152,7 +177,7 @@ body{
     </div>
   </a>
 
-  <!-- مثال امتحان مقفول -->
+  <!-- امتحان مقفول -->
   <div class="exam-card obgyn locked">
     <div class="exam-left">
       <div class="exam-icon">
