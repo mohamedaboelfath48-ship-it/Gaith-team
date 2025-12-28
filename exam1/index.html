@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaith Team | Exam</title>
+<title>Gaith Team Exam</title>
 
 <style>
 :root{
@@ -20,90 +20,59 @@
   --text:#0f172a;
 }
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  font-family:Segoe UI,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
-
-/* HEADER */
 header{
   background:linear-gradient(90deg,var(--primary),var(--secondary));
   color:#fff;
   padding:22px;
   text-align:center;
 }
-.logo{
-  font-size:28px;
-  font-weight:900;
-}
-.slogan{
-  margin-top:6px;
-  font-size:18px;
-  font-weight:800;
-}
-.timer{
-  margin-top:8px;
-  font-size:18px;
-  font-weight:700;
-}
+.logo{font-size:28px;font-weight:900}
+.slogan{margin-top:6px;font-size:18px;font-weight:800}
+.container{max-width:1000px;margin:auto;padding:20px}
 
-/* CONTAINER */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
-
-/* COUNTER */
 .counter-box{
   background:#fff;
   padding:16px;
   border-radius:18px;
-  box-shadow:0 8px 22px rgba(0,0,0,.1);
-  margin-bottom:22px;
+  box-shadow:0 6px 20px rgba(0,0,0,.1);
   display:flex;
   justify-content:space-between;
-  font-size:18px;
   font-weight:800;
+  margin-bottom:20px;
 }
 .done{color:var(--success)}
 .left{color:var(--danger)}
 
-/* CARD */
 .card{
-  background:var(--card);
+  background:#fff;
   padding:28px;
   border-radius:22px;
   box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
-
-/* QUESTION */
 .question-title{
   background:var(--question);
-  padding:22px;
-  border-radius:18px;
+  padding:20px;
+  border-radius:16px;
   font-size:22px;
   font-weight:900;
   margin-bottom:22px;
-  line-height:1.7;
   border-left:6px solid var(--primary);
 }
-
-/* OPTIONS */
 .option{
   background:var(--option);
   border:2px solid var(--border);
-  border-radius:18px;
+  border-radius:16px;
   padding:18px;
-  margin:14px 0;
-  font-size:18px;
-  font-weight:700;
+  margin:12px 0;
   cursor:pointer;
+  font-weight:700;
 }
-.option:hover{background:#e0f2fe}
 .option.selected{
   background:var(--selected);
   border-color:var(--primary);
@@ -113,7 +82,6 @@ header{
   cursor:not-allowed;
 }
 
-/* NAV */
 .nav{
   display:flex;
   gap:16px;
@@ -123,35 +91,30 @@ header{
   flex:1;
   padding:16px;
   font-size:16px;
-  font-weight:800;
+  font-weight:900;
   border:none;
-  border-radius:18px;
+  border-radius:16px;
 }
 .prev{background:#e0f2fe}
 .next{background:var(--primary);color:#fff}
 .next:disabled{background:#7dd3fc}
 
-/* RESULT */
 .result{
   background:#fff;
-  padding:32px;
+  padding:30px;
   border-radius:22px;
   text-align:center;
   font-size:22px;
-  margin-top:30px;
 }
 .good{color:var(--success);font-weight:900}
 .bad{color:var(--danger);font-weight:900}
 
-/* REPORT */
 .report-item{
   background:#fff;
   padding:18px;
   border-radius:16px;
-  margin:14px 0;
+  margin:12px 0;
   border-left:6px solid var(--border);
-  font-size:16px;
-  line-height:1.6;
 }
 .report-item.correct{border-color:var(--success)}
 .report-item.wrong{border-color:var(--danger)}
@@ -163,7 +126,6 @@ header{
 <header>
   <div class="logo">Gaith Team</div>
   <div class="slogan">الإمتحان في جيبك</div>
-  <div class="timer" id="timer">30:00</div>
 </header>
 
 <div class="container">
@@ -183,32 +145,79 @@ header{
 </div>
 
 <script>
-/* ===== QUESTIONS (ENGLISH) ===== */
+/* ================= QUESTIONS ================= */
 const questions = [
-{t:"Fertilization usually occurs in the ampulla of the fallopian tube.",a:true},
-{t:"Sperm capacitation is necessary for penetration of the ovum.",a:true},
-{t:"Implantation usually occurs in the lower uterine segment.",a:false},
-{t:"The blastocyst is responsible for implantation.",a:true},
-{t:"The placenta is fully formed by the end of the first trimester.",a:true},
-{t:"The umbilical cord normally contains two veins and one artery.",a:false},
-{t:"Wharton’s jelly protects the umbilical vessels.",a:true},
-{t:"Amniotic fluid allows fetal movements.",a:true},
-{t:"Oligohydramnios means excessive amniotic fluid.",a:false},
-{t:"Placenta previa causes painless vaginal bleeding.",a:true}
+/* -------- True / False (20) -------- */
+{type:"tf",q:"Neonatal hypothermia is defined as a core body temperature less than 36.5°C.",a:true},
+{type:"tf",q:"Prematurity is a risk factor for neonatal hypothermia.",a:true},
+{type:"tf",q:"Functional constipation is more common than organic constipation in children.",a:true},
+{type:"tf",q:"Hirschsprung disease is a functional cause of constipation.",a:false},
+{type:"tf",q:"Kwashiorkor is caused by deficiency of protein only.",a:true},
+{type:"tf",q:"Marasmus is associated with edema.",a:false},
+{type:"tf",q:"Vitamin K deficiency can cause neonatal bleeding.",a:true},
+{type:"tf",q:"Birth asphyxia results in hypoxia and acidosis.",a:true},
+{type:"tf",q:"Cyanotic heart disease presents with bluish discoloration of lips and nails.",a:true},
+{type:"tf",q:"Ventricular septal defect is a type of acyanotic congenital heart disease.",a:true},
+{type:"tf",q:"Rheumatic fever usually follows untreated streptococcal infection.",a:true},
+{type:"tf",q:"Polyarthritis is a major Jones criterion.",a:true},
+{type:"tf",q:"Gastroenteritis is most commonly caused by viruses in infants.",a:true},
+{type:"tf",q:"Dehydration is the most serious complication of gastroenteritis.",a:true},
+{type:"tf",q:"Type 1 diabetes mellitus is caused by insulin resistance.",a:false},
+{type:"tf",q:"Kussmaul breathing occurs in diabetic ketoacidosis.",a:true},
+{type:"tf",q:"Bronchiolitis mainly affects children older than 5 years.",a:false},
+{type:"tf",q:"Pneumonia can lead to respiratory failure if untreated.",a:true},
+{type:"tf",q:"Nephrotic syndrome is characterized by proteinuria and edema.",a:true},
+{type:"tf",q:"Acute glomerulonephritis commonly presents with hematuria.",a:true},
+
+/* -------- MCQs (60) -------- */
+{type:"mcq",q:"Neonatal hypothermia is classified as severe when temperature is:",o:["35.5°C","34°C","< 32°C","36°C"],a:2},
+{type:"mcq",q:"The main mechanism of heat loss in newborns is due to:",o:["Thick skin","Large surface area","Excess muscle mass","Increased sweating"],a:1},
+{type:"mcq",q:"The most common type of constipation in children is:",o:["Organic","Neurological","Functional","Metabolic"],a:2},
+{type:"mcq",q:"Hirschsprung disease is caused by:",o:["Poor fiber intake","Absence of ganglion cells","Hypothyroidism","Dehydration"],a:1},
+{type:"mcq",q:"Kwashiorkor is mainly characterized by:",o:["Severe wasting without edema","Protein deficiency with edema","Vitamin deficiency","Iron deficiency anemia"],a:1},
+{type:"mcq",q:"Marasmus results from deficiency of:",o:["Protein only","Fat only","Calories only","Protein and calories"],a:3},
+{type:"mcq",q:"Edema in kwashiorkor is due to:",o:["Hyperalbuminemia","Hypoproteinemia","Hypernatremia","Dehydration"],a:1},
+{type:"mcq",q:"Birth asphyxia is defined as:",o:["Premature delivery","Failure to initiate breathing at birth","Neonatal infection","Congenital anomaly"],a:1},
+{type:"mcq",q:"The most important initial management of birth asphyxia is:",o:["Antibiotics","Immediate resuscitation","Surgery","Blood transfusion"],a:1},
+{type:"mcq",q:"A common complication of birth asphyxia is:",o:["Asthma","Hypoxic ischemic encephalopathy","Diarrhea","Constipation"],a:1},
+
+{type:"mcq",q:"Vitamin K deficiency bleeding occurs due to:",o:["Platelet excess","Coagulation factor deficiency","Infection","Trauma only"],a:1},
+{type:"mcq",q:"Acyanotic congenital heart disease includes:",o:["Tetralogy of Fallot","Transposition of great arteries","Ventricular septal defect","Truncus arteriosus"],a:2},
+{type:"mcq",q:"Cyanosis in congenital heart disease is due to:",o:["Increased hemoglobin","Right to left shunt","Increased blood pressure","Pulmonary edema"],a:1},
+{type:"mcq",q:"Squatting position in children with CHD helps by:",o:["Decreasing venous return","Increasing systemic vascular resistance","Reducing oxygen consumption","Lowering heart rate"],a:1},
+{type:"mcq",q:"The most common cause of rheumatic fever is:",o:["Viral infection","Staphylococcal infection","Streptococcal pharyngitis","Tuberculosis"],a:2},
+{type:"mcq",q:"Chorea is a manifestation of:",o:["Minor Jones criteria","Major Jones criteria","Complication","Chronic disease"],a:1},
+{type:"mcq",q:"The most common cause of gastroenteritis in infants is:",o:["E. coli","Rotavirus","Shigella","Salmonella"],a:1},
+{type:"mcq",q:"ORS is mainly used to:",o:["Stop diarrhea","Kill organisms","Replace lost fluids and electrolytes","Reduce fever"],a:2},
+{type:"mcq",q:"A major complication of gastroenteritis is:",o:["Hypertension","Dehydration","Obesity","Anemia"],a:1},
+{type:"mcq",q:"Typhoid fever is caused by:",o:["Salmonella typhi","E. coli","Shigella","Vibrio cholerae"],a:0},
+
+{type:"mcq",q:"Rose spots are seen in:",o:["Measles","Typhoid fever","Rubella","Chickenpox"],a:1},
+{type:"mcq",q:"Widal test is used for diagnosis of:",o:["Malaria","Typhoid","Hepatitis","Cholera"],a:1},
+{type:"mcq",q:"Type 1 diabetes mellitus occurs due to:",o:["Insulin resistance","Autoimmune destruction of beta cells","Obesity","Excess insulin"],a:1},
+{type:"mcq",q:"Kussmaul breathing indicates:",o:["Hypoglycemia","Metabolic acidosis","Heart failure","Pneumonia"],a:1},
+{type:"mcq",q:"Diabetic ketoacidosis presents with:",o:["Shallow breathing","Sweet breath odor","Hypothermia","Bradycardia"],a:1},
+{type:"mcq",q:"Bronchiolitis is most commonly caused by:",o:["Bacteria","RSV","Fungi","Parasites"],a:1},
+{type:"mcq",q:"Bronchiolitis mainly affects children:",o:["Older than 5 years","Younger than 2 years","Adolescents","Adults"],a:1},
+{type:"mcq",q:"Nasal flaring and chest retractions indicate:",o:["Mild illness","Increased work of breathing","Recovery phase","Normal respiration"],a:1},
+{type:"mcq",q:"Pneumonia is an infection of:",o:["Upper airway","Lung parenchyma","Pleura only","Bronchi only"],a:1},
+{type:"mcq",q:"A common sign of pneumonia is:",o:["Polyuria","Cyanosis","Constipation","Rash"],a:1},
+
+{type:"mcq",q:"Mycoplasma pneumonia is common in:",o:["Neonates","Preschool children","School-age children","Infants"],a:2},
+{type:"mcq",q:"Nephrotic syndrome is characterized by:",o:["Hematuria","Proteinuria","Hypertension only","Oliguria only"],a:1},
+{type:"mcq",q:"The main cause of edema in nephrotic syndrome is:",o:["Hypertension","Hypoalbuminemia","Infection","Renal stones"],a:1},
+{type:"mcq",q:"Frothy urine indicates:",o:["Hematuria","Proteinuria","Dehydration","Infection"],a:1},
+{type:"mcq",q:"Acute glomerulonephritis commonly follows:",o:["Viral infection","Streptococcal infection","Trauma","Congenital defect"],a:1},
+{type:"mcq",q:"Smoky urine is due to:",o:["Protein","Glucose","Blood","Ketones"],a:2},
+{type:"mcq",q:"Hypertension in AGN is due to:",o:["Dehydration","Fluid overload","Infection","Anemia"],a:1},
+{type:"mcq",q:"Hemolytic anemia is characterized by:",o:["Decreased RBC destruction","Increased RBC destruction","Platelet deficiency","Bone marrow failure"],a:1},
+{type:"mcq",q:"Jaundice in hemolytic anemia is due to:",o:["Direct bilirubin","Indirect bilirubin","Liver failure","Gallstones"],a:1},
+{type:"mcq",q:"G6PD deficiency causes:",o:["Iron deficiency anemia","Aplastic anemia","Hemolytic anemia","Megaloblastic anemia"],a:2}
 ];
 
-/* ===== STATE ===== */
+/* ================= LOGIC ================= */
 let i=0;
 let answers = Array(questions.length).fill(null);
-let time = 30*60;
-
-/* TIMER */
-setInterval(()=>{
-  let m=Math.floor(time/60), s=time%60;
-  timer.innerText=`${m}:${s<10?"0":""}${s}`;
-  time--;
-  if(time<0) finish();
-},1000);
 
 function updateCounter(){
   const solved = answers.filter(a=>a!==null).length;
@@ -217,14 +226,26 @@ function updateCounter(){
 }
 
 function showQ(){
-  let sel = answers[i];
+  const q = questions[i];
+  const sel = answers[i];
   nextBtn.disabled = sel===null;
 
-  questionBox.innerHTML = `
-    <div class="question-title">${questions[i].t}</div>
-    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
-    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>
-  `;
+  let html = `<div class="question-title">${q.q}</div>`;
+
+  if(q.type==="tf"){
+    html+=`
+      <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+      <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }else{
+    q.o.forEach((op,idx)=>{
+      html+=`
+      <div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">
+        ${op}
+      </div>`;
+    });
+  }
+
+  questionBox.innerHTML = html;
   updateCounter();
 }
 
@@ -236,45 +257,44 @@ function choose(v){
 }
 
 function nextQ(){
-  if(i<questions.length-1){
-    i++; showQ();
-  }else finish();
+  if(i<questions.length-1){i++;showQ();}
+  else finish();
 }
-function prevQ(){
-  if(i>0){ i--; showQ(); }
-}
+function prevQ(){if(i>0){i--;showQ();}}
 
 function finish(){
-  let correct=0, report="";
+  let correct=0;
+  let report="";
   questions.forEach((q,idx)=>{
     let ok = answers[idx]===q.a;
     if(ok) correct++;
     report+=`
-      <div class="report-item ${ok?"correct":"wrong"}">
-        <b>Q${idx+1}:</b> ${q.t}<br>
-        Your answer: ${answers[idx]?"True":"False"}<br>
-        Correct answer: ${q.a?"True":"False"}
-      </div>`;
+    <div class="report-item ${ok?"correct":"wrong"}">
+      <b>Q${idx+1}:</b> ${q.q}<br>
+      Your answer: ${q.type==="tf"?(answers[idx]?"True":"False"):q.o[answers[idx]]}<br>
+      Correct answer: ${q.type==="tf"?(q.a?"True":"False"):q.o[q.a]}
+    </div>`;
   });
+
   let wrong = questions.length - correct;
   let percent = Math.round(correct/questions.length*100);
 
   document.body.innerHTML = `
-    <header>
-      <div class="logo">Gaith Team</div>
-      <div class="slogan">الإمتحان في جيبك</div>
-    </header>
-    <div class="container">
-      <div class="result">
-        <p class="good">Correct answers: ${correct}</p>
-        <p class="bad">Wrong answers: ${wrong}</p>
-        <p>Score: ${percent}%</p>
-        <div style="margin-top:20px;font-size:22px;font-weight:900;color:#0891b2">
-          فخورين بيك وأشطر شطور 🌟
-        </div>
+  <header>
+    <div class="logo">Gaith Team</div>
+    <div class="slogan">الإمتحان في جيبك</div>
+  </header>
+  <div class="container">
+    <div class="result">
+      <p class="good">Correct answers: ${correct}</p>
+      <p class="bad">Wrong answers: ${wrong}</p>
+      <p>Score: ${percent}%</p>
+      <div style="margin-top:18px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
       </div>
-      ${report}
-    </div>`;
+    </div>
+    ${report}
+  </div>`;
 }
 
 showQ();
