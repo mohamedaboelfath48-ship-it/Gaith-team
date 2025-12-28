@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:var(--bg);
+}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:5px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:950px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:var(--card);
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:900;
+}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* ===== TRUE / FALSE (1–20) ===== */
+{t:"Newborns are unable to sweat effectively to regulate body temperature.",a:true},
+{t:"Cold delivery rooms increase the risk of neonatal hypothermia.",a:true},
+{t:"Functional constipation usually has an identifiable anatomical cause.",a:false},
+{t:"Painful defecation can lead to stool withholding in children.",a:true},
+{t:"Protein-energy malnutrition can cause delayed physical growth.",a:true},
+{t:"Edema in kwashiorkor is caused by excess fluid intake only.",a:false},
+{t:"Marasmus children usually appear thin with prominent ribs.",a:true},
+{t:"Neonatal bleeding may occur due to deficiency of clotting factors.",a:true},
+{t:"Birth asphyxia can affect the brain, kidneys, and heart.",a:true},
+{t:"All congenital heart diseases cause cyanosis.",a:false},
+{t:"Poor weight gain may indicate congenital heart disease.",a:true},
+{t:"Rheumatic fever occurs immediately after streptococcal infection.",a:false},
+{t:"Migratory polyarthritis is a feature of rheumatic fever.",a:true},
+{t:"Gastroenteritis may lead to electrolyte imbalance.",a:true},
+{t:"Antibiotics are routinely used in viral gastroenteritis.",a:false},
+{t:"Typhoid fever can cause abdominal distension.",a:true},
+{t:"Type 1 diabetes mellitus results from autoimmune destruction of beta cells.",a:true},
+{t:"Bronchiolitis commonly presents with poor feeding.",a:true},
+{t:"Pneumonia can impair oxygen exchange in the lungs.",a:true},
+{t:"Nephrotic syndrome is characterized by hypoalbuminemia.",a:true},
+
+/* ===== MCQs (21–80) ===== */
+{t:"The primary reason newborns lose heat rapidly is:",o:["Excess sweating","Large body surface area","Increased muscle mass","Thick skin"],a:1},
+{t:"Which action reduces heat loss by evaporation?",o:["Delayed feeding","Immediate drying","Oxygen therapy","Incubator use"],a:1},
+{t:"A child passing hard stools once weekly most likely has:",o:["Normal bowel habit","Diarrhea","Constipation","IBS"],a:2},
+{t:"Which symptom suggests organic constipation?",o:["Stool withholding","Normal growth","Delayed meconium passage","Toilet training issues"],a:2},
+{t:"Bilateral pedal edema is most commonly seen in:",o:["Marasmus","Kwashiorkor","Rickets","Iron deficiency anemia"],a:1},
+{t:"Loss of subcutaneous fat with no edema indicates:",o:["Kwashiorkor","Marasmus","Obesity","Hypothyroidism"],a:1},
+{t:"Vitamin K deficiency mainly results in:",o:["Anemia","Thrombocytopenia","Bleeding tendency","Jaundice"],a:2},
+{t:"The most reliable sign of birth asphyxia is:",o:["Fever","Weak cry","Apgar score","Jaundice"],a:2},
+{t:"Hypoxic ischemic encephalopathy is a complication of:",o:["Neonatal sepsis","Birth asphyxia","Hypoglycemia","Congenital infection"],a:1},
+{t:"Left-to-right cardiac shunts initially cause:",o:["Cyanosis","Hypoxia","Pulmonary overcirculation","Reduced cardiac output"],a:2},
+
+{t:"A child who squats frequently likely has:",o:["VSD","ASD","Tetralogy of Fallot","PDA"],a:2},
+{t:"The purpose of secondary prophylaxis in rheumatic fever is to:",o:["Treat fever","Prevent arthritis","Prevent recurrence","Reduce pain"],a:2},
+{t:"Which Jones criterion indicates heart involvement?",o:["Fever","Carditis","Arthralgia","Elevated ESR"],a:1},
+{t:"The most effective prevention of rheumatic heart disease is:",o:["Vaccination","Early antibiotic therapy","Steroids","Bed rest"],a:1},
+{t:"The most dangerous complication of acute diarrhea is:",o:["Weight loss","Dehydration","Anemia","Fever"],a:1},
+{t:"Which organism commonly causes watery diarrhea without blood?",o:["Shigella","Entamoeba histolytica","Rotavirus","Salmonella typhi"],a:2},
+{t:"Sunken fontanelle in infants indicates:",o:["Overhydration","Dehydration","Normal finding","Infection"],a:1},
+{t:"Rose spots are characteristic of:",o:["Malaria","Typhoid fever","Measles","Rubella"],a:1},
+{t:"The definitive diagnostic test for typhoid fever is:",o:["Widal test","Blood culture","Stool culture","CBC"],a:1},
+{t:"Polyuria, polydipsia, and weight loss suggest:",o:["Hypoglycemia","Type 2 diabetes","Type 1 diabetes","Metabolic syndrome"],a:2},
+
+{t:"Diabetic ketoacidosis is associated with:",o:["Respiratory alkalosis","Metabolic acidosis","Hypokalemia only","Normal respiration"],a:1},
+{t:"The most common cause of bronchiolitis in infants is:",o:["Adenovirus","RSV","Influenza","Rhinovirus"],a:1},
+{t:"Chest retractions indicate:",o:["Normal breathing","Increased work of breathing","Recovery phase","Mild illness"],a:1},
+{t:"Which finding is most suggestive of bacterial pneumonia?",o:["Mild cough","High fever","Runny nose","Sneezing"],a:1},
+{t:"Crackles heard on auscultation are due to:",o:["Bronchospasm","Fluid in alveoli","Airway narrowing","Pleural thickening"],a:1},
+{t:"Massive proteinuria leads to edema due to:",o:["Sodium retention","Hypoalbuminemia","Infection","Hypertension"],a:1},
+{t:"Hypercoagulability is a complication of:",o:["Acute GN","Nephrotic syndrome","UTI","Renal stones"],a:1},
+{t:"Cola-colored urine with hypertension suggests:",o:["Nephrotic syndrome","Acute glomerulonephritis","Renal stones","UTI"],a:1},
+{t:"Hemolytic anemia is confirmed by:",o:["Low reticulocyte count","High reticulocyte count","Low bilirubin","Normal LDH"],a:1},
+{t:"Jaundice in hemolytic anemia is mainly due to:",o:["Direct bilirubin","Indirect bilirubin","Liver failure","Gallstones only"],a:1},
+
+{t:"A barking cough with inspiratory stridor suggests:",o:["Asthma","Croup","Bronchiolitis","Pneumonia"],a:1},
+{t:"Cool mist therapy in croup helps by:",o:["Treating infection","Reducing airway edema","Increasing oxygen demand","Drying secretions"],a:1},
+{t:"Asthma exacerbation is triggered by:",o:["Antibiotics","Allergens","Vitamins","Iron"],a:1},
+{t:"Long-term asthma control is achieved mainly by:",o:["Short-acting bronchodilators","Inhaled corticosteroids","Antibiotics","Antipyretics"],a:1},
+{t:"Failure to thrive in heart disease is due to:",o:["Renal loss","Increased energy consumption","Poor absorption","Infection only"],a:1},
+{t:"Hepatomegaly in heart failure occurs because of:",o:["Infection","Venous congestion","Fat deposition","Malnutrition"],a:1},
+{t:"Acute kidney injury is best defined by:",o:["Proteinuria","Hematuria","Rising serum creatinine","Edema"],a:2},
+{t:"The most important nursing measure in AKI is:",o:["Antibiotics","Fluid balance monitoring","Chest physiotherapy","Oxygen therapy"],a:1},
+{t:"Pediatric health education mainly aims to:",o:["Treat disease","Prevent complications","Increase admissions","Delay recovery"],a:1},
+{t:"Early intervention in childhood illness leads to:",o:["Poor outcomes","Better recovery","Increased costs","Longer hospitalization"],a:1}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>`;
+  if(q.o){
+    q.o.forEach((op,idx)=>{
+      h+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
+    });
+  }else{
+    h+=`
+    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
