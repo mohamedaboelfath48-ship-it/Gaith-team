@@ -10,42 +10,49 @@
 <style>
 body{
   margin:0;
-  font-family:Arial, Tahoma;
-  background:#87CEEB;
+  font-family:"Segoe UI", Tahoma, Arial;
+  background:linear-gradient(180deg,#8fd3f4,#84fab0);
 }
 
-/* الهيدر */
+/* ===== الهيدر ===== */
 .header{
   text-align:center;
-  padding:25px 10px;
+  padding:30px 15px;
   color:#fff;
 }
 .header h1{
   margin:0;
-  font-size:38px;
+  font-size:40px;
   font-weight:900;
+  letter-spacing:2px;
+}
+.header h1 span{
+  color:#ff2d55; /* القلب الأحمر */
 }
 .header p{
-  margin-top:6px;
-  font-size:16px;
+  margin-top:8px;
+  font-size:17px;
+  opacity:.95;
 }
 
-/* الكارت الرئيسي */
+/* ===== الكارت الرئيسي ===== */
 .card{
-  width:90%;
-  max-width:700px;
-  margin:20px auto;
+  width:92%;
+  max-width:720px;
+  margin:20px auto 40px;
   background:#ffffff;
-  border-radius:22px;
-  padding:18px;
+  border-radius:26px;
+  padding:20px;
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
 }
 
 /* ===== القسم ===== */
 .section{
   border-radius:18px;
-  margin-bottom:15px;
+  margin-bottom:18px;
   overflow:hidden;
-  background:#f0f9ff;
+  background:#f8fbff;
+  border:1px solid #e5effa;
 }
 
 /* هيدر القسم */
@@ -53,7 +60,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px;
+  padding:18px;
   font-size:20px;
   font-weight:900;
   cursor:pointer;
@@ -68,57 +75,67 @@ body{
 
 /* عند الفتح */
 .section.open .section-header i{
-  transform:rotate(180deg); /* السهم لفوق */
+  transform:rotate(180deg);
 }
 
 /* محتوى القسم */
 .section-content{
-  padding:10px 14px 16px;
+  padding:10px 16px 18px;
   display:none;
 }
-
-/* أول قسم مفتوح */
 .section.open .section-content{
   display:block;
 }
 
 /* عنصر الامتحان */
 .exam-item{
-  background:#e0f2fe;
-  padding:14px;
+  background:#eef6ff;
+  padding:15px 16px;
   margin:10px 0;
-  border-radius:14px;
+  border-radius:16px;
   font-size:17px;
   font-weight:800;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
 }
 
-/* أيقونة القفل */
+/* قفل */
 .exam-item i{
   color:#ef4444;
+  font-size:18px;
+}
+
+/* تمييز آخر قسم */
+.section.highlight .section-header{
+  background:linear-gradient(90deg,#0369a1,#0ea5e9);
+  color:#fff;
+  border-radius:16px;
+}
+.section.highlight .section-content{
+  background:#f0f9ff;
 }
 </style>
 </head>
 
 <body>
 
+<!-- ===== الهيدر ===== -->
 <div class="header">
-  <h1>GAITH TEAM</h1>
+  <h1>GAITH TEAM <span>❤</span></h1>
   <p>الامتحان في جيبك</p>
 </div>
 
+<!-- ===== المحتوى ===== -->
 <div class="card">
 
-  <!-- ===== القسم الأول (مفتوح) ===== -->
-  <div class="section open">
+  <!-- ===== القسم الأول (مقفول) ===== -->
+  <div class="section">
     <div class="section-header" onclick="toggleSection(this)">
       🩺 طب أطفال
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-
     <div class="section-content">
       <div class="exam-item">شامل طب أطفال 1 <i class="fa-solid fa-lock"></i></div>
       <div class="exam-item">شامل طب أطفال 2 <i class="fa-solid fa-lock"></i></div>
@@ -131,10 +148,21 @@ body{
   <!-- ===== القسم الثاني (مقفول) ===== -->
   <div class="section">
     <div class="section-header" onclick="toggleSection(this)">
+      🧠 قسم إضافي
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="section-content">
+      <div class="exam-item">امتحان 1 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">امتحان 2 <i class="fa-solid fa-lock"></i></div>
+    </div>
+  </div>
+
+  <!-- ===== القسم الأخير (مفتوح تلقائيًا) ===== -->
+  <div class="section open highlight">
+    <div class="section-header" onclick="toggleSection(this)">
       🤰 طب نِسا
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-
     <div class="section-content">
       <div class="exam-item">شامل طب نِسا 1 <i class="fa-solid fa-lock"></i></div>
       <div class="exam-item">شامل طب نِسا 2 <i class="fa-solid fa-lock"></i></div>
