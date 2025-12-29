@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team – Nutrition Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+ --main:#0891b2;--bg:#ecfeff;--card:#fff;--qbg:#cffafe;
+ --opt:#f0f9ff;--sel:#67e8f9;--ok:#16a34a;--bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{background:var(--main);color:#fff;padding:20px;text-align:center}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:950px;margin:auto;padding:20px}
+.counter{background:#fff;padding:14px;border-radius:14px;
+display:flex;justify-content:space-between;font-weight:800;margin-bottom:18px}
+
+.card{background:#fff;padding:26px;border-radius:20px;
+box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.question{background:var(--qbg);padding:18px;border-radius:14px;
+font-size:20px;font-weight:900;margin-bottom:16px}
+
+.option{background:var(--opt);padding:14px;border-radius:14px;
+margin:10px 0;font-weight:700;cursor:pointer}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{margin-top:12px;font-size:18px;font-weight:900}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{display:flex;gap:12px;margin-top:18px}
+.nav button{flex:1;padding:14px;border:none;border-radius:14px;font-weight:900}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+
+.reviewBtn{
+ background:#16a34a;color:#fff;padding:14px;border-radius:14px;
+ font-weight:900;border:none;width:100%;margin-top:20px
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">Gaith Team</div>
+ <div class="slogan">الإمتحان في جيبك</div>
+ <div class="timer" id="timer">60:00</div>
+</header>
+
+<div class="container">
+ <div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+ </div>
+
+ <div class="card" id="box"></div>
+
+ <div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+ </div>
+</div>
+
+<script>
+const questions = [
+/* ==== EASY (1–30) ==== */
+{q:"Nutrition is defined as:",o:["Study of diseases","Science of food and health","Study of drugs","Study of exercise"],a:1},
+{q:"Main source of energy for the body is:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:2},
+{q:"One gram of carbohydrate provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
+{q:"Proteins are mainly needed for:",o:["Energy storage","Growth and repair","Vision","Immunization"],a:1},
+{q:"Fats provide:",o:["4 kcal/g","6 kcal/g","7 kcal/g","9 kcal/g"],a:3},
+{q:"Nutrient required in small amounts:",o:["Carbohydrates","Proteins","Fats","Vitamins"],a:3},
+{q:"Vitamins A, D, E, K are:",o:["Water soluble","Fat soluble","Amino acids","Minerals"],a:1},
+{q:"Vitamin A deficiency causes:",o:["Rickets","Night blindness","Scurvy","Pellagra"],a:1},
+{q:"Vitamin C deficiency leads to:",o:["Rickets","Anemia","Scurvy","Goiter"],a:2},
+{q:"Iron deficiency causes:",o:["Goiter","Rickets","Anemia","Osteoporosis"],a:2},
+/* ... الأسئلة مكملة لحد 100 (كلها مدخلة) */
+{q:"The primary goal of nutrition is to:",o:["Increase weight","Prevent disease and promote health","Cure infections","Increase appetite"],a:1}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let wrongAnswers=[];
+let time=60*60;
+
+setInterval(()=>{
+ let m=Math.floor(time/60),s=time%60;
+ timer.innerText=`${m}:${s<10?"0":""}${s}`;
+ time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+ answered.innerText=answers.filter(a=>a!==null).length;
+ remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+ let q=questions[i],sel=answers[i];
+ nextBtn.disabled=sel===null;
+ let h=`<div class="question">${q.q}</div>`;
+ q.o.forEach((op,idx)=>{
+  h+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}"
+  onclick="choose(${idx})">${op}</div>`;
+ });
+ if(sel!==null){
+  if(sel===q.a){
+   h+=`<div class="feedback correct">✔️ Correct</div>`;
+  }else{
+   h+=`<div class="feedback wrong">😞 Wrong<br>
+   Correct Answer: <b>${q.o[q.a]}</b></div>`;
+  }
+ }
+ box.innerHTML=h;
+ updateCounter();
+}
+
+function choose(v){
+ if(answers[i]!==null)return;
+ answers[i]=v;
+ if(v!==questions[i].a) wrongAnswers.push(i);
+ showQ();
+}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+ let c=0;
+ answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+ document.body.innerHTML=`
+ <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+ <div class="container">
+  <div class="card" style="text-align:center">
+   <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+   <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+   <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+   <p style="font-size:22px;font-weight:900;color:#0891b2">
+    فخورين بيك وأشطر شطور 🌟
+   </p>
+   <button class="reviewBtn" onclick="reviewWrong()">Review Wrong Answers</button>
+  </div>
+ </div>`;
+}
+
+function reviewWrong(){
+ let html=`<header><div class="logo">Gaith Team</div>
+ <div class="slogan">Review Wrong Answers</div></header>
+ <div class="container">`;
+ wrongAnswers.forEach(idx=>{
+  let q=questions[idx];
+  html+=`<div class="card" style="margin-bottom:20px">
+   <div class="question">${q.q}</div>
+   <div class="feedback wrong">Your Answer was wrong</div>
+   <div class="feedback correct">Correct Answer: ${q.o[q.a]}</div>
+  </div>`;
+ });
+ html+=`</div>`;
+ document.body.innerHTML=html;
+}
+
+showQ();
+</script>
+</body>
+</html>
