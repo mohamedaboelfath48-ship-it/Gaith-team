@@ -3,181 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM</title>
+<title>GAITH Team</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body{
   margin:0;
-  font-family:"Segoe UI", Tahoma, Arial;
-  background:linear-gradient(180deg,#8fd3f4,#84fab0);
+  font-family:Arial, Tahoma;
+  background:#87CEEB;
+  text-align:center;
 }
 
-/* ===== الهيدر ===== */
-.header{
-  text-align:center;
-  padding:30px 15px;
+/* العنوان */
+.logo{
+  margin-top:35px;
+  font-size:42px;
+  font-weight:900;
   color:#fff;
 }
-.header h1{
-  margin:0;
-  font-size:40px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-.header h1 span{
-  color:#ff2d55; /* القلب الأحمر */
-}
-.header p{
-  margin-top:8px;
-  font-size:17px;
-  opacity:.95;
+.subtitle{
+  color:#fff;
+  font-size:18px;
+  margin-bottom:25px;
 }
 
-/* ===== الكارت الرئيسي ===== */
-.card{
-  width:92%;
-  max-width:720px;
-  margin:20px auto 40px;
-  background:#ffffff;
-  border-radius:26px;
-  padding:20px;
-  box-shadow:0 20px 45px rgba(0,0,0,.18);
+/* الحاوية */
+.container{
+  width:90%;
+  max-width:700px;
+  margin:auto;
 }
 
-/* ===== القسم ===== */
-.section{
+/* ===== اللوحات ===== */
+.accordion{
+  background:#fff;
   border-radius:18px;
-  margin-bottom:18px;
+  margin-bottom:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
   overflow:hidden;
-  background:#f8fbff;
-  border:1px solid #e5effa;
 }
-
-/* هيدر القسم */
-.section-header{
+.accordion-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:18px;
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
   cursor:pointer;
-  color:#0369a1;
 }
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  background:#f8fafc;
+  padding:0 18px;
+}
+.accordion.active .accordion-content{
+  max-height:1000px;
+  padding-bottom:18px;
+}
+.accordion i{transition:.3s}
+.accordion.active i{transform:rotate(180deg)}
 
-/* السهم */
-.section-header i{
-  transition:transform .3s ease;
+/* ===== كارت ===== */
+.exam-card{
+  position:relative;
+  padding:22px 16px 16px;
+  margin:14px 0;
+  border-radius:14px;
   font-size:18px;
+  font-weight:900;
 }
 
-/* عند الفتح */
-.section.open .section-header i{
-  transform:rotate(180deg);
-}
+/* ===== ألوان الأقسام ===== */
+/* أطفال */
+.pediatrics-header{background:#ecfeff;color:#0891b2;}
+.pediatrics-card{background:#e0f2fe;}
+/* نِسا */
+.obgyn-header{background:#fff1f2;color:#be123c;}
+.obgyn-card{background:#ffe4e6;}
+/* تغذية (مفتوح) */
+.nutrition-header{background:#dcfce7;color:#166534;}
+.nutrition-card{background:#bbf7d0;}
 
-/* محتوى القسم */
-.section-content{
-  padding:10px 16px 18px;
-  display:none;
-}
-.section.open .section-content{
-  display:block;
-}
-
-/* عنصر الامتحان */
-.exam-item{
-  background:#eef6ff;
-  padding:15px 16px;
-  margin:10px 0;
-  border-radius:16px;
-  font-size:17px;
-  font-weight:800;
+/* ===== القفل (أيقونة فقط فوق) ===== */
+.lock-top{
+  position:absolute;
+  top:8px;
+  right:10px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#fee2e2;
+  border:2px solid #ef4444;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  box-shadow:0 6px 14px rgba(0,0,0,.08);
+  justify-content:center;
 }
+.lock-top i{color:#b91c1c;font-size:15px;}
+.locked{opacity:.7}
 
-/* قفل */
-.exam-item i{
-  color:#ef4444;
-  font-size:18px;
-}
-
-/* تمييز آخر قسم */
-.section.highlight .section-header{
-  background:linear-gradient(90deg,#0369a1,#0ea5e9);
+/* ===== زر الانضمام (تحت – متناسق مع التغذية) ===== */
+.join-bottom{
+  margin:40px auto 50px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#16a34a; /* ماشي مع لون التغذية */
   color:#fff;
-  border-radius:16px;
+  padding:14px 28px;
+  border-radius:35px;
+  font-size:18px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 8px 22px rgba(0,0,0,.35);
 }
-.section.highlight .section-content{
-  background:#f0f9ff;
-}
+.join-bottom:hover{background:#15803d}
 </style>
 </head>
 
 <body>
 
-<!-- ===== الهيدر ===== -->
-<div class="header">
-  <h1>GAITH TEAM <span>❤</span></h1>
-  <p>الامتحان في جيبك</p>
-</div>
+<div class="logo">GAITH TEAM</div>
+<div class="subtitle">الامتحان في جيبك</div>
 
-<!-- ===== المحتوى ===== -->
-<div class="card">
+<div class="container">
 
-  <!-- ===== القسم الأول (مقفول) ===== -->
-  <div class="section">
-    <div class="section-header" onclick="toggleSection(this)">
+  <!-- ===== طب أطفال (مقفول) ===== -->
+  <div class="accordion">
+    <div class="accordion-header pediatrics-header" onclick="toggleAccordion(this)">
       🩺 طب أطفال
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="section-content">
-      <div class="exam-item">شامل طب أطفال 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 2 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 3 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 4 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 5 <i class="fa-solid fa-lock"></i></div>
+    <div class="accordion-content">
+      <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
+        شامل طب أطفال 1
+      </div>
+      <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
+        شامل طب أطفال 2
+      </div>
     </div>
   </div>
 
-  <!-- ===== القسم الثاني (مقفول) ===== -->
-  <div class="section">
-    <div class="section-header" onclick="toggleSection(this)">
-      🧠 قسم إضافي
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div class="section-content">
-      <div class="exam-item">امتحان 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">امتحان 2 <i class="fa-solid fa-lock"></i></div>
-    </div>
-  </div>
-
-  <!-- ===== القسم الأخير (مفتوح تلقائيًا) ===== -->
-  <div class="section open highlight">
-    <div class="section-header" onclick="toggleSection(this)">
+  <!-- ===== طب نِسا (مقفول) ===== -->
+  <div class="accordion">
+    <div class="accordion-header obgyn-header" onclick="toggleAccordion(this)">
       🤰 طب نِسا
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="section-content">
-      <div class="exam-item">شامل طب نِسا 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 2 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 3 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 4 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 5 <i class="fa-solid fa-lock"></i></div>
+    <div class="accordion-content">
+      <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
+        شامل طب نسا 1
+      </div>
+      <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
+        شامل طب نسا 2
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== تغذية (مفتوح) ===== -->
+  <div class="accordion">
+    <div class="accordion-header nutrition-header" onclick="toggleAccordion(this)">
+      🥗 تغذية
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="accordion-content">
+      <div class="exam-card nutrition-card">مراجعة 1</div>
+      <div class="exam-card nutrition-card">مراجعة 2</div>
+      <div class="exam-card nutrition-card">امتحان شامل 1</div>
+      <div class="exam-card nutrition-card">امتحان شامل 2</div>
+      <div class="exam-card nutrition-card">امتحان شامل 3</div>
     </div>
   </div>
 
 </div>
 
+<!-- زر الانضمام -->
+<a class="join-bottom" href="https://t.me/nursing2bu" target="_blank">
+  <i class="fa-brands fa-telegram"></i>
+  انضم إلينا على Telegram
+</a>
+
 <script>
-function toggleSection(header){
-  const section = header.parentElement;
-  section.classList.toggle("open");
+function toggleAccordion(header){
+  header.parentElement.classList.toggle("active");
 }
 </script>
 
