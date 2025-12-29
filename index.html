@@ -1,71 +1,301 @@
-/* ================== PROFESSIONAL COLOR SYSTEM ================== */
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAITH Team</title>
+
+<style>
+/* ================== COLOR SYSTEM ================== */
 :root{
-  /* Background */
-  --bg1: linear-gradient(135deg,#0f172a,#1e293b,#020617);
-  --bg2: #020617;
+  --bg-main: radial-gradient(circle at top left,#0f172a,#1e293b,#020617);
+  --card-glass: rgba(255,255,255,.92);
+  --text-main:#0f172a;
+  --shadow-strong:0 20px 45px rgba(0,0,0,.35);
 
-  --card: rgba(255,255,255,.92);
-  --text: #0f172a;
-  --shadow: 0 18px 40px rgba(0,0,0,.25);
+  /* Pediatrics */
+  --ped-h:linear-gradient(135deg,#0ea5e9,#38bdf8);
+  --ped-card:linear-gradient(135deg,#e0f2fe,#f0f9ff);
+  --ped-icon:linear-gradient(135deg,#0284c7,#0ea5e9);
 
-  /* Pediatrics – Blue / Teal */
-  --ped-h: linear-gradient(135deg,#0ea5e9,#38bdf8);
-  --ped: linear-gradient(135deg,#e0f2fe,#f0f9ff);
-  --ped-i: linear-gradient(135deg,#0284c7,#0ea5e9);
+  /* OBGYN */
+  --ob-h:linear-gradient(135deg,#ec4899,#a855f7);
+  --ob-card:linear-gradient(135deg,#fce7f3,#fdf4ff);
+  --ob-icon:linear-gradient(135deg,#be185d,#9333ea);
 
-  /* OBGYN – Rose / Purple */
-  --ob-h: linear-gradient(135deg,#ec4899,#a855f7);
-  --ob: linear-gradient(135deg,#fce7f3,#fdf4ff);
-  --ob-i: linear-gradient(135deg,#be185d,#9333ea);
+  /* Nutrition */
+  --nu-h:linear-gradient(135deg,#22c55e,#84cc16);
+  --nu-card:linear-gradient(135deg,#ecfccb,#f0fdf4);
+  --nu-icon:linear-gradient(135deg,#15803d,#4d7c0f);
 
-  /* Nutrition – Green / Lime */
-  --nu-h: linear-gradient(135deg,#22c55e,#84cc16);
-  --nu: linear-gradient(135deg,#ecfccb,#f0fdf4);
-  --nu-i: linear-gradient(135deg,#15803d,#4d7c0f);
-
-  /* CTA */
-  --join: linear-gradient(135deg,#0f766e,#14b8a6);
-  --join-h: linear-gradient(135deg,#115e59,#0d9488);
+  --cta:linear-gradient(135deg,#0f766e,#14b8a6);
 }
 
-/* ================== BODY ================== */
+/* ================== BASE ================== */
 body{
-  background: radial-gradient(circle at top left,#1e293b,#020617);
-  color:var(--text);
-}
-
-/* ================== CARDS ================== */
-.accordion{
-  background:var(--card);
-  backdrop-filter: blur(10px);
-  border-radius:26px;
-}
-
-.exam-card{
-  backdrop-filter: blur(6px);
-  border:1px solid rgba(255,255,255,.6);
-}
-
-/* ================== HEADERS ================== */
-.ped-h{color:#fff}
-.ob-h{color:#fff}
-.nu-h{color:#fff}
-
-/* ================== ICONS ================== */
-.exam-icon{
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  margin:0;
+  font-family:'Segoe UI',Tahoma;
+  background:var(--bg-main);
+  color:var(--text-main);
+  text-align:center;
 }
 
 /* ================== DARK MODE ================== */
 body.dark{
-  --card: rgba(2,6,23,.85);
-  --text: #e5e7eb;
+  --card-glass:rgba(2,6,23,.88);
+  --text-main:#e5e7eb;
 }
 
-body.dark .accordion{
-  border:1px solid rgba(255,255,255,.08);
+.dark-toggle{
+  position:fixed;
+  top:18px;left:18px;
+  width:44px;height:44px;
+  border-radius:50%;
+  border:none;
+  background:#020617;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+  z-index:999;
 }
 
-body.dark .exam-card{
-  border:1px solid rgba(255,255,255,.06);
+/* ================== HEADER ================== */
+.logo-wrap{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
 }
+.logo{
+  font-size:44px;
+  font-weight:900;
+  color:#fff;
+  letter-spacing:1px;
+}
+.heart{
+  color:#ef4444;
+  font-size:30px;
+  animation:beat 1.4s infinite;
+}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+}
+.subtitle{
+  margin:10px 0 35px;
+  color:#cbd5f5;
+}
+
+/* ================== LAYOUT ================== */
+.container{
+  width:92%;
+  max-width:780px;
+  margin:auto;
+}
+
+/* ================== ACCORDION ================== */
+.accordion{
+  background:var(--card-glass);
+  backdrop-filter:blur(14px);
+  border-radius:26px;
+  margin-bottom:26px;
+  box-shadow:var(--shadow-strong);
+  overflow:hidden;
+}
+.accordion-header{
+  padding:22px 26px;
+  font-size:22px;
+  font-weight:900;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  color:#fff;
+}
+.accordion.active .accordion-header i{
+  transform:rotate(180deg);
+}
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .45s ease;
+  padding:0 22px;
+}
+.accordion.active .accordion-content{
+  max-height:4000px;
+  padding-bottom:26px;
+}
+
+/* ================== EXAM CARDS ================== */
+.exam-card{
+  position:relative;
+  padding:20px 20px 20px 80px;
+  margin:16px 0;
+  border-radius:18px;
+  font-size:18px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  transition:.3s;
+  border:1px solid rgba(255,255,255,.6);
+}
+.exam-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(0,0,0,.25);
+}
+
+/* ================== ICON ================== */
+.exam-icon{
+  position:absolute;
+  left:20px;
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+
+/* ================== ANIMATIONS ================== */
+/* Pediatrics – Bounce */
+.ped:hover svg{animation:bounce .6s}
+@keyframes bounce{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* OBGYN – Pulse */
+.ob:hover svg{animation:pulse 1s}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
+/* Nutrition – Rotate */
+.nu:hover svg{animation:rotate .8s}
+@keyframes rotate{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ================== COLORS ================== */
+.ped-h{background:var(--ped-h)}
+.ped{background:var(--ped-card)}
+.ped-i{background:var(--ped-icon)}
+
+.ob-h{background:var(--ob-h)}
+.ob{background:var(--ob-card)}
+.ob-i{background:var(--ob-icon)}
+
+.nu-h{background:var(--nu-h)}
+.nu{background:var(--nu-card)}
+.nu-i{background:var(--nu-icon)}
+
+/* ================== CTA ================== */
+.join{
+  margin:55px auto 65px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  background:var(--cta);
+  color:#fff;
+  padding:18px 42px;
+  border-radius:50px;
+  font-size:18px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 14px 32px rgba(0,0,0,.45);
+}
+</style>
+</head>
+
+<body>
+
+<button class="dark-toggle" onclick="toggleDark()">🌙</button>
+
+<div class="logo-wrap">
+  <div class="logo">GAITH TEAM</div>
+  <div class="heart">❤</div>
+</div>
+<div class="subtitle">الامتحان في جيبك</div>
+
+<!-- ================= SVG SPRITE ================= -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-ped" viewBox="0 0 64 64">
+    <circle cx="32" cy="18" r="10" fill="currentColor"/>
+    <path d="M16 48c0-10 7-16 16-16s16 6 16 16" fill="currentColor"/>
+    <path d="M24 26v6a8 8 0 0 0 16 0v-6" stroke="currentColor" stroke-width="3" fill="none"/>
+  </symbol>
+
+  <symbol id="icon-ob" viewBox="0 0 64 64">
+    <circle cx="32" cy="14" r="8" fill="currentColor"/>
+    <path d="M20 52c0-14 8-22 12-22s12 8 12 22" fill="currentColor"/>
+    <ellipse cx="38" cy="40" rx="10" ry="8" fill="currentColor" opacity=".85"/>
+  </symbol>
+
+  <symbol id="icon-nu" viewBox="0 0 64 64">
+    <circle cx="32" cy="38" r="14" fill="currentColor"/>
+    <path d="M32 16c8-10 20-6 20-6s-2 12-14 14" fill="currentColor"/>
+    <rect x="30" y="12" width="4" height="8" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="container">
+
+<!-- Pediatrics -->
+<div class="accordion">
+  <div class="accordion-header ped-h" onclick="toggle(this)">🩺 طب أطفال <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card ped" onclick="location.href='exam1/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 1</div>
+    <div class="exam-card ped" onclick="location.href='exam2/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 2</div>
+    <div class="exam-card ped" onclick="location.href='exam3/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 3</div>
+    <div class="exam-card ped" onclick="location.href='exam4/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 4</div>
+    <div class="exam-card ped" onclick="location.href='exam5/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 5</div>
+  </div>
+</div>
+
+<!-- OBGYN -->
+<div class="accordion">
+  <div class="accordion-header ob-h" onclick="toggle(this)">🤰 طب نسا <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card ob" onclick="location.href='exam6/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 1</div>
+    <div class="exam-card ob" onclick="location.href='exam7/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 2</div>
+    <div class="exam-card ob" onclick="location.href='exam8/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 3</div>
+    <div class="exam-card ob" onclick="location.href='exam9/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 4</div>
+    <div class="exam-card ob" onclick="location.href='exam10/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 5</div>
+  </div>
+</div>
+
+<!-- Nutrition -->
+<div class="accordion">
+  <div class="accordion-header nu-h" onclick="toggle(this)">🥗 تغذية <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card nu" onclick="location.href='exam11/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 1</div>
+    <div class="exam-card nu" onclick="location.href='exam12/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 2</div>
+    <div class="exam-card nu" onclick="location.href='exam13/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 1</div>
+    <div class="exam-card nu" onclick="location.href='exam14/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 2</div>
+    <div class="exam-card nu" onclick="location.href='exam15/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 3</div>
+  </div>
+</div>
+
+</div>
+
+<a class="join" href="https://t.me/nursing2bu" target="_blank">انضم إلينا على Telegram</a>
+
+<script>
+function toggle(h){h.parentElement.classList.toggle('active')}
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  localStorage.setItem('dark',document.body.classList.contains('dark')?'1':'0');
+}
+if(localStorage.getItem('dark')==='1'){document.body.classList.add('dark')}
+</script>
+
+</body>
+</html>
