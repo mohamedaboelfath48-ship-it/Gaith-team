@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH Team</title>
+<title>GAITH TEAM</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -12,248 +12,144 @@ body{
   margin:0;
   font-family:Arial, Tahoma;
   background:#87CEEB;
+}
+
+/* الهيدر */
+.header{
   text-align:center;
+  padding:25px 10px;
+  color:#fff;
 }
-
-/* اللوجو */
-.logo{
-  margin-top:35px;
-  font-size:42px;
+.header h1{
+  margin:0;
+  font-size:38px;
   font-weight:900;
-  color:#fff;
 }
-.subtitle{
-  color:#fff;
-  font-size:18px;
-  margin-bottom:25px;
+.header p{
+  margin-top:6px;
+  font-size:16px;
 }
 
-/* زر الانضمام (فوق) */
-.join-top{
-  position:fixed;
-  top:15px;
-  right:15px;
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  background:#dc2626;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:22px;
-  box-shadow:0 6px 18px rgba(0,0,0,.35);
-  z-index:9999;
-  text-decoration:none;
-}
-.join-top:hover{
-  background:#b91c1c;
-}
-
-/* الحاوية */
-.container{
+/* الكارت الرئيسي */
+.card{
   width:90%;
   max-width:700px;
-  margin:auto;
+  margin:20px auto;
+  background:#ffffff;
+  border-radius:22px;
+  padding:18px;
 }
 
-/* ===== اللوحات ===== */
-.accordion{
-  background:#fff;
+/* ===== القسم ===== */
+.section{
   border-radius:18px;
-  margin-bottom:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  margin-bottom:15px;
   overflow:hidden;
+  background:#f0f9ff;
 }
 
-/* عنوان اللوحة */
-.accordion-header{
+/* هيدر القسم */
+.section-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px;
-  font-size:22px;
+  padding:16px;
+  font-size:20px;
   font-weight:900;
+  cursor:pointer;
+  color:#0369a1;
+}
+
+/* السهم */
+.section-header i{
+  transition:transform .3s ease;
+  font-size:18px;
+}
+
+/* عند الفتح */
+.section.open .section-header i{
+  transform:rotate(180deg); /* السهم لفوق */
+}
+
+/* محتوى القسم */
+.section-content{
+  padding:10px 14px 16px;
+  display:none;
+}
+
+/* أول قسم مفتوح */
+.section.open .section-content{
+  display:block;
+}
+
+/* عنصر الامتحان */
+.exam-item{
+  background:#e0f2fe;
+  padding:14px;
+  margin:10px 0;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:800;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   cursor:pointer;
 }
 
-/* المحتوى */
-.accordion-content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .4s ease;
-  background:#f8fafc;
-  padding:0 18px;
-}
-.accordion.active .accordion-content{
-  max-height:1200px;
-  padding-bottom:18px;
-}
-
-/* سهم */
-.accordion i{
-  transition:.3s;
-}
-.accordion.active i{
-  transform:rotate(180deg);
-}
-
-/* ===== كارت الامتحان ===== */
-.exam-card{
-  position:relative;
-  padding:22px 16px 16px;
-  margin:14px 0;
-  border-radius:14px;
-  font-size:18px;
-  font-weight:900;
-}
-
-/* ألوان المواد */
-/* أطفال */
-.pediatrics-header{background:#ecfeff;color:#0891b2;}
-.pediatrics-card{background:#e0f2fe;}
-
-/* نسا */
-.obgyn-header{background:#fff1f2;color:#be123c;}
-.obgyn-card{background:#ffe4e6;}
-
-/* تغذية */
-.nutrition-header{background:#dcfce7;color:#166534;}
-.nutrition-card{background:#bbf7d0;}
-
-/* ===== القفل فوق ===== */
-.lock-top{
-  position:absolute;
-  top:8px;
-  right:10px;
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#fee2e2;
-  border:2px solid #ef4444;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.lock-top i{
-  color:#b91c1c;
-  font-size:15px;
-}
-
-/* حالة مقفول */
-.locked{
-  opacity:.7;
+/* أيقونة القفل */
+.exam-item i{
+  color:#ef4444;
 }
 </style>
 </head>
 
 <body>
 
-<!-- زر الانضمام -->
-<a class="join-top" href="https://t.me/nursing2bu" target="_blank" title="انضم إلينا">
-  <i class="fa-brands fa-telegram"></i>
-</a>
+<div class="header">
+  <h1>GAITH TEAM</h1>
+  <p>الامتحان في جيبك</p>
+</div>
 
-<div class="logo">GAITH TEAM</div>
-<div class="subtitle">الامتحان في جيبك</div>
+<div class="card">
 
-<div class="container">
-
-  <!-- ===== طب أطفال ===== -->
-  <div class="accordion">
-    <div class="accordion-header pediatrics-header" onclick="toggleAccordion(this)">
+  <!-- ===== القسم الأول (مفتوح) ===== -->
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
       🩺 طب أطفال
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="accordion-content">
-      <div class="exam-card pediatrics-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب أطفال 1
-      </div>
-      <div class="exam-card pediatrics-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب أطفال 2
-      </div>
-      <div class="exam-card pediatrics-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب أطفال 3
-      </div>
-      <div class="exam-card pediatrics-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب أطفال 4
-      </div>
-      <div class="exam-card pediatrics-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب أطفال 5
-      </div>
+
+    <div class="section-content">
+      <div class="exam-item">شامل طب أطفال 1 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب أطفال 2 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب أطفال 3 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب أطفال 4 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب أطفال 5 <i class="fa-solid fa-lock"></i></div>
     </div>
   </div>
 
-  <!-- ===== طب نسا ===== -->
-  <div class="accordion">
-    <div class="accordion-header obgyn-header" onclick="toggleAccordion(this)">
+  <!-- ===== القسم الثاني (مقفول) ===== -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
       🤰 طب نِسا
       <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="accordion-content">
-      <div class="exam-card obgyn-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب نسا 1
-      </div>
-      <div class="exam-card obgyn-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب نسا 2
-      </div>
-      <div class="exam-card obgyn-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب نسا 3
-      </div>
-      <div class="exam-card obgyn-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب نسا 4
-      </div>
-      <div class="exam-card obgyn-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل طب نسا 5
-      </div>
-    </div>
-  </div>
 
-  <!-- ===== تغذية ===== -->
-  <div class="accordion">
-    <div class="accordion-header nutrition-header" onclick="toggleAccordion(this)">
-      🥗 تغذية شامل
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div class="accordion-content">
-      <div class="exam-card nutrition-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل تغذية 1
-      </div>
-      <div class="exam-card nutrition-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل تغذية 2
-      </div>
-      <div class="exam-card nutrition-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل تغذية 3
-      </div>
-      <div class="exam-card nutrition-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل تغذية 4
-      </div>
-      <div class="exam-card nutrition-card locked">
-        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
-        شامل تغذية 5
-      </div>
+    <div class="section-content">
+      <div class="exam-item">شامل طب نِسا 1 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب نِسا 2 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب نِسا 3 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب نِسا 4 <i class="fa-solid fa-lock"></i></div>
+      <div class="exam-item">شامل طب نِسا 5 <i class="fa-solid fa-lock"></i></div>
     </div>
   </div>
 
 </div>
 
 <script>
-function toggleAccordion(header){
-  header.parentElement.classList.toggle("active");
+function toggleSection(header){
+  const section = header.parentElement;
+  section.classList.toggle("open");
 }
 </script>
 
