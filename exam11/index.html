@@ -2,108 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nutrition MCQ Exam</title>
+<title>Gaith Team – Nutrition Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{font-family:Arial;background:#f4f6f8;margin:0;padding:20px}
-.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px}
-h1{text-align:center;color:#2c3e50}
-.question{margin-bottom:15px;padding:10px;border-bottom:1px solid #ddd}
-.options label{display:block;margin:5px 0;cursor:pointer}
-button{padding:10px 20px;font-size:16px;background:#27ae60;color:#fff;border:none;border-radius:5px;cursor:pointer}
-button:hover{background:#219150}
-#result{font-size:20px;font-weight:bold;text-align:center;margin-top:20px}
-.level{font-size:13px;color:#888}
+:root{
+ --main:#0891b2;--bg:#ecfeff;--card:#fff;--qbg:#cffafe;
+ --opt:#f0f9ff;--ok:#16a34a;--bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{background:var(--main);color:#fff;padding:20px;text-align:center}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:950px;margin:auto;padding:20px}
+.counter{
+ background:#fff;padding:14px;border-radius:14px;
+ display:flex;justify-content:space-between;
+ font-weight:900;margin-bottom:18px;
+ color:#dc2626;
+}
+.card{
+ background:#fff;padding:26px;border-radius:20px;
+ box-shadow:0 8px 22px rgba(0,0,0,.12)
+}
+.question{
+ background:var(--qbg);padding:18px;border-radius:14px;
+ font-size:20px;font-weight:900;margin-bottom:16px
+}
+.option{
+ background:var(--opt);padding:14px;border-radius:14px;
+ margin:10px 0;font-weight:700;cursor:pointer
+}
+.option.correct{background:#bbf7d0;border:2px solid var(--ok)}
+.option.wrong{background:#fecaca;border:2px solid var(--bad)}
+.option.disabled{pointer-events:none}
+
+.nav{display:flex;gap:12px;margin-top:18px}
+.nav button{
+ flex:1;padding:14px;border:none;border-radius:14px;
+ font-weight:900
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+
+.reviewBtn{
+ background:#16a34a;color:#fff;padding:14px;border-radius:14px;
+ font-weight:900;border:none;width:100%;margin-top:20px
+}
+.retryBtn{
+ background:#0891b2;color:#fff;padding:14px;border-radius:14px;
+ font-weight:900;border:none;width:100%;margin-top:12px
+}
 </style>
 </head>
+
 <body>
 
+<header>
+ <div class="logo">Gaith Team</div>
+ <div class="slogan">الإمتحان في جيبك</div>
+ <div class="timer" id="timer">60:00</div>
+</header>
+
 <div class="container">
-<h1>Nutrition MCQ Exam (150 Questions)</h1>
-<form id="quiz"></form>
-<button onclick="submitQuiz()">Submit Exam</button>
-<div id="result"></div>
+ <div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">100</span></div>
+ </div>
+
+ <div class="card" id="box"></div>
+
+ <div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+ </div>
 </div>
 
 <script>
+/* ===== QUESTIONS (مثال – مكانها أسئلتك الـ100) ===== */
 const questions = [
-
-/* ================= EASY (1–50) ================= */
-{q:"Nutrition is defined as:",o:["Study of diseases","Science of food and its relationship to health","Study of drugs","Study of exercise"],a:1},
-{q:"Main source of energy for the body is:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:2},
-{q:"One gram of carbohydrate provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
-{q:"Proteins are mainly needed for:",o:["Energy storage","Growth and tissue repair","Vision","Immunity only"],a:1},
-{q:"Fats provide:",o:["4 kcal/g","6 kcal/g","7 kcal/g","9 kcal/g"],a:3},
-{q:"Vitamins are required in:",o:["Large amounts","Moderate amounts","Small amounts","Very large amounts"],a:2},
-{q:"Vitamin A, D, E and K are:",o:["Water soluble","Fat soluble","Minerals","Proteins"],a:1},
-{q:"Vitamin C deficiency causes:",o:["Rickets","Scurvy","Pellagra","Anemia"],a:1},
-{q:"Iron deficiency leads to:",o:["Goiter","Rickets","Anemia","Scurvy"],a:2},
-{q:"Calcium is important for:",o:["Vision","Bone and teeth","Blood clotting only","Digestion"],a:1},
-{q:"Which nutrient builds body tissues?",o:["Carbohydrate","Protein","Fat","Vitamin"],a:1},
-{q:"Night blindness is due to deficiency of:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:0},
-{q:"Kwashiorkor is caused by deficiency of:",o:["Protein","Fat","Vitamin","Minerals"],a:0},
-{q:"Marasmus is caused by deficiency of:",o:["Protein only","Calories only","Calories and protein","Vitamins"],a:2},
-{q:"Main function of carbohydrates:",o:["Growth","Energy","Repair","Immunity"],a:1},
-{q:"Water is:",o:["Energy giving","Body building","Protective","Essential but no energy"],a:3},
-{q:"Which is a fat-soluble vitamin?",o:["Vitamin B","Vitamin C","Vitamin A","Folic acid"],a:2},
-{q:"Fiber helps in prevention of:",o:["Constipation","Obesity","Hypertension","All"],a:3},
-{q:"BMI stands for:",o:["Body Mass Index","Body Muscle Index","Bone Mass Index","Basal Metabolic Index"],a:0},
-{q:"Normal BMI range is:",o:["15–18","18.5–24.9","25–30","30–35"],a:1},
-
-/* ================= MEDIUM (51–100) ================= */
-{q:"Macronutrients include:",o:["Vitamins and minerals","Carbohydrates, proteins, fats","Water and fiber","Enzymes"],a:1},
-{q:"Micronutrients include:",o:["Proteins","Fats","Vitamins and minerals","Carbohydrates"],a:2},
-{q:"Essential amino acids:",o:["Are synthesized in body","Must be supplied by diet","Are non-nitrogenous","Provide no energy"],a:1},
-{q:"Protein requirement in adults is about:",o:["0.5 g/kg/day","1 g/kg/day","2 g/kg/day","3 g/kg/day"],a:1},
-{q:"Fat acts as:",o:["Insulator","Carrier of fat-soluble vitamins","Energy reserve","All of the above"],a:3},
-{q:"Vitamin D deficiency in children causes:",o:["Scurvy","Rickets","Pellagra","Anemia"],a:1},
-{q:"Vitamin K is essential for:",o:["Vision","Blood clotting","Bone growth","Immunity"],a:1},
-{q:"Pellagra is due to deficiency of:",o:["Niacin","Thiamine","Riboflavin","Vitamin C"],a:0},
-{q:"Thiamine deficiency leads to:",o:["Scurvy","Beriberi","Rickets","Anemia"],a:1},
-{q:"Which mineral prevents goiter?",o:["Iron","Iodine","Calcium","Sodium"],a:1},
-{q:"Iron is needed for formation of:",o:["Hemoglobin","Insulin","Enzymes","Hormones"],a:0},
-{q:"Obesity is defined as BMI more than:",o:["25","30","35","40"],a:1},
-{q:"Waist circumference risk in females is:",o:[">80 cm",">88 cm",">90 cm",">100 cm"],a:1},
-{q:"Anthropometry measures:",o:["Blood tests","Body measurements","Diet history","Biochemical markers"],a:1},
-{q:"Which is NOT a direct nutritional assessment?",o:["Anthropometry","Biochemical tests","Clinical exam","Mortality rate"],a:3},
-
-/* ================= HARD (101–150) ================= */
-{q:"Protein energy malnutrition includes:",o:["Kwashiorkor","Marasmus","Both A and B","Obesity"],a:2},
-{q:"BMI is calculated as:",o:["Weight/Height","Height/Weight","Weight/(Height²)","Height²/Weight"],a:2},
-{q:"High fiber diet helps prevent:",o:["Colon cancer","CHD","Constipation","All"],a:3},
-{q:"Vitamin B12 deficiency causes:",o:["Microcytic anemia","Megaloblastic anemia","Hemolytic anemia","Iron deficiency anemia"],a:1},
-{q:"Calcium deficiency leads to:",o:["Rickets","Osteoporosis","Osteomalacia","All"],a:3},
-{q:"Iron absorption is increased by:",o:["Vitamin A","Vitamin C","Vitamin D","Calcium"],a:1},
-{q:"Fat provides energy of:",o:["4 kcal/g","7 kcal/g","9 kcal/g","11 kcal/g"],a:2},
-{q:"Overnutrition leads to:",o:["Obesity","Diabetes","Hypertension","All"],a:3},
-{q:"Undernutrition results in:",o:["Stunting","Wasting","Underweight","All"],a:3},
-{q:"Recommended fat intake is:",o:["10–15%","20–25%","25–35%","40–50%"],a:2}
-
+ {q:"Nutrition is defined as:",o:["Study of diseases","Science of food and health","Study of drugs","Exercise"],a:1},
+ {q:"Main source of energy is:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:2},
+ // 👈 هنا حطي باقي الأسئلة لحد 100 بنفس الشكل
 ];
 
-const quiz=document.getElementById("quiz");
+let currentQuestions = [...questions];
+let i=0;
+let answers=[];
+let wrongIndexes=[];
+let time=60*60;
 
-questions.forEach((q,i)=>{
-let div=document.createElement("div");
-div.className="question";
-div.innerHTML=`<p><b>${i+1}. ${q.q}</b></p>
-<div class="options">
-${q.o.map((opt,j)=>`
-<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>
-`).join("")}
-</div>`;
-quiz.appendChild(div);
-});
+/* ===== TIMER ===== */
+setInterval(()=>{
+ let m=Math.floor(time/60),s=time%60;
+ timer.innerText=`${m}:${s<10?"0":""}${s}`;
+ if(--time<0) finish();
+},1000);
 
-function submitQuiz(){
-let score=0;
-questions.forEach((q,i)=>{
-let ans=document.querySelector(`input[name="q${i}"]:checked`);
-if(ans && parseInt(ans.value)===q.a) score++;
-});
-document.getElementById("result").innerHTML=
-`Your Score: ${score} / ${questions.length} (${Math.round(score/questions.length*100)}%)`;
+function updateCounter(){
+ answered.innerText=answers.filter(a=>a!==null).length;
+ remaining.innerText=currentQuestions.length-answered.innerText;
 }
-</script>
 
+function showQ(){
+ let q=currentQuestions[i],sel=answers[i];
+ nextBtn.disabled=sel===null;
+ let h=`<div class="question">${i+1}. ${q.q}</div>`;
+ q.o.forEach((op,idx)=>{
+  let cls="option";
+  if(sel!==null){
+   if(idx===q.a) cls+=" correct";
+   else if(idx===sel) cls+=" wrong";
+   cls+=" disabled";
+  }
+  h+=`<div class="${cls}" onclick="choose(${idx})">${op}</div>`;
+ });
+ box.innerHTML=h;
+ updateCounter();
+}
+
+function choose(v){
+ if(answers[i]!==null)return;
+ answers[i]=v;
+ if(v!==currentQuestions[i].a) wrongIndexes.push(i);
+ showQ();
+}
+
+function nextQ(){if(i<currentQuestions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+ let correct=0;
+ answers.forEach((a,idx)=>{if(a===currentQuestions[idx].a)correct++;});
+ document.body.innerHTML=`
+ <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+ <div class="container">
+  <div class="card" style="text-align:center">
+   <p style="color:green;font-size:22px;font-weight:900">Correct: ${correct}</p>
+   <p style="color:red;font-size:22px;font-weight:900">Wrong: ${currentQuestions.length-correct}</p>
+   <p style="font-size:22px;font-weight:900;color:#0891b2">
+    فخورين بيك وأشطر شطور 🌟
+   </p>
+   <button class="reviewBtn" onclick="retryWrong()">حل الأسئلة الغلط تاني</button>
+  </div>
+ </div>`;
+}
+
+function retryWrong(){
+ let newQ=[];
+ wrongIndexes.forEach(i=>newQ.push(currentQuestions[i]));
+ currentQuestions=newQ;
+ answers=Array(newQ.length).fill(null);
+ wrongIndexes=[];
+ i=0;
+ document.body.innerHTML=document.documentElement.outerHTML;
+ location.reload();
+}
+
+showQ();
+</script>
 </body>
 </html>
