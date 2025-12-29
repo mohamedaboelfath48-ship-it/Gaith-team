@@ -17,7 +17,7 @@ body{
 
 /* اللوجو */
 .logo{
-  margin-top:40px;
+  margin-top:35px;
   font-size:42px;
   font-weight:900;
   color:#fff;
@@ -25,7 +25,29 @@ body{
 .subtitle{
   color:#fff;
   font-size:18px;
-  margin-bottom:30px;
+  margin-bottom:25px;
+}
+
+/* زر الانضمام (فوق) */
+.join-top{
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#dc2626;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  z-index:9999;
+  text-decoration:none;
+}
+.join-top:hover{
+  background:#b91c1c;
 }
 
 /* الحاوية */
@@ -35,7 +57,7 @@ body{
   margin:auto;
 }
 
-/* ===== اللوحة ===== */
+/* ===== اللوحات ===== */
 .accordion{
   background:#fff;
   border-radius:18px;
@@ -78,16 +100,12 @@ body{
 
 /* ===== كارت الامتحان ===== */
 .exam-card{
-  background:#fff;
-  padding:16px;
+  position:relative;
+  padding:22px 16px 16px;
   margin:14px 0;
   border-radius:14px;
   font-size:18px;
   font-weight:900;
-  display:flex;
-  flex-direction:column;   /* ⬅️ مهم: يخلي القفل تحت */
-  align-items:flex-start;
-  gap:10px;
 }
 
 /* ألوان المواد */
@@ -99,31 +117,42 @@ body{
 .obgyn-header{background:#fff1f2;color:#be123c;}
 .obgyn-card{background:#ffe4e6;}
 
-/* تغذية (لون جديد) */
+/* تغذية */
 .nutrition-header{background:#dcfce7;color:#166534;}
 .nutrition-card{background:#bbf7d0;}
 
-/* ===== قفل احترافي تحت ===== */
-.locked{
-  opacity:.7;
-}
-.lock-badge{
-  align-self:flex-end;
+/* ===== القفل فوق ===== */
+.lock-top{
+  position:absolute;
+  top:8px;
+  right:10px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#fee2e2;
+  border:2px solid #ef4444;
   display:flex;
   align-items:center;
-  gap:6px;
-  background:#fee2e2;
+  justify-content:center;
+}
+.lock-top i{
   color:#b91c1c;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:14px;
-  font-weight:800;
-  border:2px solid #ef4444;
+  font-size:15px;
+}
+
+/* حالة مقفول */
+.locked{
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
+
+<!-- زر الانضمام -->
+<a class="join-top" href="https://t.me/nursing2bu" target="_blank" title="انضم إلينا">
+  <i class="fa-brands fa-telegram"></i>
+</a>
 
 <div class="logo">GAITH TEAM</div>
 <div class="subtitle">الامتحان في جيبك</div>
@@ -137,32 +166,26 @@ body{
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="accordion-content">
-
       <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب أطفال 1
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب أطفال 2
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب أطفال 3
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب أطفال 4
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card pediatrics-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب أطفال 5
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
     </div>
   </div>
 
@@ -173,32 +196,26 @@ body{
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="accordion-content">
-
       <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب نسا 1
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب نسا 2
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب نسا 3
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب نسا 4
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card obgyn-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل طب نسا 5
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
     </div>
   </div>
 
@@ -209,32 +226,26 @@ body{
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="accordion-content">
-
       <div class="exam-card nutrition-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل تغذية 1
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card nutrition-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل تغذية 2
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card nutrition-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل تغذية 3
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card nutrition-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل تغذية 4
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
       <div class="exam-card nutrition-card locked">
+        <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
         شامل تغذية 5
-        <div class="lock-badge"><i class="fa-solid fa-lock"></i> مقفول</div>
       </div>
-
     </div>
   </div>
 
