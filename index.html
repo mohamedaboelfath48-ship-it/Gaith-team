@@ -5,149 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH Team</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
+/* ================== Base ================== */
+:root{
+  --bg1:#e0f2fe; --bg2:#f8fafc;
+  --card:#ffffff; --text:#0f172a;
+  --shadow:0 10px 28px rgba(15,23,42,.15);
+
+  /* Pediatrics */
+  --ped-h:#f0f9ff; --ped:#e0f2fe; --ped-i:#0284c7;
+
+  /* OBGYN */
+  --ob-h:#fdf2f8; --ob:#fce7f3; --ob-i:#be185d;
+
+  /* Nutrition */
+  --nu-h:#f0fdf4; --nu:#dcfce7; --nu-i:#15803d;
+
+  --join:#0f766e; --join-h:#115e59;
+}
+
 body{
   margin:0;
   font-family:'Segoe UI',Tahoma;
-  background:linear-gradient(180deg,#7dd3fc,#87CEEB);
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
   text-align:center;
 }
 
-/* ===== اللوجو ===== */
+/* ================== Dark Mode ================== */
+body.dark{
+  --bg1:#020617; --bg2:#020617;
+  --card:#020617; --text:#e5e7eb;
+  --shadow:0 12px 28px rgba(0,0,0,.6);
+
+  --ped-h:#020617; --ped:#020617;
+  --ob-h:#020617;  --ob:#020617;
+  --nu-h:#020617;  --nu:#020617;
+}
+
+.dark-toggle{
+  position:fixed; top:18px; left:18px;
+  border:none; background:#0f172a; color:#fff;
+  width:44px; height:44px; border-radius:50%;
+  font-size:18px; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.3);
+  z-index:999;
+}
+
+/* ================== Header ================== */
 .logo-wrap{
   margin-top:30px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
+  display:flex; justify-content:center; align-items:center; gap:10px;
 }
-.logo{
-  font-size:44px;
-  font-weight:900;
-  color:#fff;
-}
-.heart{
-  color:#ef4444;
-  font-size:28px;
-  animation:beat 1.4s infinite;
-}
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.2)}
-}
-.subtitle{
-  color:#f8fafc;
-  font-size:18px;
-  margin:10px 0 30px;
-}
+.logo{font-size:44px; font-weight:900;}
+.heart{color:#ef4444; font-size:28px; animation:beat 1.4s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.subtitle{opacity:.9; margin:10px 0 30px}
 
-/* ===== container ===== */
-.container{
-  width:92%;
-  max-width:760px;
-  margin:auto;
-}
+/* ================== Layout ================== */
+.container{width:92%; max-width:760px; margin:auto}
 
-/* ===== accordion ===== */
+/* Accordion */
 .accordion{
-  background:#fff;
-  border-radius:22px;
-  margin-bottom:24px;
-  box-shadow:0 14px 35px rgba(0,0,0,.28);
-  overflow:hidden;
+  background:var(--card);
+  border-radius:22px; margin-bottom:24px;
+  box-shadow:var(--shadow); overflow:hidden;
 }
 .accordion-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:22px;
-  font-size:22px;
-  font-weight:900;
+  padding:22px; font-size:22px; font-weight:900;
+  display:flex; justify-content:space-between; align-items:center;
   cursor:pointer;
 }
-.accordion-header i{
-  transition:.3s;
-}
-.accordion.active .accordion-header i{
-  transform:rotate(180deg);
-}
+.accordion-header i{transition:.3s}
+.accordion.active .accordion-header i{transform:rotate(180deg)}
 .accordion-content{
-  max-height:0;
-  overflow:hidden;
+  max-height:0; overflow:hidden;
   transition:max-height .4s ease;
   padding:0 20px;
 }
 .accordion.active .accordion-content{
-  max-height:2000px;
-  padding-bottom:24px;
+  max-height:2000px; padding-bottom:24px;
 }
 
-/* ===== cards ===== */
+/* Cards */
 .exam-card{
   position:relative;
   padding:20px 20px 20px 76px;
-  margin:14px 0;
-  border-radius:18px;
-  font-size:18px;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  cursor:pointer;
-  transition:.25s;
+  margin:14px 0; border-radius:16px;
+  font-size:18px; font-weight:800;
+  display:flex; align-items:center;
+  cursor:pointer; transition:.25s;
 }
-.exam-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 24px rgba(0,0,0,.25);
-}
+.exam-card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .exam-icon{
-  position:absolute;
-  left:18px;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:22px;
-  box-shadow:0 6px 16px rgba(0,0,0,.35);
+  position:absolute; left:18px;
+  width:46px; height:46px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
 }
 
-/* ===== colors ===== */
-.ped-h{background:#ecfeff;color:#0369a1}
-.ped{background:#e0f2fe}
-.ped-i{background:#0284c7}
+/* Section colors */
+.ped-h{background:var(--ped-h); color:#075985}
+.ped{background:var(--ped)}
+.ped-i{background:var(--ped-i)}
 
-.ob-h{background:#fff1f2;color:#9f1239}
-.ob{background:#ffe4e6}
-.ob-i{background:#be123c}
+.ob-h{background:var(--ob-h); color:#9d174d}
+.ob{background:var(--ob)}
+.ob-i{background:var(--ob-i)}
 
-.nu-h{background:#dcfce7;color:#166534}
-.nu{background:#bbf7d0}
-.nu-i{background:#16a34a}
+.nu-h{background:var(--nu-h); color:#166534}
+.nu{background:var(--nu)}
+.nu-i{background:var(--nu-i)}
 
-/* ===== join ===== */
+/* Join */
 .join{
   margin:50px auto 60px;
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  background:#16a34a;
-  color:#fff;
-  padding:16px 38px;
-  border-radius:45px;
-  font-size:19px;
-  font-weight:900;
-  text-decoration:none;
-  box-shadow:0 12px 28px rgba(0,0,0,.4);
+  display:inline-flex; align-items:center; gap:12px;
+  background:var(--join); color:#fff;
+  padding:16px 38px; border-radius:40px;
+  font-size:18px; font-weight:900; text-decoration:none;
+  box-shadow:0 10px 24px rgba(15,118,110,.35);
 }
-.join:hover{background:#15803d}
+.join:hover{background:var(--join-h)}
 </style>
 </head>
 
 <body>
+
+<button class="dark-toggle" onclick="toggleDark()">🌙</button>
 
 <div class="logo-wrap">
   <div class="logo">GAITH TEAM</div>
@@ -157,68 +141,64 @@ body{
 
 <div class="container">
 
-<!-- ===== طب أطفال ===== -->
+<!-- ===== Pediatrics ===== -->
 <div class="accordion">
   <div class="accordion-header ped-h" onclick="toggle(this)">
-    🩺 طب أطفال
-    <i class="fa-solid fa-chevron-down"></i>
+    🩺 طب أطفال <i>⌄</i>
   </div>
   <div class="accordion-content">
-
-    <div class="exam-card ped" onclick="location.href='exam1/'"><div class="exam-icon ped-i"><i class="fa-solid fa-baby"></i></div>امتحان أطفال 1</div>
-    <div class="exam-card ped" onclick="location.href='exam2/'"><div class="exam-icon ped-i"><i class="fa-solid fa-baby"></i></div>امتحان أطفال 2</div>
-    <div class="exam-card ped" onclick="location.href='exam3/'"><div class="exam-icon ped-i"><i class="fa-solid fa-baby"></i></div>امتحان أطفال 3</div>
-    <div class="exam-card ped" onclick="location.href='exam4/'"><div class="exam-icon ped-i"><i class="fa-solid fa-baby"></i></div>امتحان أطفال 4</div>
-    <div class="exam-card ped" onclick="location.href='exam5/'"><div class="exam-icon ped-i"><i class="fa-solid fa-baby"></i></div>امتحان أطفال 5</div>
-
+    <div class="exam-card ped" onclick="location.href='exam1/'">
+      <div class="exam-icon ped-i">
+        <!-- SVG Baby -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" fill="#fff"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6" fill="#fff"/></svg>
+      </div> امتحان أطفال 1
+    </div>
+    <div class="exam-card ped" onclick="location.href='exam2/'"><div class="exam-icon ped-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" fill="#fff"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6" fill="#fff"/></svg></div> امتحان أطفال 2</div>
+    <div class="exam-card ped" onclick="location.href='exam3/'"><div class="exam-icon ped-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" fill="#fff"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6" fill="#fff"/></svg></div> امتحان أطفال 3</div>
+    <div class="exam-card ped" onclick="location.href='exam4/'"><div class="exam-icon ped-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" fill="#fff"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6" fill="#fff"/></svg></div> امتحان أطفال 4</div>
+    <div class="exam-card ped" onclick="location.href='exam5/'"><div class="exam-icon ped-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" fill="#fff"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6" fill="#fff"/></svg></div> امتحان أطفال 5</div>
   </div>
 </div>
 
-<!-- ===== طب نسا ===== -->
+<!-- ===== OBGYN ===== -->
 <div class="accordion">
   <div class="accordion-header ob-h" onclick="toggle(this)">
-    🤰 طب نِسا
-    <i class="fa-solid fa-chevron-down"></i>
+    🤰 طب نِسا <i>⌄</i>
   </div>
   <div class="accordion-content">
-
-    <div class="exam-card ob" onclick="location.href='exam6/'"><div class="exam-icon ob-i"><i class="fa-solid fa-person-pregnant"></i></div>امتحان نسا 1</div>
-    <div class="exam-card ob" onclick="location.href='exam7/'"><div class="exam-icon ob-i"><i class="fa-solid fa-person-pregnant"></i></div>امتحان نسا 2</div>
-    <div class="exam-card ob" onclick="location.href='exam8/'"><div class="exam-icon ob-i"><i class="fa-solid fa-person-pregnant"></i></div>امتحان نسا 3</div>
-    <div class="exam-card ob" onclick="location.href='exam9/'"><div class="exam-icon ob-i"><i class="fa-solid fa-person-pregnant"></i></div>امتحان نسا 4</div>
-    <div class="exam-card ob" onclick="location.href='exam10/'"><div class="exam-icon ob-i"><i class="fa-solid fa-person-pregnant"></i></div>امتحان نسا 5</div>
-
+    <div class="exam-card ob" onclick="location.href='exam6/'"><div class="exam-icon ob-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M6 22c0-4 3-6 6-6s6 2 6 6" fill="#fff"/></svg></div> امتحان نسا 1</div>
+    <div class="exam-card ob" onclick="location.href='exam7/'"><div class="exam-icon ob-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M6 22c0-4 3-6 6-6s6 2 6 6" fill="#fff"/></svg></div> امتحان نسا 2</div>
+    <div class="exam-card ob" onclick="location.href='exam8/'"><div class="exam-icon ob-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M6 22c0-4 3-6 6-6s6 2 6 6" fill="#fff"/></svg></div> امتحان نسا 3</div>
+    <div class="exam-card ob" onclick="location.href='exam9/'"><div class="exam-icon ob-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M6 22c0-4 3-6 6-6s6 2 6 6" fill="#fff"/></svg></div> امتحان نسا 4</div>
+    <div class="exam-card ob" onclick="location.href='exam10/'"><div class="exam-icon ob-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M6 22c0-4 3-6 6-6s6 2 6 6" fill="#fff"/></svg></div> امتحان نسا 5</div>
   </div>
 </div>
 
-<!-- ===== تغذية ===== -->
+<!-- ===== Nutrition ===== -->
 <div class="accordion">
   <div class="accordion-header nu-h" onclick="toggle(this)">
-    🥗 تغذية
-    <i class="fa-solid fa-chevron-down"></i>
+    🥗 تغذية <i>⌄</i>
   </div>
   <div class="accordion-content">
-
-    <div class="exam-card nu" onclick="location.href='exam11/'"><div class="exam-icon nu-i"><i class="fa-solid fa-apple-whole"></i></div>مراجعة تغذية 1</div>
-    <div class="exam-card nu" onclick="location.href='exam12/'"><div class="exam-icon nu-i"><i class="fa-solid fa-apple-whole"></i></div>مراجعة تغذية 2</div>
-    <div class="exam-card nu" onclick="location.href='exam13/'"><div class="exam-icon nu-i"><i class="fa-solid fa-file-circle-check"></i></div>امتحان تغذية شامل 1</div>
-    <div class="exam-card nu" onclick="location.href='exam14/'"><div class="exam-icon nu-i"><i class="fa-solid fa-file-circle-check"></i></div>امتحان تغذية شامل 2</div>
-    <div class="exam-card nu" onclick="location.href='exam15/'"><div class="exam-icon nu-i"><i class="fa-solid fa-file-circle-check"></i></div>امتحان تغذية شامل 3</div>
-
+    <div class="exam-card nu" onclick="location.href='exam11/'"><div class="exam-icon nu-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2c4 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2-6 6-10Z" fill="#fff"/></svg></div> مراجعة تغذية 1</div>
+    <div class="exam-card nu" onclick="location.href='exam12/'"><div class="exam-icon nu-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2c4 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2-6 6-10Z" fill="#fff"/></svg></div> مراجعة تغذية 2</div>
+    <div class="exam-card nu" onclick="location.href='exam13/'"><div class="exam-icon nu-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12h16v8H4zM6 6h12v4H6z" fill="#fff"/></svg></div> امتحان تغذية شامل 1</div>
+    <div class="exam-card nu" onclick="location.href='exam14/'"><div class="exam-icon nu-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12h16v8H4zM6 6h12v4H6z" fill="#fff"/></svg></div> امتحان تغذية شامل 2</div>
+    <div class="exam-card nu" onclick="location.href='exam15/'"><div class="exam-icon nu-i"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12h16v8H4zM6 6h12v4H6z" fill="#fff"/></svg></div> امتحان تغذية شامل 3</div>
   </div>
 </div>
 
 </div>
 
-<a class="join" href="https://t.me/nursing2bu" target="_blank">
-  <i class="fa-brands fa-telegram"></i>
-  انضم إلينا على Telegram
-</a>
+<a class="join" href="https://t.me/nursing2bu" target="_blank">انضم إلينا على Telegram</a>
 
 <script>
-function toggle(h){
-  h.parentElement.classList.toggle("active");
+function toggle(h){ h.parentElement.classList.toggle('active'); }
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  localStorage.setItem('dark', document.body.classList.contains('dark')?'1':'0');
 }
+if(localStorage.getItem('dark')==='1'){ document.body.classList.add('dark'); }
 </script>
 
 </body>
