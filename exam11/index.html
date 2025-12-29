@@ -2,251 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Gaith Team – Nutrition Exam</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Nutrition MCQ Exam</title>
 <style>
-:root{
- --main:#0891b2;--bg:#ecfeff;--card:#fff;--qbg:#cffafe;
- --opt:#f0f9ff;--sel:#67e8f9;
- --ok:#16a34a;--bad:#dc2626;
-}
-body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
-header{background:var(--main);color:#fff;padding:20px;text-align:center}
-.logo{font-size:26px;font-weight:900}
-.slogan{font-size:18px;font-weight:800;margin-top:6px}
-.timer{font-size:18px;font-weight:800;margin-top:6px}
-
-.container{max-width:950px;margin:auto;padding:20px}
-
-.counter{
- background:#fff;padding:14px;border-radius:14px;
- display:flex;justify-content:space-between;
- font-weight:900;margin-bottom:18px;
- color:#dc2626; /* 🔴 أحمر */
-}
-
-.card{background:#fff;padding:26px;border-radius:20px;
-box-shadow:0 8px 22px rgba(0,0,0,.12)}
-
-.question{
- background:var(--qbg);padding:18px;border-radius:14px;
- font-size:20px;font-weight:900;margin-bottom:16px
-}
-
-.option{
- background:var(--opt);padding:14px;border-radius:14px;
- margin:10px 0;font-weight:700;cursor:pointer
-}
-.option.correct{background:#bbf7d0;border:2px solid var(--ok)}
-.option.wrong{background:#fecaca;border:2px solid var(--bad)}
-.option.disabled{pointer-events:none;opacity:.9}
-
-.nav{display:flex;gap:12px;margin-top:18px}
-.nav button{
- flex:1;padding:14px;border:none;border-radius:14px;
- font-weight:900
-}
-.next{background:var(--main);color:#fff}
-.prev{background:#e0f2fe}
-.next:disabled{background:#7dd3fc}
-
-.reviewBtn{
- background:#16a34a;color:#fff;padding:14px;border-radius:14px;
- font-weight:900;border:none;width:100%;margin-top:20px
-}
+body{font-family:Arial;background:#f4f6f8;margin:0;padding:20px}
+.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:10px}
+h1{text-align:center;color:#2c3e50}
+.question{margin-bottom:15px;padding:10px;border-bottom:1px solid #ddd}
+.options label{display:block;margin:5px 0;cursor:pointer}
+button{padding:10px 20px;font-size:16px;background:#27ae60;color:#fff;border:none;border-radius:5px;cursor:pointer}
+button:hover{background:#219150}
+#result{font-size:20px;font-weight:bold;text-align:center;margin-top:20px}
+.level{font-size:13px;color:#888}
 </style>
 </head>
-
 <body>
 
-<header>
- <div class="logo">Gaith Team</div>
- <div class="slogan">الإمتحان في جيبك</div>
- <div class="timer" id="timer">60:00</div>
-</header>
-
 <div class="container">
- <div class="counter">
-  <div>Answered: <span id="answered">0</span></div>
-  <div>Remaining: <span id="remaining">100</span></div>
- </div>
-
- <div class="card" id="box"></div>
-
- <div class="nav">
-  <button class="prev" onclick="prevQ()">Previous</button>
-  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
- </div>
+<h1>Nutrition MCQ Exam (150 Questions)</h1>
+<form id="quiz"></form>
+<button onclick="submitQuiz()">Submit Exam</button>
+<div id="result"></div>
 </div>
 
 <script>
-/* ===================== 100 QUESTIONS ===================== */
 const questions = [
-/* ================= EASY (1–30) ================= */
+
+/* ================= EASY (1–50) ================= */
 {q:"Nutrition is defined as:",o:["Study of diseases","Science of food and its relationship to health","Study of drugs","Study of exercise"],a:1},
 {q:"Main source of energy for the body is:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:2},
 {q:"One gram of carbohydrate provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
-{q:"Proteins are mainly needed for:",o:["Energy storage","Growth and tissue repair","Vision","Immunization"],a:1},
+{q:"Proteins are mainly needed for:",o:["Energy storage","Growth and tissue repair","Vision","Immunity only"],a:1},
 {q:"Fats provide:",o:["4 kcal/g","6 kcal/g","7 kcal/g","9 kcal/g"],a:3},
-{q:"Nutrient required in small amounts:",o:["Carbohydrates","Proteins","Fats","Vitamins"],a:3},
-{q:"Vitamins A, D, E, and K are:",o:["Water soluble","Fat soluble","Amino acids","Minerals"],a:1},
-{q:"Vitamin A deficiency causes:",o:["Rickets","Night blindness","Scurvy","Pellagra"],a:1},
-{q:"Vitamin C deficiency leads to:",o:["Rickets","Anemia","Scurvy","Goiter"],a:2},
-{q:"Iron deficiency causes:",o:["Goiter","Rickets","Anemia","Osteoporosis"],a:2},
-{q:"Calcium is essential for:",o:["Vision","Blood clotting only","Bone and teeth formation","Digestion"],a:2},
-{q:"Main function of dietary fiber is:",o:["Energy production","Prevent constipation","Hormone synthesis","Vision"],a:1},
-{q:"Protective food is:",o:["Rice","Sugar","Vegetables","Oil"],a:2},
-{q:"Water forms about how much of body weight?",o:["20%","40%","60–70%","90%"],a:2},
-{q:"Malnutrition includes:",o:["Undernutrition only","Overnutrition only","Balanced diet","Undernutrition and overnutrition"],a:3},
-{q:"BMI stands for:",o:["Body Mass Index","Body Muscle Index","Bone Mass Index","Body Mineral Index"],a:0},
-{q:"Normal BMI range is:",o:["10–15","15–18","18.5–24.9","30–35"],a:2},
-{q:"Obesity is best assessed by:",o:["Height only","Weight only","BMI","Age"],a:2},
-{q:"Kwashiorkor is caused by deficiency of:",o:["Fat","Carbohydrate","Protein","Vitamin"],a:2},
-{q:"Marasmus is caused by deficiency of:",o:["Protein only","Calories only","Protein and calories","Vitamins"],a:2},
-{q:"Vitamin helps in blood clotting:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:3},
-{q:"Main mineral in hemoglobin:",o:["Calcium","Iron","Iodine","Sodium"],a:1},
-{q:"Iodine deficiency leads to:",o:["Anemia","Goiter","Rickets","Scurvy"],a:1},
-{q:"Vitamin D deficiency in children causes:",o:["Osteoporosis","Osteomalacia","Rickets","Scurvy"],a:2},
-{q:"Proteins are made of:",o:["Fatty acids","Amino acids","Glucose","Vitamins"],a:1},
-{q:"Essential amino acids:",o:["Synthesized by body","Not needed","Must be supplied in diet","Are vitamins"],a:2},
-{q:"Carbohydrates should provide more than:",o:["20% energy","30% energy","40% energy","50% energy"],a:3},
-{q:"Main function of food:",o:["Taste only","Energy, growth and regulation","Entertainment","Digestion only"],a:1},
-{q:"Balanced diet means:",o:["High protein","Low calorie","All nutrients in adequate amounts","Vegetarian"],a:2},
-{q:"Milk is important because:",o:["Poor nutrients","Consumed by all ages","Hard to digest","Free from contamination"],a:1},
+{q:"Vitamins are required in:",o:["Large amounts","Moderate amounts","Small amounts","Very large amounts"],a:2},
+{q:"Vitamin A, D, E and K are:",o:["Water soluble","Fat soluble","Minerals","Proteins"],a:1},
+{q:"Vitamin C deficiency causes:",o:["Rickets","Scurvy","Pellagra","Anemia"],a:1},
+{q:"Iron deficiency leads to:",o:["Goiter","Rickets","Anemia","Scurvy"],a:2},
+{q:"Calcium is important for:",o:["Vision","Bone and teeth","Blood clotting only","Digestion"],a:1},
+{q:"Which nutrient builds body tissues?",o:["Carbohydrate","Protein","Fat","Vitamin"],a:1},
+{q:"Night blindness is due to deficiency of:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:0},
+{q:"Kwashiorkor is caused by deficiency of:",o:["Protein","Fat","Vitamin","Minerals"],a:0},
+{q:"Marasmus is caused by deficiency of:",o:["Protein only","Calories only","Calories and protein","Vitamins"],a:2},
+{q:"Main function of carbohydrates:",o:["Growth","Energy","Repair","Immunity"],a:1},
+{q:"Water is:",o:["Energy giving","Body building","Protective","Essential but no energy"],a:3},
+{q:"Which is a fat-soluble vitamin?",o:["Vitamin B","Vitamin C","Vitamin A","Folic acid"],a:2},
+{q:"Fiber helps in prevention of:",o:["Constipation","Obesity","Hypertension","All"],a:3},
+{q:"BMI stands for:",o:["Body Mass Index","Body Muscle Index","Bone Mass Index","Basal Metabolic Index"],a:0},
+{q:"Normal BMI range is:",o:["15–18","18.5–24.9","25–30","30–35"],a:1},
 
-/* ================= MODERATE (31–70) ================= */
-{q:"Vitamin synthesized by sunlight:",o:["Vitamin A","Vitamin B12","Vitamin C","Vitamin D"],a:3},
-{q:"Pellagra is due to deficiency of:",o:["Thiamine","Riboflavin","Niacin","Folic acid"],a:2},
-{q:"Fat soluble vitamins stored in:",o:["Blood","Liver and adipose tissue","Urine","Muscles"],a:1},
-{q:"Protein requirement in adults:",o:["0.5 g/kg","1 g/kg","2 g/kg","3 g/kg"],a:1},
-{q:"Mineral preventing anemia:",o:["Calcium","Iron","Sodium","Potassium"],a:1},
-{q:"Nutrient carrying fat soluble vitamins:",o:["Protein","Carbohydrate","Fat","Water"],a:2},
-{q:"Overconsumption of fat leads to:",o:["Rickets","Scurvy","Cardiovascular disease","Goiter"],a:2},
-{q:"Fiber rich diet prevents:",o:["Diabetes only","Colon cancer","Night blindness","Rickets"],a:1},
-{q:"Water soluble vitamin:",o:["Vitamin A","Vitamin D","Vitamin E","Vitamin C"],a:3},
-{q:"BMI >30 indicates:",o:["Underweight","Normal","Overweight","Obesity"],a:3},
-{q:"Mid arm circumference assesses:",o:["Obesity","Malnutrition in children","Height","Vision"],a:1},
-{q:"Biochemical assessment includes:",o:["Weight","Clinical signs","Hemoglobin","Diet recall"],a:2},
-{q:"24-hour recall is:",o:["Biochemical","Anthropometric","Dietary assessment","Clinical"],a:2},
-{q:"Bleeding gums due to deficiency of:",o:["Vitamin A","Vitamin B12","Vitamin C","Vitamin D"],a:2},
-{q:"Obesity increases risk of:",o:["Diabetes","Hypertension","CVD","All of these"],a:3},
-{q:"Sodium excess causes:",o:["Anemia","Edema","Rickets","Goiter"],a:1},
-{q:"Vitamin B12 deficiency causes:",o:["Microcytic anemia","Pernicious anemia","Rickets","Scurvy"],a:1},
-{q:"Folic acid deficiency causes:",o:["Macrocytic anemia","Iron deficiency","Goiter","Osteoporosis"],a:0},
-{q:"Nutrient regulating temperature:",o:["Protein","Fat","Water","Vitamin"],a:2},
-{q:"Energy imbalance causes:",o:["Underweight","Obesity","Diabetes only","Anemia"],a:1},
-{q:"Energy giving food group:",o:["Fruits","Vegetables","Cereals","Milk"],a:2},
-{q:"Nutrition assessment aims to:",o:["Treat disease","Identify malnutrition","Prescribe drugs","Measure height"],a:1},
-{q:"BMI formula:",o:["W/H","H²/W","W/H²","H/W²"],a:2},
-{q:"Most concentrated energy source:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:1},
-{q:"Fat intake should be:",o:["5–10%","10–20%","25–35%","50%"],a:2},
-{q:"Vitamin aiding calcium absorption:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin E"],a:2},
-{q:"Goiter caused by deficiency of:",o:["Iron","Iodine","Calcium","Phosphorus"],a:1},
-{q:"Anthropometry deals with:",o:["Lab tests","Diet surveys","Body measurements","Clinical signs"],a:2},
-{q:"Skin fold thickness measures:",o:["Muscle","Bone","Body fat","Height"],a:2},
-{q:"Vitamin helping vision:",o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],a:0},
-{q:"Protein deficiency affects:",o:["Growth","Immunity","Repair","All"],a:3},
+/* ================= MEDIUM (51–100) ================= */
+{q:"Macronutrients include:",o:["Vitamins and minerals","Carbohydrates, proteins, fats","Water and fiber","Enzymes"],a:1},
+{q:"Micronutrients include:",o:["Proteins","Fats","Vitamins and minerals","Carbohydrates"],a:2},
+{q:"Essential amino acids:",o:["Are synthesized in body","Must be supplied by diet","Are non-nitrogenous","Provide no energy"],a:1},
+{q:"Protein requirement in adults is about:",o:["0.5 g/kg/day","1 g/kg/day","2 g/kg/day","3 g/kg/day"],a:1},
+{q:"Fat acts as:",o:["Insulator","Carrier of fat-soluble vitamins","Energy reserve","All of the above"],a:3},
+{q:"Vitamin D deficiency in children causes:",o:["Scurvy","Rickets","Pellagra","Anemia"],a:1},
+{q:"Vitamin K is essential for:",o:["Vision","Blood clotting","Bone growth","Immunity"],a:1},
+{q:"Pellagra is due to deficiency of:",o:["Niacin","Thiamine","Riboflavin","Vitamin C"],a:0},
+{q:"Thiamine deficiency leads to:",o:["Scurvy","Beriberi","Rickets","Anemia"],a:1},
+{q:"Which mineral prevents goiter?",o:["Iron","Iodine","Calcium","Sodium"],a:1},
+{q:"Iron is needed for formation of:",o:["Hemoglobin","Insulin","Enzymes","Hormones"],a:0},
+{q:"Obesity is defined as BMI more than:",o:["25","30","35","40"],a:1},
+{q:"Waist circumference risk in females is:",o:[">80 cm",">88 cm",">90 cm",">100 cm"],a:1},
+{q:"Anthropometry measures:",o:["Blood tests","Body measurements","Diet history","Biochemical markers"],a:1},
+{q:"Which is NOT a direct nutritional assessment?",o:["Anthropometry","Biochemical tests","Clinical exam","Mortality rate"],a:3},
 
-/* ================= HARD (71–100) ================= */
-{q:"Head circumference assesses:",o:["Adult nutrition","Brain growth","Obesity","Muscle mass"],a:1},
-{q:"Head–chest ratio at birth:",o:["Chest larger","Equal","Head larger","No relation"],a:2},
-{q:"Waist–hip ratio assesses:",o:["Muscle","Fat distribution","Bone","Height"],a:1},
-{q:"Iron deficiency anemia is:",o:["Macrocytic","Normocytic","Microcytic hypochromic","Megaloblastic"],a:2},
-{q:"Osteomalacia due to deficiency of:",o:["Vit A","Vit D","Vit C","Vit K"],a:1},
-{q:"Antioxidant vitamin:",o:["Vit K","Vit A","Vit E","Vit D"],a:2},
-{q:"Albumin reflects:",o:["Carbohydrate","Fat","Protein","Vitamin"],a:2},
-{q:"BMI ≥40 indicates:",o:["Overweight","Obesity I","Obesity II","Morbid obesity"],a:3},
-{q:"Vitamin B1 deficiency causes:",o:["Scurvy","Beriberi","Pellagra","Rickets"],a:1},
-{q:"Excess vitamin A causes:",o:["Night blindness","Liver damage","Anemia","Goiter"],a:1},
-{q:"PEM includes:",o:["Kwashiorkor","Marasmus","Both","Obesity"],a:2},
-{q:"Best indicator of obesity mortality:",o:["BMI","Waist circumference","Height","Weight"],a:1},
-{q:"Indirect nutritional assessment:",o:["BMI","Clinical exam","Mortality rate","Hemoglobin"],a:2},
-{q:"Neural tube defects due to deficiency of:",o:["Vit A","Vit C","Folic acid","Vit D"],a:2},
-{q:"Recent protein intake indicator:",o:["BMI","Serum albumin","Height","Weight"],a:1},
-{q:"Energy dense foods rich in:",o:["Water","Fiber","Fat & sugar","Protein"],a:2},
-{q:"Vitamin needed daily:",o:["Vit A","Vit D","Vit C","Vit K"],a:2},
-{q:"Nutrient maintaining osmotic pressure:",o:["Protein","Fat","Carbohydrate","Vitamin"],a:0},
-{q:"Overnutrition leads to:",o:["Stunting","Wasting","Obesity","Anemia"],a:2},
-{q:"Primary goal of nutrition:",o:["Increase weight","Promote health","Cure infections","Increase appetite"],a:1}
+/* ================= HARD (101–150) ================= */
+{q:"Protein energy malnutrition includes:",o:["Kwashiorkor","Marasmus","Both A and B","Obesity"],a:2},
+{q:"BMI is calculated as:",o:["Weight/Height","Height/Weight","Weight/(Height²)","Height²/Weight"],a:2},
+{q:"High fiber diet helps prevent:",o:["Colon cancer","CHD","Constipation","All"],a:3},
+{q:"Vitamin B12 deficiency causes:",o:["Microcytic anemia","Megaloblastic anemia","Hemolytic anemia","Iron deficiency anemia"],a:1},
+{q:"Calcium deficiency leads to:",o:["Rickets","Osteoporosis","Osteomalacia","All"],a:3},
+{q:"Iron absorption is increased by:",o:["Vitamin A","Vitamin C","Vitamin D","Calcium"],a:1},
+{q:"Fat provides energy of:",o:["4 kcal/g","7 kcal/g","9 kcal/g","11 kcal/g"],a:2},
+{q:"Overnutrition leads to:",o:["Obesity","Diabetes","Hypertension","All"],a:3},
+{q:"Undernutrition results in:",o:["Stunting","Wasting","Underweight","All"],a:3},
+{q:"Recommended fat intake is:",o:["10–15%","20–25%","25–35%","40–50%"],a:2}
+
 ];
-/* ===================== LOGIC ===================== */
-let i=0;
-let answers=Array(questions.length).fill(null);
-let wrongAnswers=[];
-let time=60*60;
 
-setInterval(()=>{
- let m=Math.floor(time/60),s=time%60;
- timer.innerText=`${m}:${s<10?"0":""}${s}`;
- time--; if(time<0)finish();
-},1000);
+const quiz=document.getElementById("quiz");
 
-function updateCounter(){
- answered.innerText=answers.filter(a=>a!==null).length;
- remaining.innerText=questions.length-answered.innerText;
+questions.forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+div.innerHTML=`<p><b>${i+1}. ${q.q}</b></p>
+<div class="options">
+${q.o.map((opt,j)=>`
+<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>
+`).join("")}
+</div>`;
+quiz.appendChild(div);
+});
+
+function submitQuiz(){
+let score=0;
+questions.forEach((q,i)=>{
+let ans=document.querySelector(`input[name="q${i}"]:checked`);
+if(ans && parseInt(ans.value)===q.a) score++;
+});
+document.getElementById("result").innerHTML=
+`Your Score: ${score} / ${questions.length} (${Math.round(score/questions.length*100)}%)`;
 }
-
-function showQ(){
- let q=questions[i],sel=answers[i];
- nextBtn.disabled=sel===null;
- let h=`<div class="question">${i+1}. ${q.q}</div>`;
- q.o.forEach((op,idx)=>{
-  let cls="option";
-  if(sel!==null){
-    if(idx===q.a) cls+=" correct";
-    else if(idx===sel) cls+=" wrong";
-    cls+=" disabled";
-  }
-  h+=`<div class="${cls}" onclick="choose(${idx})">${op}</div>`;
- });
- box.innerHTML=h;
- updateCounter();
-}
-
-function choose(v){
- if(answers[i]!==null)return;
- answers[i]=v;
- if(v!==questions[i].a) wrongAnswers.push(i);
- showQ();
-}
-function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
-function prevQ(){if(i>0){i--;showQ();}}
-
-function finish(){
- let c=0;
- answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
- document.body.innerHTML=`
- <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
- <div class="container">
-  <div class="card" style="text-align:center">
-   <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
-   <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
-   <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
-   <p style="font-size:22px;font-weight:900;color:#0891b2">
-    فخورين بيك وأشطر شطور 🌟
-   </p>
-   <button class="reviewBtn" onclick="reviewWrong()">Review Wrong Answers</button>
-  </div>
- </div>`;
-}
-
-function reviewWrong(){
- let html=`<header><div class="logo">Gaith Team</div>
- <div class="slogan">Review Wrong Answers</div></header>
- <div class="container">`;
- wrongAnswers.forEach(idx=>{
-  let q=questions[idx];
-  html+=`<div class="card" style="margin-bottom:20px">
-   <div class="question">${idx+1}. ${q.q}</div>
-   <div class="option correct">${q.o[q.a]}</div>
-  </div>`;
- });
- html+=`</div>`;
- document.body.innerHTML=html;
-}
-
-showQ();
 </script>
+
 </body>
 </html>
