@@ -6,127 +6,119 @@
 <title>GAITH Team</title>
 
 <style>
-/* ================== Variables ================== */
+/* ================= Variables ================= */
 :root{
   --bg1:#e0f2fe; --bg2:#f8fafc; --card:#fff; --text:#0f172a;
   --shadow:0 10px 28px rgba(15,23,42,.15);
 
   --ped-h:#f0f9ff; --ped:#e0f2fe; --ped-i:#0284c7;
-  --ob-h:#fdf2f8; --ob:#fce7f3; --ob-i:#be185d;
-  --nu-h:#f0fdf4; --nu:#dcfce7; --nu-i:#15803d;
+  --ob-h:#fdf2f8;  --ob:#fce7f3;  --ob-i:#be185d;
+  --nu-h:#f0fdf4;  --nu:#dcfce7;  --nu-i:#15803d;
 
   --join:#0f766e; --join-h:#115e59;
 }
 
-/* ================== Base ================== */
+/* ================= Base ================= */
 body{
   margin:0;font-family:'Segoe UI',Tahoma;
   background:linear-gradient(180deg,var(--bg1),var(--bg2));
   color:var(--text); text-align:center;
 }
 
-/* ================== Dark Mode ================== */
+/* ================= Dark Mode ================= */
 body.dark{
   --bg1:#020617; --bg2:#020617; --card:#020617; --text:#e5e7eb;
   --shadow:0 12px 28px rgba(0,0,0,.6);
   --ped-h:#020617; --ped:#020617;
-  --ob-h:#020617; --ob:#020617;
-  --nu-h:#020617; --nu:#020617;
+  --ob-h:#020617;  --ob:#020617;
+  --nu-h:#020617;  --nu:#020617;
 }
 
 .dark-toggle{
-  position:fixed; top:18px; left:18px;
-  width:44px; height:44px; border-radius:50%;
-  border:none; background:#0f172a; color:#fff;
-  font-size:18px; cursor:pointer; z-index:999;
+  position:fixed;top:18px;left:18px;
+  width:44px;height:44px;border-radius:50%;
+  border:none;background:#0f172a;color:#fff;
+  font-size:18px;cursor:pointer;z-index:999;
 }
 
-/* ================== Header ================== */
+/* ================= Header ================= */
 .logo-wrap{
-  margin-top:30px; display:flex; justify-content:center; align-items:center; gap:10px;
+  margin-top:30px;display:flex;justify-content:center;align-items:center;gap:10px;
 }
-.logo{font-size:44px; font-weight:900}
-.heart{color:#ef4444; font-size:28px; animation:beat 1.4s infinite}
+.logo{font-size:44px;font-weight:900}
+.heart{color:#ef4444;font-size:28px;animation:beat 1.4s infinite}
 @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-.subtitle{margin:10px 0 30px; opacity:.9}
+.subtitle{margin:10px 0 30px;opacity:.9}
 
-/* ================== Layout ================== */
-.container{width:92%; max-width:760px; margin:auto}
+/* ================= Layout ================= */
+.container{width:92%;max-width:760px;margin:auto}
 
 /* Accordion */
 .accordion{
-  background:var(--card); border-radius:22px; margin-bottom:24px;
-  box-shadow:var(--shadow); overflow:hidden;
+  background:var(--card);border-radius:22px;margin-bottom:24px;
+  box-shadow:var(--shadow);overflow:hidden;
 }
 .accordion-header{
-  padding:22px; font-size:22px; font-weight:900;
-  display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+  padding:22px;font-size:22px;font-weight:900;
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
 }
 .accordion.active .accordion-header i{transform:rotate(180deg)}
 .accordion-content{
-  max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px;
+  max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 20px;
 }
-.accordion.active .accordion-content{max-height:2000px; padding-bottom:24px}
+.accordion.active .accordion-content{max-height:3000px;padding-bottom:24px}
 
 /* Cards */
 .exam-card{
-  position:relative; padding:20px 20px 20px 76px;
-  margin:14px 0; border-radius:16px;
-  font-size:18px; font-weight:800;
-  display:flex; align-items:center;
-  cursor:pointer; transition:.25s;
+  position:relative;padding:20px 20px 20px 76px;
+  margin:14px 0;border-radius:16px;
+  font-size:18px;font-weight:800;
+  display:flex;align-items:center;
+  cursor:pointer;transition:.25s;
 }
-.exam-card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.exam-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
 
 .exam-icon{
-  position:absolute; left:18px;
-  width:46px; height:46px; border-radius:14px;
-  display:flex; align-items:center; justify-content:center;
+  position:absolute;left:18px;
+  width:46px;height:46px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
 }
 
-/* ================== Animations per subject ================== */
-/* Pediatrics → Bounce */
-.ped .icon svg{animation:none}
-.ped:hover .icon svg{animation:bounce .6s}
+/* ================= Animations ================= */
+/* Pediatrics: Bounce */
+.ped:hover svg{animation:bounce .6s}
 @keyframes bounce{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 
-/* OBGYN → Pulse */
-.ob:hover .icon svg{animation:pulse 1s}
+/* OBGYN: Pulse */
+.ob:hover svg{animation:pulse 1s}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 
-/* Nutrition → Rotate */
-.nu:hover .icon svg{animation:rotate .8s}
+/* Nutrition: Rotate */
+.nu:hover svg{animation:rotate .8s}
 @keyframes rotate{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
 /* Colors */
-.ped-h{background:var(--ped-h); color:#075985}
+.ped-h{background:var(--ped-h);color:#075985}
 .ped{background:var(--ped)}
 .ped-i{background:var(--ped-i)}
 
-.ob-h{background:var(--ob-h); color:#9d174d}
+.ob-h{background:var(--ob-h);color:#9d174d}
 .ob{background:var(--ob)}
 .ob-i{background:var(--ob-i)}
 
-.nu-h{background:var(--nu-h); color:#166534}
+.nu-h{background:var(--nu-h);color:#166534}
 .nu{background:var(--nu)}
 .nu-i{background:var(--nu-i)}
 
 /* Join */
 .join{
   margin:50px auto 60px;
-  display:inline-flex; align-items:center; gap:12px;
-  background:var(--join); color:#fff;
-  padding:16px 38px; border-radius:40px;
-  font-size:18px; font-weight:900; text-decoration:none;
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--join);color:#fff;
+  padding:16px 38px;border-radius:40px;
+  font-size:18px;font-weight:900;text-decoration:none;
 }
-
-/* Admin button */
-.admin{
-  position:fixed; bottom:18px; left:18px;
-  padding:12px 22px; border:none; border-radius:30px;
-  background:#16a34a; color:#fff; font-weight:900;
-  z-index:999;
-}
+.join:hover{background:var(--join-h)}
 </style>
 </head>
 
@@ -140,20 +132,31 @@ body.dark{
 </div>
 <div class="subtitle">الامتحان في جيبك</div>
 
-<!-- ================== SVG SPRITE ================== -->
+<!-- ============ SVG SPRITE ============ -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="pediatrics" viewBox="0 0 64 64">
-    <circle cx="32" cy="20" r="10" fill="currentColor"/>
-    <path d="M16 46c0-9 7-14 16-14s16 5 16 14" fill="currentColor"/>
-  </symbol>
-  <symbol id="obgyn" viewBox="0 0 64 64">
-    <circle cx="32" cy="14" r="8" fill="currentColor"/>
-    <path d="M20 50c0-12 8-20 12-20s12 8 12 20" fill="currentColor"/>
-  </symbol>
-  <symbol id="nutrition" viewBox="0 0 64 64">
-    <circle cx="32" cy="36" r="14" fill="currentColor"/>
-    <path d="M32 16c6-8 16-6 16-6s-2 10-12 12" fill="currentColor"/>
-  </symbol>
+
+<!-- Pediatrics -->
+<symbol id="icon-ped" viewBox="0 0 64 64">
+  <circle cx="32" cy="18" r="10" fill="currentColor"/>
+  <path d="M16 48c0-10 7-16 16-16s16 6 16 16" fill="currentColor"/>
+  <path d="M24 26v6a8 8 0 0 0 16 0v-6"
+        stroke="currentColor" stroke-width="3" fill="none"/>
+</symbol>
+
+<!-- OBGYN -->
+<symbol id="icon-ob" viewBox="0 0 64 64">
+  <circle cx="32" cy="14" r="8" fill="currentColor"/>
+  <path d="M20 52c0-14 8-22 12-22s12 8 12 22" fill="currentColor"/>
+  <ellipse cx="38" cy="40" rx="10" ry="8" fill="currentColor" opacity=".85"/>
+</symbol>
+
+<!-- Nutrition -->
+<symbol id="icon-nu" viewBox="0 0 64 64">
+  <circle cx="32" cy="38" r="14" fill="currentColor"/>
+  <path d="M32 16c8-10 20-6 20-6s-2 12-14 14" fill="currentColor"/>
+  <rect x="30" y="12" width="4" height="8" fill="currentColor"/>
+</symbol>
+
 </svg>
 
 <div class="container">
@@ -162,14 +165,11 @@ body.dark{
 <div class="accordion">
   <div class="accordion-header ped-h" onclick="toggle(this)">🩺 طب أطفال <i>⌄</i></div>
   <div class="accordion-content">
-    <div class="exam-card ped" onclick="location.href='exam1/'">
-      <div class="exam-icon ped-i icon"><svg width="26" height="26"><use href="#pediatrics"/></svg></div>
-      امتحان أطفال 1
-    </div>
-    <div class="exam-card ped" onclick="location.href='exam2/'">
-      <div class="exam-icon ped-i icon"><svg width="26" height="26"><use href="#pediatrics"/></svg></div>
-      امتحان أطفال 2
-    </div>
+    <div class="exam-card ped" onclick="location.href='exam1/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 1</div>
+    <div class="exam-card ped" onclick="location.href='exam2/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 2</div>
+    <div class="exam-card ped" onclick="location.href='exam3/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 3</div>
+    <div class="exam-card ped" onclick="location.href='exam4/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 4</div>
+    <div class="exam-card ped" onclick="location.href='exam5/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 5</div>
   </div>
 </div>
 
@@ -177,10 +177,11 @@ body.dark{
 <div class="accordion">
   <div class="accordion-header ob-h" onclick="toggle(this)">🤰 طب نسا <i>⌄</i></div>
   <div class="accordion-content">
-    <div class="exam-card ob" onclick="location.href='exam6/'">
-      <div class="exam-icon ob-i icon"><svg width="26" height="26"><use href="#obgyn"/></svg></div>
-      امتحان نسا 1
-    </div>
+    <div class="exam-card ob" onclick="location.href='exam6/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 1</div>
+    <div class="exam-card ob" onclick="location.href='exam7/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 2</div>
+    <div class="exam-card ob" onclick="location.href='exam8/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 3</div>
+    <div class="exam-card ob" onclick="location.href='exam9/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 4</div>
+    <div class="exam-card ob" onclick="location.href='exam10/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 5</div>
   </div>
 </div>
 
@@ -188,18 +189,17 @@ body.dark{
 <div class="accordion">
   <div class="accordion-header nu-h" onclick="toggle(this)">🥗 تغذية <i>⌄</i></div>
   <div class="accordion-content">
-    <div class="exam-card nu" onclick="location.href='exam11/'">
-      <div class="exam-icon nu-i icon"><svg width="26" height="26"><use href="#nutrition"/></svg></div>
-      مراجعة تغذية 1
-    </div>
+    <div class="exam-card nu" onclick="location.href='exam11/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 1</div>
+    <div class="exam-card nu" onclick="location.href='exam12/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 2</div>
+    <div class="exam-card nu" onclick="location.href='exam13/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 1</div>
+    <div class="exam-card nu" onclick="location.href='exam14/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 2</div>
+    <div class="exam-card nu" onclick="location.href='exam15/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 3</div>
   </div>
 </div>
 
 </div>
 
 <a class="join" href="https://t.me/nursing2bu" target="_blank">انضم إلينا على Telegram</a>
-
-<button class="admin" onclick="markAllDone()">✔ تعليم الكل</button>
 
 <script>
 function toggle(h){h.parentElement.classList.toggle('active')}
@@ -208,12 +208,6 @@ function toggleDark(){
   localStorage.setItem('dark',document.body.classList.contains('dark')?'1':'0');
 }
 if(localStorage.getItem('dark')==='1'){document.body.classList.add('dark')}
-
-function markAllDone(){
-  const exams=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-  exams.forEach(e=>localStorage.setItem('exam'+e+'_done','1'));
-  alert('✔ تم تعليم كل الامتحانات');
-}
 </script>
 
 </body>
