@@ -184,4 +184,91 @@ body{
   background:var(--cta);
   color:#fff;
   padding:18px 42px;
-  border-radius:50p
+  border-radius:50px;
+  font-size:18px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 14px 32px rgba(0,0,0,.45);
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo-wrap">
+  <div class="logo">GAITH TEAM</div>
+  <div class="heart">❤</div>
+</div>
+<div class="subtitle">الامتحان في جيبك</div>
+
+<!-- ================= SVG SPRITE ================= -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-ped" viewBox="0 0 64 64">
+    <circle cx="32" cy="18" r="10" fill="currentColor"/>
+    <path d="M16 48c0-10 7-16 16-16s16 6 16 16" fill="currentColor"/>
+    <path d="M24 26v6a8 8 0 0 0 16 0v-6" stroke="currentColor" stroke-width="3" fill="none"/>
+  </symbol>
+
+  <symbol id="icon-ob" viewBox="0 0 64 64">
+    <circle cx="32" cy="14" r="8" fill="currentColor"/>
+    <path d="M20 52c0-14 8-22 12-22s12 8 12 22" fill="currentColor"/>
+    <ellipse cx="38" cy="40" rx="10" ry="8" fill="currentColor" opacity=".85"/>
+  </symbol>
+
+  <symbol id="icon-nu" viewBox="0 0 64 64">
+    <circle cx="32" cy="38" r="14" fill="currentColor"/>
+    <path d="M32 16c8-10 20-6 20-6s-2 12-14 14" fill="currentColor"/>
+    <rect x="30" y="12" width="4" height="8" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="container">
+
+<!-- Pediatrics -->
+<div class="accordion">
+  <div class="accordion-header ped-h" onclick="toggle(this)">🩺 طب أطفال <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card ped" onclick="location.href='exam1/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 1</div>
+    <div class="exam-card ped" onclick="location.href='exam2/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 2</div>
+    <div class="exam-card ped" onclick="location.href='exam3/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 3</div>
+    <div class="exam-card ped" onclick="location.href='exam4/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 4</div>
+    <div class="exam-card ped" onclick="location.href='exam5/'"><div class="exam-icon ped-i"><svg width="26" height="26"><use href="#icon-ped"/></svg></div>امتحان أطفال 5</div>
+  </div>
+</div>
+
+<!-- OBGYN -->
+<div class="accordion">
+  <div class="accordion-header ob-h" onclick="toggle(this)">🤰 طب نسا <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card ob" onclick="location.href='exam6/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 1</div>
+    <div class="exam-card ob" onclick="location.href='exam7/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 2</div>
+    <div class="exam-card ob" onclick="location.href='exam8/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 3</div>
+    <div class="exam-card ob" onclick="location.href='exam9/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 4</div>
+    <div class="exam-card ob" onclick="location.href='exam10/'"><div class="exam-icon ob-i"><svg width="26" height="26"><use href="#icon-ob"/></svg></div>امتحان نسا 5</div>
+  </div>
+</div>
+
+<!-- Nutrition -->
+<div class="accordion">
+  <div class="accordion-header nu-h" onclick="toggle(this)">🥗 تغذية <i>⌄</i></div>
+  <div class="accordion-content">
+    <div class="exam-card nu" onclick="location.href='exam11/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 1</div>
+    <div class="exam-card nu" onclick="location.href='exam12/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>مراجعة 2</div>
+    <div class="exam-card nu" onclick="location.href='exam13/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 1</div>
+    <div class="exam-card nu" onclick="location.href='exam14/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 2</div>
+    <div class="exam-card nu" onclick="location.href='exam15/'"><div class="exam-icon nu-i"><svg width="26" height="26"><use href="#icon-nu"/></svg></div>امتحان شامل 3</div>
+  </div>
+</div>
+
+</div>
+
+<a class="join" href="https://t.me/nursing2bu" target="_blank">انضم إلينا على Telegram</a>
+
+<script>
+function toggle(h){
+  h.parentElement.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
