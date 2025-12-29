@@ -25,7 +25,7 @@ body{
 .subtitle{
   color:#fff;
   font-size:18px;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 
 /* زر الانضمام */
@@ -43,7 +43,6 @@ body{
   box-shadow:0 6px 18px rgba(0,0,0,.25);
   margin-bottom:30px;
 }
-.join-main:hover{background:#16a34a}
 
 /* الحاوية */
 .container{
@@ -52,68 +51,86 @@ body{
   margin:auto;
 }
 
-/* عنوان القسم */
-.section-center{
-  margin:35px 0 20px;
-  font-size:28px;
-  font-weight:900;
-  color:#0f172a;
-}
-.section-center::after{
-  content:"";
-  display:block;
-  width:120px;
-  height:4px;
-  background:#0f172a;
-  margin:10px auto 0;
-  border-radius:4px;
+/* ===== اللوحة ===== */
+.accordion{
+  background:#fff;
+  border-radius:18px;
+  margin-bottom:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  overflow:hidden;
 }
 
-/* كارت موحد */
+/* عنوان اللوحة */
+.accordion-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px;
+  font-size:22px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+/* محتوى اللوحة */
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  background:#f8fafc;
+  padding:0 18px;
+}
+
+/* مفتوحة */
+.accordion.active .accordion-content{
+  max-height:800px;
+  padding-bottom:18px;
+}
+
+/* أيقونة السهم */
+.accordion i{
+  transition:.3s;
+}
+.accordion.active i{
+  transform:rotate(180deg);
+}
+
+/* كارت الامتحان */
 .exam-card{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:18px;
-  margin:14px 0;
-  border-radius:18px;
+  padding:16px;
+  margin:12px 0;
+  border-radius:14px;
   font-size:18px;
   font-weight:900;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-/* الجزء الشمال */
-.exam-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
+/* أطفال */
+.pediatrics-header{
+  background:#ecfeff;
+  color:#0891b2;
 }
-.exam-icon{
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  color:#fff;
+.pediatrics-card{
+  background:#e0f2fe;
 }
 
-/* ألوان المواد */
-.pediatrics{background:#ecfeff;}
-.pediatrics .exam-icon{background:#0891b2;}
-
-.obgyn{background:#fff1f2;}
-.obgyn .exam-icon{background:#be123c;}
+/* نسا */
+.obgyn-header{
+  background:#fff1f2;
+  color:#be123c;
+}
+.obgyn-card{
+  background:#ffe4e6;
+}
 
 /* مقفول */
 .locked{
   opacity:.55;
-  pointer-events:none;
 }
 .lock-icon{
-  font-size:22px;
   color:#374151;
+  font-size:20px;
 }
 </style>
 </head>
@@ -131,92 +148,85 @@ body{
 <div class="container">
 
   <!-- ===== طب أطفال ===== -->
-  <div class="section-center" id="pediatrics">🩺 طب أطفال</div>
-
-  <div class="exam-card pediatrics locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 1
+  <div class="accordion">
+    <div class="accordion-header pediatrics-header" onclick="toggleAccordion(this)">
+      🩺 طب أطفال
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
+    <div class="accordion-content">
+
+      <div class="exam-card pediatrics-card locked">
+        شامل طب أطفال 1
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card pediatrics-card locked">
+        شامل طب أطفال 2
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card pediatrics-card locked">
+        شامل طب أطفال 3
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card pediatrics-card locked">
+        شامل طب أطفال 4
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card pediatrics-card locked">
+        شامل طب أطفال 5
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+    </div>
   </div>
 
-  <div class="exam-card pediatrics locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 2
+  <!-- ===== طب نسا ===== -->
+  <div class="accordion">
+    <div class="accordion-header obgyn-header" onclick="toggleAccordion(this)">
+      🤰 طب نِسا
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
+    <div class="accordion-content">
 
-  <div class="exam-card pediatrics locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 3
+      <div class="exam-card obgyn-card locked">
+        شامل طب نسا 1
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card obgyn-card locked">
+        شامل طب نسا 2
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card obgyn-card locked">
+        شامل طب نسا 3
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card obgyn-card locked">
+        شامل طب نسا 4
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
+      <div class="exam-card obgyn-card locked">
+        شامل طب نسا 5
+        <i class="fa-solid fa-lock lock-icon"></i>
+      </div>
+
     </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card pediatrics locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 4
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card pediatrics locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-stethoscope"></i></div>
-      شامل طب أطفال 5
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <!-- ===== طب نِسا ===== -->
-  <div class="section-center" id="obgyn">🤰 طب نِسا</div>
-
-  <div class="exam-card obgyn locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل طب نِسا 1
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card obgyn locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل طب نِسا 2
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card obgyn locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل طب نِسا 3
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card obgyn locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل طب نِسا 4
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
-  </div>
-
-  <div class="exam-card obgyn locked">
-    <div class="exam-left">
-      <div class="exam-icon"><i class="fa-solid fa-person-pregnant"></i></div>
-      شامل طب نِسا 5
-    </div>
-    <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
   </div>
 
 </div>
+
+<script>
+function toggleAccordion(header){
+  const accordion = header.parentElement;
+  accordion.classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
