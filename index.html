@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@ body{
 
 /* ===== اللوجو ===== */
 .logo-wrap{
-  margin-top:30px;
+  margin-top:35px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -53,16 +53,16 @@ body{
 /* ===== Accordion ===== */
 .accordion{
   background:#fff;
-  border-radius:20px;
-  margin-bottom:22px;
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  border-radius:22px;
+  margin-bottom:24px;
+  box-shadow:0 14px 35px rgba(0,0,0,.28);
   overflow:hidden;
 }
 .accordion-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px;
+  padding:22px;
   font-size:22px;
   font-weight:900;
   cursor:pointer;
@@ -71,72 +71,54 @@ body{
   max-height:0;
   overflow:hidden;
   transition:max-height .4s ease;
-  padding:0 18px;
+  padding:0 20px;
 }
 .accordion.active .accordion-content{
-  max-height:1200px;
-  padding-bottom:20px;
+  max-height:1400px;
+  padding-bottom:24px;
 }
-.accordion-header i{
-  transition:.3s;
-}
-.accordion.active i{
-  transform:rotate(180deg);
-}
+.accordion-header i{transition:.3s}
+.accordion.active i{transform:rotate(180deg)}
 
-/* ===== كارت الامتحان (العكس) ===== */
+/* ===== كارت الامتحان ===== */
 .exam-card{
   position:relative;
-  background:#e0f2fe;
-  padding:18px 70px 18px 70px;
-  margin:14px 0;
-  border-radius:16px;
+  padding:20px 20px 20px 74px;
+  margin:16px 0;
+  border-radius:18px;
   font-size:18px;
   font-weight:900;
-  text-align:right;
+  text-align:left;
   display:flex;
   align-items:center;
+  cursor:pointer;
+  transition:.25s;
+}
+.exam-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
 }
 
-/* أيقونة المادة (يمين) */
+/* ===== أيقونة ===== */
 .exam-icon{
   position:absolute;
-  right:16px;
-  width:42px;
-  height:42px;
+  left:18px;
+  width:46px;
+  height:46px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#fff;
-  font-size:20px;
-  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  font-size:22px;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
 }
-
-/* القفل (شمال) */
-.lock-top{
-  position:absolute;
-  left:14px;
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#fee2e2;
-  border:2px solid #ef4444;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.lock-top i{
-  color:#b91c1c;
-  font-size:15px;
-}
-.locked{opacity:.7}
 
 /* ===== ألوان المواد ===== */
 /* أطفال */
 .pediatrics-header{background:#ecfeff;color:#0369a1;}
 .pediatrics-card{background:#e0f2fe;}
-.pediatrics-icon{background:#0891b2;}
+.pediatrics-icon{background:#0284c7;}
 
 /* نسا */
 .obgyn-header{background:#fff1f2;color:#9f1239;}
@@ -150,22 +132,20 @@ body{
 
 /* ===== زر الانضمام ===== */
 .join-bottom{
-  margin:45px auto 55px;
+  margin:50px auto 60px;
   display:inline-flex;
   align-items:center;
   gap:12px;
   background:#16a34a;
   color:#fff;
-  padding:15px 34px;
-  border-radius:40px;
-  font-size:18px;
+  padding:16px 38px;
+  border-radius:45px;
+  font-size:19px;
   font-weight:900;
   text-decoration:none;
-  box-shadow:0 10px 26px rgba(0,0,0,.4);
+  box-shadow:0 12px 28px rgba(0,0,0,.4);
 }
-.join-bottom:hover{
-  background:#15803d;
-}
+.join-bottom:hover{background:#15803d}
 </style>
 </head>
 
@@ -182,34 +162,89 @@ body{
 <!-- ===== طب أطفال ===== -->
 <div class="accordion">
   <div class="accordion-header pediatrics-header" onclick="toggleAccordion(this)">
-    طب أطفال
+    🩺 طب أطفال
     <i class="fa-solid fa-chevron-down"></i>
   </div>
   <div class="accordion-content">
-    <div class="exam-card pediatrics-card locked">
+    <div class="exam-card pediatrics-card">
       <div class="exam-icon pediatrics-icon"><i class="fa-solid fa-baby"></i></div>
-      <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
       امتحان أطفال 1
     </div>
-    <div class="exam-card pediatrics-card locked">
+    <div class="exam-card pediatrics-card">
       <div class="exam-icon pediatrics-icon"><i class="fa-solid fa-baby"></i></div>
-      <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
       امتحان أطفال 2
     </div>
-    <div class="exam-card pediatrics-card locked">
+    <div class="exam-card pediatrics-card">
       <div class="exam-icon pediatrics-icon"><i class="fa-solid fa-baby"></i></div>
-      <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
       امتحان أطفال 3
     </div>
-    <div class="exam-card pediatrics-card locked">
+    <div class="exam-card pediatrics-card">
       <div class="exam-icon pediatrics-icon"><i class="fa-solid fa-baby"></i></div>
-      <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
       امتحان أطفال 4
     </div>
-    <div class="exam-card pediatrics-card locked">
+    <div class="exam-card pediatrics-card">
       <div class="exam-icon pediatrics-icon"><i class="fa-solid fa-baby"></i></div>
-      <div class="lock-top"><i class="fa-solid fa-lock"></i></div>
       امتحان أطفال 5
+    </div>
+  </div>
+</div>
+
+<!-- ===== طب نسا ===== -->
+<div class="accordion">
+  <div class="accordion-header obgyn-header" onclick="toggleAccordion(this)">
+    🤰 طب نِسا
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+  <div class="accordion-content">
+    <div class="exam-card obgyn-card">
+      <div class="exam-icon obgyn-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      امتحان نسا 1
+    </div>
+    <div class="exam-card obgyn-card">
+      <div class="exam-icon obgyn-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      امتحان نسا 2
+    </div>
+    <div class="exam-card obgyn-card">
+      <div class="exam-icon obgyn-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      امتحان نسا 3
+    </div>
+    <div class="exam-card obgyn-card">
+      <div class="exam-icon obgyn-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      امتحان نسا 4
+    </div>
+    <div class="exam-card obgyn-card">
+      <div class="exam-icon obgyn-icon"><i class="fa-solid fa-person-pregnant"></i></div>
+      امتحان نسا 5
+    </div>
+  </div>
+</div>
+
+<!-- ===== تغذية ===== -->
+<div class="accordion">
+  <div class="accordion-header nutrition-header" onclick="toggleAccordion(this)">
+    🥗 تغذية
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+  <div class="accordion-content">
+    <div class="exam-card nutrition-card">
+      <div class="exam-icon nutrition-icon"><i class="fa-solid fa-apple-whole"></i></div>
+      مراجعة 1
+    </div>
+    <div class="exam-card nutrition-card">
+      <div class="exam-icon nutrition-icon"><i class="fa-solid fa-apple-whole"></i></div>
+      مراجعة 2
+    </div>
+    <div class="exam-card nutrition-card">
+      <div class="exam-icon nutrition-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+      امتحان شامل 1
+    </div>
+    <div class="exam-card nutrition-card">
+      <div class="exam-icon nutrition-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+      امتحان شامل 2
+    </div>
+    <div class="exam-card nutrition-card">
+      <div class="exam-icon nutrition-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+      امتحان شامل 3
     </div>
   </div>
 </div>
