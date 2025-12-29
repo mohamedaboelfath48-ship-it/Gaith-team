@@ -25,22 +25,6 @@ body{
 .subtitle{
   color:#fff;
   font-size:18px;
-  margin-bottom:20px;
-}
-
-/* زر الانضمام */
-.join-main{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  background:#22c55e;
-  color:#fff;
-  padding:12px 22px;
-  border-radius:30px;
-  font-size:16px;
-  font-weight:900;
-  text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,.25);
   margin-bottom:30px;
 }
 
@@ -71,7 +55,7 @@ body{
   cursor:pointer;
 }
 
-/* محتوى اللوحة */
+/* المحتوى */
 .accordion-content{
   max-height:0;
   overflow:hidden;
@@ -79,14 +63,12 @@ body{
   background:#f8fafc;
   padding:0 18px;
 }
-
-/* مفتوحة */
 .accordion.active .accordion-content{
-  max-height:800px;
+  max-height:900px;
   padding-bottom:18px;
 }
 
-/* أيقونة السهم */
+/* سهم */
 .accordion i{
   transition:.3s;
 }
@@ -94,7 +76,7 @@ body{
   transform:rotate(180deg);
 }
 
-/* كارت الامتحان */
+/* ===== كارت الامتحان ===== */
 .exam-card{
   display:flex;
   align-items:center;
@@ -124,13 +106,42 @@ body{
   background:#ffe4e6;
 }
 
-/* مقفول */
+/* ===== قفل احترافي ===== */
 .locked{
-  opacity:.55;
+  opacity:.65;
 }
-.lock-icon{
-  color:#374151;
-  font-size:20px;
+.lock-badge{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#fee2e2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #ef4444;
+}
+.lock-badge i{
+  color:#b91c1c;
+  font-size:18px;
+}
+
+/* ===== زر الانضمام ===== */
+.join-bottom{
+  margin:40px auto 50px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#dc2626;
+  color:#fff;
+  padding:14px 26px;
+  border-radius:35px;
+  font-size:18px;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+.join-bottom:hover{
+  background:#b91c1c;
 }
 </style>
 </head>
@@ -139,11 +150,6 @@ body{
 
 <div class="logo">GAITH TEAM</div>
 <div class="subtitle">الامتحان في جيبك</div>
-
-<a class="join-main" href="https://t.me/nursing2bu" target="_blank">
-  <i class="fa-brands fa-telegram"></i>
-  انضم إلينا على Telegram
-</a>
 
 <div class="container">
 
@@ -157,27 +163,27 @@ body{
 
       <div class="exam-card pediatrics-card locked">
         شامل طب أطفال 1
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card pediatrics-card locked">
         شامل طب أطفال 2
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card pediatrics-card locked">
         شامل طب أطفال 3
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card pediatrics-card locked">
         شامل طب أطفال 4
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card pediatrics-card locked">
         شامل طب أطفال 5
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
     </div>
@@ -193,33 +199,39 @@ body{
 
       <div class="exam-card obgyn-card locked">
         شامل طب نسا 1
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card obgyn-card locked">
         شامل طب نسا 2
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card obgyn-card locked">
         شامل طب نسا 3
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card obgyn-card locked">
         شامل طب نسا 4
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
       <div class="exam-card obgyn-card locked">
         شامل طب نسا 5
-        <i class="fa-solid fa-lock lock-icon"></i>
+        <div class="lock-badge"><i class="fa-solid fa-lock"></i></div>
       </div>
 
     </div>
   </div>
 
 </div>
+
+<!-- ===== زر الانضمام في الأسفل ===== -->
+<a class="join-bottom" href="https://t.me/nursing2bu" target="_blank">
+  <i class="fa-brands fa-telegram"></i>
+  انضم إلينا على Telegram
+</a>
 
 <script>
 function toggleAccordion(header){
