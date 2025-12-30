@@ -1,40 +1,421 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Gaith Team – Nutrition Exam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
 
 <style>
 :root{
- --main:#0891b2;--bg:#ecfeff;--card:#fff;--qbg:#cffafe;
- --opt:#f0f9ff;--ok:#16a34a;--bad:#dc2626;
-}
-body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
-header{background:var(--main);color:#fff;padding:20px;text-align:center}
-.logo{font-size:26px;font-weight:900}
-.slogan{font-size:18px;font-weight:800;margin-top:6px}
-.timer{font-size:18px;font-weight:800;margin-top:6px}
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
 
-.container{max-width:950px;margin:auto;padding:20px}
-.counter{
- background:#fff;padding:14px;border-radius:14px;
- display:flex;justify-content:space-between;
- font-weight:900;margin-bottom:18px;
- color:#dc2626;
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
 }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
 .card{
- background:#fff;padding:26px;border-radius:20px;
- box-shadow:0 8px 22px rgba(0,0,0,.12)
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
 }
-.question{
- background:var(--qbg);padding:18px;border-radius:14px;
- font-size:20px;font-weight:900;margin-bottom:16px
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
 }
 .option{
- background:var(--opt);padding:14px;border-radius:14px;
- margin:10px 0;font-weight:700;cursor:pointer
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
 }
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+const questions=[
+/* 1–10 */
+{q:"Nutrition is defined as:",o:["Science of food and its relationship to health","Cooking and preparation of food","Digestion process only","Food preservation"],a:0},
+{q:"Nutrients are:",o:["Substances that give taste to food","Compounds in food that support life","Only energy sources","Only vitamins"],a:1},
+{q:"The primary source of energy is:",o:["Protein","Fat","Carbohydrates","Minerals"],a:2},
+{q:"One gram of carbohydrate provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
+{q:"Carbohydrates should provide about:",o:["10–20% energy","30–40% energy","50–65% energy","80–90% energy"],a:2},
+{q:"Glucose is classified as:",o:["Disaccharide","Polysaccharide","Monosaccharide","Fiber"],a:2},
+{q:"Lactose is found in:",o:["Fruits","Milk","Cereals","Meat"],a:1},
+{q:"Glycogen is stored in:",o:["Kidneys","Brain","Liver and muscles","Lungs"],a:2},
+{q:"Cellulose is:",o:["Digestible sugar","Insoluble fiber","Fat","Protein"],a:1},
+{q:"Dietary fiber helps in:",o:["Energy production","Preventing constipation","Protein synthesis","Vitamin absorption"],a:1},
+
+/* 11–20 */
+{q:"Proteins are made of:",o:["Fatty acids","Amino acids","Glucose units","Minerals"],a:1},
+{q:"Essential amino acids are:",o:["Synthesized in the body","Obtained from diet","Stored in liver","Energy sources"],a:1},
+{q:"Proteins are mainly required for:",o:["Energy storage","Growth and tissue repair","Vision","Blood clotting"],a:1},
+{q:"Kwashiorkor is caused by deficiency of:",o:["Carbohydrates","Fat","Protein","Vitamins"],a:2},
+{q:"Marasmus results from deficiency of:",o:["Protein only","Energy only","Protein and energy","Vitamins"],a:2},
+{q:"Enzymes are mainly:",o:["Carbohydrates","Proteins","Fats","Minerals"],a:1},
+{q:"One gram of protein provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
+{q:"A complete protein contains:",o:["Some amino acids","All essential amino acids","No nitrogen","Only plant sources"],a:1},
+{q:"Animal protein example:",o:["Beans","Lentils","Egg","Rice"],a:2},
+{q:"Nitrogen balance assesses:",o:["Fat metabolism","Protein status","Vitamin intake","Water balance"],a:1},
+
+/* 21–30 */
+{q:"Fats are composed of:",o:["Amino acids","Fatty acids and glycerol","Glucose","Minerals"],a:1},
+{q:"One gram of fat provides:",o:["4 kcal","7 kcal","9 kcal","12 kcal"],a:2},
+{q:"Saturated fats are usually:",o:["Liquid","Solid","Plant-based","Cholesterol free"],a:1},
+{q:"Unsaturated fats are found in:",o:["Butter","Ghee","Vegetable oils","Cheese"],a:2},
+{q:"Essential fatty acid:",o:["Stearic acid","Palmitic acid","Linoleic acid","Cholesterol"],a:2},
+{q:"Fats help in absorption of:",o:["Vitamin C","Vitamin B","Fat-soluble vitamins","Minerals"],a:2},
+{q:"Cholesterol is found in:",o:["Plant foods","Animal foods","Fruits","Vegetables"],a:1},
+{q:"HDL is known as:",o:["Bad cholesterol","Neutral fat","Good cholesterol","Triglyceride"],a:2},
+{q:"Excess fat intake leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
+{q:"Fats act as:",o:["Energy reserve","Enzymes","Hormones","Minerals"],a:0},
+
+/* 31–40 */
+{q:"Vitamins are:",o:["Energy sources","Organic compounds needed in small amounts","Structural nutrients","Inorganic"],a:1},
+{q:"Fat soluble vitamins include:",o:["B & C","A D E K","B1 B2","C only"],a:1},
+{q:"Vitamin A is essential for:",o:["Blood clotting","Vision","Bone growth","Energy"],a:1},
+{q:"Vitamin A deficiency causes:",o:["Rickets","Night blindness","Scurvy","Goiter"],a:1},
+{q:"Vitamin D deficiency in children leads to:",o:["Scurvy","Rickets","Anemia","Pellagra"],a:1},
+{q:"Vitamin D helps absorption of:",o:["Iron","Calcium","Sodium","Potassium"],a:1},
+{q:"Vitamin K is needed for:",o:["Vision","Blood clotting","Energy","Growth"],a:1},
+{q:"Vitamin C deficiency causes:",o:["Rickets","Scurvy","Anemia","Goiter"],a:1},
+{q:"Vitamin C is:",o:["Fat soluble","Water soluble","Stored in liver","Toxic"],a:1},
+{q:"Thiamine is vitamin:",o:["B1","B2","B6","B12"],a:0},
+
+/* 41–50 */
+{q:"Riboflavin deficiency causes:",o:["Cheilosis","Rickets","Goiter","Blindness"],a:0},
+{q:"Vitamin B12 deficiency causes:",o:["Scurvy","Pernicious anemia","Rickets","Goiter"],a:1},
+{q:"Folic acid deficiency causes:",o:["Microcytic anemia","Macrocytic anemia","Rickets","Scurvy"],a:1},
+{q:"Minerals are:",o:["Organic","Energy sources","Inorganic elements","Vitamins"],a:2},
+{q:"Calcium is important for:",o:["Vision","Bone and teeth","Blood glucose","Energy"],a:1},
+{q:"Iron is essential for:",o:["Hemoglobin formation","Vision","Fat digestion","Calcium absorption"],a:0},
+{q:"Iron deficiency causes:",o:["Scurvy","Anemia","Rickets","Obesity"],a:1},
+{q:"Iodine deficiency leads to:",o:["Goiter","Anemia","Rickets","Blindness"],a:0},
+{q:"Phosphorus works with:",o:["Iron","Calcium","Sodium","Potassium"],a:1},
+{q:"Sodium helps in:",o:["Bone formation","Nerve transmission","Vision","Blood clotting"],a:1},
+
+/* 51–60 */
+{q:"Fiber is:",o:["Digestible","Indigestible carbohydrate","Protein","Fat"],a:1},
+{q:"Fiber prevents:",o:["Diabetes","Constipation","Anemia","Rickets"],a:1},
+{q:"Water constitutes about:",o:["30%","50%","70%","90%"],a:2},
+{q:"Water helps regulate:",o:["Vision","Body temperature","Protein synthesis","Fat storage"],a:1},
+{q:"BMI formula is:",o:["Weight×Height","Weight/Height²","Height/Weight","Weight+Height"],a:1},
+{q:"Normal BMI range:",o:["<18.5","18.5–24.9","25–30",">30"],a:1},
+{q:"BMI >30 indicates:",o:["Normal","Underweight","Obesity","Overweight"],a:2},
+{q:"Waist circumference indicating obesity in males:",o:[">90 cm",">95 cm",">100 cm",">102 cm"],a:3},
+{q:"Waist circumference indicating obesity in females:",o:[">75 cm",">80 cm",">85 cm",">88 cm"],a:3},
+{q:"Obesity increases risk of:",o:["Diabetes","Hypertension","Heart disease","All of the above"],a:3},
+
+/* 61–70 */
+{q:"Anthropometry deals with:",o:["Diet","Blood tests","Body measurements","Urine tests"],a:2},
+{q:"Height is measured using:",o:["Scale","Stadiometer","Tape","Caliper"],a:1},
+{q:"Skinfold thickness measures:",o:["Muscle","Bone","Body fat","Water"],a:2},
+{q:"Mid arm circumference assesses:",o:["Child nutrition","Adult height","BMI","Blood pressure"],a:0},
+{q:"Biochemical assessment includes:",o:["Height","Weight","Hemoglobin","Skinfold"],a:2},
+{q:"Low hemoglobin indicates:",o:["Obesity","Anemia","Diabetes","Dehydration"],a:1},
+{q:"Clinical assessment depends on:",o:["Lab tests","Physical signs","Diet history","BMI"],a:1},
+{q:"24-hour recall is used for:",o:["Dietary assessment","Biochemical","Anthropometry","Clinical"],a:0},
+{q:"Food frequency questionnaire assesses:",o:["Daily intake","Habitual intake","Blood level","Weight"],a:1},
+{q:"Direct nutritional assessment includes:",o:["Anthropometry","Mortality rate","Fertility index","Income"],a:0},
+/* 71–80 */
+{q:"Indirect assessment uses:",o:["Body measures","Community indices","Lab tests","Clinical signs"],a:1},
+{q:"Anemia is:",o:["Low hemoglobin","High sugar","Low calcium","High fat"],a:0},
+{q:"Osteoporosis is:",o:["Bone mass decrease","Bone infection","Vitamin C deficiency","Muscle loss"],a:0},
+{q:"Osteomalacia is related to deficiency of:",o:["Vitamin D","Vitamin C","Iron","Iodine"],a:0},
+{q:"Goiter results from deficiency of:",o:["Iron","Iodine","Calcium","Vitamin A"],a:1},
+{q:"Rickets is caused by deficiency of:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:2},
+{q:"Milk is important in food sanitation because:",o:["Consumed by all ages","Handled many times","Good medium for microbes","All of the above"],a:3},
+{q:"Boiling milk should exceed:",o:["50°C","60°C","70°C","100°C"],a:2},
+{q:"Insanitary meat shows:",o:["Bad smell","Color change","No stamp","All of the above"],a:3},
+{q:"Insanitary fish shows:",o:["Clear eyes","Firm flesh","Bad smell","Bright gills"],a:2},
+
+/* 81–100 */
+{q:"Nutrition assessment aims to:",o:["Diagnose disease","Identify malnutrition","Plan programs","All of the above"],a:3},
+{q:"Albumin indicates:",o:["Iron status","Protein status","Vitamin C","Fat"],a:1},
+{q:"Urinalysis detects:",o:["Protein","Sugar","Blood","All of the above"],a:3},
+{q:"Obesity is defined as excess:",o:["Water","Muscle","Fat","Protein"],a:2},
+{q:"Main cause of obesity:",o:["Infection","Energy imbalance","Vitamin deficiency","Genetics only"],a:1},
+{q:"Lifestyle modification includes:",o:["Diet","Exercise","Behavior change","All of the above"],a:3},
+{q:"Energy dense foods are high in:",o:["Fiber","Fat and sugar","Protein","Water"],a:1},
+{q:"Physical inactivity leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
+{q:"Psychological effect of obesity:",o:["Anemia","Depression","Blindness","Goiter"],a:1},
+{q:"Balanced diet includes:",o:["One nutrient","Two nutrients","All nutrients","Only vitamins"],a:2}
+,
+/* 101–110 */
+{q:"Macronutrients include:",o:["Vitamins and minerals","Proteins, fats and carbohydrates","Water only","Fiber only"],a:1},
+{q:"Micronutrients are required:",o:["In large amounts","In small amounts","Only in illness","Only in adults"],a:1},
+{q:"Overnutrition leads to:",o:["Wasting","Stunting","Obesity","Marasmus"],a:2},
+{q:"Undernutrition includes:",o:["Obesity","Overweight","Wasting","Hypertension"],a:2},
+{q:"Balanced diet means:",o:["High protein diet","All nutrients in proper amounts","Only vitamins","Only carbohydrates"],a:1},
+{q:"Energy-giving foods include:",o:["Milk and meat","Vegetables","Cereals and fats","Fruits only"],a:2},
+{q:"Body building foods include:",o:["Fruits","Vegetables","Milk and meat","Sugar"],a:2},
+{q:"Protective foods include:",o:["Cereals","Meat","Fruits and vegetables","Fats"],a:2},
+{q:"Food pyramid is used to:",o:["Increase weight","Guide healthy eating","Treat diseases","Preserve food"],a:1},
+{q:"Top of food pyramid contains:",o:["Cereals","Vegetables","Fats and sweets","Milk"],a:2},
+/* 111–120 */
+{q:"Malnutrition may be due to:",o:["Deficiency only","Excess only","Imbalance of nutrients","All of the above"],a:3},
+{q:"Anemia is caused mainly by deficiency of:",o:["Calcium","Iron","Vitamin A","Protein"],a:1},
+{q:"Scurvy results from deficiency of:",o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],a:2},
+{q:"Pellagra is caused by deficiency of:",o:["Niacin","Thiamine","Riboflavin","Folic acid"],a:0},
+{q:"Beriberi is due to deficiency of:",o:["Vitamin B1","Vitamin B2","Vitamin B6","Vitamin B12"],a:0},
+{q:"Night blindness is early sign of deficiency of:",o:["Vitamin A","Vitamin D","Vitamin C","Iron"],a:0},
+{q:"Osteomalacia occurs in:",o:["Children","Adults","Infants","Adolescents"],a:1},
+{q:"Vitamin D is obtained mainly from:",o:["Fruits","Milk only","Sunlight","Vegetables"],a:2},
+{q:"Fat soluble vitamins are stored in:",o:["Urine","Liver and fat","Blood","Muscles"],a:1},
+{q:"Water soluble vitamins are excreted in:",o:["Sweat","Urine","Bile","Feces"],a:1},
+/* 121–130 */
+{q:"Calcium deficiency leads to:",o:["Anemia","Osteoporosis","Scurvy","Goiter"],a:1},
+{q:"Iron is required for formation of:",o:["Insulin","Hemoglobin","Enzymes","Hormones"],a:1},
+{q:"Iodine deficiency in pregnancy may cause:",o:["Anemia","Cretinism","Rickets","Scurvy"],a:1},
+{q:"Magnesium deficiency causes:",o:["Convulsions","Blindness","Anemia","Goiter"],a:0},
+{q:"Excess sodium intake causes:",o:["Hypotension","Edema","Weight loss","Rickets"],a:1},
+{q:"Phosphorus is important for:",o:["Vision","Energy metabolism","Blood clotting","Digestion"],a:1},
+{q:"Trace minerals are required:",o:["In large amounts","In small amounts","Only in children","Only in pregnancy"],a:1},
+{q:"Fiber rich foods include:",o:["White bread","Whole grains","Butter","Meat"],a:1},
+{q:"Roughage helps in:",o:["Digestion","Energy production","Vitamin storage","Protein synthesis"],a:0},
+{q:"Water is essential because it:",o:["Provides energy","Removes waste","Builds tissue","Stores vitamins"],a:1},
+/* 131–140 */
+{q:"Nutritional assessment aims to identify:",o:["Diseases only","Malnutrition","Income level","Lifestyle"],a:1},
+{q:"Anthropometric method includes:",o:["BMI","Blood glucose","Hemoglobin","Urinalysis"],a:0},
+{q:"BMI is useful to assess:",o:["Anemia","Obesity","Vitamin deficiency","Infection"],a:1},
+{q:"Head circumference assesses:",o:["Nutrition only","Brain growth","Fat mass","Height"],a:1},
+{q:"Waist hip ratio assesses:",o:["Height","Fat distribution","Muscle strength","Bone mass"],a:1},
+{q:"Biochemical assessment includes:",o:["Height","Weight","Serum albumin","Skin fold"],a:2},
+{q:"Low serum albumin indicates:",o:["Fat deficiency","Protein deficiency","Iron deficiency","Vitamin C deficiency"],a:1},
+{q:"Clinical assessment includes:",o:["Physical signs","Blood tests","BMI","Diet history"],a:0},
+{q:"Dietary assessment includes:",o:["24-hour recall","Hemoglobin","BMI","Urine test"],a:0},
+{q:"Food frequency questionnaire measures:",o:["Blood sugar","Habitual intake","Weight","Height"],a:1},
+/* 141–150 */
+{q:"Obesity is defined as BMI more than:",o:["25","30","35","40"],a:1},
+{q:"Morbid obesity is BMI:",o:[">30",">35",">40",">45"],a:2},
+{q:"Major cause of obesity:",o:["Infection","Genetics only","Energy imbalance","Vitamin deficiency"],a:2},
+{q:"Energy dense foods are rich in:",o:["Fiber","Water","Fat and sugar","Protein"],a:2},
+{q:"Alcohol consumption:",o:["Reduces weight","Promotes weight gain","No effect","Treats obesity"],a:1},
+{q:"Physical inactivity leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
+{q:"Complication of obesity includes:",o:["Diabetes","Hypertension","Heart disease","All of the above"],a:3},
+{q:"Psychological effect of obesity:",o:["Blindness","Depression","Anemia","Goiter"],a:1},
+{q:"Obesity prevention depends on:",o:["Drugs only","Surgery","Lifestyle modification","Vitamins"],a:2},
+{q:"Healthy diet should be:",o:["High fat","Balanced","High sugar","Low fiber"],a:1},
+
+/* 151–200 (short direct revision) */
+{q:"Milk is good medium for:",o:["Viruses","Bacteria","Fungi","Parasites"],a:1},
+{q:"Milk sanitation requires boiling above:",o:["50°C","60°C","70°C","80°C"],a:2},
+{q:"Insanitary meat shows:",o:["Fresh color","Bad odor","Firm texture","Clean stamp"],a:1},
+{q:"Fish freshness is indicated by:",o:["Opaque eyes","Bad smell","Bright eyes","Soft flesh"],a:2},
+{q:"Nutrition improves:",o:["Learning","Productivity","Immunity","All of the above"],a:3}
+,
+/* 146–155 */
+{q:"The main function of carbohydrates is to:",o:["Build tissues","Provide energy","Regulate hormones","Store vitamins"],a:1},
+{q:"Protein requirement is higher in:",o:["Adults","Elderly","Children","All ages same"],a:2},
+{q:"Pregnant women need more:",o:["Protein","Iron","Calcium","All of the above"],a:3},
+{q:"Lactating women require increased:",o:["Energy only","Protein only","Water only","All nutrients"],a:3},
+{q:"Dietary fiber reduces risk of:",o:["Colon cancer","Anemia","Rickets","Goiter"],a:0},
+{q:"High fiber diet helps in:",o:["Constipation","Obesity","Diabetes","All of the above"],a:3},
+{q:"Simple sugars cause rapid increase in:",o:["Blood pressure","Blood glucose","Body fat","Hemoglobin"],a:1},
+{q:"Complex carbohydr}
 .option.correct{background:#bbf7d0;border:2px solid var(--ok)}
 .option.wrong{background:#fecaca;border:2px solid var(--bad)}
 .option.disabled{pointer-events:none}
