@@ -2,139 +2,127 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>GAITH TEAM | Exam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAITH TEAM</title>
 
 <style>
 body{
     margin:0;
     font-family:Cairo,sans-serif;
-    background:#020617;
-    color:white;
-}
-.header{
+    background:linear-gradient(180deg,#0b132b,#1c2541);
+    color:#fff;
     text-align:center;
-    padding:20px;
 }
-.header h2 span{color:red}
+
+/* Header */
+.header{
+    padding:30px 15px;
+}
+.header h1{
+    font-size:34px;
+    letter-spacing:2px;
+}
+.header span{color:red}
+.sub{opacity:.7;margin-top:8px}
+
+/* Container */
 .container{
     width:92%;
-    max-width:750px;
-    margin:20px auto;
-    background:#111827;
+    max-width:500px;
+    margin:auto;
+}
+
+/* Accordion Button */
+.exam-btn{
+    border-radius:30px;
+    margin:15px 0;
+    overflow:hidden;
+}
+
+.exam-btn summary{
+    list-style:none;
     padding:20px;
-    border-radius:20px;
-}
-.badge{
-    display:inline-block;
-    padding:6px 16px;
-    border-radius:20px;
-    font-size:14px;
-    margin:10px 0 20px;
-}
-.ped{background:#3b82f6}
-.obs{background:#ec4899}
-.nut{background:#22c55e}
-
-.q{margin-bottom:22px}
-.q h3{font-size:18px}
-.q label{
-    display:block;
-    background:#020617;
-    padding:10px;
-    border-radius:12px;
-    margin:6px 0;
-    cursor:pointer;
-}
-
-button{
-    width:100%;
-    padding:15px;
-    background:#0ea5e9;
-    border:none;
-    border-radius:25px;
-    font-size:18px;
-    color:white;
-    cursor:pointer;
-}
-
-#result{
-    margin-top:20px;
     font-size:22px;
-    text-align:center;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Colors */
+.ped summary{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
+.obs summary{background:linear-gradient(90deg,#d66efd,#ff5db1)}
+.nut summary{background:linear-gradient(90deg,#56ab2f,#a8e063)}
+
+.exam-btn a{
+    display:block;
+    background:#111827;
+    margin:10px;
+    padding:12px;
+    border-radius:20px;
+    color:white;
+    text-decoration:none;
+}
+
+/* Telegram */
+.telegram{
+    margin:30px auto;
+}
+.telegram a{
+    background:linear-gradient(90deg,#14b8a6,#0ea5e9);
+    padding:15px 30px;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+    font-size:18px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
 <div class="header">
-    <h2>GAITH TEAM <span>❤️</span></h2>
-    <h3 id="examTitle"></h3>
-    <div id="examBadge" class="badge"></div>
+    <h1>GAITH TEAM <span>❤️</span></h1>
+    <div class="sub">الامتحان في جيبك</div>
 </div>
 
-<!-- ================= EXAM ================= -->
-<div class="container" id="examBox"></div>
+<div class="container">
 
-<button onclick="finishExam()">إنهاء الامتحان</button>
+<!-- 👶 طب أطفال -->
+<details class="exam-btn ped">
+<summary>👶 طب أطفال</summary>
+<a href="exam1/index.html">شامل 1</a>
+<a href="exam2/index.html">شامل 2</a>
+<a href="exam3/index.html">شامل 3</a>
+<a href="exam4/index.html">شامل 4</a>
+<a href="exam5/index.html">شامل 5</a>
+</details>
 
-<div id="result"></div>
+<!-- 🤰 طب نسا -->
+<details class="exam-btn obs">
+<summary>🤰 طب نسا</summary>
+<a href="exam6/index.html">شامل 1</a>
+<a href="exam7/index.html">شامل 2</a>
+<a href="exam8/index.html">شامل 3</a>
+<a href="exam9/index.html">شامل 4</a>
+<a href="exam10/index.html">شامل 5</a>
+</details>
 
-<script>
-/* ========= غيّر البيانات هنا فقط ========= */
-const examData = {
-    subject: "طب أطفال",   // طب أطفال | طب نسا | تغذية
-    type: "شامل 1",        // شامل 1 | شامل 2 | مراجعة نص المنهج ...
-    badgeClass: "ped",     // ped | obs | nut
+<!-- 🥗 تغذية -->
+<details class="exam-btn nut">
+<summary>🥗 تغذية</summary>
+<a href="exam11/index.html">مراجعة نص المنهج</a>
+<a href="exam12/index.html">مراجعة باقي المنهج</a>
+<a href="exam13/index.html">شامل 1</a>
+<a href="exam14/index.html">شامل 2</a>
+<a href="exam15/index.html">شامل 3</a>
+</details>
 
-    questions: [
-        {
-            q: "Normal respiratory rate in infant is:",
-            options: ["20–30 /min","30–60 /min","60–80 /min"],
-            answer: 1
-        },
-        {
-            q: "Most common cause of neonatal jaundice:",
-            options: ["Physiological","Infection","Malnutrition"],
-            answer: 0
-        }
-    ]
-};
-/* ========================================== */
+<div class="telegram">
+<a href="#">Telegram انضم إلينا على</a>
+</div>
 
-document.getElementById("examTitle").innerText =
-examData.subject + " – " + examData.type;
-
-const badge = document.getElementById("examBadge");
-badge.innerText = examData.type;
-badge.classList.add(examData.badgeClass);
-
-let html="";
-examData.questions.forEach((q,i)=>{
-    html+=`<div class="q"><h3>${i+1}. ${q.q}</h3>`;
-    q.options.forEach((op,j)=>{
-        html+=`
-        <label>
-            <input type="radio" name="q${i}" value="${j}">
-            ${op}
-        </label>`;
-    });
-    html+="</div>";
-});
-document.getElementById("examBox").innerHTML = html;
-
-function finishExam(){
-    let score=0;
-    examData.questions.forEach((q,i)=>{
-        let sel=document.querySelector(`input[name="q${i}"]:checked`);
-        if(sel && Number(sel.value)===q.answer) score++;
-    });
-    document.getElementById("result").innerText =
-    `درجتك ${score} من ${examData.questions.length}`;
-}
-</script>
+</div>
 
 </body>
 </html>
