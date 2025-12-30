@@ -236,7 +236,7 @@ button{
 
 <script>
 /* ===== Questions ===== */
-const questions=[
+let questions = [
 /* 1–10 */
 {q:"Nutrition is defined as:",o:["Science of food and its relationship to health","Cooking and preparation of food","Digestion process only","Food preservation"],a:0},
 {q:"Nutrients are:",o:["Substances that give taste to food","Compounds in food that support life","Only energy sources","Only vitamins"],a:1},
@@ -576,9 +576,19 @@ function finishExam(){
 
 /* ===== Retry Wrong ===== */
 function retry(){
-  questions=[...wrongSet];
-  answers=[];
-  i=0; correct=0; wrong=0;
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
   show();
 }
 
@@ -586,5 +596,4 @@ show();
 </script>
 
 </body>
-
 </html>
