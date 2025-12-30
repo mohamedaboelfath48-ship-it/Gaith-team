@@ -5,179 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
 body{
-  margin:0;
-  font-family:"Segoe UI", Tahoma, Arial;
-  background:linear-gradient(180deg,#8fd3f4,#84fab0);
+    margin:0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(180deg,#0b132b,#1c2541);
+    color:#fff;
+    text-align:center;
 }
 
-/* ===== الهيدر ===== */
+/* Header */
 .header{
-  text-align:center;
-  padding:30px 15px;
-  color:#fff;
+    padding:30px 15px;
 }
 .header h1{
-  margin:0;
-  font-size:40px;
-  font-weight:900;
-  letter-spacing:2px;
+    font-size:34px;
+    letter-spacing:2px;
 }
-.header h1 span{
-  color:#ff2d55; /* القلب الأحمر */
+.header span{
+    color:red;
 }
-.header p{
-  margin-top:8px;
-  font-size:17px;
-  opacity:.95;
+.sub{
+    opacity:.7;
+    margin-top:8px;
 }
 
-/* ===== الكارت الرئيسي ===== */
-.card{
-  width:92%;
-  max-width:720px;
-  margin:20px auto 40px;
-  background:#ffffff;
-  border-radius:26px;
-  padding:20px;
-  box-shadow:0 20px 45px rgba(0,0,0,.18);
+/* Container */
+.container{
+    width:92%;
+    max-width:500px;
+    margin:auto;
 }
 
-/* ===== القسم ===== */
-.section{
-  border-radius:18px;
-  margin-bottom:18px;
-  overflow:hidden;
-  background:#f8fbff;
-  border:1px solid #e5effa;
+/* Accordion */
+.exam{
+    border-radius:30px;
+    margin:15px 0;
+    overflow:hidden;
 }
 
-/* هيدر القسم */
-.section-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px;
-  font-size:20px;
-  font-weight:900;
-  cursor:pointer;
-  color:#0369a1;
+.exam button{
+    width:100%;
+    padding:20px;
+    font-size:20px;
+    border:none;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
 }
 
-/* السهم */
-.section-header i{
-  transition:transform .3s ease;
-  font-size:18px;
+/* Colors */
+.ped{background:linear-gradient(90deg,#1cb5e0,#3a7bd5);}
+.obs{background:linear-gradient(90deg,#d66efd,#ff5db1);}
+.nut{background:linear-gradient(90deg,#56ab2f,#a8e063);}
+
+.content{
+    display:none;
+    background:#111827;
+    padding:15px;
 }
 
-/* عند الفتح */
-.section.open .section-header i{
-  transform:rotate(180deg);
+.content a{
+    display:block;
+    background:#0ea5e9;
+    margin:8px 0;
+    padding:12px;
+    border-radius:20px;
+    color:white;
+    text-decoration:none;
 }
 
-/* محتوى القسم */
-.section-content{
-  padding:10px 16px 18px;
-  display:none;
+/* Telegram */
+.telegram{
+    margin:30px auto;
 }
-.section.open .section-content{
-  display:block;
-}
-
-/* عنصر الامتحان */
-.exam-item{
-  background:#eef6ff;
-  padding:15px 16px;
-  margin:10px 0;
-  border-radius:16px;
-  font-size:17px;
-  font-weight:800;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 6px 14px rgba(0,0,0,.08);
-}
-
-/* قفل */
-.exam-item i{
-  color:#ef4444;
-  font-size:18px;
-}
-
-/* تمييز آخر قسم */
-.section.highlight .section-header{
-  background:linear-gradient(90deg,#0369a1,#0ea5e9);
-  color:#fff;
-  border-radius:16px;
-}
-.section.highlight .section-content{
-  background:#f0f9ff;
+.telegram a{
+    background:linear-gradient(90deg,#14b8a6,#0ea5e9);
+    padding:15px 30px;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+    font-size:18px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== الهيدر ===== -->
 <div class="header">
-  <h1>GAITH TEAM <span>❤</span></h1>
-  <p>الامتحان في جيبك</p>
+    <h1>GAITH TEAM <span>❤️</span></h1>
+    <div class="sub">الامتحان في جيبك</div>
 </div>
 
-<!-- ===== المحتوى ===== -->
-<div class="card">
+<div class="container">
 
-  <!-- ===== القسم الأول (مقفول) ===== -->
-  <div class="section">
-    <div class="section-header" onclick="toggleSection(this)">
-      🩺 طب أطفال
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div class="section-content">
-      <div class="exam-item">شامل طب أطفال 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 2 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 3 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 4 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب أطفال 5 <i class="fa-solid fa-lock"></i></div>
-    </div>
-  </div>
+<!-- Pediatrics -->
+<div class="exam">
+<button class="ped" onclick="toggle(this)">👶 طب أطفال <span>▾</span></button>
+<div class="content">
+<a href="#">امتحان 1</a>
+<a href="#">امتحان 2</a>
+<a href="#">امتحان 3</a>
+<a href="#">امتحان 4</a>
+<a href="#">امتحان 5</a>
+</div>
+</div>
 
-  <!-- ===== القسم الثاني (مقفول) ===== -->
-  <div class="section">
-    <div class="section-header" onclick="toggleSection(this)">
-      🧠 قسم إضافي
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div class="section-content">
-      <div class="exam-item">امتحان 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">امتحان 2 <i class="fa-solid fa-lock"></i></div>
-    </div>
-  </div>
+<!-- Obs -->
+<div class="exam">
+<button class="obs" onclick="toggle(this)">🤰 طب نسا <span>▾</span></button>
+<div class="content">
+<a href="#">امتحان 6</a>
+<a href="#">امتحان 7</a>
+<a href="#">امتحان 8</a>
+<a href="#">امتحان 9</a>
+<a href="#">امتحان 10</a>
+</div>
+</div>
 
-  <!-- ===== القسم الأخير (مفتوح تلقائيًا) ===== -->
-  <div class="section open highlight">
-    <div class="section-header" onclick="toggleSection(this)">
-      🤰 طب نِسا
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div class="section-content">
-      <div class="exam-item">شامل طب نِسا 1 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 2 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 3 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 4 <i class="fa-solid fa-lock"></i></div>
-      <div class="exam-item">شامل طب نِسا 5 <i class="fa-solid fa-lock"></i></div>
-    </div>
-  </div>
+<!-- Nutrition -->
+<div class="exam">
+<button class="nut" onclick="toggle(this)">🥗 تغذية <span>▾</span></button>
+<div class="content">
+<a href="#">امتحان 11</a>
+<a href="#">امتحان 12</a>
+<a href="#">امتحان 13</a>
+<a href="#">امتحان 14</a>
+<a href="#">امتحان 15</a>
+</div>
+</div>
+
+<div class="telegram">
+<a href="#">Telegram انضم إلينا على</a>
+</div>
 
 </div>
 
 <script>
-function toggleSection(header){
-  const section = header.parentElement;
-  section.classList.toggle("open");
+function toggle(btn){
+    let content = btn.nextElementSibling;
+    content.style.display =
+    content.style.display === "block" ? "none" : "block";
 }
 </script>
 
