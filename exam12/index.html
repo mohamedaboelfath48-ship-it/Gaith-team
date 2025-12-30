@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+/* ================= 1–10 ================= */
+
+{
+t:"Nutrition is best defined as:",
+o:["Study of drugs","Science of food and its relation to health","Study of diseases","Food preparation only"],
+a:1
+},
+{
+t:"Which nutrient is the main source of energy for the body?",
+o:["Protein","Fat","Vitamin","Carbohydrate"],
+a:3
+},
+{
+t:"One gram of carbohydrate provides:",
+o:["2 kcal","4 kcal","7 kcal","9 kcal"],
+a:1
+},
+{
+t:"Proteins are mainly required for:",
+o:["Energy supply","Growth and tissue repair","Heat production","Vision"],
+a:1
+},
+{
+t:"Fats provide how many kcal per gram?",
+o:["4","5","7","9"],
+a:3
+},
+{
+t:"Micronutrients are required in:",
+o:["Large amounts","Very high doses","Small amounts","Equal to macronutrients"],
+a:2
+},
+{
+t:"Which vitamins are fat soluble?",
+o:["B and C","A, D, E, K","B1, B2, B12","C and K"],
+a:1
+},
+{
+t:"Vitamin A deficiency leads to:",
+o:["Scurvy","Rickets","Night blindness","Beriberi"],
+a:2
+},
+{
+t:"Scurvy is caused by deficiency of:",
+o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],
+a:2
+},
+{
+t:"Pellagra results from deficiency of:",
+o:["Thiamine","Niacin","Riboflavin","Folic acid"],
+a:1
+},
+
+/* ================= 11–20 ================= */
+
+{
+t:"Low birth weight is defined as birth weight less than:",
+o:["2000 g","2500 g","3000 g","1500 g"],
+a:1
+},
+{
+t:"Very low birth weight infants weigh less than:",
+o:["2000 g","1800 g","1500 g","1000 g"],
+a:2
+},
+{
+t:"Extremely low birth weight is less than:",
+o:["1200 g","1000 g","1500 g","800 g"],
+a:1
+},
+{
+t:"Preterm infants are born before:",
+o:["36 weeks","38 weeks","37 weeks","34 weeks"],
+a:2
+},
+{
+t:"Major cause of low birth weight in developing countries is:",
+o:["Smoking","Maternal undernutrition","Infection","Diabetes"],
+a:1
+},
+{
+t:"Which feeding option is preferred for LBW infants?",
+o:["Preterm formula","Parenteral nutrition","Mother’s breast milk","Cow’s milk"],
+a:2
+},
+{
+t:"Kangaroo care helps LBW infants by:",
+o:["Reducing appetite","Increasing infection rate","Increasing weight gain","Causing hypothermia"],
+a:2
+},
+{
+t:"Vitamin D supplementation in VLBW infants is:",
+o:["Not recommended","400–1000 IU/day","Only after 1 year","Single dose only"],
+a:1
+},
+{
+t:"Iron supplementation in LBW infants starts at:",
+o:["Birth","1 week","2 weeks","6 months"],
+a:2
+},
+{
+t:"Routine zinc supplementation in LBW infants is:",
+o:["Recommended","Mandatory","Optional","Not recommended"],
+a:3
+},
+
+/* ================= 21–30 ================= */
+
+{
+t:"Which group is most nutritionally vulnerable?",
+o:["Adolescents","Pregnant women","Office workers","Athletes"],
+a:1
+},
+{
+t:"In pregnancy, nutritional needs:",
+o:["Decrease","Remain same","Increase","Stop"],
+a:2
+},
+{
+t:"Excessive pregnancy weight gain is defined as:",
+o:[">0.5 kg/month","<1 kg/month",">1 kg/week",">1 kg/year"],
+a:2
+},
+{
+t:"Iron and folic acid recommended during pregnancy are:",
+o:["30 mg iron + 200 µg folate","60 mg iron + 400 µg folate","100 mg iron + 100 µg folate","No supplementation"],
+a:1
+},
+{
+t:"Exclusive breastfeeding is recommended for:",
+o:["3 months","4 months","6 months","12 months"],
+a:2
+},
+{
+t:"Children under five are vulnerable mainly due to:",
+o:["Low appetite","High nutrient needs","Low activity","High immunity"],
+a:1
+},
+{
+t:"Parasitic infestation mainly worsens:",
+o:["Vitamin A status","Protein level","Iron status","Calcium level"],
+a:2
+},
+{
+t:"Vitamin A supplementation starts at:",
+o:["Birth","3 months","6 months","1 year"],
+a:2
+},
+{
+t:"Which disease is related to protein-energy malnutrition?",
+o:["Rickets","Scurvy","Marasmus","Obesity"],
+a:2
+},
+{
+t:"Kwashiorkor is mainly due to deficiency of:",
+o:["Calories","Protein","Fat","Vitamins"],
+a:1
+},
+
+/* ================= 31–40 ================= */
+
+{
+t:"Marasmus is characterized by:",
+o:["Edema","Normal weight","Severe wasting","Hair changes only"],
+a:2
+},
+{
+t:"Edema is commonly seen in:",
+o:["Marasmus","Kwashiorkor","Rickets","Scurvy"],
+a:1
+},
+{
+t:"Iron deficiency anemia is classified as:",
+o:["Macrocytic","Normocytic","Microcytic hypochromic","Hemolytic"],
+a:2
+},
+{
+t:"Normal serum iron is usually above:",
+o:["10 µg/dl","20 µg/dl","30 µg/dl","5 µg/dl"],
+a:2
+},
+{
+t:"Megaloblastic anemia results from deficiency of:",
+o:["Iron","Vitamin C","Vitamin B12 and folate","Vitamin D"],
+a:2
+},
+{
+t:"Rickets is caused by deficiency of:",
+o:["Calcium only","Vitamin D","Iron","Protein"],
+a:1
+},
+{
+t:"Osteomalacia affects mainly:",
+o:["Children","Infants","Adults","Newborns"],
+a:2
+},
+{
+t:"Best prevention of rickets includes:",
+o:["Antibiotics","Sunlight exposure","High protein diet","Iron supplements"],
+a:1
+},
+{
+t:"Therapeutic nutrition means:",
+o:["Diet for weight loss","Use of nutrients to treat disease","Fast food diet","Liquid diet only"],
+a:1
+},
+{
+t:"GERD patients should avoid:",
+o:["Lean protein","Small meals","Peppermint","Fiber"],
+a:2
+},
+
+/* ================= 41–50 ================= */
+
+{
+t:"BRAT diet includes:",
+o:["Beans, Rice, Apples, Tea","Banana, Rice, Apple sauce, Toast","Bread, Rice, Apple, Tea","Banana, Roti, Apple, Tea"],
+a:1
+},
+{
+t:"For constipation, recommended intake includes:",
+o:["Low fluid","Low fiber","High fiber","High fat"],
+a:2
+},
+{
+t:"IBS patients should avoid:",
+o:["Water","Dietary fiber","Spicy food","Probiotics"],
+a:2
+},
+{
+t:"Hypertension diet includes:",
+o:["High sodium","DASH diet","High fat","Low potassium"],
+a:1
+},
+{
+t:"DASH diet is rich in:",
+o:["Sodium","Saturated fat","Potassium and fiber","Sugar"],
+a:2
+},
+{
+t:"Diabetes mellitus is characterized by:",
+o:["Low blood sugar","High blood sugar","Normal glucose","Low insulin always"],
+a:1
+},
+{
+t:"Preferred carbohydrates for diabetics are:",
+o:["Refined sugar","Simple carbs","Complex carbs","Sweets"],
+a:2
+},
+{
+t:"Low glycemic index foods cause:",
+o:["Rapid glucose rise","Slow glucose rise","No glucose","Hypoglycemia"],
+a:1
+},
+{
+t:"Protein requirement during illness is:",
+o:["Decreased","Stopped","Increased","Unchanged"],
+a:2
+},
+{
+t:"Parenteral nutrition is given when:",
+o:["Patient eats normally","GI tract is nonfunctional","Oral intake is adequate","Only for children"],
+a:1
+const questions = [
+
+/* ================= 1–10 ================= */
+
+{
+t:"Nutrition is best defined as:",
+o:["Study of drugs","Science of food and its relation to health","Study of diseases","Food preparation only"],
+a:1
+},
+{
+t:"Which nutrient is the main source of energy for the body?",
+o:["Protein","Fat","Vitamin","Carbohydrate"],
+a:3
+},
+{
+t:"One gram of carbohydrate provides:",
+o:["2 kcal","4 kcal","7 kcal","9 kcal"],
+a:1
+},
+{
+t:"Proteins are mainly required for:",
+o:["Energy supply","Growth and tissue repair","Heat production","Vision"],
+a:1
+},
+{
+t:"Fats provide how many kcal per gram?",
+o:["4","5","7","9"],
+a:3
+},
+{
+t:"Micronutrients are required in:",
+o:["Large amounts","Very high doses","Small amounts","Equal to macronutrients"],
+a:2
+},
+{
+t:"Which vitamins are fat soluble?",
+o:["B and C","A, D, E, K","B1, B2, B12","C and K"],
+a:1
+},
+{
+t:"Vitamin A deficiency leads to:",
+o:["Scurvy","Rickets","Night blindness","Beriberi"],
+a:2
+},
+{
+t:"Scurvy is caused by deficiency of:",
+o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],
+a:2
+},
+{
+t:"Pellagra results from deficiency of:",
+o:["Thiamine","Niacin","Riboflavin","Folic acid"],
+a:1
+},
+
+/* ================= 11–20 ================= */
+
+{
+t:"Low birth weight is defined as birth weight less than:",
+o:["2000 g","2500 g","3000 g","1500 g"],
+a:1
+},
+{
+t:"Very low birth weight infants weigh less than:",
+o:["2000 g","1800 g","1500 g","1000 g"],
+a:2
+},
+{
+t:"Extremely low birth weight is less than:",
+o:["1200 g","1000 g","1500 g","800 g"],
+a:1
+},
+{
+t:"Preterm infants are born before:",
+o:["36 weeks","38 weeks","37 weeks","34 weeks"],
+a:2
+},
+{
+t:"Major cause of low birth weight in developing countries is:",
+o:["Smoking","Maternal undernutrition","Infection","Diabetes"],
+a:1
+},
+{
+t:"Which feeding option is preferred for LBW infants?",
+o:["Preterm formula","Parenteral nutrition","Mother’s breast milk","Cow’s milk"],
+a:2
+},
+{
+t:"Kangaroo care helps LBW infants by:",
+o:["Reducing appetite","Increasing infection rate","Increasing weight gain","Causing hypothermia"],
+a:2
+},
+{
+t:"Vitamin D supplementation in VLBW infants is:",
+o:["Not recommended","400–1000 IU/day","Only after 1 year","Single dose only"],
+a:1
+},
+{
+t:"Iron supplementation in LBW infants starts at:",
+o:["Birth","1 week","2 weeks","6 months"],
+a:2
+},
+{
+t:"Routine zinc supplementation in LBW infants is:",
+o:["Recommended","Mandatory","Optional","Not recommended"],
+a:3
+},
+
+/* ================= 21–30 ================= */
+
+{
+t:"Which group is most nutritionally vulnerable?",
+o:["Adolescents","Pregnant women","Office workers","Athletes"],
+a:1
+},
+{
+t:"In pregnancy, nutritional needs:",
+o:["Decrease","Remain same","Increase","Stop"],
+a:2
+},
+{
+t:"Excessive pregnancy weight gain is defined as:",
+o:[">0.5 kg/month","<1 kg/month",">1 kg/week",">1 kg/year"],
+a:2
+},
+{
+t:"Iron and folic acid recommended during pregnancy are:",
+o:["30 mg iron + 200 µg folate","60 mg iron + 400 µg folate","100 mg iron + 100 µg folate","No supplementation"],
+a:1
+},
+{
+t:"Exclusive breastfeeding is recommended for:",
+o:["3 months","4 months","6 months","12 months"],
+a:2
+},
+{
+t:"Children under five are vulnerable mainly due to:",
+o:["Low appetite","High nutrient needs","Low activity","High immunity"],
+a:1
+},
+{
+t:"Parasitic infestation mainly worsens:",
+o:["Vitamin A status","Protein level","Iron status","Calcium level"],
+a:2
+},
+{
+t:"Vitamin A supplementation starts at:",
+o:["Birth","3 months","6 months","1 year"],
+a:2
+},
+{
+t:"Which disease is related to protein-energy malnutrition?",
+o:["Rickets","Scurvy","Marasmus","Obesity"],
+a:2
+},
+{
+t:"Kwashiorkor is mainly due to deficiency of:",
+o:["Calories","Protein","Fat","Vitamins"],
+a:1
+},
+
+/* ================= 31–40 ================= */
+
+{
+t:"Marasmus is characterized by:",
+o:["Edema","Normal weight","Severe wasting","Hair changes only"],
+a:2
+},
+{
+t:"Edema is commonly seen in:",
+o:["Marasmus","Kwashiorkor","Rickets","Scurvy"],
+a:1
+},
+{
+t:"Iron deficiency anemia is classified as:",
+o:["Macrocytic","Normocytic","Microcytic hypochromic","Hemolytic"],
+a:2
+},
+{
+t:"Normal serum iron is usually above:",
+o:["10 µg/dl","20 µg/dl","30 µg/dl","5 µg/dl"],
+a:2
+},
+{
+t:"Megaloblastic anemia results from deficiency of:",
+o:["Iron","Vitamin C","Vitamin B12 and folate","Vitamin D"],
+a:2
+},
+{
+t:"Rickets is caused by deficiency of:",
+o:["Calcium only","Vitamin D","Iron","Protein"],
+a:1
+},
+{
+t:"Osteomalacia affects mainly:",
+o:["Children","Infants","Adults","Newborns"],
+a:2
+},
+{
+t:"Best prevention of rickets includes:",
+o:["Antibiotics","Sunlight exposure","High protein diet","Iron supplements"],
+a:1
+},
+{
+t:"Therapeutic nutrition means:",
+o:["Diet for weight loss","Use of nutrients to treat disease","Fast food diet","Liquid diet only"],
+a:1
+},
+{
+t:"GERD patients should avoid:",
+o:["Lean protein","Small meals","Peppermint","Fiber"],
+a:2
+},
+
+/* ================= 41–50 ================= */
+
+{
+t:"BRAT diet includes:",
+o:["Beans, Rice, Apples, Tea","Banana, Rice, Apple sauce, Toast","Bread, Rice, Apple, Tea","Banana, Roti, Apple, Tea"],
+a:1
+},
+{
+t:"For constipation, recommended intake includes:",
+o:["Low fluid","Low fiber","High fiber","High fat"],
+a:2
+},
+{
+t:"IBS patients should avoid:",
+o:["Water","Dietary fiber","Spicy food","Probiotics"],
+a:2
+},
+{
+t:"Hypertension diet includes:",
+o:["High sodium","DASH diet","High fat","Low potassium"],
+a:1
+},
+{
+t:"DASH diet is rich in:",
+o:["Sodium","Saturated fat","Potassium and fiber","Sugar"],
+a:2
+},
+{
+t:"Diabetes mellitus is characterized by:",
+o:["Low blood sugar","High blood sugar","Normal glucose","Low insulin always"],
+a:1
+},
+{
+t:"Preferred carbohydrates for diabetics are:",
+o:["Refined sugar","Simple carbs","Complex carbs","Sweets"],
+a:2
+},
+{
+t:"Low glycemic index foods cause:",
+o:["Rapid glucose rise","Slow glucose rise","No glucose","Hypoglycemia"],
+a:1
+},
+{
+t:"Protein requirement during illness is:",
+o:["Decreased","Stopped","Increased","Unchanged"],
+a:2
+},
+{
+t:"Parenteral nutrition is given when:",
+o:["Patient eats normally","GI tract is nonfunctional","Oral intake is adequate","Only for children"],
+a:1
+}
+
+];
+
+// تحويل q إلى t (عشان العرض)
+questions.forEach(q => q.t = q.q);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+        إجابتك: ${q.o[answers[idx]]}<br>
+        الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>📋 تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
