@@ -13,30 +13,31 @@ body{
     color:white;
     text-align:center;
 }
-
 .hidden{display:none}
 
 /* Header */
 .header{padding:30px}
-.header h1{font-size:32px}
+.header h1{font-size:34px}
 .header span{color:red}
+.sub{opacity:.7}
 
-/* Buttons */
+/* Home Buttons */
 .container{width:92%;max-width:500px;margin:auto}
 
-.btn{
-    padding:20px;
-    margin:15px 0;
+.card{
+    padding:22px;
     border-radius:30px;
-    font-size:20px;
+    font-size:22px;
+    margin:15px 0;
     cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .ped{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
 .obs{background:linear-gradient(90deg,#d66efd,#ff5db1)}
 .nut{background:linear-gradient(90deg,#56ab2f,#a8e063)}
-
-.btn small{opacity:.7}
 
 /* Exam */
 .exam-box{
@@ -59,14 +60,21 @@ body{
     cursor:pointer;
 }
 
-.finish{
+.btn{
     width:100%;
     padding:15px;
     border:none;
     background:#0ea5e9;
     color:white;
     font-size:18px;
-    border-radius:20px;
+    border-radius:25px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.result{
+    font-size:22px;
+    margin:20px 0;
 }
 </style>
 </head>
@@ -77,13 +85,21 @@ body{
 <div id="home">
     <div class="header">
         <h1>GAITH TEAM <span>❤️</span></h1>
-        <p>الامتحان في جيبك</p>
+        <div class="sub">الامتحان في جيبك</div>
     </div>
 
     <div class="container">
-        <div class="btn ped" onclick="openExam(1)">👶 طب أطفال <small>امتحان 1</small></div>
-        <div class="btn obs" onclick="openExam(2)">🤰 طب نسا <small>امتحان 2</small></div>
-        <div class="btn nut" onclick="openExam(3)">🥗 تغذية <small>امتحان 3</small></div>
+        <div class="card ped" onclick="startExam(1)">
+            👶 طب أطفال <span>▾</span>
+        </div>
+
+        <div class="card obs" onclick="startExam(2)">
+            🤰 طب نسا <span>▾</span>
+        </div>
+
+        <div class="card nut" onclick="startExam(3)">
+            🥗 تغذية <span>▾</span>
+        </div>
     </div>
 </div>
 
@@ -95,64 +111,48 @@ body{
 
     <div class="exam-box" id="questions"></div>
 
-    <button class="finish" onclick="finishExam()">إنهاء الامتحان</button>
+    <button class="btn" onclick="submitExam()">إنهاء الامتحان</button>
+</div>
+
+<!-- ================= RESULT ================= -->
+<div id="result" class="hidden">
+    <div class="header">
+        <h2>النتيجة</h2>
+    </div>
+    <div class="result" id="score"></div>
+    <button class="btn" onclick="backHome()">رجوع للرئيسية</button>
 </div>
 
 <script>
-/* ====== الامتحانات ====== */
-const exams = {
+/* ===== الامتحانات ===== */
+const exams={
 1:{
-    title:"امتحان طب أطفال",
-    questions:[
-        {q:"Main cause of neonatal jaundice?",o:["Physiological","Infection","Malnutrition"],a:0},
-        {q:"Normal RR in infant?",o:["20-30","30-60","60-80"],a:1}
-    ]
-},
+title:"امتحان طب أطفال",
+q:[
+{q:"Normal respiratory rate in infant?",o:["20–30","30–60","60–80"],a:1},
+{q:"Most common cause of neonatal jaundice?",o:["Physiological","Infection","Malnutrition"],a:0}
+]},
 2:{
-    title:"امتحان طب نسا",
-    questions:[
-        {q:"Normal menstrual cycle?",o:["21 days","28 days","35 days"],a:1}
-    ]
-},
+title:"امتحان طب نسا",
+q:[
+{q:"Normal menstrual cycle length?",o:["21","28","35"],a:1}
+]},
 3:{
-    title:"امتحان تغذية",
-    questions:[
-        {q:"Main energy source?",o:["Protein","Fat","Carbohydrate"],a:2}
-    ]
-}
+title:"امتحان تغذية",
+q:[
+{q:"Main energy source of body?",o:["Protein","Fat","Carbohydrate"],a:2}
+]}
 };
 
-let currentExam;
+let current;
 
-/* ====== فتح الامتحان ====== */
-function openExam(num){
-    currentExam = exams[num];
-    document.getElementById("home").classList.add("hidden");
-    document.getElementById("exam").classList.remove("hidden");
-    document.getElementById("examTitle").innerText = currentExam.title;
+/* ===== تشغيل الامتحان ===== */
+function startExam(id){
+current=exams[id];
+document.getElementById("home").classList.add("hidden");
+document.getElementById("exam").classList.remove("hidden");
+document.getElementById("examTitle").innerText=current.title;
 
-    let html="";
-    currentExam.questions.forEach((q,i)=>{
-        html+=`<div class="q"><h3>${i+1}. ${q.q}</h3>`;
-        q.o.forEach((op,j)=>{
-            html+=`
-            <label>
-            <input type="radio" name="q${i}" value="${j}">
-            ${op}
-            </label>`;
-        });
-        html+="</div>";
-    });
-    document.getElementById("questions").innerHTML = html;
-}
-
-/* ====== إنهاء ====== */
-function finishExam(){
-    alert("تم إنهاء الامتحان ✔️");
-    document.getElementById("exam").classList.add("hidden");
-    document.getElementById("home").classList.remove("hidden");
-}
-</script>
-
-</body>
-</html>
+let html="";
+current.q.forEach((q,i)=>{
+html+=`<div class="q"><h3>${i+1}. ${
