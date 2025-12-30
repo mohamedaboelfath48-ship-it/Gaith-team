@@ -8,146 +8,149 @@
 <style>
 body{
     margin:0;
-    font-family: 'Cairo', sans-serif;
-    background: linear-gradient(180deg,#0b132b,#1c2541);
-    color:#fff;
+    font-family:Cairo,sans-serif;
+    background:linear-gradient(180deg,#0b132b,#1c2541);
+    color:white;
     text-align:center;
 }
 
+.hidden{display:none}
+
 /* Header */
-.header{
-    padding:30px 15px;
-}
-.header h1{
-    font-size:34px;
-    letter-spacing:2px;
-}
-.header span{
-    color:red;
-}
-.sub{
-    opacity:.7;
-    margin-top:8px;
-}
+.header{padding:30px}
+.header h1{font-size:32px}
+.header span{color:red}
 
-/* Container */
-.container{
-    width:92%;
-    max-width:500px;
-    margin:auto;
-}
+/* Buttons */
+.container{width:92%;max-width:500px;margin:auto}
 
-/* Accordion */
-.exam{
-    border-radius:30px;
-    margin:15px 0;
-    overflow:hidden;
-}
-
-.exam button{
-    width:100%;
+.btn{
     padding:20px;
+    margin:15px 0;
+    border-radius:30px;
     font-size:20px;
-    border:none;
-    color:#fff;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
     cursor:pointer;
 }
 
-/* Colors */
-.ped{background:linear-gradient(90deg,#1cb5e0,#3a7bd5);}
-.obs{background:linear-gradient(90deg,#d66efd,#ff5db1);}
-.nut{background:linear-gradient(90deg,#56ab2f,#a8e063);}
+.ped{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
+.obs{background:linear-gradient(90deg,#d66efd,#ff5db1)}
+.nut{background:linear-gradient(90deg,#56ab2f,#a8e063)}
 
-.content{
-    display:none;
+.btn small{opacity:.7}
+
+/* Exam */
+.exam-box{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
     background:#111827;
-    padding:15px;
-}
-
-.content a{
-    display:block;
-    background:#0ea5e9;
-    margin:8px 0;
-    padding:12px;
+    padding:20px;
     border-radius:20px;
-    color:white;
-    text-decoration:none;
+    text-align:left;
 }
 
-/* Telegram */
-.telegram{
-    margin:30px auto;
+.q{margin-bottom:20px}
+.q label{
+    display:block;
+    background:#020617;
+    padding:10px;
+    border-radius:12px;
+    margin:6px 0;
+    cursor:pointer;
 }
-.telegram a{
-    background:linear-gradient(90deg,#14b8a6,#0ea5e9);
-    padding:15px 30px;
-    border-radius:30px;
-    color:#fff;
-    text-decoration:none;
+
+.finish{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#0ea5e9;
+    color:white;
     font-size:18px;
+    border-radius:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>GAITH TEAM <span>❤️</span></h1>
-    <div class="sub">الامتحان في جيبك</div>
+<!-- ================= HOME ================= -->
+<div id="home">
+    <div class="header">
+        <h1>GAITH TEAM <span>❤️</span></h1>
+        <p>الامتحان في جيبك</p>
+    </div>
+
+    <div class="container">
+        <div class="btn ped" onclick="openExam(1)">👶 طب أطفال <small>امتحان 1</small></div>
+        <div class="btn obs" onclick="openExam(2)">🤰 طب نسا <small>امتحان 2</small></div>
+        <div class="btn nut" onclick="openExam(3)">🥗 تغذية <small>امتحان 3</small></div>
+    </div>
 </div>
 
-<div class="container">
+<!-- ================= EXAM ================= -->
+<div id="exam" class="hidden">
+    <div class="header">
+        <h2 id="examTitle"></h2>
+    </div>
 
-<!-- Pediatrics -->
-<div class="exam">
-<button class="ped" onclick="toggle(this)">👶 طب أطفال <span>▾</span></button>
-<div class="content">
-<a href="#">امتحان 1</a>
-<a href="#">امتحان 2</a>
-<a href="#">امتحان 3</a>
-<a href="#">امتحان 4</a>
-<a href="#">امتحان 5</a>
-</div>
-</div>
+    <div class="exam-box" id="questions"></div>
 
-<!-- Obs -->
-<div class="exam">
-<button class="obs" onclick="toggle(this)">🤰 طب نسا <span>▾</span></button>
-<div class="content">
-<a href="#">امتحان 6</a>
-<a href="#">امتحان 7</a>
-<a href="#">امتحان 8</a>
-<a href="#">امتحان 9</a>
-<a href="#">امتحان 10</a>
-</div>
-</div>
-
-<!-- Nutrition -->
-<div class="exam">
-<button class="nut" onclick="toggle(this)">🥗 تغذية <span>▾</span></button>
-<div class="content">
-<a href="#">امتحان 11</a>
-<a href="#">امتحان 12</a>
-<a href="#">امتحان 13</a>
-<a href="#">امتحان 14</a>
-<a href="#">امتحان 15</a>
-</div>
-</div>
-
-<div class="telegram">
-<a href="#">Telegram انضم إلينا على</a>
-</div>
-
+    <button class="finish" onclick="finishExam()">إنهاء الامتحان</button>
 </div>
 
 <script>
-function toggle(btn){
-    let content = btn.nextElementSibling;
-    content.style.display =
-    content.style.display === "block" ? "none" : "block";
+/* ====== الامتحانات ====== */
+const exams = {
+1:{
+    title:"امتحان طب أطفال",
+    questions:[
+        {q:"Main cause of neonatal jaundice?",o:["Physiological","Infection","Malnutrition"],a:0},
+        {q:"Normal RR in infant?",o:["20-30","30-60","60-80"],a:1}
+    ]
+},
+2:{
+    title:"امتحان طب نسا",
+    questions:[
+        {q:"Normal menstrual cycle?",o:["21 days","28 days","35 days"],a:1}
+    ]
+},
+3:{
+    title:"امتحان تغذية",
+    questions:[
+        {q:"Main energy source?",o:["Protein","Fat","Carbohydrate"],a:2}
+    ]
+}
+};
+
+let currentExam;
+
+/* ====== فتح الامتحان ====== */
+function openExam(num){
+    currentExam = exams[num];
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("exam").classList.remove("hidden");
+    document.getElementById("examTitle").innerText = currentExam.title;
+
+    let html="";
+    currentExam.questions.forEach((q,i)=>{
+        html+=`<div class="q"><h3>${i+1}. ${q.q}</h3>`;
+        q.o.forEach((op,j)=>{
+            html+=`
+            <label>
+            <input type="radio" name="q${i}" value="${j}">
+            ${op}
+            </label>`;
+        });
+        html+="</div>";
+    });
+    document.getElementById("questions").innerHTML = html;
+}
+
+/* ====== إنهاء ====== */
+function finishExam(){
+    alert("تم إنهاء الامتحان ✔️");
+    document.getElementById("exam").classList.add("hidden");
+    document.getElementById("home").classList.remove("hidden");
 }
 </script>
 
