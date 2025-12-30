@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+/* 1–10 */
+{t:"One gram of carbohydrates provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
+{t:"One gram of protein provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
+{t:"One gram of fat provides:",o:["4 kcal","7 kcal","9 kcal","12 kcal"],a:2},
+{t:"Recommended carbohydrate intake should be:",o:["<30%","30–40%","More than 50%","90%"],a:2},
+{t:"Recommended fat intake should provide:",o:["10–15%","15–20%","25–35%","40–50%"],a:2},
+{t:"Protein requirement for healthy adults is:",o:["0.5 g/kg","0.8 g/kg","1 g/kg","2 g/kg"],a:2},
+{t:"Protein requirement for infants is:",o:["0.8 g/kg","1 g/kg","2 g/kg","3.5 g/kg"],a:2},
+{t:"Protein requirement during pregnancy is:",o:["0.8 g/kg","1 g/kg","1.2–1.5 g/kg","2.5 g/kg"],a:2},
+{t:"A child weighing 20 kg needs protein (2 g/kg):",o:["20 g","30 g","40 g","50 g"],a:2},
+{t:"Protein provides energy mainly during:",o:["Normal diet","Exercise","Starvation","Overnutrition"],a:2},
+
+/* 11–20 */
+{t:"Vitamin A requirement for adult male is:",o:["2000 IU","3000 IU","4000 IU","5000 IU"],a:3},
+{t:"Vitamin A requirement for adult female is:",o:["2000 IU","3000 IU","4000 IU","6000 IU"],a:2},
+{t:"Vitamin D requirement for children is:",o:["100 IU","200 IU","400 IU","800 IU"],a:2},
+{t:"Night blindness is caused by deficiency of:",o:["Vitamin D","Vitamin A","Vitamin K","Vitamin C"],a:1},
+{t:"Vitamin C deficiency causes:",o:["Rickets","Scurvy","Pellagra","Beriberi"],a:1},
+{t:"Pellagra is caused by deficiency of:",o:["B1","B2","B3","B12"],a:2},
+{t:"Rickets in children is due to deficiency of:",o:["Vitamin A","Vitamin D","Iron","Vitamin C"],a:1},
+{t:"Vitamin K is essential for:",o:["Vision","Blood clotting","Bone growth","Energy"],a:1},
+{t:"Riboflavin deficiency causes:",o:["Cheilosis","Goiter","Blindness","Rickets"],a:0},
+{t:"Vitamin B1 deficiency leads to:",o:["Night blindness","Peripheral neuritis","Goiter","Rickets"],a:1},
+
+/* 21–30 */
+{t:"Recommended calcium intake for children is:",o:["400 mg","600 mg","800 mg","1200 mg"],a:2},
+{t:"Extra calcium needed during pregnancy is:",o:["100 mg","200 mg","300 mg","400 mg"],a:3},
+{t:"Iron requirement for adult males is:",o:["3–5 mg","7–10 mg","12–20 mg","30–60 mg"],a:1},
+{t:"Iron requirement for adult females is:",o:["5–8 mg","7–10 mg","12–20 mg","25–40 mg"],a:2},
+{t:"Iodine requirement for adults is:",o:["0.5 µg/kg","1 µg/kg","5 µg/kg","10 µg/kg"],a:1},
+{t:"Goiter is caused by deficiency of:",o:["Iron","Calcium","Iodine","Phosphorus"],a:2},
+{t:"Iron deficiency anemia is:",o:["Macrocytic","Normocytic","Microcytic hypochromic","Megaloblastic"],a:2},
+{t:"Water constitutes about:",o:["40%","50%","60–70%","80%"],a:2},
+{t:"Cellulose is classified as:",o:["Digestible carb","Protein","Fat","Dietary fiber"],a:3},
+{t:"High fiber diet reduces risk of:",o:["Constipation","Colon cancer","CHD","All"],a:3},
+
+/* 31–40 */
+{t:"BMI formula is:",o:["W×H","W/H","W/H²","H²/W"],a:2},
+{t:"Normal BMI range is:",o:["<18.5","18.5–24.9","25–29.9","30–34.9"],a:1},
+{t:"BMI >30 indicates:",o:["Normal","Underweight","Obesity","Overweight"],a:2},
+{t:"BMI >40 is classified as:",o:["Overweight","Grade 1","Grade 2","Morbid obesity"],a:3},
+{t:"Waist circumference indicating obesity in males:",o:["88 cm","90 cm","100 cm","102 cm"],a:3},
+{t:"Waist circumference indicating obesity in females:",o:["80 cm","85 cm","88 cm","95 cm"],a:2},
+{t:"Normal mid-arm circumference in children under 5:",o:["8–10 cm","10–11 cm","11.5–13.5 cm","14–16 cm"],a:2},
+{t:"Normal head circumference of newborn:",o:["30 cm","32 cm","34.5 cm","38 cm"],a:2},
+{t:"At birth, head circumference is:",o:["Smaller","Equal","Larger","Unrelated"],a:2},
+{t:"2400 kcal diet with 60% carbohydrates gives:",o:["1200","1400","1440","1600"],a:2},
+
+/* 41–50 */
+{t:"1440 kcal from carbohydrates equals:",o:["240 g","300 g","360 g","400 g"],a:2},
+{t:"50 g fat provides:",o:["200 kcal","300 kcal","400 kcal","450 kcal"],a:3},
+{t:"100 g protein provides:",o:["200 kcal","300 kcal","400 kcal","900 kcal"],a:2},
+{t:"Kwashiorkor is due to deficiency of:",o:["Carbs","Fat","Protein","Vitamins"],a:2},
+{t:"Marasmus is due to deficiency of:",o:["Protein","Energy","Protein & energy","Vitamins"],a:2},
+{t:"Vitamin D deficiency in adults causes:",o:["Rickets","Osteomalacia","Scurvy","Goiter"],a:1},
+{t:"Albumin level reflects:",o:["Iron status","Protein status","Calcium","Iodine"],a:1},
+{t:"Low hemoglobin indicates:",o:["Obesity","Anemia","Diabetes","Dehydration"],a:1},
+{t:"Anthropometry deals with:",o:["Diet","Body measurements","Lab tests","Urine"],a:1},
+{t:"Skinfold thickness measures:",o:["Muscle","Bone","Body fat","Water"],a:2},
+/* 51–60 */
+{t:"Vitamin D deficiency in children causes:",o:["Scurvy","Rickets","Anemia","Pellagra"],a:1},
+{t:"Vitamin B12 deficiency causes:",o:["Scurvy","Pernicious anemia","Rickets","Goiter"],a:1},
+{t:"Folic acid deficiency causes:",o:["Microcytic anemia","Macrocytic anemia","Rickets","Scurvy"],a:1},
+{t:"Minerals are classified as:",o:["Organic","Energy nutrients","Inorganic elements","Vitamins"],a:2},
+{t:"Calcium is essential for:",o:["Vision","Bone and teeth","Energy","Blood glucose"],a:1},
+{t:"Iron is required for formation of:",o:["Insulin","Hemoglobin","Enzymes","Hormones"],a:1},
+{t:"Iron deficiency causes:",o:["Scurvy","Anemia","Rickets","Obesity"],a:1},
+{t:"Iodine deficiency leads to:",o:["Goiter","Anemia","Rickets","Blindness"],a:0},
+{t:"Phosphorus works mainly with:",o:["Iron","Calcium","Sodium","Potassium"],a:1},
+{t:"Sodium is important for:",o:["Bone formation","Nerve transmission","Vision","Blood clotting"],a:1},
+
+/* 61–70 */
+{t:"Dietary fiber is classified as:",o:["Protein","Digestible carbohydrate","Indigestible carbohydrate","Fat"],a:2},
+{t:"Dietary fiber helps in prevention of:",o:["Anemia","Constipation","Rickets","Goiter"],a:1},
+{t:"Water constitutes approximately:",o:["30%","50%","60–70%","90%"],a:2},
+{t:"Water helps in regulation of:",o:["Vision","Body temperature","Protein synthesis","Fat storage"],a:1},
+{t:"BMI is calculated using:",o:["Weight × Height","Weight / Height","Weight / Height²","Height / Weight"],a:2},
+{t:"BMI 18.0 is classified as:",o:["Normal","Overweight","Underweight","Obese"],a:2},
+{t:"BMI 25–30 is classified as:",o:["Normal","Overweight","Obese grade 2","Morbid obesity"],a:1},
+{t:"BMI >40 indicates:",o:["Grade 1 obesity","Grade 2 obesity","Overweight","Morbid obesity"],a:3},
+{t:"Waist circumference predicts:",o:["Height","Mortality risk","Muscle mass","Bone density"],a:1},
+{t:"Central obesity is assessed by:",o:["BMI","Skinfold","Waist circumference","Height"],a:2},
+
+/* 71–80 */
+{t:"Anthropometry deals with measurement of:",o:["Diet","Body size and proportions","Blood tests","Urine tests"],a:1},
+{t:"Height is measured using:",o:["Scale","Stadiometer","Caliper","Tape"],a:1},
+{t:"Skinfold thickness estimates:",o:["Muscle mass","Bone mass","Body fat","Water"],a:2},
+{t:"Mid-arm circumference is useful for assessing:",o:["Adult height","Child nutrition","BMI","Blood pressure"],a:1},
+{t:"Biochemical assessment includes:",o:["Height","Weight","Hemoglobin","Skinfold"],a:2},
+{t:"Low hemoglobin level indicates:",o:["Obesity","Anemia","Diabetes","Dehydration"],a:1},
+{t:"Serum albumin reflects:",o:["Iron status","Protein status","Calcium status","Iodine status"],a:1},
+{t:"Low serum albumin suggests:",o:["Good nutrition","Protein malnutrition","Obesity","Dehydration"],a:1},
+{t:"Urine glucose indicates:",o:["UTI","Diabetes mellitus","Anemia","Kidney stones"],a:1},
+{t:"Stool examination is used to detect:",o:["Parasites","Vitamin deficiency","Obesity","Dehydration"],a:0},
+
+/* 81–90 */
+{t:"Kwashiorkor is characterized mainly by:",o:["Energy deficiency","Protein deficiency","Vitamin deficiency","Fat deficiency"],a:1},
+{t:"Marasmus results from deficiency of:",o:["Protein only","Energy only","Protein and energy","Vitamins"],a:2},
+{t:"Obesity is defined as excess accumulation of:",o:["Water","Muscle","Fat","Protein"],a:2},
+{t:"Major cause of obesity is:",o:["Infection","Energy imbalance","Vitamin deficiency","Genetics only"],a:1},
+{t:"Obesity increases risk of:",o:["Diabetes","Hypertension","Heart disease","All of the above"],a:3},
+{t:"Energy-dense foods are high in:",o:["Fiber","Protein","Fat and sugar","Water"],a:2},
+{t:"Physical inactivity leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
+{t:"Psychological effect of obesity includes:",o:["Blindness","Depression","Anemia","Goiter"],a:1},
+{t:"Lifestyle modification includes:",o:["Diet only","Exercise only","Behavior change only","All of the above"],a:3},
+{t:"Balanced diet should include:",o:["One nutrient","Two nutrients","All nutrients","Only vitamins"],a:2},
+/* 91–100 */
+{t:"Malnutrition may result from:",o:["Deficiency","Excess","Imbalance","All of the above"],a:3},
+{t:"Undernutrition in children leads to:",o:["Stunting","Wasting","Delayed development","All of the above"],a:3},
+{t:"Overnutrition mainly results in:",o:["Anemia","Obesity","Rickets","Scurvy"],a:1},
+{t:"Best indicator of chronic malnutrition in children is:",o:["Weight for age","Height for age","BMI","Waist circumference"],a:1},
+{t:"Head circumference in infants reflects:",o:["Nutrition only","Brain growth","Fat mass","Height"],a:1},
+{t:"After 2 years of age, chest circumference becomes:",o:["Smaller than head","Equal to head","Larger than head","Unrelated"],a:2},
+{t:"Milk is high-risk food because it is:",o:["Low nutrient","Rarely consumed","Good medium for bacteria","Difficult to digest"],a:2},
+{t:"Milk should be boiled above:",o:["50°C","60°C","70°C","90°C"],a:2},
+{t:"Insanitary meat is indicated by:",o:["Fresh color","Abattoir stamp","Bad odor","Firm texture"],a:2},
+{t:"Good nutrition leads to:",o:["Better immunity","Better growth","Better productivity","All of the above"],a:3}
+];
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=80*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>📋 تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
