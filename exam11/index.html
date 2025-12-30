@@ -237,247 +237,1089 @@ button{
 <script>
 /* ===== Questions ===== */
 let questions = [
-/* 1–10 */
-{q:"Nutrition is defined as:",o:["Science of food and its relationship to health","Cooking and preparation of food","Digestion process only","Food preservation"],a:0},
-{q:"Nutrients are:",o:["Substances that give taste to food","Compounds in food that support life","Only energy sources","Only vitamins"],a:1},
-{q:"The primary source of energy is:",o:["Protein","Fat","Carbohydrates","Minerals"],a:2},
-{q:"One gram of carbohydrate provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
-{q:"Carbohydrates should provide about:",o:["10–20% energy","30–40% energy","50–65% energy","80–90% energy"],a:2},
-{q:"Glucose is classified as:",o:["Disaccharide","Polysaccharide","Monosaccharide","Fiber"],a:2},
-{q:"Lactose is found in:",o:["Fruits","Milk","Cereals","Meat"],a:1},
-{q:"Glycogen is stored in:",o:["Kidneys","Brain","Liver and muscles","Lungs"],a:2},
-{q:"Cellulose is:",o:["Digestible sugar","Insoluble fiber","Fat","Protein"],a:1},
-{q:"Dietary fiber helps in:",o:["Energy production","Preventing constipation","Protein synthesis","Vitamin absorption"],a:1},
+/* ================= 1–10 ================= */
+{
+t:"Nutrition is best defined as:",
+o:["Study of drugs","Science of food and its relation to health","Study of diseases","Food preparation only"],
+a:1
+},
+{
+t:"Which nutrient is the main source of energy for the body?",
+o:["Protein","Fat","Vitamin","Carbohydrate"],
+a:3
+},
+{
+t:"One gram of carbohydrate provides:",
+o:["2 kcal","4 kcal","7 kcal","9 kcal"],
+a:1
+},
+{
+t:"Proteins are mainly required for:",
+o:["Energy supply","Growth and tissue repair","Heat production","Vision"],
+a:1
+},
+{
+t:"Fats provide how many kcal per gram?",
+o:["4","5","7","9"],
+a:3
+},
+{
+t:"Micronutrients are required in:",
+o:["Large amounts","Very high doses","Small amounts","Equal to macronutrients"],
+a:2
+},
+{
+t:"Which vitamins are fat soluble?",
+o:["B and C","A, D, E, K","B1, B2, B12","C and K"],
+a:1
+},
+{
+t:"Vitamin A deficiency leads to:",
+o:["Scurvy","Rickets","Night blindness","Beriberi"],
+a:2
+},
+{
+t:"Scurvy is caused by deficiency of:",
+o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],
+a:2
+},
+/* ================= 11–20 ================= */
+{
+t:"Low birth weight is defined as birth weight less than:",
+o:["2000 g","2500 g","3000 g","1500 g"],
+a:1
+},
+{
+t:"Very low birth weight infants weigh less than:",
+o:["2000 g","1800 g","1500 g","1000 g"],
+a:2
+},
+{
+t:"Extremely low birth weight is less than:",
+o:["1200 g","1000 g","1500 g","800 g"],
+a:1
+},
+{
+t:"Preterm infants are born before:",
+o:["36 weeks","38 weeks","37 weeks","34 weeks"],
+a:2
+},
+{
+t:"Major cause of low birth weight in developing countries is:",
+o:["Smoking","Maternal undernutrition","Infection","Diabetes"],
+a:1
+},
+{
+t:"Which feeding option is preferred for LBW infants?",
+o:["Preterm formula","Parenteral nutrition","Mother’s breast milk","Cow’s milk"],
+a:2
+},
+{
+t:"Kangaroo care helps LBW infants by:",
+o:["Reducing appetite","Increasing infection rate","Increasing weight gain","Causing hypothermia"],
+a:2
+},
+{
+t:"Vitamin D supplementation in VLBW infants is:",
+o:["Not recommended","400–1000 IU/day","Only after 1 year","Single dose only"],
+a:1
+},
+{
+t:"Iron supplementation in LBW infants starts at:",
+o:["Birth","1 week","2 weeks","6 months"],
+a:2
+},
+{
+t:"Routine zinc supplementation in LBW infants is:",
+o:["Recommended","Mandatory","Optional","Not recommended"],
+a:3
+},
 
-/* 11–20 */
-{q:"Proteins are made of:",o:["Fatty acids","Amino acids","Glucose units","Minerals"],a:1},
-{q:"Essential amino acids are:",o:["Synthesized in the body","Obtained from diet","Stored in liver","Energy sources"],a:1},
-{q:"Proteins are mainly required for:",o:["Energy storage","Growth and tissue repair","Vision","Blood clotting"],a:1},
-{q:"Kwashiorkor is caused by deficiency of:",o:["Carbohydrates","Fat","Protein","Vitamins"],a:2},
-{q:"Marasmus results from deficiency of:",o:["Protein only","Energy only","Protein and energy","Vitamins"],a:2},
-{q:"Enzymes are mainly:",o:["Carbohydrates","Proteins","Fats","Minerals"],a:1},
-{q:"One gram of protein provides:",o:["2 kcal","4 kcal","7 kcal","9 kcal"],a:1},
-{q:"A complete protein contains:",o:["Some amino acids","All essential amino acids","No nitrogen","Only plant sources"],a:1},
-{q:"Animal protein example:",o:["Beans","Lentils","Egg","Rice"],a:2},
-{q:"Nitrogen balance assesses:",o:["Fat metabolism","Protein status","Vitamin intake","Water balance"],a:1},
+/* ================= 21–30 ================= */
 
-/* 21–30 */
-{q:"Fats are composed of:",o:["Amino acids","Fatty acids and glycerol","Glucose","Minerals"],a:1},
-{q:"One gram of fat provides:",o:["4 kcal","7 kcal","9 kcal","12 kcal"],a:2},
-{q:"Saturated fats are usually:",o:["Liquid","Solid","Plant-based","Cholesterol free"],a:1},
-{q:"Unsaturated fats are found in:",o:["Butter","Ghee","Vegetable oils","Cheese"],a:2},
-{q:"Essential fatty acid:",o:["Stearic acid","Palmitic acid","Linoleic acid","Cholesterol"],a:2},
-{q:"Fats help in absorption of:",o:["Vitamin C","Vitamin B","Fat-soluble vitamins","Minerals"],a:2},
-{q:"Cholesterol is found in:",o:["Plant foods","Animal foods","Fruits","Vegetables"],a:1},
-{q:"HDL is known as:",o:["Bad cholesterol","Neutral fat","Good cholesterol","Triglyceride"],a:2},
-{q:"Excess fat intake leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
-{q:"Fats act as:",o:["Energy reserve","Enzymes","Hormones","Minerals"],a:0},
+{
+t:"Which group is most nutritionally vulnerable?",
+o:["Adolescents","Pregnant women","Office workers","Athletes"],
+a:1
+},
+{
+t:"In pregnancy, nutritional needs:",
+o:["Decrease","Remain same","Increase","Stop"],
+a:2
+},
+{
+t:"Excessive pregnancy weight gain is defined as:",
+o:[">0.5 kg/month","<1 kg/month",">1 kg/week",">1 kg/year"],
+a:2
+},
+{
+t:"Iron and folic acid recommended during pregnancy are:",
+o:["30 mg iron + 200 µg folate","60 mg iron + 400 µg folate","100 mg iron + 100 µg folate","No supplementation"],
+a:1
+},
+{
+t:"Exclusive breastfeeding is recommended for:",
+o:["3 months","4 months","6 months","12 months"],
+a:2
+},
+{
+t:"Children under five are vulnerable mainly due to:",
+o:["Low appetite","High nutrient needs","Low activity","High immunity"],
+a:1
+},
+{
+t:"Parasitic infestation mainly worsens:",
+o:["Vitamin A status","Protein level","Iron status","Calcium level"],
+a:2
+},
+{
+t:"Vitamin A supplementation starts at:",
+o:["Birth","3 months","6 months","1 year"],
+a:2
+},
+{
+t:"Which disease is related to protein-energy malnutrition?",
+o:["Rickets","Scurvy","Marasmus","Obesity"],
+a:2
+},
+{
+t:"Kwashiorkor is mainly due to deficiency of:",
+o:["Calories","Protein","Fat","Vitamins"],
+a:1
+},
 
-/* 31–40 */
-{q:"Vitamins are:",o:["Energy sources","Organic compounds needed in small amounts","Structural nutrients","Inorganic"],a:1},
-{q:"Fat soluble vitamins include:",o:["B & C","A D E K","B1 B2","C only"],a:1},
-{q:"Vitamin A is essential for:",o:["Blood clotting","Vision","Bone growth","Energy"],a:1},
-{q:"Vitamin A deficiency causes:",o:["Rickets","Night blindness","Scurvy","Goiter"],a:1},
-{q:"Vitamin D deficiency in children leads to:",o:["Scurvy","Rickets","Anemia","Pellagra"],a:1},
-{q:"Vitamin D helps absorption of:",o:["Iron","Calcium","Sodium","Potassium"],a:1},
-{q:"Vitamin K is needed for:",o:["Vision","Blood clotting","Energy","Growth"],a:1},
-{q:"Vitamin C deficiency causes:",o:["Rickets","Scurvy","Anemia","Goiter"],a:1},
-{q:"Vitamin C is:",o:["Fat soluble","Water soluble","Stored in liver","Toxic"],a:1},
-{q:"Thiamine is vitamin:",o:["B1","B2","B6","B12"],a:0},
+/* ================= 31–40 ================= */
 
-/* 41–50 */
-{q:"Riboflavin deficiency causes:",o:["Cheilosis","Rickets","Goiter","Blindness"],a:0},
-{q:"Vitamin B12 deficiency causes:",o:["Scurvy","Pernicious anemia","Rickets","Goiter"],a:1},
-{q:"Folic acid deficiency causes:",o:["Microcytic anemia","Macrocytic anemia","Rickets","Scurvy"],a:1},
-{q:"Minerals are:",o:["Organic","Energy sources","Inorganic elements","Vitamins"],a:2},
-{q:"Calcium is important for:",o:["Vision","Bone and teeth","Blood glucose","Energy"],a:1},
-{q:"Iron is essential for:",o:["Hemoglobin formation","Vision","Fat digestion","Calcium absorption"],a:0},
-{q:"Iron deficiency causes:",o:["Scurvy","Anemia","Rickets","Obesity"],a:1},
-{q:"Iodine deficiency leads to:",o:["Goiter","Anemia","Rickets","Blindness"],a:0},
-{q:"Phosphorus works with:",o:["Iron","Calcium","Sodium","Potassium"],a:1},
-{q:"Sodium helps in:",o:["Bone formation","Nerve transmission","Vision","Blood clotting"],a:1},
+{
+t:"Marasmus is characterized by:",
+o:["Edema","Normal weight","Severe wasting","Hair changes only"],
+a:2
+},
+{
+t:"Edema is commonly seen in:",
+o:["Marasmus","Kwashiorkor","Rickets","Scurvy"],
+a:1
+},
+{
+t:"Iron deficiency anemia is classified as:",
+o:["Macrocytic","Normocytic","Microcytic hypochromic","Hemolytic"],
+a:2
+},
+{
+t:"Normal serum iron is usually above:",
+o:["10 µg/dl","20 µg/dl","30 µg/dl","5 µg/dl"],
+a:2
+},
+{
+t:"Megaloblastic anemia results from deficiency of:",
+o:["Iron","Vitamin C","Vitamin B12 and folate","Vitamin D"],
+a:2
+},
+{
+t:"Rickets is caused by deficiency of:",
+o:["Calcium only","Vitamin D","Iron","Protein"],
+a:1
+},
+{
+t:"Osteomalacia affects mainly:",
+o:["Children","Infants","Adults","Newborns"],
+a:2
+},
+{
+t:"Best prevention of rickets includes:",
+o:["Antibiotics","Sunlight exposure","High protein diet","Iron supplements"],
+a:1
+},
+{
+t:"Therapeutic nutrition means:",
+o:["Diet for weight loss","Use of nutrients to treat disease","Fast food diet","Liquid diet only"],
+a:1
+},
+{
+t:"GERD patients should avoid:",
+o:["Lean protein","Small meals","Peppermint","Fiber"],
+a:2
+},
 
-/* 51–60 */
-{q:"Fiber is:",o:["Digestible","Indigestible carbohydrate","Protein","Fat"],a:1},
-{q:"Fiber prevents:",o:["Diabetes","Constipation","Anemia","Rickets"],a:1},
-{q:"Water constitutes about:",o:["30%","50%","70%","90%"],a:2},
-{q:"Water helps regulate:",o:["Vision","Body temperature","Protein synthesis","Fat storage"],a:1},
-{q:"BMI formula is:",o:["Weight×Height","Weight/Height²","Height/Weight","Weight+Height"],a:1},
-{q:"Normal BMI range:",o:["<18.5","18.5–24.9","25–30",">30"],a:1},
-{q:"BMI >30 indicates:",o:["Normal","Underweight","Obesity","Overweight"],a:2},
-{q:"Waist circumference indicating obesity in males:",o:[">90 cm",">95 cm",">100 cm",">102 cm"],a:3},
-{q:"Waist circumference indicating obesity in females:",o:[">75 cm",">80 cm",">85 cm",">88 cm"],a:3},
-{q:"Obesity increases risk of:",o:["Diabetes","Hypertension","Heart disease","All of the above"],a:3},
+/* ================= 41–50 ================= */
 
-/* 61–70 */
-{q:"Anthropometry deals with:",o:["Diet","Blood tests","Body measurements","Urine tests"],a:2},
-{q:"Height is measured using:",o:["Scale","Stadiometer","Tape","Caliper"],a:1},
-{q:"Skinfold thickness measures:",o:["Muscle","Bone","Body fat","Water"],a:2},
-{q:"Mid arm circumference assesses:",o:["Child nutrition","Adult height","BMI","Blood pressure"],a:0},
-{q:"Biochemical assessment includes:",o:["Height","Weight","Hemoglobin","Skinfold"],a:2},
-{q:"Low hemoglobin indicates:",o:["Obesity","Anemia","Diabetes","Dehydration"],a:1},
-{q:"Clinical assessment depends on:",o:["Lab tests","Physical signs","Diet history","BMI"],a:1},
-{q:"24-hour recall is used for:",o:["Dietary assessment","Biochemical","Anthropometry","Clinical"],a:0},
-{q:"Food frequency questionnaire assesses:",o:["Daily intake","Habitual intake","Blood level","Weight"],a:1},
-{q:"Direct nutritional assessment includes:",o:["Anthropometry","Mortality rate","Fertility index","Income"],a:0},
-/* 71–80 */
-{q:"Indirect assessment uses:",o:["Body measures","Community indices","Lab tests","Clinical signs"],a:1},
-{q:"Anemia is:",o:["Low hemoglobin","High sugar","Low calcium","High fat"],a:0},
-{q:"Osteoporosis is:",o:["Bone mass decrease","Bone infection","Vitamin C deficiency","Muscle loss"],a:0},
-{q:"Osteomalacia is related to deficiency of:",o:["Vitamin D","Vitamin C","Iron","Iodine"],a:0},
-{q:"Goiter results from deficiency of:",o:["Iron","Iodine","Calcium","Vitamin A"],a:1},
-{q:"Rickets is caused by deficiency of:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:2},
-{q:"Milk is important in food sanitation because:",o:["Consumed by all ages","Handled many times","Good medium for microbes","All of the above"],a:3},
-{q:"Boiling milk should exceed:",o:["50°C","60°C","70°C","100°C"],a:2},
-{q:"Insanitary meat shows:",o:["Bad smell","Color change","No stamp","All of the above"],a:3},
-{q:"Insanitary fish shows:",o:["Clear eyes","Firm flesh","Bad smell","Bright gills"],a:2},
+{
+t:"BRAT diet includes:",
+o:["Beans, Rice, Apples, Tea","Banana, Rice, Apple sauce, Toast","Bread, Rice, Apple, Tea","Banana, Roti, Apple, Tea"],
+a:1
+},
+{
+t:"For constipation, recommended intake includes:",
+o:["Low fluid","Low fiber","High fiber","High fat"],
+a:2
+},
+{
+t:"IBS patients should avoid:",
+o:["Water","Dietary fiber","Spicy food","Probiotics"],
+a:2
+},
+{
+t:"Hypertension diet includes:",
+o:["High sodium","DASH diet","High fat","Low potassium"],
+a:1
+},
+{
+t:"DASH diet is rich in:",
+o:["Sodium","Saturated fat","Potassium and fiber","Sugar"],
+a:2
+},
+{
+t:"Diabetes mellitus is characterized by:",
+o:["Low blood sugar","High blood sugar","Normal glucose","Low insulin always"],
+a:1
+},
+{
+t:"Preferred carbohydrates for diabetics are:",
+o:["Refined sugar","Simple carbs","Complex carbs","Sweets"],
+a:2
+},
+{
+t:"Low glycemic index foods cause:",
+o:["Rapid glucose rise","Slow glucose rise","No glucose","Hypoglycemia"],
+a:1
+},
+{
+t:"Protein requirement during illness is:",
+o:["Decreased","Stopped","Increased","Unchanged"],
+a:2
+},
+{
+t:"Parenteral nutrition is given when:",
+o:["Patient eats normally","GI tract is nonfunctional","Oral intake is adequate","Only for children"],
+a:1
+},
+/* ================= 51–150 ================= */
+{
+t:"Total Parenteral Nutrition (TPN) is administered via:",
+o:["Peripheral vein","Oral route","Central venous catheter","Nasogastric tube"],
+a:2
+},
+{
+t:"Peripheral Parenteral Nutrition (PPN) is usually:",
+o:["Long term","Short term","For children only","Complete nutrition"],
+a:1
+},
+{
+t:"Osmolarity of TPN is usually:",
+o:["<500 mOsm/L","<900 mOsm/L",">900 mOsm/L","<300 mOsm/L"],
+a:2
+},
+{
+t:"Main carbohydrate used in parenteral nutrition is:",
+o:["Fructose","Sucrose","Dextrose","Lactose"],
+a:2
+},
+{
+t:"One gram of fat provides:",
+o:["4 kcal","7 kcal","9 kcal","3.4 kcal"],
+a:2
+},
+{
+t:"Protein requirement in stressed patients is about:",
+o:["0.5 g/kg/day","1–2 g/kg/day","3–4 g/kg/day","0.2 g/kg/day"],
+a:1
+},
+{
+t:"Fat emulsion in PN should not exceed:",
+o:["10% of calories","20% of calories","30% of calories","50% of calories"],
+a:2
+},
+{
+t:"Hyperglycemia is a complication of excess:",
+o:["Protein","Fat","Dextrose","Water"],
+a:2
+},
+{
+t:"Refeeding syndrome is associated with low:",
+o:["Potassium","Sodium","Phosphorus","Calcium"],
+a:2
+},
+{
+t:"To prevent hypoglycemia, PN should be:",
+o:["Stopped suddenly","Increased rapidly","Tapered gradually","Given at night"],
+a:2
+},
 
-/* 81–100 */
-{q:"Nutrition assessment aims to:",o:["Diagnose disease","Identify malnutrition","Plan programs","All of the above"],a:3},
-{q:"Albumin indicates:",o:["Iron status","Protein status","Vitamin C","Fat"],a:1},
-{q:"Urinalysis detects:",o:["Protein","Sugar","Blood","All of the above"],a:3},
-{q:"Obesity is defined as excess:",o:["Water","Muscle","Fat","Protein"],a:2},
-{q:"Main cause of obesity:",o:["Infection","Energy imbalance","Vitamin deficiency","Genetics only"],a:1},
-{q:"Lifestyle modification includes:",o:["Diet","Exercise","Behavior change","All of the above"],a:3},
-{q:"Energy dense foods are high in:",o:["Fiber","Fat and sugar","Protein","Water"],a:1},
-{q:"Physical inactivity leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
-{q:"Psychological effect of obesity:",o:["Anemia","Depression","Blindness","Goiter"],a:1},
-{q:"Balanced diet includes:",o:["One nutrient","Two nutrients","All nutrients","Only vitamins"],a:2}
-,
-/* 101–110 */
-{q:"Macronutrients include:",o:["Vitamins and minerals","Proteins, fats and carbohydrates","Water only","Fiber only"],a:1},
-{q:"Micronutrients are required:",o:["In large amounts","In small amounts","Only in illness","Only in adults"],a:1},
-{q:"Overnutrition leads to:",o:["Wasting","Stunting","Obesity","Marasmus"],a:2},
-{q:"Undernutrition includes:",o:["Obesity","Overweight","Wasting","Hypertension"],a:2},
-{q:"Balanced diet means:",o:["High protein diet","All nutrients in proper amounts","Only vitamins","Only carbohydrates"],a:1},
-{q:"Energy-giving foods include:",o:["Milk and meat","Vegetables","Cereals and fats","Fruits only"],a:2},
-{q:"Body building foods include:",o:["Fruits","Vegetables","Milk and meat","Sugar"],a:2},
-{q:"Protective foods include:",o:["Cereals","Meat","Fruits and vegetables","Fats"],a:2},
-{q:"Food pyramid is used to:",o:["Increase weight","Guide healthy eating","Treat diseases","Preserve food"],a:1},
-{q:"Top of food pyramid contains:",o:["Cereals","Vegetables","Fats and sweets","Milk"],a:2},
-/* 111–120 */
-{q:"Malnutrition may be due to:",o:["Deficiency only","Excess only","Imbalance of nutrients","All of the above"],a:3},
-{q:"Anemia is caused mainly by deficiency of:",o:["Calcium","Iron","Vitamin A","Protein"],a:1},
-{q:"Scurvy results from deficiency of:",o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],a:2},
-{q:"Pellagra is caused by deficiency of:",o:["Niacin","Thiamine","Riboflavin","Folic acid"],a:0},
-{q:"Beriberi is due to deficiency of:",o:["Vitamin B1","Vitamin B2","Vitamin B6","Vitamin B12"],a:0},
-{q:"Night blindness is early sign of deficiency of:",o:["Vitamin A","Vitamin D","Vitamin C","Iron"],a:0},
-{q:"Osteomalacia occurs in:",o:["Children","Adults","Infants","Adolescents"],a:1},
-{q:"Vitamin D is obtained mainly from:",o:["Fruits","Milk only","Sunlight","Vegetables"],a:2},
-{q:"Fat soluble vitamins are stored in:",o:["Urine","Liver and fat","Blood","Muscles"],a:1},
-{q:"Water soluble vitamins are excreted in:",o:["Sweat","Urine","Bile","Feces"],a:1},
-/* 121–130 */
-{q:"Calcium deficiency leads to:",o:["Anemia","Osteoporosis","Scurvy","Goiter"],a:1},
-{q:"Iron is required for formation of:",o:["Insulin","Hemoglobin","Enzymes","Hormones"],a:1},
-{q:"Iodine deficiency in pregnancy may cause:",o:["Anemia","Cretinism","Rickets","Scurvy"],a:1},
-{q:"Magnesium deficiency causes:",o:["Convulsions","Blindness","Anemia","Goiter"],a:0},
-{q:"Excess sodium intake causes:",o:["Hypotension","Edema","Weight loss","Rickets"],a:1},
-{q:"Phosphorus is important for:",o:["Vision","Energy metabolism","Blood clotting","Digestion"],a:1},
-{q:"Trace minerals are required:",o:["In large amounts","In small amounts","Only in children","Only in pregnancy"],a:1},
-{q:"Fiber rich foods include:",o:["White bread","Whole grains","Butter","Meat"],a:1},
-{q:"Roughage helps in:",o:["Digestion","Energy production","Vitamin storage","Protein synthesis"],a:0},
-{q:"Water is essential because it:",o:["Provides energy","Removes waste","Builds tissue","Stores vitamins"],a:1},
-/* 131–140 */
-{q:"Nutritional assessment aims to identify:",o:["Diseases only","Malnutrition","Income level","Lifestyle"],a:1},
-{q:"Anthropometric method includes:",o:["BMI","Blood glucose","Hemoglobin","Urinalysis"],a:0},
-{q:"BMI is useful to assess:",o:["Anemia","Obesity","Vitamin deficiency","Infection"],a:1},
-{q:"Head circumference assesses:",o:["Nutrition only","Brain growth","Fat mass","Height"],a:1},
-{q:"Waist hip ratio assesses:",o:["Height","Fat distribution","Muscle strength","Bone mass"],a:1},
-{q:"Biochemical assessment includes:",o:["Height","Weight","Serum albumin","Skin fold"],a:2},
-{q:"Low serum albumin indicates:",o:["Fat deficiency","Protein deficiency","Iron deficiency","Vitamin C deficiency"],a:1},
-{q:"Clinical assessment includes:",o:["Physical signs","Blood tests","BMI","Diet history"],a:0},
-{q:"Dietary assessment includes:",o:["24-hour recall","Hemoglobin","BMI","Urine test"],a:0},
-{q:"Food frequency questionnaire measures:",o:["Blood sugar","Habitual intake","Weight","Height"],a:1},
-/* 141–150 */
-{q:"Obesity is defined as BMI more than:",o:["25","30","35","40"],a:1},
-{q:"Morbid obesity is BMI:",o:[">30",">35",">40",">45"],a:2},
-{q:"Major cause of obesity:",o:["Infection","Genetics only","Energy imbalance","Vitamin deficiency"],a:2},
-{q:"Energy dense foods are rich in:",o:["Fiber","Water","Fat and sugar","Protein"],a:2},
-{q:"Alcohol consumption:",o:["Reduces weight","Promotes weight gain","No effect","Treats obesity"],a:1},
-{q:"Physical inactivity leads to:",o:["Weight loss","Obesity","Anemia","Rickets"],a:1},
-{q:"Complication of obesity includes:",o:["Diabetes","Hypertension","Heart disease","All of the above"],a:3},
-{q:"Psychological effect of obesity:",o:["Blindness","Depression","Anemia","Goiter"],a:1},
-{q:"Obesity prevention depends on:",o:["Drugs only","Surgery","Lifestyle modification","Vitamins"],a:2},
-{q:"Healthy diet should be:",o:["High fat","Balanced","High sugar","Low fiber"],a:1},
+{
+t:"Main function of sodium in PN is:",
+o:["Bone health","Fluid balance","Energy","Immunity"],
+a:1
+},
+{
+t:"Potassium is essential for:",
+o:["Bone strength","Vision","Muscle and heart function","Blood clotting"],
+a:2
+},
+{
+t:"Calcium gluconate in PN is used for:",
+o:["Energy","Bone and cardiac contraction","Protein synthesis","Glucose control"],
+a:1
+},
+{
+t:"Water-soluble vitamins include:",
+o:["A, D, E","A, K","B-complex and C","D and E"],
+a:2
+},
+{
+t:"Fat-soluble vitamins include:",
+o:["B and C","A, D, E, K","B12 and folate","C only"],
+a:1
+},
+{
+t:"Average adult fluid requirement is:",
+o:["10–20 ml/kg/day","20–25 ml/kg/day","30–40 ml/kg/day","50–60 ml/kg/day"],
+a:2
+},
+{
+t:"PN solutions should be prepared under:",
+o:["Normal conditions","Laminar airflow","Room air","Open system"],
+a:1
+},
+{
+t:"Blood glucose monitoring during PN is done every:",
+o:["12 hours","24 hours","6 hours initially","Once daily"],
+a:2
+},
+{
+t:"Catheter site should be checked:",
+o:["Daily","Weekly","Every shift","Monthly"],
+a:2
+},
+{
+t:"A common infectious complication of PN is:",
+o:["UTI","Pneumonia","Catheter-related sepsis","Otitis media"],
+a:2
+},
 
-/* 151–200 (short direct revision) */
-{q:"Milk is good medium for:",o:["Viruses","Bacteria","Fungi","Parasites"],a:1},
-{q:"Milk sanitation requires boiling above:",o:["50°C","60°C","70°C","80°C"],a:2},
-{q:"Insanitary meat shows:",o:["Fresh color","Bad odor","Firm texture","Clean stamp"],a:1},
-{q:"Fish freshness is indicated by:",o:["Opaque eyes","Bad smell","Bright eyes","Soft flesh"],a:2},
-{q:"Nutrition improves:",o:["Learning","Productivity","Immunity","All of the above"],a:3}
-,
-/* 146–155 */
-{q:"The main function of carbohydrates is to:",o:["Build tissues","Provide energy","Regulate hormones","Store vitamins"],a:1},
-{q:"Protein requirement is higher in:",o:["Adults","Elderly","Children","All ages same"],a:2},
-{q:"Pregnant women need more:",o:["Protein","Iron","Calcium","All of the above"],a:3},
-{q:"Lactating women require increased:",o:["Energy only","Protein only","Water only","All nutrients"],a:3},
-{q:"Dietary fiber reduces risk of:",o:["Colon cancer","Anemia","Rickets","Goiter"],a:0},
-{q:"High fiber diet helps in:",o:["Constipation","Obesity","Diabetes","All of the above"],a:3},
-{q:"Simple sugars cause rapid increase in:",o:["Blood pressure","Blood glucose","Body fat","Hemoglobin"],a:1},
-{q:"Complex carbohydrates are found in:",o:["Fruits","Milk","Whole grains","Sugar"],a:2},
-{q:"Protein deficiency in children causes:",o:["Obesity","Kwashiorkor","Diabetes","Hypertension"],a:1},
-{q:"Animal foods are rich source of:",o:["Vitamin B12","Vitamin C","Fiber","Carbohydrates"],a:0},
+{
+t:"Obesity is defined when BMI is more than:",
+o:["25 kg/m²","27 kg/m²","30 kg/m²","35 kg/m²"],
+a:2
+},
+{
+t:"Overweight differs from obesity in that it refers to:",
+o:["Fat only","Excess body weight","Muscle loss","Edema"],
+a:1
+},
+{
+t:"Diabetes mellitus results from problem in:",
+o:["Protein metabolism","Fat metabolism","Insulin secretion or action","Vitamin absorption"],
+a:2
+},
+{
+t:"Type 1 diabetes is caused by:",
+o:["Insulin resistance","Autoimmune destruction of beta cells","Obesity","Pregnancy"],
+a:1
+},
+{
+t:"Type 2 diabetes management focuses on:",
+o:["High calorie diet","Weight control","High sugar intake","No exercise"],
+a:1
+},
+{
+t:"Gestational diabetes occurs during:",
+o:["Childhood","Adolescence","Pregnancy","Old age"],
+a:2
+},
+{
+t:"Recommended carbohydrate intake for diabetics is:",
+o:["10–20%","25–35%","45–60%","70–80%"],
+a:2
+},
+{
+t:"Low GI foods cause blood glucose to rise:",
+o:["Rapidly","Suddenly","Slowly","Unpredictably"],
+a:2
+},
+{
+t:"Protein intake in diabetic nephropathy should be:",
+o:["Increased","Stopped","Restricted","Ignored"],
+a:2
+},
+{
+t:"Best fat choice for diabetics is:",
+o:["Trans fat","Saturated fat","Unsaturated fat","Animal fat"],
+a:2
+},
 
-/* 156–165 */
-{q:"Plant foods are good sources of:",o:["Vitamin B12","Fiber","Cholesterol","Vitamin D"],a:1},
-{q:"Fat acts as insulation by:",o:["Reducing heat loss","Producing heat","Absorbing water","Storing glucose"],a:0},
-{q:"Fats give satiety because they:",o:["Digest quickly","Slow gastric emptying","Increase appetite","Reduce digestion"],a:1},
-{q:"Deficiency of essential fatty acids leads to:",o:["Skin lesions","Anemia","Rickets","Goiter"],a:0},
-{q:"Vitamin A is stored mainly in:",o:["Muscle","Liver","Kidney","Blood"],a:1},
-{q:"Vitamin D acts as:",o:["Enzyme","Hormone","Antioxidant","Mineral"],a:1},
-{q:"Vitamin K is synthesized by:",o:["Liver cells","Skin","Intestinal bacteria","Kidney"],a:2},
-{q:"Water soluble vitamins must be consumed:",o:["Weekly","Monthly","Daily","Yearly"],a:2},
-{q:"Excess fat soluble vitamins cause:",o:["Deficiency","Toxicity","Anemia","Dehydration"],a:1},
-{q:"Minerals required in large amounts are called:",o:["Trace elements","Micronutrients","Major minerals","Vitamins"],a:2},
+{
+t:"Fiber helps diabetics by:",
+o:["Raising glucose","Lowering cholesterol","Increasing appetite","Causing diarrhea"],
+a:1
+},
+{
+t:"One carbohydrate exchange equals:",
+o:["10 g carbs","12 g carbs","15 g carbs","20 g carbs"],
+a:2
+},
+{
+t:"Plate method includes:",
+o:["½ protein","½ vegetables","½ fat","½ carbohydrates"],
+a:1
+},
+{
+t:"HbA1c target for diabetics is usually:",
+o:["<10%","<9%","<7%","<5%"],
+a:2
+},
+{
+t:"Geriatrics deals with:",
+o:["Child nutrition","Adult nutrition","Diseases of aging","Pregnancy"],
+a:2
+},
+{
+t:"Poor appetite in elderly may be due to:",
+o:["Good health","Depression","High metabolism","Exercise"],
+a:1
+},
+{
+t:"Elderly malnutrition can be caused by:",
+o:["Good income","Excess food","Poor dentition","High education"],
+a:2
+},
+{
+t:"Chronic diseases increase malnutrition risk because of:",
+o:["Low immunity","Increased appetite","Altered requirements","Excess intake"],
+a:2
+},
+{
+t:"Food assistance programs for elderly aim to:",
+o:["Increase obesity","Prevent malnutrition","Reduce appetite","Increase sugar intake"],
+a:1
+},
+{
+t:"Antioxidants recommended for elderly include:",
+o:["Vitamin A only","Vitamin C and E","Iron only","Vitamin K"],
+a:1
+},
 
-/* 166–175 */
-{q:"Trace elements include:",o:["Calcium","Phosphorus","Iron","Sodium"],a:2},
-{q:"Calcium absorption is enhanced by:",o:["Vitamin A","Vitamin C","Vitamin D","Vitamin K"],a:2},
-{q:"Iron absorption is increased by:",o:["Milk","Tea","Vitamin C","Fiber"],a:2},
-{q:"Tea reduces iron absorption because it contains:",o:["Tannins","Fats","Proteins","Sugars"],a:0},
-{q:"Iodine is essential for synthesis of:",o:["Insulin","Thyroxine","Hemoglobin","Adrenaline"],a:1},
-{q:"Deficiency of iodine during pregnancy may cause:",o:["Rickets","Cretinism","Scurvy","Anemia"],a:1},
-{q:"Phosphorus deficiency affects:",o:["Vision","Energy metabolism","Blood clotting","Immunity"],a:1},
-{q:"Magnesium deficiency causes:",o:["Muscle tremors","Night blindness","Anemia","Goiter"],a:0},
-{q:"Sodium imbalance affects:",o:["Nerve function","Vision","Bone growth","Blood clotting"],a:0},
-{q:"Potassium is mainly intracellular electrolyte:",o:["True","False"],a:0},
+{
+t:"Vegetarians who consume dairy only are:",
+o:["Vegans","Ovo-vegetarians","Lacto-vegetarians","Lacto-ovo vegetarians"],
+a:2
+},
+{
+t:"Vegetarians who consume eggs only are:",
+o:["Vegans","Lacto-vegetarians","Ovo-vegetarians","Pescatarians"],
+a:2
+},
+{
+t:"Vegans consume:",
+o:["Eggs and milk","Milk only","Animal foods","No animal foods"],
+a:3
+},
+{
+t:"Clear liquid diet is:",
+o:["Highly nutritious","Low nutritive value","High protein","High fat"],
+a:1
+},
+{
+t:"Clear liquid diet includes:",
+o:["Milk","Eggs","Fruit juice without pulp","Meat"],
+a:2
+},
+{
+t:"Full liquid diet includes:",
+o:["Water only","Milk and yogurt","Solid food","Dry bread"],
+a:1
+},
+{
+t:"Full liquid diet is indicated after:",
+o:["Normal feeding","Facial surgery","Exercise","Obesity"],
+a:1
+},
+{
+t:"Therapeutic nutrition can be used as:",
+o:["Prevention only","Treatment only","Both prevention and treatment","Weight gain only"],
+a:2
+},
+{
+t:"GERD patients are advised to eat:",
+o:["Large meals","Late meals","Small frequent meals","High fat meals"],
+a:2
+},
+{
+t:"IBS management includes:",
+o:["No water","Food diary","High fat diet","Fasting"],
+a:1
+},
 
-/* 176–185 */
-{q:"Water loss without replacement leads to:",o:["Edema","Dehydration","Obesity","Anemia"],a:1},
-{q:"Water helps excretion of waste via:",o:["Sweat","Urine","Feces","All of the above"],a:3},
-{q:"Balanced diet should provide:",o:["Energy only","Protein only","All nutrients","Vitamins only"],a:2},
-{q:"Malnutrition affects:",o:["Growth","Immunity","Learning","All of the above"],a:3},
-{q:"Undernutrition in children leads to:",o:["Stunting","Wasting","Delayed development","All of the above"],a:3},
-{q:"Overnutrition mainly results in:",o:["Obesity","Anemia","Rickets","Scurvy"],a:0},
-{q:"BMI is a measure of:",o:["Body fat directly","Weight for height","Muscle mass","Bone density"],a:1},
-{q:"Skinfold thickness measures:",o:["Muscle mass","Bone mass","Subcutaneous fat","Water"],a:2},
-{q:"Waist circumference indicates:",o:["General obesity","Central obesity","Height","Muscle mass"],a:1},
-{q:"Waist–hip ratio assesses:",o:["Fat distribution","BMI","Height","Weight"],a:0},
+{
+t:"Hypertension diet should be low in:",
+o:["Potassium","Fiber","Sodium","Protein"],
+a:2
+},
+{
+t:"DASH diet helps in controlling:",
+o:["Diabetes","Cancer","Hypertension","Anemia"],
+a:2
+},
+{
+t:"Smoking cessation is important in:",
+o:["Healthy only","Chronic illness","Children","Pregnancy only"],
+a:1
+},
+{
+t:"Nutrition support in cancer aims to:",
+o:["Increase sugar intake","Reduce immunity","Support healing","Cause weight loss"],
+a:2
+},
+{
+t:"Protective foods against cancer include:",
+o:["Processed meat","Fruits and vegetables","Sugary drinks","Trans fats"],
+a:1
+},
+{
+t:"Omega-3 fatty acids help by:",
+o:["Increasing inflammation","Improving lipid profile","Raising glucose","Causing obesity"],
+a:1
+},
+{
+t:"Monitoring weight during PN helps assess:",
+o:["Infection","Fluid balance","Pain","Appetite"],
+a:1
+},
+{
+t:"Enteral feeding is preferred over PN because it:",
+o:["Is expensive","Maintains gut integrity","Is painful","Causes infection"],
+a:1
+},
+/* ================= 109–150 ================= */
 
-/* 186–200 */
-{q:"Clinical signs of malnutrition include:",o:["Hair changes","Skin changes","Edema","All of the above"],a:3},
-{q:"Anthropometric assessment is used to detect:",o:["Infections","Malnutrition","Vitamin toxicity","Hormonal disorders"],a:1},
-{q:"Biochemical tests provide:",o:["Subjective data","Objective data","Diet history","Physical signs"],a:1},
-{q:"Low serum albumin suggests:",o:["Iron deficiency","Protein deficiency","Vitamin C deficiency","Dehydration"],a:1},
-{q:"24-hour recall depends on:",o:["Memory","Lab tests","Physical exam","BMI"],a:0},
-{q:"Food frequency questionnaire assesses:",o:["Single day intake","Habitual diet","Blood nutrients","Weight change"],a:1},
-{q:"Main cause of obesity is:",o:["Infection","Hormonal disorders","Energy imbalance","Vitamin excess"],a:2},
-{q:"Prevention of obesity requires:",o:["Diet control","Physical activity","Behavior modification","All of the above"],a:3},
-{q:"Psychological complication of obesity includes:",o:["Depression","Blindness","Anemia","Rickets"],a:0},
-{q:"Good nutrition leads to:",o:["Better immunity","Better growth","Better productivity","All of the above"],a:3}
+{
+t:"Vulnerability in nutrition refers to:",
+o:["High immunity","Reduced physical reserve","High food intake","Normal health status"],
+a:1
+},
+{
+t:"Hazard is defined as:",
+o:["Disease only","Man-made event only","Natural or man-made extreme event","Hospital condition"],
+a:2
+},
+{
+t:"Disaster differs from hazard because it:",
+o:["Is mild","Is predictable","Exceeds community coping capacity","Affects one person"],
+a:2
+},
+{
+t:"IDPs are people who are:",
+o:["Refugees outside country","Migrants by choice","Forced to flee within their country","Tourists"],
+a:2
+},
+{
+t:"Which life stage is most affected by intrauterine nutrition?",
+o:["Adolescence","Elderly","Fetal stage","Adulthood"],
+a:2
+},
+{
+t:"Women of reproductive age are vulnerable mainly due to:",
+o:["Low activity","Monthly nutrient losses","High immunity","Low metabolism"],
+a:1
+},
+{
+t:"Food insecurity is mainly related to:",
+o:["Obesity","Poverty","Education","Climate only"],
+a:1
+},
+{
+t:"Cultural food taboos affect nutrition through:",
+o:["Genetics","Economic growth","Dietary restriction","Exercise"],
+a:2
+},
+{
+t:"Poor infrastructures mainly affect nutrition by:",
+o:["Increasing appetite","Limiting food access","Raising income","Improving health"],
+a:1
+},
+{
+t:"Parasites increase nutritional vulnerability by causing:",
+o:["Obesity","Malabsorption","High appetite","Hypertension"],
+a:1
+},
+
+{
+t:"Maternal anemia increases risk of:",
+o:["High birth weight","Low birth weight","Macrosomia","Post-term birth"],
+a:1
+},
+{
+t:"Smoking during pregnancy can lead to:",
+o:["Normal birth weight","Increased immunity","Low birth weight","Post-maturity"],
+a:2
+},
+{
+t:"Placental dysfunction mainly affects:",
+o:["Maternal appetite","Fetal growth","Maternal weight","Labor pain"],
+a:1
+},
+{
+t:"Preterm infants have higher nutrient needs because of:",
+o:["Large size","Rapid growth","Low metabolism","High reserves"],
+a:1
+},
+{
+t:"Main aim of feeding premature infants is to:",
+o:["Reduce appetite","Improve survival and growth","Delay development","Prevent feeding"],
+a:1
+},
+{
+t:"Early malnutrition in infancy leads to:",
+o:["Short-term effects only","No effect","Long-term health impact","Only obesity"],
+a:2
+},
+{
+t:"NICU nutritional care focuses mainly on:",
+o:["Weight loss","Vital organ development","Exercise","Immunization"],
+a:1
+},
+{
+t:"Cup feeding is suitable for infants who:",
+o:["Cannot swallow","Are clinically stable","Have infections","Are unconscious"],
+a:1
+},
+{
+t:"Enteral feeding via tube is used when:",
+o:["Infant is mature","Oral feeding is unsafe","Infant is obese","Breastfeeding is easy"],
+a:1
+},
+{
+t:"Exclusive breastfeeding for LBW infants is recommended until:",
+o:["3 months","4 months","6 months","12 months"],
+a:2
+},
+
+{
+t:"Women before pregnancy should:",
+o:["Diet strictly","Build nutrient reserves","Avoid supplements","Fast regularly"],
+a:1
+},
+{
+t:"Iron absorption is inhibited by intake of:",
+o:["Vitamin C","Meat","Tea and coffee","Fruits"],
+a:2
+},
+{
+t:"Daily iron requirement during pregnancy is:",
+o:["30 mg","40 mg","60 mg","90 mg"],
+a:2
+},
+{
+t:"Adolescents are nutritionally vulnerable due to:",
+o:["Low growth","Rapid growth","Low needs","Low activity"],
+a:1
+},
+{
+t:"Children are more prone to malnutrition due to:",
+o:["Strong immunity","High infection rate","Low needs","Good appetite"],
+a:1
+},
+{
+t:"Vitamin A deficiency increases risk of:",
+o:["Obesity","Blindness","Diabetes","Hypertension"],
+a:1
+},
+{
+t:"Severe acute malnutrition in children requires:",
+o:["Home diet only","No treatment","Special management","Exercise"],
+a:2
+},
+{
+t:"Chronic illness affects nutrition by:",
+o:["Reducing needs","Increasing metabolic demands","Stopping absorption","No effect"],
+a:1
+},
+{
+t:"Rheumatoid arthritis is a disease affecting mainly:",
+o:["Bones","Joints","Muscles","Nerves"],
+a:1
+},
+{
+t:"Osteoarthritis commonly affects joints of:",
+o:["Eyes","Hands and knees","Heart","Liver"],
+a:1
+},
+
+{
+t:"Elderly nutritional problems are worsened by:",
+o:["Good dentition","Social isolation","High income","Good appetite"],
+a:1
+},
+{
+t:"Loss of taste in elderly leads to:",
+o:["Better intake","Poor appetite","Weight gain","High immunity"],
+a:1
+},
+{
+t:"Polypharmacy affects nutrition by:",
+o:["Improving appetite","Altering taste and digestion","Increasing absorption","No effect"],
+a:1
+},
+{
+t:"Illness-related malnutrition is common in:",
+o:["Healthy adults","Cancer patients","Athletes","Children only"],
+a:1
+},
+{
+t:"Nutrition education programs for elderly aim to:",
+o:["Reduce intake","Promote healthy aging","Increase sugar","Cause weight gain"],
+a:1
+},
+{
+t:"Supplementary feeding programs target elderly who are:",
+o:["Obese","Resource poor","Athletes","Hospital staff"],
+a:1
+},
+{
+t:"Clear liquid diet is mainly used as:",
+o:["Long-term diet","Transition diet","High nutrition therapy","Weight loss plan"],
+a:1
+},
+{
+t:"Clear liquid diet provides mainly:",
+o:["Protein","Fat","Electrolytes","Fiber"],
+a:2
+},
+{
+t:"Full liquid diet differs from clear liquid by being:",
+o:["Less nutritious","More nutritious","Fiber rich","Fat free"],
+a:1
+},
+{
+t:"Vegetarian diets require careful planning to avoid deficiency of:",
+o:["Carbohydrates","Protein and B12","Water","Fiber"],
+a:1
+},
+{
+t:"Medical nutrition therapy aims to:",
+o:["Ignore disease","Support treatment","Replace drugs","Cause fasting"],
+a:1
+},
+{
+t:"Nutrition care in chronic disease focuses on:",
+o:["Cure only","Lifestyle modification","Surgery","Fasting"],
+a:1
+},
+/* ================= NEW 100 QUESTIONS ================= */
+{
+t:"Malnutrition is best described as:",
+o:["Lack of food only","Imbalance between nutrient intake and needs","Overeating only","Vitamin deficiency only"],
+a:1
+},
+{
+t:"Overnutrition refers to:",
+o:["Low calorie intake","Deficiency diseases","Excess intake of nutrients","Starvation"],
+a:2
+},
+{
+t:"Starvation results mainly from:",
+o:["Short-term fasting","Prolonged inadequate intake","High metabolism","Vitamin excess"],
+a:1
+},
+{
+t:"Which group is MOST vulnerable to nutritional deficiencies?",
+o:["Young adults","Elderly and children","Athletes","Office workers"],
+a:1
+},
+{
+t:"Protein-energy malnutrition (PEM) affects:",
+o:["Children only","Adults only","Both children and adults","Pregnant women only"],
+a:2
+},
+{
+t:"PEM in adults commonly presents with:",
+o:["Weight gain","Edema only","Muscle wasting","Obesity"],
+a:2
+},
+{
+t:"A major cause of PEM is:",
+o:["Adequate diet","Malabsorption","High vitamin intake","Low water intake"],
+a:1
+},
+{
+t:"Kwashiorkor differs from marasmus by presence of:",
+o:["Wasting","Edema","Low weight","Muscle loss"],
+a:1
+},
+{
+t:"Hair changes are typically seen in:",
+o:["Marasmus","Kwashiorkor","Rickets","Scurvy"],
+a:1
+},
+{
+t:"Marasmus usually occurs due to deficiency of:",
+o:["Protein only","Calories only","Protein and calories","Vitamins"],
+a:2
+},
+
+{
+t:"Nutritional anemia is caused by deficiency of:",
+o:["Iron only","Vitamin B12 only","Hemopoietic nutrients","Vitamin D"],
+a:2
+},
+{
+t:"Iron deficiency anemia is common in:",
+o:["Pregnant women","Athletes","Elderly men","Infants only"],
+a:0
+},
+{
+t:"Microcytic hypochromic anemia indicates deficiency of:",
+o:["Vitamin B12","Iron","Folate","Protein"],
+a:1
+},
+{
+t:"Hookworm infestation leads mainly to:",
+o:["Vitamin A deficiency","Protein deficiency","Iron deficiency","Calcium loss"],
+a:2
+},
+{
+t:"Serum iron level below _____ indicates iron deficiency:",
+o:["10 µg/dl","20 µg/dl","30 µg/dl","50 µg/dl"],
+a:2
+},
+{
+t:"Megaloblastic anemia is characterized by:",
+o:["Small RBCs","Large oval RBCs","Normal RBCs","Fragmented RBCs"],
+a:1
+},
+{
+t:"Vitamin B12 deficiency may cause:",
+o:["Night blindness","Neurological symptoms","Bone pain","Hair loss"],
+a:1
+},
+{
+t:"Folate deficiency is common during:",
+o:["Old age","Pregnancy","Infancy","Childhood"],
+a:1
+},
+{
+t:"Rickets mainly affects:",
+o:["Adults","Elderly","Infants and children","Pregnant women"],
+a:2
+},
+{
+t:"Craniotabes is a sign of:",
+o:["Scurvy","Rickets","Osteomalacia","Anemia"],
+a:1
+},
+
+{
+t:"Osteomalacia differs from rickets by affecting:",
+o:["Children","Infants","Adults","Newborns"],
+a:2
+},
+{
+t:"Vitamin D deficiency affects:",
+o:["Bones and muscles","Heart only","Liver only","Kidneys only"],
+a:0
+},
+{
+t:"Best natural source of vitamin D is:",
+o:["Milk","Vegetables","Sunlight","Meat"],
+a:2
+},
+{
+t:"Osteomalacia patients may present with:",
+o:["Bone pain","Obesity","Edema","Blindness"],
+a:0
+},
+{
+t:"Therapeutic nutrition aims to:",
+o:["Replace drugs","Support healing","Cause fasting","Increase weight only"],
+a:1
+},
+{
+t:"GERD dietary advice includes avoiding:",
+o:["Lean protein","Water","Chocolate","Fiber"],
+a:2
+},
+{
+t:"Constipation diet should be rich in:",
+o:["Protein","Fat","Fiber","Sugar"],
+a:2
+},
+{
+t:"Diarrhea management includes:",
+o:["Low fluid intake","High sugar intake","Fluid replacement","Fasting"],
+a:2
+},
+{
+t:"BRAT diet is useful in:",
+o:["Constipation","Diarrhea","GERD","Obesity"],
+a:1
+},
+{
+t:"IBS dietary management includes:",
+o:["Food diary","High fat intake","Low water intake","Fasting"],
+a:0
+},
+
+{
+t:"Hypertension nutrition management includes:",
+o:["High sodium","DASH diet","High sugar","Low potassium"],
+a:1
+},
+{
+t:"DASH diet is low in:",
+o:["Fiber","Potassium","Sodium","Protein"],
+a:2
+},
+{
+t:"Coronary heart disease diet limits:",
+o:["Vegetables","Whole grains","Saturated fats","Fish"],
+a:2
+},
+{
+t:"Omega-3 fatty acids are beneficial for:",
+o:["Inflammation","Heart health","Obesity","Hyperglycemia"],
+a:1
+},
+{
+t:"Diabetic diet should emphasize:",
+o:["Refined carbs","Complex carbs","Sugary drinks","Trans fats"],
+a:1
+},
+{
+t:"Carbohydrate counting helps in:",
+o:["Weight gain","Blood glucose control","Protein intake","Fat digestion"],
+a:1
+},
+{
+t:"One carb exchange equals:",
+o:["10 g","12 g","15 g","20 g"],
+a:2
+},
+{
+t:"Low glycemic index foods cause glucose rise:",
+o:["Rapid","Sudden","Slow","Uncontrolled"],
+a:2
+},
+{
+t:"Fiber intake helps reduce:",
+o:["Blood glucose","Cholesterol","Both","Neither"],
+a:2
+},
+{
+t:"Protein intake in illness is usually:",
+o:["Decreased","Stopped","Increased","Unchanged"],
+a:2
+},
+
+{
+t:"Cancer patients benefit nutritionally from:",
+o:["High sugar intake","Adequate protein","Fasting","Low fluid intake"],
+a:1
+},
+{
+t:"Chemoprevention refers to:",
+o:["Cancer treatment","Use of agents to reduce cancer risk","Radiotherapy","Surgery"],
+a:1
+},
+{
+t:"Protective foods against cancer include:",
+o:["Processed foods","Fruits and vegetables","Sugary drinks","Trans fats"],
+a:1
+},
+{
+t:"Vegetarian diets may lack:",
+o:["Carbohydrates","Vitamin B12","Fiber","Vitamin C"],
+a:1
+},
+{
+t:"Vegans consume:",
+o:["Milk","Eggs","Fish","No animal foods"],
+a:3
+},
+{
+t:"Clear liquid diet is used mainly:",
+o:["Long term","As transition","For obesity","For athletes"],
+a:1
+},
+{
+t:"Clear liquid diet provides mainly:",
+o:["Protein","Electrolytes","Fat","Fiber"],
+a:1
+},
+{
+t:"Full liquid diet includes:",
+o:["Water only","Milk and yogurt","Solid food","Dry bread"],
+a:1
+},
+{
+t:"Parenteral nutrition is indicated when:",
+o:["Oral intake adequate","GI tract nonfunctional","Patient is obese","Short fasting"],
+a:1
+},
+{
+t:"Enteral feeding is preferred because it:",
+o:["Is cheaper","Maintains gut function","Causes infection","Is painful"],
+a:1
+},
+
+{
+t:"Elderly malnutrition may result from:",
+o:["Good appetite","Poor dentition","High income","Good health"],
+a:1
+},
+{
+t:"Social isolation in elderly leads to:",
+o:["Better intake","Poor nutrition","Weight gain","High immunity"],
+a:1
+},
+{
+t:"Polypharmacy affects nutrition by:",
+o:["Improving appetite","Altering digestion","Increasing absorption","No effect"],
+a:1
+},
+{
+t:"Chronic illness increases nutritional risk due to:",
+o:["Low needs","Altered metabolism","High intake","Good appetite"],
+a:1
+},
+{
+t:"Nutrition education for elderly aims to:",
+o:["Reduce intake","Promote healthy aging","Increase sugar","Cause obesity"],
+a:1
+},
+{
+t:"Food insecurity mainly results from:",
+o:["Overeating","Poverty","Exercise","Education"],
+a:1
+},
+{
+t:"Children are vulnerable nutritionally because of:",
+o:["Low growth","High nutrient needs","Low immunity","Low appetite"],
+a:1
+},
+{
+t:"Vitamin A deficiency increases risk of:",
+o:["Hypertension","Blindness","Diabetes","Cancer"],
+a:1
+},
+{
+t:"Severe acute malnutrition requires:",
+o:["No treatment","Special management","Home diet only","Exercise"],
+a:1
+},
+{
+t:"Lifestyle modification is essential in managing:",
+o:["Acute illness","Chronic disease","Trauma","Infection only"],
+a:1
+}
 ];
-// تحويل q إلى t (عشان العرض)
-questions.forEach(q => q.t = q.q);
-
 // تعريف المتغيرات الناقصة
 let i = 0;
 let correct = 0;
 let wrong = 0;
 let answers = [];
 let wrongSet = [];
+
 /* ===== Timer ===== */
-let totalTime=60*60, timeLeft=totalTime;
+let totalTime=120*60, timeLeft=totalTime;
 const timerInt=setInterval(()=>{
   timeLeft--;
   let m=Math.floor(timeLeft/60), s=timeLeft%60;
@@ -561,8 +1403,8 @@ function finishExam(){
     report+=`
       <div class="report ${ok?"correct":"wrong"}">
         <b>${q.t}</b><br>
-        إجابتك: ${q.o[answers[idx]]}<br>
-        الصح: ${q.o[q.a]}
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
       </div>`;
   });
 
