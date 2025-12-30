@@ -185,7 +185,8 @@ button{
   0%{transform:scale(.6);opacity:0}
   100%{transform:scale(1);opacity:1}
 }
-  /* Report */
+
+/* Report */
 .report{
   background:var(--card);
   padding:14px;
@@ -266,7 +267,8 @@ let questions = [
 {t:"Vitamin C is important for:",o:["Blood clotting","Connective tissue formation","Vision","Calcium absorption"],a:1},
 {t:"Water soluble vitamins include:",o:["A and D","E and K","B complex and C","A and C"],a:2},
 {t:"Which vitamin prevents pernicious anemia?",o:["Vitamin B1","Vitamin B6","Vitamin B12","Vitamin C"],a:2},
-  {t:"Mid-upper arm circumference is used to assess:",o:["Obesity","Anemia","Malnutrition","Diabetes"],a:2},
+
+{t:"Mid-upper arm circumference is used to assess:",o:["Obesity","Anemia","Malnutrition","Diabetes"],a:2},
 {t:"Skin fold thickness measures:",o:["Muscle mass","Bone density","Body fat","Water content"],a:2},
 {t:"Parenteral nutrition means:",o:["Feeding by mouth","Tube feeding","IV nutrition","Rectal feeding"],a:2},
 {t:"Enteral nutrition is feeding through:",o:["Vein","Muscle","GIT","Skin"],a:2},
@@ -308,7 +310,8 @@ let questions = [
 {t:"Morbid obesity is BMI more than:",o:["30","35","40","45"],a:2},
 {t:"Obesity increases risk of all EXCEPT:",o:["Diabetes","Hypertension","Cancer","Rickets"],a:3},
 {t:"Behavior modification is important in obesity management because:",o:["Short term effect","Long term lifestyle change","Medication only","Surgery only"],a:1},
-  {t:"Pregnant women need increased intake of:",o:["Protein","Iron","Calcium","All of the above"],a:3},
+
+{t:"Pregnant women need increased intake of:",o:["Protein","Iron","Calcium","All of the above"],a:3},
 {t:"Low birth weight is less than:",o:["1.5 kg","2 kg","2.5 kg","3 kg"],a:2},
 {t:"Elderly malnutrition is often due to:",o:["High appetite","Poor dentition","High metabolism","High activity"],a:1},
 {t:"Children under five are prone to malnutrition due to:",o:["Slow growth","High nutritional needs","Low activity","Low immunity"],a:1},
@@ -340,9 +343,9 @@ let totalTime=120*60, timeLeft=totalTime;
 const timerInt=setInterval(()=>{
   timeLeft--;
   let m=Math.floor(timeLeft/60), s=timeLeft%60;
-  timer.innerText=${m}:${s<10?"0":""}${s};
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
   let deg=(timeLeft/totalTime)*360;
-  timer.style.background=conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg);
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
   if(timeLeft<=0){clearInterval(timerInt);finishExam();}
 },1000);
 
@@ -350,7 +353,7 @@ const timerInt=setInterval(()=>{
 function updateTop(){
   let total=questions.length;
   let answered=correct+wrong;
-  progressText.innerText=سؤال ${i+1} من ${total};
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
   progressBar.style.width=((i+1)/total*100)+"%";
   correctCount.innerText=correct;
   wrongCount.innerText=wrong;
@@ -411,6 +414,7 @@ function finishExam(){
     document.documentElement.style.setProperty("--brand1","#fb923c");
     document.documentElement.style.setProperty("--brand2","#fed7aa");
   }
+
   wrongSet=[];
   let report="";
   questions.forEach((q,idx)=>{
@@ -428,7 +432,7 @@ function finishExam(){
     <div class="card">
       <h3>📋 تقريرك</h3>
       ${report}
-      ${wrongSet.length?<button onclick="retry()">إعادة حل الغلط فقط</button>:"<p>أنت ممتاز 👑</p>"}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
     </div>`;
 }
 
