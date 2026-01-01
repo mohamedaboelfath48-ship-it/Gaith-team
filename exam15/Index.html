@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Directing عمو غيث</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap");
+
+    :root {
+      --bg: #0e1726;
+      --card: #10263a;
+      --primary: #6fe7c5;
+      --accent-1: #6fe7c5;
+      --accent-2: #ffc96b;
+      --accent-3: #9fb4ff;
+      --accent-4: #ff7f9f;
+      --text: #f5fbff;
+      --muted: #b9c8d7;
+      --border: rgba(111, 231, 197, 0.35);
+      --shadow: 0 20px 48px rgba(8, 12, 24, 0.55);
+      --radius-xl: 22px;
+      --radius-pill: 999px;
+      --transition: 0.2s ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 12% 10%, #1a3b5a 0, #0e1726 40%, #0b111d 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 32px 14px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .shell { width: 100%; max-width: 1280px; margin: auto; }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .title-block { flex: 1 1 320px; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(111, 231, 197, 0.1);
+      border: 1px solid rgba(111, 231, 197, 0.35);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+      box-shadow: 0 0 0 6px rgba(255, 201, 107, 0.15);
+    }
+
+    h1 {
+      margin-top: 8px;
+      font-size: 30px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+      min-width: 280px;
+      align-items: start;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(16, 38, 58, 0.82);
+      border: 1px solid rgba(159, 180, 255, 0.35);
+      color: var(--muted);
+      font-size: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .legend-color { width: 16px; height: 8px; border-radius: var(--radius-pill); }
+    .bg-a1 { background: linear-gradient(90deg, #6fe7c5, #3dc6ac); }
+    .bg-a2 { background: linear-gradient(90deg, #ffc96b, #f49b3f); }
+    .bg-a3 { background: linear-gradient(90deg, #9fb4ff, #647dff); }
+    .bg-a4 { background: linear-gradient(90deg, #ff7f9f, #ff5b7a); }
+    .bg-a5 { background: linear-gradient(90deg, #7de0ff, #3fb7ff); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 24px 20px 22px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto -80px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(111, 231, 197, 0.16), transparent 60%);
+      filter: blur(3px);
+      z-index: 0;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -90px auto;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 127, 159, 0.16), transparent 60%);
+      filter: blur(3px);
+      z-index: 0;
+    }
+
+    .center {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .center .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 18px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #6fe7c5, #3fb7ff);
+      color: #0c1424;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 24px rgba(63, 183, 255, 0.35);
+    }
+    .center h2 { margin-top: 10px; font-size: 26px; font-weight: 800; }
+    .center p { margin-top: 6px; font-size: 14px; color: var(--muted); }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 1px solid rgba(159, 180, 255, 0.5);
+      background: rgba(16, 38, 58, 0.8);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(159, 180, 255, 0.8);
+      background: rgba(24, 57, 82, 0.95);
+      box-shadow: 0 8px 16px rgba(8, 12, 24, 0.35);
+    }
+
+    .grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .branch {
+      border-radius: 18px;
+      padding: 14px 14px;
+      background: rgba(18, 45, 64, 0.95);
+      border: 1px solid rgba(159, 180, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+      cursor: default;
+    }
+    .branch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+      border-color: rgba(159, 180, 255, 0.45);
+      background: rgba(22, 54, 78, 0.98);
+    }
+
+    .branch-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 40px;
+    }
+    .pill-num {
+      min-width: 28px; height: 28px;
+      border-radius: var(--radius-pill);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; color: #0c1424;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    }
+    .pill-num.a1 { background: linear-gradient(135deg, #6fe7c5, #3dc6ac); }
+    .pill-num.a2 { background: linear-gradient(135deg, #ffc96b, #f49b3f); }
+    .pill-num.a3 { background: linear-gradient(135deg, #9fb4ff, #647dff); }
+    .pill-num.a4 { background: linear-gradient(135deg, #ff7f9f, #ff5b7a); }
+    .pill-num.a5 { background: linear-gradient(135deg, #7de0ff, #3fb7ff); }
+
+    .branch-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .branch-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      border: 1px dashed rgba(185, 200, 215, 0.3);
+    }
+    .branch-toggle {
+      margin-left: auto;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(185, 200, 215, 0.2);
+      padding: 5px 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      transition: background var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .branch-toggle:hover { background: rgba(255, 255, 255, 0.07); transform: translateY(-1px); border-color: rgba(111, 231, 197, 0.35); }
+    .branch-toggle span { display: inline-block; transform-origin: center; transition: transform 0.18s ease-out; }
+    .branch.open .branch-toggle span { transform: rotate(90deg); }
+
+    .branch-body {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(185, 200, 215, 0.25);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: max-height 0.24s ease-out, opacity 0.24s ease-out, transform 0.24s ease-out;
+      overflow: hidden;
+    }
+    .branch.open .branch-body {
+      max-height: none;
+      opacity: 1;
+      transform: translateY(0);
+      overflow: visible;
+    }
+    .branch-body p { margin-bottom: 6px; }
+    .branch-body ul { list-style: none; padding-left: 0; margin: 6px 0 2px; }
+    .branch-body li { position: relative; padding-left: 16px; margin: 2px 0; }
+    .branch-body li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 9px;
+      width: 8px; height: 8px; border-radius: 12px;
+      background: linear-gradient(135deg, #6fe7c5, #3fb7ff);
+      opacity: 0.7;
+    }
+    .subsection-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 6px;
+      margin-bottom: 4px;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+    }
+    .hi-core { background: rgba(111, 231, 197, 0.16); border-color: rgba(111, 231, 197, 0.35); color: #6fe7c5; }
+    .hi-important { background: rgba(255, 201, 107, 0.16); border-color: rgba(255, 201, 107, 0.35); color: #ffc96b; }
+    .hi-tech { background: rgba(159, 180, 255, 0.16); border-color: rgba(159, 180, 255, 0.35); color: #9fb4ff; }
+    .hi-exam { background: rgba(255, 127, 159, 0.16); border-color: rgba(255, 127, 159, 0.35); color: #ff7f9f; }
+
+    @media (max-width: 768px) {
+      body { padding: 20px 10px 24px; }
+      .card { padding: 18px 13px 18px; }
+      h1 { font-size: 24px; }
+      .center h2 { font-size: 20px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="title-block">
+       <section class="center">
+        <div class="pill"><span class="dot"></span> عمو غيث</div>
+        <h1>Directing </h1>   
+ 
+        <p class="subtitle">
+         <section class="center">
+صلي علي رسول الله  وإستعن بالله ولا تعجز 
+    <main class="card">
+      <section class="center">
+   
+        <h2>Directing</h2>
+        <p>Heart of management: instructing, guiding, motivating, supervising to achieve goals.</p>
+      </section>
+
+      <div class="toolbar">
+        <button class="btn" type="button" id="expand-all">Expand all</button>
+        <button class="btn" type="button" id="collapse-all">Collapse all</button>
+      </div>
+
+      <section class="grid">
+
+        <article class="branch open">
+          <div class="branch-header">
+            <div class="pill-num a1">1</div>
+            <div class="branch-title">
+              What is Directing?
+              <span class="branch-label">Definition</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <p class="subsection-title">Meaning</p>
+            <ul>
+              <li><span class="highlight hi-core">Core management function</span> alongside planning, organizing, staffing, controlling.</li>
+              <li>Instructing, guiding, communicating, inspiring to achieve objectives.</li>
+              <li>Superior-subordinate flow: starts at top, continues to frontline; continuous at all levels.</li>
+              <li>In nursing: creating work climate, motivating, supervising, scheduling, counseling, disciplining.</li>
+            </ul>
+            <p class="subsection-title">Forms</p>
+            <ul>
+              <li><span class="highlight hi-exam">Oral</span> directions.</li>
+              <li><span class="highlight hi-exam">Written</span> directions: clear, auditable, simultaneous to all, reduces misunderstanding.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="branch open">
+          <div class="branch-header">
+            <div class="pill-num a2">2</div>
+            <div class="branch-title">
+              Why it Matters
+              <span class="branch-label">Importance</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <p class="subsection-title">Essentials</p>
+            <ul>
+              <li><span class="highlight hi-important">Initiates action</span>: employees cannot start without clear directions.</li>
+              <li><span class="highlight hi-important">Coordinates</span> many workers and tasks.</li>
+              <li><span class="highlight hi-important">Motivates</span> and builds belonging.</li>
+              <li>Helps adapt to change; maintains balance via promotion, rewards, cooperation.</li>
+              <li>Aligns staff to organizational goals; maximizes outcomes by using capabilities.</li>
+              <li>Keeps supervision, motivation, leadership, communication effective.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="branch open">
+          <div class="branch-header">
+            <div class="pill-num a4">3</div>
+            <div class="branch-title">
+              Principles to Remember
+              <span class="branch-label">Principles</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <ul>
+              <li><span class="highlight hi-exam">Direct objectives</span>: communicate and motivate for best performance.</li>
+              <li><span class="highlight hi-exam">Harmony of objectives</span>: align personal and group interests.</li>
+              <li><span class="highlight hi-exam">Managerial communication</span>: keep channels open; manager is key medium.</li>
+              <li><span class="highlight hi-exam">Comprehension</span>: ensure receiver truly understands.</li>
+              <li><span class="highlight hi-exam">Follow through</span>: monitor enforcement of policies and directions.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="branch">
+          <div class="branch-header">
+            <div class="pill-num a3">4</div>
+            <div class="branch-title">
+              Techniques of Direction
+              <span class="branch-label">How</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <p class="subsection-title">Consultative</p>
+            <ul>
+              <li>Exec consults subordinates before deciding.</li>
+              <li><span class="highlight hi-tech">Pros</span>: participation, better communication, low resistance, uses experience, better morale and coordination.</li>
+              <li><span class="highlight hi-tech">Cons</span>: time consuming; may raise expectations; can trigger arguments.</li>
+            </ul>
+            <p class="subsection-title">Free-rein</p>
+            <ul>
+              <li>Empowers subordinate initiative and solutions; often fastest results with skilled staff.</li>
+            </ul>
+            <p class="subsection-title">Automatic (Directive)</p>
+            <ul>
+              <li>Manager gives clear, precise orders with detail on what and how.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="branch">
+          <div class="branch-header">
+            <div class="pill-num a5">5</div>
+            <div class="branch-title">
+              Characteristics
+              <span class="branch-label">Nature</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <ul>
+              <li><span class="highlight hi-exam">Pervasive</span>: needed at all levels.</li>
+              <li>Continuous: daily across the org.</li>
+              <li>Human-focused: deals with complex, unpredictable behavior.</li>
+              <li>Creative: turns plans into performance.</li>
+              <li>Executive and delegated: every manager directs; conditioning behavior toward goals.</li>
+              <li>Top-down flow: starts at top, moves through hierarchy.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="branch">
+          <div class="branch-header">
+            <div class="pill-num a2">6</div>
+            <div class="branch-title">
+              Elements (Key Actions)
+              <span class="branch-label">Execution</span>
+            </div>
+            <button class="branch-toggle" type="button" aria-label="toggle"><span>&rsaquo;</span></button>
+          </div>
+          <div class="branch-body">
+            <p class="subsection-title">Giving orders</p>
+            <ul>
+              <li><span class="highlight hi-important">Clarity</span>: clear, concise, enough info; explain reasons when possible.</li>
+              <li>Match to situation needs; tone and delivery matter for acceptance.</li>
+            </ul>
+            <p class="subsection-title">Supervision</p>
+            <ul>
+              <li>Guiding and overseeing work and behavior to meet outputs.</li>
+              <li>Includes training, discipline, follow-up to ensure prompt, accurate completion.</li>
+            </ul>
+            <p class="subsection-title">Motivation, leadership, communication</p>
+            <ul>
+              <li>Maintain effective channels; motivate toward goals; lead by example.</li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const branches = Array.from(document.querySelectorAll(".branch"));
+
+    branches.forEach(function (branch) {
+      const header = branch.querySelector(".branch-header");
+      const toggleBtn = branch.querySelector(".branch-toggle");
+
+      function toggle() { branch.classList.toggle("open"); }
+
+      if (header) {
+        header.addEventListener("click", function (e) {
+          if (e.target.closest(".branch-toggle")) return;
+          toggle();
+        });
+      }
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          toggle();
+        });
+      }
+    });
+
+    const expandAllBtn = document.getElementById("expand-all");
+    const collapseAllBtn = document.getElementById("collapse-all");
+
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener("click", function () {
+        branches.forEach(function (branch) { branch.classList.add("open"); });
+      });
+    }
+    if (collapseAllBtn) {
+      collapseAllBtn.addEventListener("click", function () {
+        branches.forEach(function (branch) { branch.classList.remove("open"); });
+      });
+    }
+  </script>
+</body>
+  </html>
+  
