@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+{t:"Directing is considered the heart of management process because it:",o:["Ends the management process","Initiates action in the organization","Deals only with planning","Focuses only on staffing"],a:1},
+{t:"Directing mainly focuses on:",o:["Material resources","Financial control","Human resources","Physical facilities"],a:2},
+{t:"Directing refers to:",o:["Planning future goals","Guiding and motivating staff to achieve goals","Recruiting employees","Evaluating performance only"],a:1},
+{t:"Directing is a ______ process.",o:["Temporary","Continuous","Short-term","Occasional"],a:1},
+{t:"Directing starts at the ______ level of management.",o:["Supervisory","Middle","Lower","Top"],a:3},
+
+{t:"One of the essentials of directing is:",o:["It stops work","It delays action","It initiates action","It replaces planning"],a:2},
+{t:"Directing helps coordination among employees by:",o:["Ignoring supervision","Encouraging competition","Guiding employees in task performance","Reducing communication"],a:2},
+{t:"Motivation in directing helps employees to:",o:["Avoid responsibility","Work with dedication","Resist authority","Ignore goals"],a:1},
+{t:"Directing helps employees cope with organizational changes by:",o:["Avoiding training","Improving adaptability","Reducing communication","Limiting supervision"],a:1},
+{t:"One advantage of written directions is:",o:["They are unclear","They increase misunderstanding","They can be referred to later","They waste time"],a:2},
+
+{t:"Written directions are better because they:",o:["Are emotional","Reduce accountability","Minimize duplication of effort","Confuse subordinates"],a:2},
+{t:"Harmony of objectives means:",o:["Conflict between goals","Employee goals contradict group goals","Employee goals align with group goals","Ignoring organizational goals"],a:2},
+{t:"Follow through in directing means:",o:["Ignoring results","Monitoring implementation of directions","Issuing orders only","Stopping supervision"],a:1},
+{t:"Consultative direction involves:",o:["No employee participation","Manager decides alone","Subordinates consulted before decision","Strict supervision only"],a:2},
+{t:"One disadvantage of consultative direction is:",o:["Better morale","Time consuming","Better coordination","Less resistance"],a:1},
+
+{t:"Free rein direction encourages subordinates to:",o:["Avoid responsibility","Depend totally on manager","Use initiative and creativity","Ignore objectives"],a:2},
+{t:"Automatic direction is characterized by:",o:["Vague orders","Indirect communication","Clear and precise orders","Employee freedom only"],a:2},
+{t:"Directing is called a pervasive function because:",o:["It is limited to top managers","It is used only in hospitals","It is required at all levels","It is optional"],a:2},
+{t:"Directing is related to human factor because:",o:["Machines need direction","Human behavior is predictable","Human behavior is complex","It ignores motivation"],a:2},
+{t:"Directing converts plans into:",o:["Ideas","Policies","Performance","Reports"],a:2},
+
+{t:"Giving orders is considered:",o:["A minor task","The central task of directing","Unimportant","Only clerical work"],a:1},
+{t:"An effective order should be:",o:["Long and complex","Clear and concise","Emotional","Harsh"],a:1},
+{t:"Supervision mainly focuses on:",o:["Punishment","Guiding and overseeing work","Ignoring staff","Planning only"],a:1},
+{t:"Motivation is defined as:",o:["Force that discourages work","Something that moves a person to action","Control technique","Reward system only"],a:1},
+{t:"Motivation helps organizations by:",o:["Increasing absenteeism","Reducing productivity","Reducing turnover","Increasing resistance"],a:2},
+
+{t:"Leadership is the ability to:",o:["Control resources","Inspire and influence others","Punish subordinates","Issue orders only"],a:1},
+{t:"Democratic leadership style emphasizes:",o:["Strict control","Employee participation","Fear","Authority only"],a:1},
+{t:"Communication means:",o:["Ignoring feedback","Transfer of information","Issuing orders only","Listening only"],a:1},
+{t:"One importance of communication is:",o:["Creating confusion","Improving coordination","Reducing morale","Limiting authority"],a:1},
+{t:"Controlling is defined as:",o:["Planning future goals","Regulation of activities according to plan","Recruitment process","Motivation technique"],a:1},
+
+{t:"Controlling helps management by:",o:["Ignoring errors","Detecting deviations","Increasing risks","Reducing standards"],a:1},
+{t:"The first step in control process is:",o:["Measure performance","Take corrective action","Establish objectives and standards","Compare results"],a:2},
+{t:"A standard in controlling is:",o:["A punishment tool","Benchmark for performance","Employee benefit","Policy statement"],a:1},
+{t:"Input standards measure:",o:["Results only","Work efforts","Profits","Time only"],a:1},
+{t:"Output standards measure:",o:["Employee attitude","Performance results","Planning efficiency","Leadership style"],a:1},
+
+{t:"Measuring actual performance is important because:",o:["Control is possible without it","It identifies deviations","It delays action","It increases confusion"],a:1},
+{t:"Management by exception focuses on:",o:["Minor issues","Major deviations","Daily routine work","Ignoring performance"],a:1},
+{t:"Feedback control occurs:",o:["Before activity","During activity","After activity","Instead of activity"],a:2},
+{t:"Effective control should be:",o:["Rigid","Costly","Flexible","Delayed"],a:2},
+{t:"One role of control is:",o:["Creating uncertainty","Detecting irregularities","Avoiding planning","Ignoring results"],a:1},
+{t:"Controlling is considered a function of:",o:["Top management only","Middle management only","All managers at all levels","Supervisors only"],a:2},
+{t:"Control is concerned with ensuring that:",o:["Wrong things happen","Right things happen at right time","Employees work independently","Plans are ignored"],a:1},
+{t:"Comparing actual performance with standards helps to:",o:["Ignore deviations","Identify need for action","Stop work","Reduce standards"],a:1},
+{t:"Corrective action in control process aims to:",o:["Punish employees","Improve performance","Stop supervision","Cancel planning"],a:1},
+{t:"Input standards mainly focus on:",o:["End results","Work efforts and resources","Employee satisfaction","Leadership style"],a:1},
+
+{t:"Output standards focus on:",o:["Quantity and quality of results","Employee motivation","Planning efficiency","Staffing"],a:0},
+{t:"Benchmarking is used to:",o:["Ignore competitors","Compare performance","Increase workload","Reduce communication"],a:1},
+{t:"Control without measurement is:",o:["Effective","Impossible","Recommended","Optional"],a:1},
+{t:"Management by exception saves managers’ time by:",o:["Focusing on all activities","Focusing on major deviations","Ignoring standards","Delaying decisions"],a:1},
+{t:"An opportunity exception means performance is:",o:["Below standard","At standard","Above standard","Unmeasured"],a:2},
+
+{t:"Effective control should be understandable because:",o:["Employees dislike control","It encourages acceptance","It reduces responsibility","It delays action"],a:1},
+{t:"Preliminary control takes place:",o:["After activity","Before activity","During activity","Instead of activity"],a:1},
+{t:"Concurrent control is also called:",o:["Feedback control","Steering control","Post-action control","External control"],a:1},
+{t:"Feedback control mainly focuses on:",o:["Inputs","Activities","End results","Planning"],a:2},
+{t:"Internal control depends mainly on:",o:["Supervision","Self-control","Punishment","External authority"],a:1},
+
+{t:"External control includes:",o:["Self-monitoring","Personal supervision","Motivation only","Leadership style"],a:1},
+{t:"One importance of control is:",o:["Makes delegation difficult","Facilitates goal achievement","Eliminates planning","Stops motivation"],a:1},
+{t:"Role of control includes:",o:["Ignoring uncertainty","Coping with uncertainty","Avoiding problems","Delaying decisions"],a:1},
+{t:"Management process control includes:",o:["Organizational culture","Employee discipline only","Profitability","Liquidity"],a:0},
+{t:"Progressive discipline aims to:",o:["Punish immediately","Achieve compliance gradually","Ignore behavior","Reward misconduct"],a:1},
+
+{t:"Decision making is defined as:",o:["Avoiding problems","Choosing a course of action","Solving conflicts only","Implementing orders"],a:1},
+{t:"Problem solving is considered:",o:["Separate from decision making","Part of decision making","Opposite of planning","Unnecessary"],a:1},
+{t:"Traditional problem-solving model includes:",o:["Five steps","Six steps","Seven steps","Eight steps"],a:2},
+{t:"Decision making occurs at which step of traditional model?",o:["Identifying problem","Evaluating alternatives","Selecting solution","Implementing solution"],a:2},
+{t:"The first step in problem solving is:",o:["Selecting solution","Identifying problem","Evaluating results","Implementing decision"],a:1},
+
+{t:"Structured problems are:",o:["Unfamiliar","Clear and routine","Crisis situations","Unexpected"],a:1},
+{t:"Unstructured problems are characterized by:",o:["Clear solutions","Ambiguity","Routine responses","Predictability"],a:1},
+{t:"Crisis problems require:",o:["Delayed action","Quick and appropriate response","Routine decisions","No planning"],a:1},
+{t:"Programmed decisions deal with:",o:["Non-routine problems","Routine problems","Crisis situations","Uncertainty"],a:1},
+{t:"Non-programmed decisions are:",o:["Routine","Standardized","Tailored to situation","Automatic"],a:2},
+
+{t:"Courage in decision making refers to:",o:["Avoiding risks","Willingness to take risks","Ignoring consequences","Following others"],a:1},
+{t:"Sensitivity in decision making means:",o:["Ignoring people","Being alert to situations","Rigid thinking","Lack of awareness"],a:1},
+{t:"Creativity helps decision makers to:",o:["Avoid solutions","Develop new solutions","Delay action","Ignore alternatives"],a:1},
+{t:"The second step in decision making process is:",o:["Choose action","Identify alternatives","Evaluate results","Implement decision"],a:1},
+{t:"Evaluating results in decision making is important because:",o:["It ends process","Corrective action may be needed","It wastes time","It avoids responsibility"],a:1},
+{t:"Decision making under certainty means:",o:["No information available","Complete information is available","Outcomes are unknown","High risk is involved"],a:1},
+{t:"Risk decision making condition occurs when:",o:["Outcomes are known","Probabilities can be estimated","No alternatives exist","Information is complete"],a:1},
+{t:"Uncertainty decision making is characterized by:",o:["Clear probabilities","Lack of information","Routine problems","Programmed decisions"],a:1},
+{t:"Under uncertainty, managers rely heavily on:",o:["Rules","Creativity","Routine procedures","Punishment"],a:1},
+{t:"Directive decision style managers tend to:",o:["Analyze large data","Make quick decisions","Consult many people","Avoid decisions"],a:1},
+
+{t:"Analytical decision style managers prefer:",o:["Minimal data","Complex analysis","Quick decisions","Emotional judgment"],a:1},
+{t:"Conceptual decision style managers are more:",o:["Task oriented","Socially oriented","Rigid","Authoritative"],a:1},
+{t:"Behavioral decision style managers focus on:",o:["Data only","Personal development of others","Speed","Rules"],a:1},
+{t:"Ethical decision making refers to:",o:["Legal compliance only","Choosing alternatives based on ethics","Profit maximization","Manager authority"],a:1},
+{t:"Autonomy principle emphasizes:",o:["Control","Freedom of choice","Punishment","Justice"],a:1},
+
+{t:"Justice in ethical decision making means:",o:["Treating all people the same","Fair treatment respecting differences","Ignoring individuality","Favoritism"],a:1},
+{t:"Beneficence means:",o:["Doing harm","Promoting good of others","Ignoring outcomes","Strict control"],a:1},
+{t:"Nonmaleficence means:",o:["Do no harm","Do maximum harm","Ignore consequences","Avoid responsibility"],a:0},
+{t:"Fidelity in ethics refers to:",o:["Breaking promises","Honoring commitments","Ignoring loyalty","Avoiding trust"],a:1},
+{t:"Communication is defined as:",o:["One-way message","Transfer of information","Giving orders","Listening only"],a:1},
+
+{t:"One goal of communication is to:",o:["Create confusion","Change behavior","Limit interaction","Delay action"],a:1},
+{t:"The sender in communication is:",o:["Receiver of message","Person who sends message","Feedback source","Channel"],a:1},
+{t:"Encoding in communication means:",o:["Receiving message","Translating message into symbols","Choosing channel","Giving feedback"],a:1},
+{t:"Decoding refers to:",o:["Sending message","Interpreting message","Selecting channel","Encoding message"],a:1},
+{t:"Feedback is important because it:",o:["Ends communication","Completes communication process","Delays response","Confuses sender"],a:1},
+
+{t:"Intrapersonal communication occurs:",o:["Between groups","Within one’s own mind","Between two people","Through media"],a:1},
+{t:"Interpersonal communication occurs:",o:["Within self","Between two people","In large audience","Via mass media"],a:1},
+{t:"Small group communication mainly aims at:",o:["Entertainment","Decision making","Broadcasting","Advertising"],a:1},
+{t:"Mass communication uses:",o:["Face to face contact","Electronic or print media","Personal dialogue","Small groups"],a:1},
+{t:"Formal communication is:",o:["Unofficial","Established by management","Based on friendship","Grapevine"],a:1},
+
+{t:"Informal communication is also known as:",o:["Official line","Downward flow","Grapevine","Diagonal"],a:2},
+{t:"Grapevine communication is useful for:",o:["Spreading rumors only","Understanding employee morale","Replacing formal communication","Ignoring management"],a:1},
+{t:"Verbal communication uses:",o:["Body language","Words","Silence","Gestures only"],a:1},
+{t:"Effective verbal communication should be:",o:["Long","Clear","Complex","Aggressive"],a:1},
+{t:"Tone of voice in communication indicates:",o:["Written content","Emotional state","Channel","Feedback"],a:1},
+
+{t:"Non-verbal communication includes:",o:["Emails","Body language","Written reports","Telephone calls"],a:1},
+{t:"Personal appearance in communication helps in:",o:["Creating impression","Reducing message","Avoiding interaction","Delaying response"],a:0},
+{t:"Attending behavior includes:",o:["Ignoring speaker","Eye contact","Interrupting","Talking continuously"],a:1},
+{t:"Electronic communication includes:",o:["Face to face talk","Email","Gestures","Body language"],a:1},
+{t:"Video calls require:",o:["Only text","Webcam and microphone","Written symbols","Letters"],a:1},
+{t:"Downward communication flows from:",o:["Subordinate to manager","Manager to subordinate","Peers","External sources"],a:1},
+{t:"Upward communication mainly flows:",o:["From top to bottom","From subordinates to superiors","Between peers","Outside organization"],a:1},
+{t:"Horizontal communication occurs between:",o:["Different organizations","Same organizational level","Managers and staff","Top management only"],a:1},
+{t:"Diagonal communication occurs between:",o:["Same level staff","Different levels with no direct authority","Only managers","Only subordinates"],a:1},
+{t:"Downward communication commonly includes:",o:["Suggestions","Reports","Instructions","Feedback only"],a:2},
+
+{t:"Upward communication helps in:",o:["Discouraging staff","Motivating employees","Limiting input","Increasing conflict"],a:1},
+{t:"One common method of upward communication is:",o:["Policy manual","Suggestion box","Order","Instruction"],a:1},
+{t:"Horizontal communication is mainly used for:",o:["Control","Coordination","Punishment","Motivation"],a:1},
+{t:"Diagonal communication helps to:",o:["Slow information","Improve coordination","Increase hierarchy","Avoid teamwork"],a:1},
+{t:"Nurses communicate orally with:",o:["Patients only","Physicians only","Health care team","Administration only"],a:2},
+
+{t:"Written communication by nurses includes:",o:["Gestures","Charts","Body language","Facial expressions"],a:1},
+{t:"Electronic communication in nursing includes:",o:["Handwritten notes","Telemedicine","Face to face talk","Meetings"],a:1},
+{t:"Self-reflection in nursing communication refers to:",o:["Talking to others","Internal dialogue","Group discussion","Written reports"],a:1},
+{t:"Positive self-talk helps nurses to:",o:["Lower confidence","Improve self-image","Increase stress","Avoid responsibility"],a:1},
+{t:"Negative self-talk leads to:",o:["High morale","Lower self-image","Better performance","Motivation"],a:1},
+
+{t:"Physical barriers to communication include:",o:["Attitudes","Noise","Language","Emotions"],a:1},
+{t:"Poor lighting and noise are examples of:",o:["Psychological barriers","Physical barriers","Cultural barriers","Linguistic barriers"],a:1},
+{t:"System design barriers include:",o:["Personal conflicts","Unclear organizational structure","Noise","Fatigue"],a:1},
+{t:"Attitudinal barriers result from:",o:["Technology","Poor management","Clear roles","Training"],a:1},
+{t:"Personality conflicts are classified as:",o:["Physical barriers","Attitudinal barriers","System barriers","Physiological barriers"],a:1},
+
+{t:"Psychological barriers are related to:",o:["Equipment","State of mind","Language","Organization"],a:1},
+{t:"Different languages and cultures create:",o:["Physical barriers","National barriers","Technical barriers","Personal barriers"],a:1},
+{t:"Use of difficult words affects communication due to:",o:["Physical barriers","Linguistic ability","Noise","System design"],a:1},
+{t:"Physiological barriers include:",o:["Poor supervision","Ill health","Unclear roles","Conflict"],a:1},
+{t:"Poor eyesight and hearing difficulties are examples of:",o:["Psychological barriers","Physiological barriers","System barriers","Cultural barriers"],a:1},
+
+{t:"Clarifying ideas before communication helps to:",o:["Increase confusion","Improve understanding","Delay message","Reduce feedback"],a:1},
+{t:"Selecting the right medium in communication means choosing:",o:["Only written","Only oral","Most effective channel","Longest message"],a:2},
+{t:"Communication is effective when it is:",o:["One-way","Two-way","Delayed","Informal only"],a:1},
+{t:"Follow-up in communication ensures:",o:["Message is ignored","Understanding is achieved","Feedback is avoided","Authority is enforced"],a:1},
+{t:"Feedback in communication is important to:",o:["End process","Ensure message is understood","Reduce interaction","Control sender"],a:1},
+
+{t:"One measure to improve communication is:",o:["Ignore tone","Watch tone of voice","Use complex language","Avoid feedback"],a:1},
+{t:"Contradicting actions in communication lead to:",o:["Trust","Confusion","Clarity","Motivation"],a:1},
+{t:"Providing right climate for communication involves:",o:["Increasing barriers","Removing barriers","Avoiding interaction","Delaying messages"],a:1},
+{t:"Effective communication requires:",o:["No planning","Clear purpose","Authority only","Written orders only"],a:1},
+{t:"The final step to ensure effective communication is:",o:["Silence","Feedback","Punishment","Control"],a:1},
+{t:"Directing is considered the heart of the management process.",a:true},
+{t:"Directing is a temporary function that ends once work starts.",a:false},
+{t:"Directing mainly focuses on human resources.",a:true},
+{t:"Written directions help in reducing misunderstanding.",a:true},
+{t:"Oral directions are always clearer than written directions.",a:false},
+
+{t:"Harmony of objectives means conflict between employee and organizational goals.",a:false},
+{t:"Follow through ensures that directions are properly implemented.",a:true},
+{t:"Consultative direction encourages employee participation.",a:true},
+{t:"Free rein direction limits employee initiative.",a:false},
+{t:"Automatic direction involves clear and precise orders.",a:true},
+
+{t:"Directing is required only at the top management level.",a:false},
+{t:"Supervision is concerned with guiding and overseeing work.",a:true},
+{t:"Motivation helps reduce employee absenteeism.",a:true},
+{t:"Leadership is the ability to punish subordinates effectively.",a:false},
+{t:"Communication is the transfer of information from sender to receiver.",a:true},
+
+{t:"Controlling helps in detecting deviations from standards.",a:true},
+{t:"Controlling is not related to planning.",a:false},
+{t:"Establishing standards is the first step in the control process.",a:true},
+{t:"Input standards measure performance results.",a:false},
+{t:"Feedback control occurs before activity begins.",a:false},
+
+{t:"Effective control should be flexible.",a:true},
+{t:"Management by exception focuses on major deviations.",a:true},
+{t:"Internal control depends mainly on self-control.",a:true},
+{t:"External control relies on personal supervision and formal systems.",a:true},
+{t:"Decision making is the process of choosing a course of action.",a:true},
+
+{t:"Problem solving is completely separate from decision making.",a:false},
+{t:"Structured problems are routine and familiar.",a:true},
+{t:"Crisis problems require quick and appropriate action.",a:true},
+{t:"Programmed decisions deal with non-routine problems.",a:false},
+{t:"Creativity is a characteristic of successful decision makers.",a:true},
+
+{t:"Decision making under certainty means lack of information.",a:false},
+{t:"Under uncertainty, managers rely more on creativity.",a:true},
+{t:"Ethical decision making aims to do no harm.",a:true},
+{t:"Non-verbal communication includes body language and facial expressions.",a:true},
+{t:"Feedback completes the communication process.",a:true},
+];
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=120*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>📋 تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
