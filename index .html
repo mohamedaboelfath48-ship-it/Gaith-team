@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">120:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+{t:"Management is best defined as:",o:["Using resources randomly","Achieving goals with minimum effort","Planning only","Giving orders to employees"],a:1},
+{t:"Which of the following is NOT a category of resources?",o:["Human","Financial","Physical","Political"],a:3},
+{t:"Management is considered both art and science because:",o:["It deals only with numbers","It uses theories and skills","It depends on luck","It ignores experience"],a:1},
+{t:"Top management level in nursing includes:",o:["Head nurse","Staff nurse","Director of nursing service","Charge nurse"],a:2},
+{t:"Which management level acts as intermediary?",o:["Top level","Middle level","Lower level","Staff level"],a:1},
+{t:"Planning is considered the ____ function of management.",o:["Last","Optional","Basic","Unimportant"],a:2},
+{t:"Organizing mainly involves:",o:["Motivating staff","Assigning and grouping activities","Evaluating performance","Budgeting"],a:1},
+{t:"Staffing focuses on:",o:["Equipment allocation","Human resources","Policy making","Financial control"],a:1},
+{t:"Directing includes all EXCEPT:",o:["Guiding","Motivating","Leading","Budgeting"],a:3},
+{t:"Controlling means:",o:["Punishing employees","Comparing performance with standards","Planning future goals","Delegating authority"],a:1},
+
+{t:"Which skill is most important at top management level?",o:["Technical","Human","Conceptual","Manual"],a:2},
+{t:"Poor communication is a cause of:",o:["Management success","Management failure","Staff promotion","Planning accuracy"],a:1},
+{t:"Henri Fayol proposed:",o:["5 principles","10 principles","14 principles","20 principles"],a:2},
+{t:"Unity of command means:",o:["Many bosses","One supervisor","No supervisor","Shared authority"],a:1},
+{t:"Division of work increases:",o:["Confusion","Output","Conflict","Turnover"],a:1},
+{t:"Equity principle focuses on:",o:["Salary only","Equal treatment","Punishment","Promotion"],a:1},
+{t:"Stability of tenure improves:",o:["Job insecurity","Productivity","Turnover","Absenteeism"],a:1},
+{t:"Team spirit promotes:",o:["Conflict","Harmony","Isolation","Competition"],a:1},
+{t:"Planning bridges the gap between:",o:["Past and present","Present and future","Future and past","Goals and policies"],a:1},
+{t:"Planning is considered futuristic because it:",o:["Deals with past","Focuses on future","Ignores goals","Avoids decisions"],a:1},
+
+{t:"Mission statement identifies:",o:["Daily tasks","Reason for existence","Staff duties","Rules"],a:1},
+{t:"Objectives should be:",o:["Vague","Measurable","Unlimited","Unclear"],a:1},
+{t:"Policies are:",o:["Daily activities","General guidelines","Punishments","Orders"],a:1},
+{t:"Procedures describe:",o:["Rules only","Sequence of actions","Goals","Vision"],a:1},
+{t:"Strategic plans are developed by:",o:["Lower management","Middle management","Top management","Staff nurses"],a:2},
+{t:"Operational plans are usually:",o:["Long term","Short term","Flexible only","Unwritten"],a:1},
+{t:"Specific plans are characterized by:",o:["Flexibility","Ambiguity","Clarity","Uncertainty"],a:2},
+{t:"Standing plans include:",o:["Budgets","Policies","Projects","Campaigns"],a:1},
+{t:"Planning limitation includes:",o:["Flexibility","Accuracy","Costliness","Coordination"],a:2},
+
+{t:"Organizing follows which function?",o:["Planning","Staffing","Controlling","Directing"],a:0},
+{t:"Formal organization is created by:",o:["Employees","Top management","Informal groups","Patients"],a:1},
+{t:"Informal organization arises due to:",o:["Rules","Authority","Social interaction","Policies"],a:2},
+{t:"Span of control refers to:",o:["Number of tasks","Number of subordinates","Budget size","Work hours"],a:1},
+{t:"Organization chart shows:",o:["Salary structure","Authority relationships","Patient care","Staff emotions"],a:1},
+{t:"Skeleton chart shows:",o:["Duties","Main divisions","Staff names","Job descriptions"],a:1},
+{t:"Vertical chart shows:",o:["Authority from bottom up","Authority top to bottom","No hierarchy","Circular flow"],a:1},
+{t:"According to management concept, efficiency means:",o:["Doing right things","Doing things right","Achieving goals only","Using more resources"],a:1},
+{t:"Effectiveness in management focuses on:",o:["Cost reduction","Goal achievement","Employee satisfaction","Time saving"],a:1},
+{t:"Which resource is considered the most critical in management?",o:["Financial","Physical","Human","Information"],a:2},
+{t:"Management becomes essential when:",o:["There is no goal","People work individually","There is organized group effort","Resources are unlimited"],a:2},
+{t:"Middle management is mainly responsible for:",o:["Policy formulation","Daily supervision","Linking top and lower levels","External relations"],a:2},
+{t:"Lower management is primarily concerned with:",o:["Policy making","Strategic planning","Execution of plans","Budget approval"],a:2},
+{t:"George Terry identified management functions as:",o:["Planning, staffing, budgeting","Planning, organizing, staffing, directing, controlling","Planning and organizing only","Leading and controlling only"],a:1},
+{t:"Which function ensures right man for right job?",o:["Planning","Organizing","Staffing","Controlling"],a:2},
+{t:"Motivation is mainly part of:",o:["Planning","Staffing","Directing","Controlling"],a:2},
+{t:"Corrective action is taken during:",o:["Planning","Organizing","Directing","Controlling"],a:3},
+
+{t:"Human skills are important:",o:["Only for top managers","Only for lower managers","At all management levels","Only for supervisors"],a:2},
+{t:"Technical skills are most needed at:",o:["Top level","Middle level","Lower level","Board level"],a:2},
+{t:"Conceptual skills mainly involve:",o:["Manual work","Interpersonal relations","Problem solving","Routine supervision"],a:2},
+{t:"Paralysis by analysis refers to:",o:["Quick decisions","Delayed decisions","Wrong planning","Poor staffing"],a:1},
+{t:"Which principle states orders from one superior?",o:["Unity of direction","Authority","Unity of command","Scalar chain"],a:2},
+{t:"Scalar chain represents:",o:["Informal relations","Line of authority","Span of control","Specialization"],a:1},
+{t:"Centralization refers to:",o:["Delegation level","Decision making authority","Staff motivation","Job security"],a:1},
+{t:"Subordination of individual interest means:",o:["Ignoring employees","Group interest over individual","Equal interest","Personal gain"],a:1},
+{t:"Initiative principle encourages:",o:["Strict control","Creativity","Punishment","Centralization"],a:1},
+{t:"Remuneration should be based on:",o:["Personal preference","Job difficulty","Random basis","Age"],a:1},
+
+{t:"Planning is pervasive because it:",o:["Is done only by top managers","Occurs at all levels","Is optional","Is future oriented"],a:1},
+{t:"Planning reduces risk by:",o:["Ignoring uncertainty","Providing forecasts","Avoiding decisions","Increasing cost"],a:1},
+{t:"Vision statement mainly expresses:",o:["Current activities","Future aspirations","Policies","Procedures"],a:1},
+{t:"Objectives differ from goals because they are:",o:["Broader","Measurable","Unclear","Informal"],a:1},
+{t:"Rules mainly specify:",o:["General guidance","Exact actions","Future goals","Employee motivation"],a:1},
+{t:"Follow-up step in planning involves:",o:["Selection","Evaluation","Revision","Motivation"],a:2},
+{t:"Directional plans are preferred when:",o:["Certainty is high","Uncertainty is high","Rules are strict","Resources are fixed"],a:1},
+{t:"Single-use plans are designed for:",o:["Repeated activities","Unique situations","Long term goals","Policies"],a:1},
+{t:"Employee participation in planning helps to:",o:["Increase resistance","Reduce motivation","Overcome limitations","Delay decisions"],a:2},
+
+{t:"Organizing primarily aims at:",o:["Goal setting","Task distribution","Performance appraisal","Recruitment"],a:1},
+{t:"Grouping activities based on resources is step number:",o:["2","3","4","6"],a:2},
+{t:"Delegation of authority occurs during:",o:["Planning","Organizing","Staffing","Controlling"],a:1},
+{t:"Unity of command reduces:",o:["Efficiency","Confusion","Authority","Responsibility"],a:1},
+{t:"Span of control depends on:",o:["Employee training","Salary","Organizational size","Policies only"],a:0},
+{t:"Specialization principle emphasizes:",o:["Multiple tasks","Single major function","Authority","Coordination"],a:1},
+{t:"Formal organizational structure is created by:",o:["Informal leaders","Top management","Employees","Unions"],a:1},
+{t:"Informal leaders gain authority through:",o:["Position","Rules","Group support","Policies"],a:2},
+{t:"Which statement best describes management as a universal process?",o:["It applies only to hospitals","It is needed in all organized activities","It applies to profit organizations only","It is limited to nursing"],a:1},
+{t:"Maximum prosperity with minimum effort refers to:",o:["Efficiency","Effectiveness","Authority","Control"],a:0},
+{t:"The absence of management leads to:",o:["High productivity","Resource wastage","Clear roles","Employee motivation"],a:1},
+{t:"Top management derives authority mainly from:",o:["Employees","Ownership","Position","Experience"],a:2},
+{t:"Preparing departmental budgets is responsibility of:",o:["Lower management","Middle management","Top management","Staff nurses"],a:2},
+{t:"Evaluation of employee performance is mainly done by:",o:["Top management","Middle management","Lower management","Board of directors"],a:1},
+{t:"Daily task achievement is responsibility of:",o:["Top level","Middle level","Lower level","External auditors"],a:2},
+{t:"Planning answers all EXCEPT:",o:["What to do","When to do","Who will do","How to punish"],a:3},
+{t:"Organizing converts plans into:",o:["Budgets","Structures","Controls","Policies"],a:1},
+{t:"Staffing helps managers to avoid:",o:["Planning errors","Staffing crisis","Budget deficits","Policy conflicts"],a:1},
+
+{t:"Leading staff toward goals is mainly part of:",o:["Organizing","Directing","Staffing","Controlling"],a:1},
+{t:"Comparing actual performance with standards is:",o:["Planning","Organizing","Directing","Controlling"],a:3},
+{t:"Human skills mainly involve:",o:["Technical knowledge","Interpersonal relations","Strategic planning","Data analysis"],a:1},
+{t:"Which skill enables managers to see organization as a whole?",o:["Human","Technical","Conceptual","Manual"],a:2},
+{t:"Bad change management leads to:",o:["Innovation","Management failure","Staff promotion","Goal clarity"],a:1},
+{t:"Lack of accountability results in:",o:["High performance","Effective control","Management failure","Employee empowerment"],a:2},
+{t:"Authority without responsibility results in:",o:["Efficiency","Misuse of power","Coordination","Equity"],a:1},
+{t:"Discipline in organization ensures:",o:["Creativity","Rule obedience","Centralization","Job rotation"],a:1},
+{t:"Unity of direction ensures:",o:["Multiple plans","Single plan","Employee freedom","Decentralization"],a:1},
+{t:"Centralization level depends on:",o:["Organization size","Employee age","Salary scale","Shift timing"],a:0},
+
+{t:"Planning is an intellectual process because it involves:",o:["Guesswork","Routine work","Thinking and foresight","Supervision"],a:2},
+{t:"Continuous planning means:",o:["One-time activity","Repeated evaluation","Rigid decisions","No flexibility"],a:1},
+{t:"Flexibility in planning helps to:",o:["Avoid change","Cope with uncertainty","Increase cost","Delay action"],a:1},
+{t:"Decision making is facilitated by:",o:["Staffing","Planning","Controlling","Scheduling"],a:1},
+{t:"Vision is best described as:",o:["Daily plan","Dream of future","Policy guideline","Operational target"],a:1},
+{t:"Goals are considered global because they are:",o:["Short-term","Broad in nature","Specific","Measurable"],a:1},
+{t:"Objectives are written in:",o:["Emotional terms","Behavioral terms","Vague language","General terms"],a:1},
+{t:"Policies mainly help in:",o:["Task execution","Decision making","Punishment","Motivation"],a:1},
+{t:"Rules specify:",o:["General guidance","Exact action or non-action","Vision","Mission"],a:1},
+
+{t:"Evaluation of alternatives occurs during:",o:["Planning","Organizing","Staffing","Directing"],a:0},
+{t:"Subsidiary plans are defined after:",o:["Implementation","Selection of alternatives","Follow-up","Evaluation"],a:1},
+{t:"Strategic planning time frame is usually:",o:["1 year","1–3 years","3–10 years","Less than 6 months"],a:2},
+{t:"Operational plans focus mainly on:",o:["Vision","Policies","Execution","Forecasting"],a:2},
+{t:"Intermediate plans cover a period of:",o:["Less than 1 year","1–3 years","5–10 years","More than 10 years"],a:1},
+{t:"Organizing is considered a link between:",o:["Planning and staffing","Planning and controlling","Planning and directing","Staffing and controlling"],a:2},
+{t:"The outcome of organizing process is:",o:["Budget","Organization structure","Staffing pattern","Policy"],a:1},
+{t:"Sub-dividing work among people leads to:",o:["Centralization","Specialization","Delegation","Coordination"],a:1},
+{t:"Departmentalization occurs when organization:",o:["Is small","Becomes large","Has few employees","Has no structure"],a:1},
+{t:"Formal relationships established after organizing are known as:",o:["Informal structure","Authority line","Organization structure","Span of control"],a:2},
+{t:"Organizing as a management function mainly deals with:",o:["People only","Tasks only","Tasks, people, and relationships","Finance"],a:2},
+{t:"One major benefit of organizing is:",o:["Increased workload","Improved morale","Conflict creation","Role confusion"],a:1},
+{t:"Effective organizing ensures:",o:["Duplication of work","Efficient resource use","Employee turnover","Delayed decisions"],a:1},
+{t:"Which step comes first in organizing?",o:["Grouping activities","Delegating authority","Establishing objectives","Linking groups"],a:2},
+{t:"Grouping activities should be based on:",o:["Personal preference","Available resources","Employee age","Salary scale"],a:1},
+
+{t:"Authority delegated should be:",o:["More than responsibility","Equal to responsibility","Less than responsibility","Absent"],a:1},
+{t:"Chain of command refers to:",o:["Informal relations","Flow of authority","Communication barriers","Employee groups"],a:1},
+{t:"Violation of unity of command leads to:",o:["Efficiency","Coordination","Confusion","Discipline"],a:2},
+{t:"Effective span of control depends mainly on:",o:["Number of tasks","Competency of subordinates","Salary","Policies"],a:1},
+{t:"Wide span of control is suitable when:",o:["Work is complex","Employees are trained","Tasks are varied","Authority is centralized"],a:1},
+{t:"Specialization increases efficiency by:",o:["Reducing skills","Increasing repetition","Limiting responsibility","Increasing authority"],a:1},
+{t:"Organizational structure is created by:",o:["Employees","Middle management","Top management","Informal leaders"],a:2},
+{t:"Channels of communication define:",o:["Salary flow","Information flow","Power flow","Workload"],a:1},
+{t:"Accountability means:",o:["Answerability for actions","Authority to command","Delegation of work","Sharing responsibility"],a:0},
+{t:"Responsibility refers to:",o:["Power to act","Job duty","Reward system","Decision making"],a:1},
+
+{t:"Informal organization exists because of:",o:["Rules","Policies","Social needs","Authority"],a:2},
+{t:"Informal groups are usually based on:",o:["Official positions","Emotional attachment","Job description","Hierarchy"],a:1},
+{t:"Authority of informal leader depends on:",o:["Job title","Written rules","Group support","Management approval"],a:2},
+{t:"Formal organization is:",o:["Temporary","Unstable","Permanent","Emotional"],a:2},
+{t:"Informal organization is:",o:["Rigid","Permanent","Flexible","Documented"],a:2},
+{t:"Formal organization is shown by:",o:["Social interaction","Written rules","Organizational charts","Verbal communication"],a:2},
+{t:"Informal organization helps mainly in:",o:["Strict control","Communication","Punishment","Centralization"],a:1},
+{t:"Both formal and informal organizations are:",o:["Opposing","Independent","Complementary","Unrelated"],a:2},
+{t:"Organizational chart is a:",o:["Written report","Visual representation","Policy document","Budget plan"],a:1},
+
+{t:"Skeleton chart shows:",o:["Duties","Main divisions only","Names of staff","Authority details"],a:1},
+{t:"Functional chart mainly shows:",o:["Hierarchy","Main duties","Staff names","Departments only"],a:1},
+{t:"Manning chart shows:",o:["Job descriptions","Number and titles of staff","Authority flow","Policies"],a:1},
+{t:"Master chart represents:",o:["Single unit","One department","Whole organization","Informal groups"],a:2},
+{t:"Circular chart shows authority flowing:",o:["Upward","Downward","Outward from center","Randomly"],a:2},
+{t:"Staffing is considered which phase of management process?",o:["First","Second","Third","Last"],a:2},
+{t:"The primary goal of staffing is to:",o:["Reduce cost","Provide right number and mix of staff","Increase workload","Limit recruitment"],a:1},
+{t:"Staffing helps managers mainly to avoid:",o:["Planning failure","Staffing crisis","Organizing problems","Policy conflict"],a:1},
+{t:"Human resource planning aims to:",o:["Fill positions with qualified personnel","Reduce staff numbers","Increase authority","Improve discipline"],a:0},
+{t:"Which factor must be considered during staffing?",o:["Patient type","Staff age","Staff preference","Hospital size only"],a:0},
+{t:"Professional nurse holds:",o:["Diploma","Secondary certificate","Baccalaureate degree","No qualification"],a:2},
+{t:"Technical nurse qualification is:",o:["Baccalaureate","Diploma","Certificate","Training only"],a:1},
+{t:"Auxiliary staff mainly includes:",o:["Registered nurses","Head nurses","Messengers","Supervisors"],a:2},
+{t:"Traditional staffing system is based on:",o:["Patient needs only","Beds and census","Nursing tasks","Budget only"],a:1},
+{t:"One nurse per 4 patients refers to:",o:["Advanced system","Task system","Traditional system","Classification system"],a:2},
+
+{t:"Advanced staffing system focuses on:",o:["Number of beds","Patient needs and tasks","Shift timing","Budget allocation"],a:1},
+{t:"Patient classification system groups patients based on:",o:["Diagnosis","Acuity and dependency","Age","Length of stay"],a:1},
+{t:"Class 3 patient requires:",o:["Self care","Partial care","Intensive care","Minimal care"],a:2},
+{t:"Task quantification system focuses on:",o:["Patient needs","Nursing activities","Staff experience","Hospital policies"],a:1},
+{t:"Direct care activities are those:",o:["Done away from patient","Done in presence of patient","Administrative only","Managerial only"],a:1},
+{t:"Recruitment is the process of:",o:["Selecting best applicant","Attracting applicants","Training staff","Promoting employees"],a:1},
+{t:"Word of mouth recruitment may lead to:",o:["Diversity","Nepotism","Equal opportunity","High turnover"],a:1},
+{t:"Advertisement recruitment provides:",o:["Limited applicants","Minority opportunities","Internal hiring","No cost"],a:1},
+{t:"Recruitment responsibility usually lies with:",o:["Staff nurses","Nursing office","Patients","External agencies"],a:1},
+{t:"Recruiter should respond to inquiries:",o:["Slowly","Immediately","After selection","After interview"],a:1},
+
+{t:"Selection is best defined as:",o:["Attracting applicants","Choosing best qualified","Advertising jobs","Orientation"],a:1},
+{t:"Interview aims mainly to:",o:["Punish applicant","Exchange information","Train staff","Evaluate policies"],a:1},
+{t:"Structured interview differs because questions are:",o:["Unplanned","Prepared in advance","Random","Personal"],a:1},
+{t:"Background investigation includes:",o:["Training","Reference checks","Orientation","Evaluation"],a:1},
+{t:"Decision to hire is taken after:",o:["Application only","Interview only","All selection steps","Recruitment"],a:2},
+{t:"Socialization is the final step of:",o:["Planning","Organizing","Staffing","Controlling"],a:2},
+{t:"Orientation introduces new employees to:",o:["Patients only","Hospital culture","Salary system","Promotion rules"],a:1},
+{t:"Scheduling refers to:",o:["Job description","Assigning work hours","Staff evaluation","Recruitment"],a:1},
+{t:"Main objective of scheduling is to:",o:["Increase overtime","Ensure adequate patient care","Reduce staff","Increase workload"],a:1},
+{t:"Fair scheduling helps to:",o:["Reduce equity","Increase dissatisfaction","Improve morale","Cause conflict"],a:2},
+
+{t:"Centralized scheduling is planned by:",o:["Head nurse","Director of nursing","Staff nurse","Supervisor"],a:1},
+{t:"Decentralized scheduling is done at:",o:["Hospital level","Unit level","Ministry level","Board level"],a:1},
+{t:"Providing day off before and after night duty ensures:",o:["Discipline","Efficiency","Rest","Authority"],a:2},
+{t:"Balanced distribution of days off aims to:",o:["Favor some staff","Ensure fairness","Increase workload","Reduce staffing"],a:1},
+{t:"Flexible scheduling helps in:",o:["Ignoring staff needs","Meeting changing needs","Increasing conflict","Reducing care"],a:1},
+{t:"Scheduling should inform staff for next:",o:["One week","One year","3–6 weeks","24 hours"],a:2},
+{t:"Effective scheduling maximizes use of:",o:["Equipment","Nursing staff power","Budget","Authority"],a:1},
+{t:"Management is concerned with achieving organizational goals using available resources.",a:true},
+{t:"Management is needed only in large organizations.",a:false},
+{t:"Human resources are considered the most important organizational resource.",a:true},
+{t:"Management is a universal process applied only in healthcare organizations.",a:false},
+{t:"Top management is the ultimate source of authority in the organization.",a:true},
+{t:"Middle management acts as a link between top and lower management.",a:true},
+{t:"Lower management is mainly responsible for policy formulation.",a:false},
+{t:"Planning is the first and fundamental function of management.",a:true},
+{t:"Organizing is concerned with assigning duties and delegating authority.",a:true},
+{t:"Staffing focuses on matching jobs with qualified individuals.",a:true},
+{t:"Directing includes guiding, motivating, and leading staff.",a:true},
+{t:"Controlling involves comparing actual performance with standards.",a:true},
+{t:"Technical skills are most important at the top management level.",a:false},
+{t:"Conceptual skills help managers see the organization as a whole.",a:true},
+{t:"Poor communication can lead to management failure.",a:true},
+{t:"Henri Fayol proposed fourteen principles of management.",a:true},
+{t:"Unity of command means employees receive orders from more than one supervisor.",a:false},
+{t:"Division of work increases efficiency and productivity.",a:true},
+{t:"Planning is a one-time activity.",a:false},
+{t:"Objectives are more specific and measurable than goals.",a:true},
+{t:"Policies are detailed steps for performing tasks.",a:false},
+{t:"Procedures outline the sequence of actions to achieve objectives.",a:true},
+{t:"Strategic plans are usually short-term plans.",a:false},
+{t:"Formal organization is created by top management.",a:true},
+{t:"Informal organization arises due to social interactions among employees.",a:true},
+{t:"Span of control refers to the number of subordinates a manager supervises.",a:true},
+{t:"Staffing is the third phase of the management process.",a:true},
+{t:"Recruitment means choosing the best applicant for a job.",a:false},
+{t:"Selection involves interviewing and background investigation.",a:true},
+{t:"Scheduling aims to ensure adequate patient care and fair work distribution.",a:true},
+{t:"Decentralized scheduling is usually done at the unit level.",a:true},
+{t:"أنت شطور وجاوبت معظم الأسئلة صح وإتعلمت منها ولا لا  🤔",a:true}
+];
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=120*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>📋 تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
