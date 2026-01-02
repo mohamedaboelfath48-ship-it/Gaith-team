@@ -463,6 +463,17 @@ let questions = [
 {t:"Decentralized scheduling is usually done at the unit level.",a:true},
 {t:"أنت شطور وجاوبت معظم الأسئلة صح وإتعلمت منها ولا لا  🤔",a:true}
 ];
+  // ===== تحويل كل أسئلة True / False تلقائياً =====
+questions = questions.map(q=>{
+  if(typeof q.a === "boolean"){
+    return {
+      ...q,
+      o: ["True","False"],
+      a: q.a ? 0 : 1
+    };
+  }
+  return q;
+});
 // تعريف المتغيرات الناقصة
 let i = 0;
 let correct = 0;
@@ -592,3 +603,4 @@ show();
 </body>
 
 </html>
+
