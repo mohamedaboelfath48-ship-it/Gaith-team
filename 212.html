@@ -1,0 +1,708 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+
+{t:"If an organization possesses all necessary resources but lacks management, what is the most probable direct outcome?",o:["Increased employee innovation","Efficient self-organization by teams","Wastage of resources and confusion","Accelerated achievement of objectives"],a:2},
+
+{t:"Koontz and O'Donnell assert that management is critical because its core task is:",o:["Controlling financial expenditures","Developing new technologies","Getting things done through others","Establishing legal and ethical standards"],a:2},
+
+{t:"Management as 'using what you have to achieve a goal' reflects the relationship between:",o:["Planning and controlling","Leadership and motivation","Resources and objectives","Authority and accountability"],a:2},
+
+{t:"Which is explicitly listed as an organizational resource?",o:["Market reputation","Brand equity","Energy","Customer loyalty"],a:2},
+
+{t:"Management enables adaptation to change in a _____ environment:",o:["Stable and predictable","Static and controlled","Dynamic and evolving","Isolated and independent"],a:2},
+
+{t:"Management is classified as a science because of:",o:["Personal creativity","Personal skills","An organized body of knowledge","Experience in unique situations"],a:2},
+
+{t:"The Nursing Supervisor belongs to which management level?",o:["Top management","Middle management","Lower management","Operational level"],a:1},
+
+{t:"The primary responsibility of top management includes:",o:["Directing daily tasks","Monitoring lower employees","Setting policies and budgets","Achieving daily tasks"],a:2},
+
+{t:"According to George Terry, management functions include:",o:["Planning, Motivating, Staffing, Controlling, Reviewing","Organizing, Directing, Budgeting, Reporting, Coordinating","Planning, Organizing, Staffing, Directing, Controlling","Forecasting, Commanding, Coordinating, Staffing, Evaluating"],a:2},
+
+{t:"Deciding in advance what is to be done is:",o:["Organizing","Controlling","Planning","Directing"],a:2},
+
+{t:"Staffing is the process of:",o:["Giving instructions","Classifying activities","Matching jobs with individuals","Monitoring performance"],a:2},
+
+{t:"Controlling involves:",o:["Delegation","Monitoring and corrective action","Creating plans","Formulating objectives"],a:1},
+
+{t:"The most important skill for top-level managers is:",o:["Human","Technical","Conceptual","Clinical"],a:2},
+
+{t:"Technical skills are most important at which level?",o:["Top","Middle","Lower","Equal at all levels"],a:2},
+
+{t:"Human skills are:",o:["Only for middle managers","Most critical for supervisors","Equally important at all levels","For non-managers"],a:2},
+
+{t:"Paralysis by analysis reflects failure in:",o:["Resource allocation","Communication flow","Decision-making speed","Talent development"],a:2},
+
+{t:"Receiving orders from one superior refers to:",o:["Unity of direction","Unity of command","Scalar chain","Centralization"],a:1},
+
+{t:"Subordination of individual interest means:",o:["Rewards must be calculated","Group effort is essential","Authority equals responsibility","Specialization increases output"],a:1},
+
+{t:"Remuneration should be based on:",o:["Seniority","Job differential","Supervisor discretion","Profitability"],a:1},
+
+{t:"Stability of tenure leads to:",o:["Centralization","High turnover","Increased productivity","Strict chain of command"],a:2},
+
+{t:"Planning is fundamental because:",o:["It consumes time","Other functions depend on it","Only top managers do it","It handles daily work"],a:1},
+
+{t:"Planning bridges the gap by:",o:["Documenting past","Creating rigidity","Linking present to future","Eliminating judgment"],a:2},
+
+{t:"Planning is pervasive because it is:",o:["Only for top management","Required at all levels","One-time activity","Informal"],a:1},
+
+{t:"A Vision is:",o:["A measurable target","Why the organization exists","Purpose and future aspirations","Sequence of actions"],a:2},
+
+{t:"An objective differs from a goal because it is:",o:["Philosophical","Specific and measurable","A guideline","A value statement"],a:1},
+
+{t:"Policies are:",o:["Step-by-step actions","Exact rules","General decision guidelines","Dream statements"],a:2},
+
+{t:"Strategic plans are:",o:["Short-term and operational","Daily focused","Long-term for entire organization","Rigid directives"],a:2},
+
+{t:"Directional plans are useful when:",o:["Uncertainty is high","Tasks are routine","No discretion exists","Environment is stable"],a:0},
+
+{t:"Reluctance to change refers to:",o:["Forecast inaccuracy","Planning cost","Psychological resistance","Legal restrictions"],a:2},
+
+{t:"A way to overcome planning limitations is:",o:["Rigid plans","Exclude employees","Top management support","Reduce planning"],a:2},
+
+{t:"Organizing results in:",o:["Budgets","Performance reports","Organization structure","Marketing strategy"],a:2},
+
+{t:"Efficient resource use prevents:",o:["Low morale","Resource wastage","Poor communication","Lack of goals"],a:1},
+
+{t:"Unity of command reduces:",o:["Specialization","Conflicting orders","Span of control","Centralization"],a:1},
+
+{t:"Span of control increases when:",o:["Jobs are complex","Employees are untrained","Work is specialized","Employees are well trained"],a:3},
+
+{t:"Formal organization is:",o:["Spontaneous","Chart-based with rules","Informally led","Temporary"],a:1},
+
+{t:"Informal organization arises from:",o:["Official design","Social interaction","Authority lines","Written policies"],a:1},
+
+{t:"Formal organization is:",o:["Unstable","Natural","Informally led","Permanent and structured"],a:3},
+
+{t:"Organization charts do NOT show:",o:["Communication channels","Personal friendships","Span of control","Levels of supervision"],a:1},
+
+{t:"Authority is:",o:["A duty","Moral responsibility","Official power","Reporting process"],a:2},
+
+{t:"A functional chart:",o:["Shows main divisions","Lists duties","Lists number and titles","Shows whole organization"],a:1},
+
+{t:"Job description is NOT used for:",o:["Salary increases only","Recruitment","Orientation","Performance appraisal"],a:0},
+
+{t:"Primary goal of staffing is:",o:["Minimize wages","Adequate patient care","Equal staff numbers","Only baccalaureate nurses"],a:1},
+
+{t:"Traditional staffing distribution is based on:",o:["Patient classification","Manager opinion","Task analysis","Government ratios"],a:1},
+
+{t:"Advanced staffing focuses on:",o:["Seniority","Tasks","Patient needs","Budget"],a:2},
+
+{t:"Task quantification differentiates between:",o:["Nurse types","Direct and indirect care","Shift times","Plan types"],a:1},
+
+{t:"First step in staffing is:",o:["Interview","Recruitment","Socialization","Application"],a:1},
+
+{t:"Word-of-mouth recruitment may:",o:["Be expensive","Cause nepotism","Reach few candidates","Lack planning"],a:1},
+
+{t:"Core recruiter responsibility is:",o:["Clinical care","Determining staffing needs","Setting vision","Union negotiation"],a:1},
+
+{t:"Selection is:",o:["Attracting applicants","Steps to hire","Orientation","Scheduling"],a:1},
+
+{t:"Interview does NOT judge:",o:["Dependability","Financial history","Job interest","Job fit"],a:1},
+
+{t:"Structured interviews:",o:["Need less planning","Use pre-set questions","Are informal","For executives only"],a:1},
+
+{t:"Socialization involves:",o:["Reference checks","Orientation to culture","Salary negotiation","Testing"],a:1},
+
+{t:"Scheduling aims to:",o:["Maximize overtime","Ensure coverage","Identical schedules","Centralize control"],a:1},
+
+{t:"A day off before/after night duty ensures:",o:["Fewer nights","Proper rest","Budget balance","Union compliance"],a:1},
+
+{t:"Decentralized scheduling is done by:",o:["Central office","Board","Head nurse","Software"],a:2},
+
+{t:"Management significance is clear when organization lacks:",o:["Capital","Technology","Management","Vision"],a:2},
+
+{t:"Authority flows:",o:["Laterally","Bottom-up","Middle-out","Top-down"],a:3},
+
+{t:"Directing involves:",o:["Planning","Organizing","Guiding and motivating","Controlling"],a:2},
+
+{t:"Toxic culture undermines:",o:["Division of work","Discipline","Esprit de corps","Centralization"],a:2},
+
+{t:"Initiative encourages employees to:",o:["Follow orders","Propose ideas","Subordinate goals","Centralize decisions"],a:1},
+
+{t:"Planning as an intellectual process means:",o:["Guesswork","Mental foresight","Physical task","Routine work"],a:1},
+
+{t:"Philosophy refers to:",o:["Objectives","Values and beliefs","Policies","Procedures"],a:1},
+
+{t:"Rules differ from policies because they are:",o:["Flexible","Global","Exact instructions","Top-level only"],a:2},
+
+{t:"Strategic plans focus on:",o:["Daily tasks","Lower management","Long-term goals","One year"],a:2},
+
+{t:"Single-use plans are for:",o:["Ongoing activities","Unique situations","Flexible guidelines","Long-term direction"],a:1},
+
+{t:"Planning is costly because it consumes:",o:["Emotions","Time and money","Failure cost","Implementation cost"],a:1},
+
+{t:"Clear objectives help planning by:",o:["Rigidity","Less participation","Measurable focus","Faster planning"],a:2},
+
+{t:"Tying groups horizontally and vertically establishes:",o:["Objectives","Job descriptions","Communication channels","Recruitment"],a:2},
+
+{t:"Specialization promotes:",o:["Flexibility","Efficiency","Unity of command","Decentralization"],a:1},
+
+{t:"Organization structure content excludes:",o:["Levels","Personal goals","Functions","Communication"],a:1},
+
+{t:"Formal and informal organizations:",o:["Are independent","One depends totally","Both are needed","Always conflict"],a:2},
+
+{t:"Head Nurse reports to:",o:["Administrator","Nursing director","Supervisor","Staff nurse"],a:2},
+
+{t:"Job description helps budgeting by defining:",o:["Social dynamics","Qualifications and scope","Leadership","Patient satisfaction"],a:1},
+
+{t:"Auxiliary staff include:",o:["Baccalaureate nurses","Technical nurses","Messengers","Supervisors"],a:2},
+
+{t:"Background checks are done:",o:["After hiring","Before interview","Managers only","By colleagues"],a:1},
+
+{t:"Hiring decision uses info from:",o:["Interview only","Application only","All steps","Salary negotiation"],a:2},
+
+{t:"Centralized scheduling means:",o:["Unit-based planning","One central planner","Self-scheduling","Fixed schedules"],a:1},
+
+{t:"Equity in scheduling relates to Fayol’s principle of:",o:["Authority","Equity","Order","Initiative"],a:1},
+
+{t:"Staffing is typically a:",o:["Decentralized function","Centralized function","Shared task","Outsourced task"],a:1},
+
+{t:"Final integration of a new hire is:",o:["Recruitment","Selection","Socialization","Scheduling"],a:2},
+
+/* ================= DIRECTING ================= */
+
+{t:"The managerial function described as 'the heart of the management process' is:",o:["Planning","Organizing","Directing","Controlling"],a:2},
+
+{t:"Which of the following is NOT an element of the directing function?",o:["Giving orders","Supervision","Budgeting","Motivation"],a:2},
+
+{t:"In directing, issuing orders and assignments serves to:",o:["Replace planning","Allow the subordinate to understand what is expected","Eliminate hierarchy","Centralize all decisions"],a:1},
+
+{t:"Directing is a pervasive function because it:",o:["Involves only top executives","Is required at all organizational levels","Deals only with finances","Replaces staffing"],a:1},
+
+{t:"Written directions are preferred because they:",o:["Eliminate misunderstanding","Are always faster","Are clear, comprehensive, and reduce duplication","Need less oversight"],a:2},
+
+{t:"The principle ensuring harmony between individual and group interests is:",o:["Direct objectives","Harmony of objectives","Managerial communication","Follow through"],a:1},
+
+{t:"The directing technique involving consultation before decisions is:",o:["Automatic direction","Free rein direction","Consultative direction","Directive leadership"],a:2},
+
+{t:"A disadvantage of consultative direction is that it:",o:["Demotivates staff","Eliminates input","Is time-consuming and may cause arguments","Prevents use of knowledge"],a:2},
+
+{t:"Free rein direction is characterized by:",o:["Detailed instructions","Encouraging initiative","Precise orders","Mandatory consultation"],a:1},
+
+{t:"Directing is a continuous activity because it:",o:["Occurs only in crises","Is limited to training","Occurs daily in organizations","Stops after planning"],a:2},
+
+{t:"Follow-through focuses on:",o:["Starting new projects","Monitoring enforcement of directions","Creating objectives","Replacing communication"],a:1},
+
+{t:"The characteristic linking directing to converting plans into performance is:",o:["Pervasive","Continuous","Creative","Executive"],a:2},
+
+{t:"When giving orders, managers should ensure they are:",o:["Complex","Based on situational demands and proper tone","Only written","Given without explanation"],a:1},
+
+{t:"Supervision is best defined as:",o:["Financial auditing","Guiding employee efforts to achieve outputs","Only top management role","Separate from directing"],a:1},
+
+{t:"Motivation is the force that:",o:["Replaces leadership","Starts and keeps a person at work","Depends only on money","Is irrelevant"],a:1},
+
+{t:"A major importance of motivation is:",o:["Eliminating communication","Reducing turnover and absenteeism","Centralizing decisions","Focusing on materials"],a:1},
+
+{t:"Leadership is the ability to:",o:["Control finances","Inspire and influence others","Do all tasks alone","Work without subordinates"],a:1},
+
+{t:"An importance of leadership is that it:",o:["Reduces training","Builds morale and productivity","Eliminates hierarchy","Applies only in crises"],a:1},
+
+{t:"Communication is critical in directing because it:",o:["Is one-way","Enables delegation and decentralization","Replaces orders","Is only non-verbal"],a:1},
+
+/* ================= CONTROLLING ================= */
+
+{t:"The control process is fundamentally about:",o:["Eliminating autonomy","Setting standards, measuring performance, corrective action","Replacing planning","Only finances"],a:1},
+
+{t:"Who is responsible for control activities?",o:["Top management only","External auditors","Managers at all levels","HR only"],a:2},
+
+{t:"The first step in the control process is:",o:["Corrective action","Measuring performance","Establishing standards","Comparing results"],a:2},
+
+{t:"An example of an input standard is:",o:["Infection rate ≤2%","4 hospital beds per 1000 population","Patient satisfaction >90%","Revenue growth"],a:1},
+
+{t:"Measuring performance aims to:",o:["Assign blame","Spot deviations","Eliminate planning","Justify salaries"],a:1},
+
+{t:"Management-by-exception focuses on:",o:["All activities equally","Significant deviations","No standards","Only opportunities"],a:1},
+
+{t:"An effective control system is:",o:["Complex","Always costly","Strategic and timely","Rigid"],a:2},
+
+{t:"Preliminary (feed-forward) controls aim to:",o:["Correct after work","Monitor ongoing work","Prevent problems before work","Analyze history"],a:2},
+
+{t:"Concurrent controls are applied:",o:["After completion","During planning","During activity","Only annually"],a:2},
+
+{t:"Feedback controls are valuable because they:",o:["Prevent all errors","Show planning effectiveness after action","Replace motivation","Are unpopular"],a:1},
+
+{t:"Internal control is enhanced when:",o:["All decisions are centralized","Capable people have clear objectives and resources","Supervision is intrusive","No delegation exists"],a:1},
+
+{t:"One importance of control is that it:",o:["Is independent of planning","Makes delegation easier","Eliminates uncertainty","Replaces motivation"],a:1},
+
+{t:"A role of control is to:",o:["Create complexity","Detect irregularities","Eliminate risk","Centralize flow"],a:1},
+
+{t:"An example of a management process control system is:",o:["Liquidity ratios","Pay for performance","Organizational culture","Fringe benefits"],a:2},
+
+{t:"Employee discipline systems aim to:",o:["Punish equally","Use least extreme reprimand","Eliminate appraisal","Ignore policy"],a:1},
+
+/* ================= DECISION MAKING ================= */
+
+{t:"Problem solving differs from decision making because it is:",o:["Broader process","Ends with solution","Unrelated","Only for crises"],a:1},
+
+{t:"Decision-making occurs at which step?",o:["Identifying problem","Exploring alternatives","Selecting solution","Evaluating results"],a:2},
+
+{t:"A crisis problem is:",o:["Routine","Unexpected and potentially disastrous","Clear and familiar","Programmed"],a:1},
+
+{t:"Programmed decisions are used for:",o:["Novel problems","Routine problems","Crises only","Strategic planning"],a:1},
+
+{t:"A successful decision maker shows:",o:["Risk avoidance","Sensitivity to situations","Data dependence","Resistance to creativity"],a:1},
+
+{t:"The first step in decision making is:",o:["Implement solution","Identify and define problem","Evaluate results","Choose action"],a:1},
+
+{t:"A common mistake in defining problems is:",o:["Too much data","Root cause focus","Too broad or narrow definition","Too many stakeholders"],a:2},
+
+{t:"A criterion when evaluating alternatives is:",o:["Personal preference","Ethical soundness","Speed regardless of cost","Popularity"],a:1},
+
+{t:"Decision making under certainty means:",o:["Uncertainty","Risk","Certainty","Ambiguity"],a:2},
+
+{t:"Under risk, decision makers:",o:["Have full info","Have probabilities","Have no info","Use intuition only"],a:1},
+
+{t:"Directive decision style managers:",o:["Gather extensive data","Decide quickly with limited info","Seek social input","Focus on employee goals"],a:1},
+
+{t:"Analytical decision style is marked by:",o:["Quick decisions","Extensive data analysis","Creative focus","Employee feelings"],a:1},
+
+/* ================= ETHICS & COMMUNICATION ================= */
+
+{t:"Autonomy emphasizes:",o:["No harm","Freedom of choice","Equality","Fidelity"],a:1},
+
+{t:"Nonmaleficence means:",o:["Cause little harm","Maximize benefit","Follow rules","Prioritize organization"],a:0},
+
+{t:"The primary goal of communication is NOT to:",o:["Change behavior","Eliminate feedback","Ensure understanding","Persuade others"],a:1},
+
+{t:"Encoding refers to:",o:["Channel","Receiver interpretation","Translating message into symbols","Barriers"],a:2},
+
+{t:"The component that completes communication is:",o:["Channel","Feedback","Noise","Decoding"],a:1},
+
+{t:"Intrapersonal communication is:",o:["Between two people","Self-talk","Group interaction","Mass media"],a:1},
+
+{t:"Small group communication is important for:",o:["Dream analysis","Socializing","Decision making","One-way instruction"],a:2},
+
+{t:"Formal communication is:",o:["Grapevine-based","Established by management and charts","Always informal","Hierarchy bypass"],a:1},
+
+{t:"Managers can use the grapevine to:",o:["Replace formal channels","Prevent rumors with facts","Eliminate upward flow","Enforce discipline"],a:1},
+
+{t:"Effective verbal communication should be:",o:["Lengthy","Brief and clear","Monotone","Jargon-heavy"],a:1},
+
+{t:"Non-verbal communication excludes:",o:["Eye contact","Written reports","Body language","Touch"],a:1},
+
+{t:"Unclear organizational structure is a:",o:["Physical barrier","System design fault","Attitudinal barrier","Physiological barrier"],a:1},
+
+{t:"Attitudinal barriers arise from:",o:["Lighting","Personality conflicts","Language","Equipment"],a:1},
+
+{t:"To improve communication, managers should:",o:["Use complexity","Assume understanding","Examine purpose","Contradict actions"],a:2},
+
+{t:"Directing is initiated from:",o:["Middle level","Supervisory only","Top level","Consultants"],a:2},
+
+{t:"Guiding employee efforts to achieve outputs is:",o:["Motivation","Leadership","Supervision","Communication"],a:2},
+
+{t:"The principle of comprehension ensures the receiver:",o:["Agrees","Understands","Responds fast","Passes info up"],a:1},
+
+{t:"Directing relates to the human factor because:",o:["Only financial","Human behavior is complex","Eliminates staffing","Purely technical"],a:1},
+
+{t:"Transfer of information between people is:",o:["Orders","Supervision","Motivation","Communication"],a:3},
+
+{t:"A control measuring results is an:",o:["Input standard","Output standard","Concurrent control","Preliminary control"],a:1},
+
+{t:"Comparison in control uses:",o:["No standards","Benchmarking","Ignoring past","Self-reports only"],a:1},
+
+{t:"External controls include:",o:["Self-control","Personal supervision and appraisals","Motivation","Unstructured work"],a:1},
+
+{t:"A structured problem is:",o:["New","Familiar and clear","Crisis","Nonprogrammed"],a:1},
+
+{t:"Conceptual decision style prefers:",o:["Quick decisions","Data isolation","Creative, broad problem solving","Employee feelings"],a:2},
+
+{t:"Fidelity requires decision makers to:",o:["Distribute equally","Honor commitments","Maximize good","Avoid harm"],a:1},
+
+{t:"Diagonal communication occurs:",o:["Same level","Superior to subordinate","Different levels without direct reporting","Same department"],a:2},
+
+{t:"A physiological barrier is:",o:["Structure","Attitudes","Poor eyesight/hearing","Jargon"],a:2},
+
+{t:"Communication within one’s own mind is:",o:["Interpersonal","Small group","Intrapersonal","Mass"],a:2},
+
+{t:"The grapevine is:",o:["Formal channel","Social-based informal tool","Always harmful","Downward only"],a:1},
+
+{t:"Effective non-verbal communication excludes:",o:["Appearance","Body language","Written reports","Attending behavior"],a:2},
+
+{t:"An electronic communication tool is:",o:["Meeting","WhatsApp","Suggestion box","Policy handbook"],a:1},
+
+{t:"Upward communication aims to:",o:["Issue commands","Allow employee input","Coordinate peers","Contact externals"],a:1},
+
+{t:"Internal self-talk represents:",o:["Oral","Written","Self-reflection","Telemedicine"],a:2},
+
+{t:"To overcome presentation barriers, information should be:",o:["Complex","Clear","Non-verbal only","Ignoring receiver"],a:1}
+
+];
+// ===== تحويل كل أسئلة True / False تلقائياً =====
+questions = questions.map(q=>{
+  if(typeof q.a === "boolean"){
+    return {
+      ...q,
+      o: ["True","False"],
+      a: q.a ? 0 : 1
+    };
+  }
+  return q;
+});
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=120*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
