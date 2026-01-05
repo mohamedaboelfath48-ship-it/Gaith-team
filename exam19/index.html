@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Planning Quiz عمو غيث</title>
+
+<style>
+:root{
+  --primary:#0891b2;
+  --secondary:#06b6d4;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --border:#bae6fd;
+  --question:#cffafe;
+  --option:#f0f9ff;
+  --selected:#67e8f9;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:22px;
+  text-align:center;
+}
+.logo{font-size:28px;font-weight:900}
+.timer{margin-top:8px;font-size:18px;font-weight:700}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.card{
+  background:#fff;
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.question-title{
+  background:var(--question);
+  padding:22px;
+  border-radius:18px;
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:22px;
+  border-left:6px solid var(--primary);
+}
+
+.option{
+  background:var(--option);
+  border:2px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  margin:14px 0;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+.option:hover{background:#e0f2fe}
+.option.selected{background:var(--selected)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.nav{display:flex;gap:16px;margin-top:24px}
+.nav button{
+  flex:1;padding:16px;font-size:16px;
+  font-weight:800;border:none;border-radius:18px
+}
+.prev{background:#e0f2fe}
+.next{background:var(--primary);color:#fff}
+.next:disabled{background:#7dd3fc}
+
+.result{background:#fff;padding:32px;border-radius:22px;text-align:center;font-size:22px}
+.good{color:var(--success);font-weight:900}
+.bad{color:var(--danger);font-weight:900}
+
+.report-item{
+  background:#fff;
+  padding:18px;
+  border-radius:16px;
+  margin:14px 0;
+  font-size:16px;
+  line-height:1.6;
+}
+.correct-answer{color:var(--success);font-weight:900}
+.wrong-answer{color:var(--danger);font-weight:900}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="timer" id="timer">30:00</div>
+</header>
+
+<div class="container">
+  <div class="card" id="questionBox"></div>
+  <div class="nav">
+    <button class="prev" onclick="prevQ()">Previous</button>
+    <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+  </div>
+</div>
+
+<script>
+/* ===== QUESTIONS ===== */
+const questions = [
+
+{type:"mcq",q:"Which of the following is the key feature of planning?",o:["Random and unorganized","Based on luck","Mental and intellectual process","Only focuses on past events"],a:2},
+
+{type:"mcq",q:"Which of the following is a single-use plan?",o:["Operational plan","Long-term plan","Specific plan","Project-based plan"],a:3},
+
+{type:"mcq",q:"Directional plans are characterized by:",o:["Rigidity and no flexibility","Strict rules","Flexibility and general guidelines","No clear objectives"],a:2},
+
+{type:"mcq",q:"Who is primarily responsible for creating a strategic plan?",o:["Lower-level employees","Supervisor","Top-level manager","Middle-level manager"],a:2},
+
+{type:"mcq",q:"One major limitation of planning is:",o:["It requires low time","It is ineffective due to external factors","It is costly and time-consuming","It avoids organizational development"],a:2},
+
+{type:"mcq",q:"Which of the following is considered a standing plan?",o:["Temporary budget","Hospital renovation project","Organizational policy","Time-event schedule"],a:2},
+
+{type:"mcq",q:"Planning is considered a continuous process because:",o:["It occurs once a year","It happens only in crises","It involves ongoing review and revision","It is fixed and never changes"],a:2},
+
+{type:"mcq",q:"One of the following is a purpose of planning:",o:["Promote randomness","Increase confusion","Provide organizational direction","Discourage communication"],a:2},
+
+{type:"mcq",q:"What is the useful time frame for an operational plan?",o:["5–10 years","3–5 years","1–3 years","Less than 1 year"],a:2},
+
+{type:"mcq",q:"Which of the following is NOT a step in the planning process?",o:["Gathering information","Evaluating alternatives","Ignoring past failures","Implementing the plan"],a:2},
+
+{type:"mcq",q:"Planning helps reduce:",o:["Clarity of vision","Organizational efficiency","Duplication of effort","Communication"],a:2},
+
+{type:"mcq",q:"In the context of planning philosophy, it refers to:",o:["Operational strategy","Final objective","Core values and beliefs","Strict policy"],a:2},
+
+{type:"mcq",q:"Which type of plan focuses more on directing and controlling?",o:["Strategic plan","Operational plan","Mission statement","Vision plan"],a:1},
+
+{type:"mcq",q:"Specific plans are characterized by:",o:["Flexibility and unclear goals","Open to interpretation","Clearly defined and rigid","Easy to adjust"],a:2},
+
+{type:"tf",q:"Planning is a one-time activity done only at the beginning of the year.",a:false},
+
+{type:"tf",q:"Objectives are more specific and measurable than goals.",a:true},
+
+{type:"tf",q:"Planning is ineffective due to external environmental factors.",a:false},
+
+{type:"tf",q:"Flexibility is a necessary characteristic of planning.",a:true},
+
+{type:"tf",q:"Operational plans are created by top-level management.",a:false},
+
+{type:"tf",q:"One benefit of planning is to improve coordination among departments.",a:true},
+
+{type:"tf",q:"All types of plans must be rigid and not adaptable.",a:false},
+
+{type:"tf",q:"Philosophy in planning expresses the organization’s core beliefs and values.",a:true},
+
+{type:"tf",q:"Planning plays no role in decision making.",a:false},
+
+{type:"tf",q:"Planning is considered the primary function of management.",a:true},
+
+{type:"mcq",q:"Why should planning be flexible?",o:["To reduce effectiveness","To align with unexpected changes","To complicate the process","To avoid decision making"],a:1},
+
+{type:"mcq",q:"Planning is considered a:",o:["Passive activity","Technical skill","Mental and proactive process","One-person responsibility"],a:2},
+
+{type:"mcq",q:"Planning contributes to:",o:["Increased errors","Repetitive work","Higher efficiency","Uncertainty in decisions"],a:2},
+
+{type:"mcq",q:"Which of the following can help overcome resistance to change?",o:["Decision making","Ignoring employee feedback","Employee participation","Communication"],a:2}
+
+];
+
+
+/* ===== STATE ===== */
+let i=0;
+let answers = Array(questions.length).fill(null);
+let time = 30*60;
+
+/* TIMER */
+setInterval(()=>{
+  let m=Math.floor(time/60), s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--;
+  if(time<0) finish();
+},1000);
+
+function showQ(){
+  let q=questions[i], sel=answers[i];
+  nextBtn.disabled = sel===null;
+  let ops="";
+
+  if(q.type==="mcq"){
+    q.o.forEach((op,idx)=>{
+      ops+=`<div class="option ${sel===idx?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(${idx})">${op}</div>`;
+    });
+  }else{
+    ops+=`
+    <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+    <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  }
+
+  questionBox.innerHTML=`<div class="question-title">${q.q}</div>${ops}`;
+}
+
+function choose(v){
+  if(answers[i]!==null) return;
+  answers[i]=v;
+  nextBtn.disabled=false;
+  showQ();
+}
+function nextQ(){ i<questions.length-1 ? (i++,showQ()) : finish(); }
+function prevQ(){ if(i>0){i--;showQ()} }
+
+function finish(){
+  let correct=0, report="";
+  questions.forEach((q,idx)=>{
+    let userAnswer = q.type==="mcq" ? q.o[answers[idx]] : (answers[idx]?"True":"False");
+    let correctAnswer = q.type==="mcq" ? q.o[q.a] : (q.a?"True":"False");
+    let ok = answers[idx]===q.a;
+    if(ok) correct++;
+
+    report+=`
+    <div class="report-item">
+      <b>Q${idx+1}:</b> ${q.q}<br>
+      ${
+        ok
+        ? `<span class="correct-answer">✔ Your Answer: ${userAnswer}</span>`
+        : `<span class="wrong-answer">✘ Your Answer: ${userAnswer}</span><br>
+           <span class="correct-answer">✔ Correct Answer: ${correctAnswer}</span>`
+      }
+    </div>`;
+  });
+
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div></header>
+  <div class="container">
+    <div class="result">
+      <p class="good">Correct: ${correct}</p>
+      <p class="bad">Wrong: ${questions.length-correct}</p>
+      <p>Score: ${Math.round(correct/questions.length*100)}%</p>
+    </div>
+    ${report}
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
