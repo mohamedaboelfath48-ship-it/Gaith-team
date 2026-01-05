@@ -16,16 +16,16 @@ body{
 
 /* ===== Header ===== */
 .header{padding:30px 15px}
-.header h1{font-size:38px;letter-spacing:2px}
+.header h1{font-size:38px}
 .header span{color:red}
-.sub{opacity:.7;margin-top:8px}
+.sub{opacity:.7}
 
 /* ===== Container ===== */
 .container{width:92%;max-width:520px;margin:auto}
 
 /* ===== Accordion ===== */
 .exam-btn{
-    margin:20px 0;
+    margin:22px 0;
     border-radius:30px;
     overflow:hidden;
 }
@@ -58,7 +58,6 @@ body{
     justify-content:center;
     font-size:22px;
     margin-left:12px;
-    box-shadow:0 6px 16px rgba(0,0,0,.4);
 }
 
 /* ===== Colors ===== */
@@ -75,17 +74,18 @@ body{
 .icon.str{background:#fb923c}
 
 /* ===== Arrow ===== */
-.arrow{transition:.5s}
+.arrow{transition:.4s}
 .exam-btn[open] .arrow{transform:rotate(180deg) scale(1.2)}
 
-/* ===== Content Animation ===== */
+/* ===== Content ===== */
 .content{
     background:#020617;
-    animation:open .5s ease;
+    padding:10px 0 20px;   /* 👈 يمنع القطع */
+    animation:open .4s ease;
 }
 @keyframes open{
-    from{opacity:0;transform:translateY(-15px) scale(.96)}
-    to{opacity:1;transform:translateY(0) scale(1)}
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== Links ===== */
@@ -93,19 +93,28 @@ body{
     display:block;
     margin:12px;
     padding:15px;
-    border-radius:22px;
+    border-radius:999px;
     background:#111827;
     color:#fff;
     text-decoration:none;
     transition:.3s;
 }
 .exam-btn a:hover{
-    background:#0ea5e9;
     transform:scale(1.05);
 }
 
+/* ===== Special Color For Finals ===== */
+.exam-btn a.final{
+    background:linear-gradient(90deg,#facc15,#f97316);
+    color:#1f2937;
+    font-weight:800;
+}
+.exam-btn a.final:hover{
+    background:linear-gradient(90deg,#fde047,#fb923c);
+}
+
 /* ===== Telegram ===== */
-.telegram{margin:50px auto}
+.telegram{margin:55px auto}
 .telegram a{
     display:flex;
     justify-content:center;
@@ -121,9 +130,8 @@ body{
     text-decoration:none;
     font-size:18px;
     font-weight:600;
-    transition:.3s;
 }
-.telegram a:hover{transform:scale(1.08)}
+.telegram a:hover{transform:scale(1.06)}
 </style>
 </head>
 
@@ -147,7 +155,7 @@ body{
 </summary>
 <div class="content">
 <a href="exam1/index.html">شامل 1</a>
-<a href="exam2/index.html">شامل 2</a>
+<a href="exam2/index.html" class="final">شامل 2</a>
 <a href="exam3/index.html">شامل 3</a>
 <a href="exam4/index.html">شامل 4</a>
 <a href="exam5/index.html">شامل 5</a>
@@ -165,7 +173,7 @@ body{
 </summary>
 <div class="content">
 <a href="exam6/index.html">شامل 1</a>
-<a href="exam7/index.html">شامل 2</a>
+<a href="exam7/index.html" class="final">شامل 2</a>
 <a href="exam8/index.html">شامل 3</a>
 <a href="exam9/index.html">شامل 4</a>
 <a href="exam10/index.html">شامل 5</a>
@@ -183,28 +191,10 @@ body{
 </summary>
 <div class="content">
 <a href="exam11/index.html">مراجعة المنهج</a>
-<a href="exam12/index.html">شامل 1</a>
-<a href="exam13/index.html">شامل 2</a>
+<a href="exam12/index.html" class="final">شامل 1</a>
+<a href="exam13/index.html" class="final">شامل 2</a>
 <a href="exam14/index.html">شامل 3</a>
 <a href="exam15/index.html">شامل 4</a>
-</div>
-</details>
-
-<!-- ===== مبادئ إدارة ===== -->
-<details class="exam-btn man">
-<summary>
-<div class="title-wrap">
-<div class="icon man">🧠</div>
-<div class="exam-title">مبادئ إدارة</div>
-</div>
-<span class="arrow">▾</span>
-</summary>
-<div class="content">
-<a href="exam16/index.html">مراجعة أول 4 محاضرات</a>
-<a href="exam17/index.html">مراجعة باقي المنهج</a>
-<a href="exam18/index.html">بصموجة</a>
-<a href="exam19/index.html">شامل 1</a>
-<a href="exam20/index.html">شامل 2</a>
 </div>
 </details>
 
@@ -228,13 +218,13 @@ body{
 <a href="exam28/index.html">Future Trends</a>
 <a href="exam29/index.html">Role of Nurse Educator</a>
 <a href="exam30/index.html">مراجعة ثاني 4 محاضرات</a>
-<a href="exam31/index.html">شامل 1</a>
-<a href="exam32/index.html">شامل 2</a>
+<a href="exam31/index.html" class="final">شامل 1</a>
+<a href="exam32/index.html" class="final">شامل 2</a>
 </div>
 </details>
 
 <div class="telegram">
-<a href="https://t.me/nursing2bu" target="_blank">✈️ Telegram انضم إلينا على</a>
+<a href="https://t.me/nursing2bu" target="_blank">✈️ انضم إلينا على Telegram</a>
 </div>
 
 </div>
