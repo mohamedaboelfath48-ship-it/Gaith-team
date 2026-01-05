@@ -15,22 +15,13 @@ body{
 }
 
 /* ===== Header ===== */
-.header{
-    padding:30px 15px;
-}
-.header h1{
-    font-size:38px;
-    letter-spacing:2px;
-}
+.header{padding:30px 15px}
+.header h1{font-size:38px;letter-spacing:2px}
 .header span{color:red}
 .sub{opacity:.7;margin-top:8px}
 
 /* ===== Container ===== */
-.container{
-    width:92%;
-    max-width:520px;
-    margin:auto;
-}
+.container{width:92%;max-width:520px;margin:auto}
 
 /* ===== Accordion ===== */
 .exam-btn{
@@ -49,25 +40,18 @@ body{
     justify-content:space-between;
 }
 
-/* ===== Centered Title ===== */
-.title-wrap{
-    display:flex;
-    align-items:center;
-    flex:1;
-}
-
+/* ===== Title ===== */
+.title-wrap{display:flex;align-items:center;flex:1}
 .exam-title{
     flex:1;
     text-align:center;
-    font-size:28px;   /* 🔥 أكبر */
+    font-size:28px;
     font-weight:800;
-    letter-spacing:1px;
 }
 
 /* ===== Icon ===== */
 .icon{
-    width:48px;
-    height:48px;
+    width:48px;height:48px;
     border-radius:50%;
     display:flex;
     align-items:center;
@@ -81,38 +65,27 @@ body{
 .ped summary{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
 .obs summary{background:linear-gradient(90deg,#d66efd,#ff5db1)}
 .nut summary{background:linear-gradient(90deg,#56ab2f,#a8e063)}
+.man summary{background:linear-gradient(90deg,#6366f1,#0ea5e9)}
 .str summary{background:linear-gradient(90deg,#f59e0b,#f97316)}
 
 .icon.ped{background:#38bdf8}
 .icon.obs{background:#f472b6}
 .icon.nut{background:#4ade80}
+.icon.man{background:#818cf8}
 .icon.str{background:#fb923c}
 
 /* ===== Arrow ===== */
-.arrow{
-    font-size:22px;
-    transition:.5s cubic-bezier(.4,0,.2,1);
-}
-.exam-btn[open] .arrow{
-    transform:rotate(180deg) scale(1.2);
-}
+.arrow{transition:.5s}
+.exam-btn[open] .arrow{transform:rotate(180deg) scale(1.2)}
 
 /* ===== Content Animation ===== */
 .content{
-    overflow:hidden;
     background:#020617;
-    animation:accordion .5s cubic-bezier(.4,0,.2,1);
+    animation:open .5s ease;
 }
-
-@keyframes accordion{
-    from{
-        opacity:0;
-        transform:translateY(-15px) scale(.96);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
+@keyframes open{
+    from{opacity:0;transform:translateY(-15px) scale(.96)}
+    to{opacity:1;transform:translateY(0) scale(1)}
 }
 
 /* ===== Links ===== */
@@ -122,9 +95,8 @@ body{
     padding:15px;
     border-radius:22px;
     background:#111827;
-    color:white;
+    color:#fff;
     text-decoration:none;
-    font-size:16px;
     transition:.3s;
 }
 .exam-btn a:hover{
@@ -133,13 +105,11 @@ body{
 }
 
 /* ===== Telegram ===== */
-.telegram{
-    margin:50px auto;
-}
+.telegram{margin:50px auto}
 .telegram a{
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     gap:12px;
     width:90%;
     max-width:360px;
@@ -151,20 +121,17 @@ body{
     text-decoration:none;
     font-size:18px;
     font-weight:600;
-    box-shadow:0 6px 18px rgba(0,0,0,.35);
     transition:.3s;
 }
-.telegram a:hover{
-    transform:scale(1.08);
-}
+.telegram a:hover{transform:scale(1.08)}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-    <h1>GAITH TEAM <span>❤️</span></h1>
-    <div class="sub">الامتحان في جيبك</div>
+<h1>GAITH TEAM <span>❤️</span></h1>
+<div class="sub">الامتحان في جيبك</div>
 </div>
 
 <div class="container">
@@ -172,85 +139,115 @@ body{
 <!-- ===== طب أطفال ===== -->
 <details class="exam-btn ped">
 <summary>
-    <div class="title-wrap">
-        <div class="icon ped">👶</div>
-        <div class="exam-title">طب أطفال</div>
-    </div>
-    <span class="arrow">▾</span>
+<div class="title-wrap">
+<div class="icon ped">👶</div>
+<div class="exam-title">طب أطفال</div>
+</div>
+<span class="arrow">▾</span>
 </summary>
 <div class="content">
-    <a href="#">شامل 1</a>
-    <a href="#">شامل 2</a>
-    <a href="#">شامل 3</a>
+<a href="exam1/index.html">شامل 1</a>
+<a href="exam2/index.html">شامل 2</a>
+<a href="exam3/index.html">شامل 3</a>
+<a href="exam4/index.html">شامل 4</a>
+<a href="exam5/index.html">شامل 5</a>
 </div>
 </details>
 
 <!-- ===== طب نسا ===== -->
 <details class="exam-btn obs">
 <summary>
-    <div class="title-wrap">
-        <div class="icon obs">🤰</div>
-        <div class="exam-title">طب نسا</div>
-    </div>
-    <span class="arrow">▾</span>
+<div class="title-wrap">
+<div class="icon obs">🤰</div>
+<div class="exam-title">طب نسا</div>
+</div>
+<span class="arrow">▾</span>
 </summary>
 <div class="content">
-    <a href="#">شامل 1</a>
-    <a href="#">شامل 2</a>
+<a href="exam6/index.html">شامل 1</a>
+<a href="exam7/index.html">شامل 2</a>
+<a href="exam8/index.html">شامل 3</a>
+<a href="exam9/index.html">شامل 4</a>
+<a href="exam10/index.html">شامل 5</a>
 </div>
 </details>
 
 <!-- ===== تغذية ===== -->
 <details class="exam-btn nut">
 <summary>
-    <div class="title-wrap">
-        <div class="icon nut">🥗</div>
-        <div class="exam-title">تغذية</div>
-    </div>
-    <span class="arrow">▾</span>
+<div class="title-wrap">
+<div class="icon nut">🥗</div>
+<div class="exam-title">تغذية</div>
+</div>
+<span class="arrow">▾</span>
 </summary>
 <div class="content">
-    <a href="#">مراجعة</a>
-    <a href="#">شامل</a>
+<a href="exam11/index.html">مراجعة المنهج</a>
+<a href="exam12/index.html">شامل 1</a>
+<a href="exam13/index.html">شامل 2</a>
+<a href="exam14/index.html">شامل 3</a>
+<a href="exam15/index.html">شامل 4</a>
+</div>
+</details>
+
+<!-- ===== مبادئ إدارة ===== -->
+<details class="exam-btn man">
+<summary>
+<div class="title-wrap">
+<div class="icon man">🧠</div>
+<div class="exam-title">مبادئ إدارة</div>
+</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam16/index.html">مراجعة أول 4 محاضرات</a>
+<a href="exam17/index.html">مراجعة باقي المنهج</a>
+<a href="exam18/index.html">بصموجة</a>
+<a href="exam19/index.html">شامل 1</a>
+<a href="exam20/index.html">شامل 2</a>
 </div>
 </details>
 
 <!-- ===== استراتيجيات ===== -->
 <details class="exam-btn str">
 <summary>
-    <div class="title-wrap">
-        <div class="icon str">🎯</div>
-        <div class="exam-title">استراتيجيات</div>
-    </div>
-    <span class="arrow">▾</span>
+<div class="title-wrap">
+<div class="icon str">🎯</div>
+<div class="exam-title">استراتيجيات</div>
+</div>
+<span class="arrow">▾</span>
 </summary>
 <div class="content">
-    <a href="#">Introduction</a>
-    <a href="#">Active Learning</a>
-    <a href="#">Case Based</a>
+<a href="exam21/index.html">Introduction</a>
+<a href="exam22/index.html">Teaching methods</a>
+<a href="exam23/index.html">Teaching material</a>
+<a href="exam24/index.html">Active Learning</a>
+<a href="exam25/index.html">مراجعة أول 4 محاضرات</a>
+<a href="exam26/index.html">Case-Based Learning</a>
+<a href="exam27/index.html">Simulation Based Learning</a>
+<a href="exam28/index.html">Future Trends</a>
+<a href="exam29/index.html">Role of Nurse Educator</a>
+<a href="exam30/index.html">مراجعة ثاني 4 محاضرات</a>
+<a href="exam31/index.html">شامل 1</a>
+<a href="exam32/index.html">شامل 2</a>
 </div>
 </details>
 
 <div class="telegram">
-<a href="https://t.me/nursing2bu" target="_blank">
-✈️ Telegram انضم إلينا على
-</a>
+<a href="https://t.me/nursing2bu" target="_blank">✈️ Telegram انضم إلينا على</a>
 </div>
 
 </div>
 
-<!-- ===== One Open Only Script ===== -->
 <script>
-const details = document.querySelectorAll("details");
-details.forEach(d => {
-  d.addEventListener("toggle", () => {
-    if (d.open) {
-      details.forEach(o => {
-        if (o !== d) o.removeAttribute("open");
-      });
-    }
-  });
-});
+const all = document.querySelectorAll("details");
+all.forEach(d=>{
+d.addEventListener("toggle",()=>{
+if(d.open){
+all.forEach(o=>{if(o!==d) o.removeAttribute("open")})
+}
+})
+})
 </script>
 
 </body>
