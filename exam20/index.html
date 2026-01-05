@@ -1,0 +1,716 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+/* ================= MCQ ================= */
+
+{t:"When the supervisor puts action plans for their subordinates, this is considered:",o:["Chain of command","Unity of command","Span of control","Specialization"],a:1},
+
+{t:"_____ is the obligation of a subordinate to perform the assigned duties:",o:["Accountability","Power","Responsibility","Authority"],a:2},
+{t:"_____ measures the work efforts that go into a performance task:",o:["Strategic plan","Input standards","Output standards","Controlling"],a:1},
+
+{t:"All of the following are considered middle managers EXCEPT:",o:["Project leader","Department head","Plant manager","Supervisors"],a:3},
+
+{t:"_____ is accomplished before a work activity begins:",o:["Preliminary controls","Concurrent controls","Post-action controls","Internal controls"],a:0},
+
+{t:"The manager applies the directing function to help in:",o:["Time management","Power ability","Use of different tools","Transform plans into performance"],a:3},
+
+{t:"All of the following are reasons for planning EXCEPT:",o:["Provide direction","Reduce risk of uncertainty","Maximize waste","Facilitate decision making"],a:2},
+
+{t:"Which of the following are basic elements of directing?",o:["Leadership","Supervision","Motivation","All of them"],a:3},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Circular charts show high-level management in the center.",o:["True","False"," "," "],a:0},
+
+{t:"Informal organization sets regulations and rules.",o:["True","False"," "," "],a:1},
+
+{t:"Directing gives the manager a passive role in employee performance.",o:["True","False"," "," "],a:1},
+
+{t:"Strategic plans tend to cover a short time period.",o:["True","False"," "," "],a:1},
+
+{t:"Effectiveness refers to completing activities so that organizational goals are attained.",o:["True","False"," "," "],a:0},
+
+{t:"Internal controlling allows motivated individuals to exercise self-control in fulfilling job expectations.",o:["True","False"," "," "],a:0},
+
+{t:"Planning is affected by external limitations.",o:["True","False"," "," "],a:0},
+
+/* ================= MCQ ================= */
+
+{t:"The chart that defines personnel names in organizational chart is:",o:["Manning chart","Skeleton chart","Functional chart","Master chart"],a:0},
+
+{t:"The process of choosing the best qualified personnel for a job is:",o:["Recruitment","Interview","Choosing","The traditional system"],a:2},
+
+{t:"Nurses' agreement to be morally responsible for the consequences of their actions is:",o:["Accountability","Power","Responsibility","Authority"],a:0},
+
+{t:"Nurse manager develops priorities for solving problems according to:",o:["What comes first","The situation","What takes shorter time","What appears to be the easiest"],a:1},
+
+{t:"The role of control is:",o:["Critical link back to planning","Facilitating goal achievement","Detecting irregularities","Making delegation easier"],a:2},
+
+{t:"A type of plan that is flexible and sets out general guidelines is:",o:["Directional plans","Standing plans","Single-use plans","Specific plans"],a:0},
+
+{t:"Direction function helps in:",o:["Time management","Power ability","Using of different tools","Transferring plans into performance"],a:3},
+
+{t:"Measuring performance results in terms of quantity, quality, cost, and time is considered:",o:["Output standards","Objectives","Controlling","Input standards"],a:0},
+
+{t:"All of the following are considered top (high-level) managers EXCEPT:",o:["Project leader","Executive vice president","Chief operating officer","Chairman of the board"],a:0},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"The organization structure is created by middle managers.",o:["True","False"," "," "],a:1},
+  
+{t:"Written direction increases duplication of efforts.",o:["True","False"," "," "],a:1},
+
+{t:"Specific plans specify the details of how the overall goals are to be achieved.",o:["True","False"," "," "],a:1},
+
+{t:"Structured interview requires little planning.",o:["True","False"," "," "],a:1},
+
+{t:"External controlling occurs through formal administrative systems.",o:["True","False"," "," "],a:0},
+
+{t:"Directing begins from the lower level to the top level in the organization hierarchy.",o:["True","False"," "," "],a:1},
+
+/* ================= MCQ ================= */
+
+{t:"The department head is:",o:["First line manager","Second line manager","Middle manager","Top manager"],a:2},
+
+{t:"Which of the following is NOT a benefit of planning?",o:["Controlling the work","Increase redundancy","Minimizes waste","Provides direction"],a:1},
+
+{t:"The direction that is required at all levels of organization is:",o:["Continuous activity","Related to human factor","Executive function","Pervasive function"],a:3},
+
+{t:"Which of the following is NOT a mode of active recruitment?",o:["School placement","Advertisement","Socialization","Employment agencies"],a:2},
+
+{t:"The chart that shows high-level management on the left and lower positions on the right is called:",o:["Vertical chart","Circular chart","Horizontal chart","Diagonal chart"],a:2},
+
+{t:"When decision makers are concerned with personal development of others, they apply:",o:["Directive style","Analytical style","Conceptual style","Behavioral style"],a:3},
+
+{t:"Flexible plans that set out general guidelines without limiting courses of action are called:",o:["Directional","Standing","Single-use","Specific"],a:0},
+
+{t:"When the head nurse consults nurses about the content of a problem before making a decision, this is:",o:["Consultative direction","Free rein direction","Automatic direction","Oral directions"],a:0},
+
+{t:"When the head nurse puts action plans for nurses, it is considered:",o:["Chain of command","Unity of command","Span of control","Specialization"],a:1},
+
+{t:"All of the following are considerations applied during staffing EXCEPT:",o:["Type of patients","Interpersonal skills","Staff needs and availability","Budget constraints"],a:1},
+
+{t:"The interview is important for all of the following EXCEPT:",o:["Applicant's dependability","Willingness and ability to work with others","Interest in the job","Contact with school graduation classes"],a:3},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Efficiency refers to getting the most output from the least amount of input.",o:["True","False"," "," "],a:0},
+
+{t:"Planning is a subsidiary function of management.",o:["True","False"," "," "],a:1},
+
+{t:"In oral direction, nurses get the opportunity to study the direction carefully.",o:["True","False"," "," "],a:1},
+
+{t:"Preliminary controls are accomplished after a work activity begins.",o:["True","False"," "," "],a:1},
+
+{t:"Recruitment is a process of attracting applicants for existing positions.",o:["True","False"," "," "],a:0},
+
+{t:"The organizational structure is created by middle managers.",o:["True","False"," "," "],a:1},
+
+{t:"The communication process can be completed without feedback.",o:["True","False"," "," "],a:1},
+
+{t:"Specific plans are clearly defined with little room for interpretation.",o:["True","False"," "," "],a:0},
+
+{t:"Nonprogrammed decisions involve routine problems that arise regularly.",o:["True","False"," "," "],a:1},
+
+{t:"The advanced system of staffing is based on patients and staff numbers.",o:["True","False"," "," "],a:1},
+
+{t:"Output standards measure work efforts that go into a performance task.",o:["True","False"," "," "],a:1},
+
+/* ================= MCQ ================= */
+
+{t:"Personal supervision and formal administrative systems are used in:",o:["Feed forward control","External control","Steering control","Internal control"],a:1},
+
+{t:"The plan which is designed to meet the needs of a unique situation is:",o:["Single use","Standing","Short term","Long term"],a:0},
+
+{t:"Framework of formal relationships refers to:",o:["Organizational structure","Staffing","Communication","Job descriptions"],a:0},
+
+{t:"When managers make decisions quickly without a lot of information, they apply:",o:["Analytical style","Directive style","Conceptual style","Behavioral style"],a:1},
+
+{t:"Communicating with yourself is:",o:["Intrapersonal communication","Interpersonal communication","Small group communication","One-to-group communication"],a:0},
+
+{t:"The type of control that is accomplished before beginning the work is:",o:["Concurrent","Post action","Intermediate","Preliminary"],a:3},
+
+{t:"A source for active recruitment includes:",o:["Investigation","Socialization","Advertisement","Induction"],a:2},
+
+{t:"The organizational chart that defines personnel names is:",o:["Manning chart","Skeleton chart","Master chart","Functional chart"],a:0},
+
+{t:"The management activity concerned with discipline of the workforce is:",o:["Directing","Supervision","Motivation","Communication"],a:1},
+
+{t:"The obligation of a subordinate to perform assigned duties is:",o:["Accountability","Authority","Responsibility","Commitment"],a:2},
+
+{t:"A type of planning designed for the entire organization is called:",o:["Directional plans","Strategic plans","Single-use plans","Specific plans"],a:1},
+
+{t:"Translating the message into verbal and non-verbal symbols is:",o:["Decoding","Action","Encoding","Feedback"],a:2},
+
+{t:"The type of directing that helps maintain accountability is:",o:["Oral","Automatic","Comprehension","Written"],a:3},
+
+{t:"A type of managerial decision is:",o:["Analytic","Structured","Nonprogrammed","Unstructured"],a:2},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Planning facilitates overlapping of tasks.",o:["True","False"," "," "],a:1},
+
+{t:"Input standards measure performance results.",o:["True","False"," "," "],a:1},
+
+{t:"Recruiters require technological skills.",o:["True","False"," "," "],a:0},
+
+{t:"A structured problem can lead to disaster if not resolved quickly.",o:["True","False"," "," "],a:1},
+
+{t:"Control activities are essential responsibilities of first-line managers.",o:["True","False"," "," "],a:1},
+
+{t:"Type of patients should be considered during the staffing process.",o:["True","False"," "," "],a:0},
+
+{t:"Policies are used as a means of downward communication.",o:["True","False"," "," "],a:0},
+
+{t:"Free rein direction will probably show the best and quickest results.",o:["True","False"," "," "],a:0},
+
+{t:"Lines of authority are an important factor of grapevine communication.",o:["True","False"," "," "],a:1},
+
+{t:"Operational plans cover from 5 to 11 years to ensure long-term goals.",o:["True","False"," "," "],a:1},
+
+{t:"Span of control states the number of nurses supervised by the head nurse.",o:["True","False"," "," "],a:0},
+
+{t:"Internal controlling allows self-control.",o:["True","False"," "," "],a:0},
+
+{t:"Problem solving is more comprehensive than decision making.",o:["True","False"," "," "],a:1},
+
+{t:"Consultative direction leads to better coordination and effective results.",o:["True","False"," "," "],a:0},
+
+{t:"Circular charts show lower-level management in the center.",o:["True","False"," "," "],a:1}, 
+
+/* ================= MCQ ================= */
+
+{t:"_____ measures work efforts that go into a performance task.",o:["Strategic plan","Input standards","Output standards","Controlling"],a:1},
+
+{t:"_____ is the obligation of a subordinate to perform the assigned duties.",o:["Accountability","Power","Authority","Responsibility"],a:3},
+
+{t:"_____ is specialization that increases output by making employees more efficient.",o:["Remuneration","Centralization","Flexibility","Division of work"],a:3},
+
+{t:"The director of nursing has the right to direct nursing personnel through:",o:["Responsibility","Accountability","Power","Authority"],a:3},
+
+{t:"All of the following are middle managers EXCEPT:",o:["Project leader","Department head","Plant manager","Supervisors"],a:3},
+
+{t:"Which of the following is NOT a benefit of nursing information systems?",o:["Reduce paperwork","Cost reduction","Automated tools of nursing documentation","More time at nursing station"],a:3},
+
+{t:"All of the following are characteristics of effective control EXCEPT:",o:["Acceptable to organizational members","Inflexible, cost-effective, and unrealistic","Accurate, fair, and objective","Positive and encourage self-control"],a:1},
+
+{t:"The manager applies the directing function to help in:",o:["Time management","Transfer plans into performance","Use of different tools","Power ability"],a:1},
+
+{t:"It is the process of actively attracting applicants for existing positions.",o:["Staffing","Selection","Recruitment","Interview"],a:2},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Examples of single-use plans are projects and budgets.",o:["True","False"," "," "],a:0},
+
+{t:"Internal controlling allows motivated individuals to exercise self-control in fulfilling job expectations.",o:["True","False"," "," "],a:0},
+
+{t:"Input standards measure performance results in terms of quantity, quality, cost, or time.",o:["True","False"," "," "],a:1},
+
+{t:"Supervision is a way of transmitting facts, thoughts, and values.",o:["True","False"," "," "],a:1},
+
+{t:"Informal organization connects organizational tasks.",o:["True","False"," "," "],a:1},
+
+{t:"Span of control is the distance between top management and workers in an organization.",o:["True","False"," "," "],a:1},
+
+{t:"Post-action feedback controls take place before an action is complete.",o:["True","False"," "," "],a:1},
+
+{t:"Preliminary controls are accomplished after a work activity begins.",o:["True","False"," "," "],a:1},
+/* ================= MCQ ================= */
+
+{t:"Which level of management is the manager described as a line manager?",o:["Supervisory","Project leader","Department head","Middle manager"],a:0},
+
+{t:"The manager applies the directing function to help in:",o:["Time management","Transfer plans into performance","Use of different tools","Power ability"],a:1},
+
+{t:"Which of the following management processes can be used to orient nurses about sick leave and absence?",o:["Planning","Directing","Staffing","Organizing"],a:2},
+
+{t:"When the head nurse assigns duties to nurses, this is considered:",o:["Chain of command","Span of control","Unity of command","Specialization"],a:2},
+
+{t:"The director of nursing has the right to direct nursing personnel through:",o:["Responsibility","Accountability","Power","Authority"],a:3},
+
+{t:"The nurse manager develops priorities for solving problems according to:",o:["What comes first","What appears to be easiest","What takes shorter time","According to the situation"],a:3},
+
+{t:"The manager has styles of leadership that have been identified as:",o:["Autocratic","Democratic","Participative","All of them"],a:3},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Employees adapt to changing strategies at work due to directing.",o:["True","False"," "," "],a:0},
+
+{t:"Supervision is a way of transmitting facts, thoughts, and values.",o:["True","False"," "," "],a:1},
+
+{t:"More experienced nurses need more supervision in the workplace.",o:["True","False"," "," "],a:1},
+
+{t:"Unity of command diminishes confusion, anger, and contradiction of orders.",o:["True","False"," "," "],a:0},
+
+{t:"Staffing is the responsibility of the director of nursing only.",o:["True","False"," "," "],a:1},
+
+/* ================= MCQ ================= */
+
+{t:"Systematic arrangement of activities is:",o:["Planning","Organizing","Controlling","Directing"],a:1},
+
+{t:"High-level management at the top with formal lines of authority down the hierarchy is:",o:["Vertical chart","Horizontal chart","Circular chart","Diagonal chart"],a:0},
+
+{t:"The performance of a single leading function is considered:",o:["Principle of objective","Principle of definition","Principle of specialization","Principle of coordination"],a:2},
+
+{t:"The chart that defines personnel titles of all positions in the organization is:",o:["Manning chart","Skeleton chart","Functional chart","Master chart"],a:0},
+
+{t:"Nurses agreeing to be morally responsible for consequences of their actions is:",o:["Accountability","Power","Responsibility","Authority"],a:0},
+
+{t:"A time frame from 5 to 10 years to ensure long-term organizational goals is:",o:["Directional planning","Strategic planning","Operational planning","Intermediate planning"],a:1},
+
+{t:"Plans that contain details of how overall goals are achieved are:",o:["Directional plans","Standing plans","Operational plans","Specific plans"],a:2},
+
+{t:"A type of planning that includes policies and procedures is:",o:["Standing plans","Short-term plans","Long-term plans","Single-use plans"],a:0},
+
+{t:"Determining present circumstances is the _____ step in strategic planning.",o:["First","Second","Third","Fourth"],a:1},
+
+{t:"The problem that can lead to disaster if not resolved quickly is:",o:["Structured","Crisis","Analytic","Unstructured"],a:1},
+
+{t:"When managers make decisions quickly without much information, they apply:",o:["Directive style","Analytical style","Conceptual style","Behavioral style"],a:0},
+
+{t:"The first step in the traditional problem-solving model is:",o:["Gathering data","Exploring alternatives","Selecting solution","Identifying the problem"],a:3},
+
+{t:"A common mistake when defining a problem is:",o:["Gathering data","Exploring solutions","Neglecting causes","Selecting solution"],a:2},
+
+{t:"If desired results are not achieved, the decision-making process must be:",o:["Renewed","Stopped","Canceled","Finished"],a:0},
+
+{t:"The head nurse’s level of management is:",o:["Top level","Middle level","Lower level","Operational level"],a:2},
+
+{t:"The degree to which nurses are involved in decision making is:",o:["Order","Decentralization","Centralization","Discipline"],a:2},
+
+{t:"The ability to analyze situations and distinguish cause and effect is:",o:["Human skills","Technical skills","Conceptual skills","Developmental skills"],a:2},
+
+{t:"Receiving orders from only one superior means:",o:["Unity of command","Unity of direction","Authority","Responsibility"],a:0},
+
+{t:"The process of reaching organizational goals using human and material resources is:",o:["Planning","Administration","Management","Leadership"],a:2},
+
+{t:"Which of the following is NOT a mode of active recruitment?",o:["School placement","Advertisement","Socialization","Employment agencies"],a:2},
+
+{t:"Which of the following is NOT a characteristic of recruiters?",o:["Strong interpersonal skills","Problem solving skills","Technology skills","Enthusiasm"],a:1},
+
+{t:"Measures work efforts that go into a performance task through:",o:["Strategic plan","Input standards","Output standards","Controlling"],a:1},
+
+{t:"Use of personal supervision and formal administrative systems occurs in:",o:["Preliminary controls","External controls","Concurrent controls","Internal controls"],a:1},
+
+{t:"Controls that take place after action completion and focus on end results are:",o:["Preliminary controls","Internal controls","Concurrent controls","Post-action controls"],a:3},
+
+{t:"The importance of control is:",o:["Identifying opportunities","Critical link back to planning","Coping with uncertainty","Handling complex situations"],a:1},
+
+{t:"Which is NOT a characteristic of effective control?",o:["Understandable","Inflexible","Accurate","Encourage self-control"],a:1},
+
+{t:"The management activity concerned with training and discipline of workforce is:",o:["Directing","Supervision","Motivation","Communication"],a:1},
+
+{t:"The type of directing with least resistance from subordinates is:",o:["Written","Autocratic","Consultative","Oral"],a:2},
+
+{t:"Giving instructions and counseling to nurses during work is:",o:["Organizing","Directing","Leadership","Communication"],a:1},
+
+{t:"When the director of human resources gives instructions to nurses, it is:",o:["Upward communication","Downward communication","Diagonal communication","Horizontal communication"],a:2},
+
+{t:"Translating messages into verbal and non-verbal symbols is:",o:["Encoding","Decoding","Action","Feedback"],a:0},
+
+{t:"A means of upward communication is:",o:["Suggestion boxes","Instructions","Policy","Procedure"],a:0},
+
+{t:"Inappropriate information systems are communication barriers related to:",o:["Physical","Physiological","System","Attitudinal"],a:2},
+
+/* ================= TRUE / FALSE ================= */
+
+{t:"Planning can be defined as retrospective thinking.",o:["True","False"," "," "],a:1},
+
+{t:"The communication process can be completed without feedback.",o:["True","False"," "," "],a:1},
+
+{t:"Unstructured interviews require little planning.",o:["True","False"," "," "],a:0},
+
+{t:"In decentralized scheduling, one supervisor plans coverage for all units.",o:["True","False"," "," "],a:1},
+
+{t:"A written order helps to maintain accuracy.",o:["True","False"," "," "],a:0},
+
+{t:"Motivation is issuing orders and instructions to subordinates.",o:["True","False"," "," "],a:1}
+
+];
+// ===== تحويل كل أسئلة True / False تلقائياً =====
+questions = questions.map(q=>{
+  if(typeof q.a === "boolean"){
+    return {
+      ...q,
+      o: ["True","False"],
+      a: q.a ? 0 : 1
+    };
+  }
+  return q;
+});
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=160*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
