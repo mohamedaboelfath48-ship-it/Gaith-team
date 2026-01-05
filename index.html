@@ -19,7 +19,7 @@ body{
     padding:30px 15px;
 }
 .header h1{
-    font-size:34px;
+    font-size:38px;
     letter-spacing:2px;
 }
 .header span{color:red}
@@ -28,62 +28,100 @@ body{
 /* ===== Container ===== */
 .container{
     width:92%;
-    max-width:500px;
+    max-width:520px;
     margin:auto;
 }
 
 /* ===== Accordion ===== */
 .exam-btn{
+    margin:20px 0;
     border-radius:30px;
-    margin:18px 0;
     overflow:hidden;
 }
 
+/* ===== Summary ===== */
 .exam-btn summary{
     list-style:none;
-    padding:20px;
-    font-size:22px;
+    padding:24px;
     cursor:pointer;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
-/* ===== Icon Circle ===== */
+/* ===== Centered Title ===== */
+.title-wrap{
+    display:flex;
+    align-items:center;
+    flex:1;
+}
+
+.exam-title{
+    flex:1;
+    text-align:center;
+    font-size:28px;   /* 🔥 أكبر */
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+/* ===== Icon ===== */
 .icon{
-    width:44px;
-    height:44px;
+    width:48px;
+    height:48px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:22px;
     margin-left:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,.35);
+    box-shadow:0 6px 16px rgba(0,0,0,.4);
 }
 
 /* ===== Colors ===== */
 .ped summary{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
 .obs summary{background:linear-gradient(90deg,#d66efd,#ff5db1)}
 .nut summary{background:linear-gradient(90deg,#56ab2f,#a8e063)}
-.man summary{background:linear-gradient(90deg,#6366f1,#0ea5e9)}
-
-/* ===== Strategies NEW COLOR ===== */
 .str summary{background:linear-gradient(90deg,#f59e0b,#f97316)}
 
 .icon.ped{background:#38bdf8}
 .icon.obs{background:#f472b6}
 .icon.nut{background:#4ade80}
-.icon.man{background:#818cf8}
 .icon.str{background:#fb923c}
+
+/* ===== Arrow ===== */
+.arrow{
+    font-size:22px;
+    transition:.5s cubic-bezier(.4,0,.2,1);
+}
+.exam-btn[open] .arrow{
+    transform:rotate(180deg) scale(1.2);
+}
+
+/* ===== Content Animation ===== */
+.content{
+    overflow:hidden;
+    background:#020617;
+    animation:accordion .5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes accordion{
+    from{
+        opacity:0;
+        transform:translateY(-15px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
 
 /* ===== Links ===== */
 .exam-btn a{
     display:block;
+    margin:12px;
+    padding:15px;
+    border-radius:22px;
     background:#111827;
-    margin:10px;
-    padding:14px;
-    border-radius:20px;
     color:white;
     text-decoration:none;
     font-size:16px;
@@ -91,11 +129,12 @@ body{
 }
 .exam-btn a:hover{
     background:#0ea5e9;
+    transform:scale(1.05);
 }
 
 /* ===== Telegram ===== */
 .telegram{
-    margin:45px auto;
+    margin:50px auto;
 }
 .telegram a{
     display:flex;
@@ -116,14 +155,13 @@ body{
     transition:.3s;
 }
 .telegram a:hover{
-    transform:scale(1.05);
+    transform:scale(1.08);
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <div class="header">
     <h1>GAITH TEAM <span>❤️</span></h1>
     <div class="sub">الامتحان في جيبك</div>
@@ -134,91 +172,65 @@ body{
 <!-- ===== طب أطفال ===== -->
 <details class="exam-btn ped">
 <summary>
-    <div style="display:flex;align-items:center;">
+    <div class="title-wrap">
         <div class="icon ped">👶</div>
-        طب أطفال
+        <div class="exam-title">طب أطفال</div>
     </div>
-    <span>▾</span>
+    <span class="arrow">▾</span>
 </summary>
-<a href="exam1/index.html">شامل 1</a>
-<a href="exam2/index.html">شامل 2</a>
-<a href="exam3/index.html">شامل 3</a>
-<a href="exam4/index.html">شامل 4</a>
-<a href="exam5/index.html">شامل 5</a>
+<div class="content">
+    <a href="#">شامل 1</a>
+    <a href="#">شامل 2</a>
+    <a href="#">شامل 3</a>
+</div>
 </details>
 
 <!-- ===== طب نسا ===== -->
 <details class="exam-btn obs">
 <summary>
-    <div style="display:flex;align-items:center;">
+    <div class="title-wrap">
         <div class="icon obs">🤰</div>
-        طب نسا
+        <div class="exam-title">طب نسا</div>
     </div>
-    <span>▾</span>
+    <span class="arrow">▾</span>
 </summary>
-<a href="exam6/index.html">شامل 1</a>
-<a href="exam7/index.html">شامل 2</a>
-<a href="exam8/index.html">شامل 3</a>
-<a href="exam9/index.html">شامل 4</a>
-<a href="exam10/index.html">شامل 5</a>
+<div class="content">
+    <a href="#">شامل 1</a>
+    <a href="#">شامل 2</a>
+</div>
 </details>
 
 <!-- ===== تغذية ===== -->
 <details class="exam-btn nut">
 <summary>
-    <div style="display:flex;align-items:center;">
+    <div class="title-wrap">
         <div class="icon nut">🥗</div>
-        تغذية
+        <div class="exam-title">تغذية</div>
     </div>
-    <span>▾</span>
+    <span class="arrow">▾</span>
 </summary>
-<a href="exam11/index.html">مراجعة المنهج</a>
-<a href="exam12/index.html">شامل 1</a>
-<a href="exam13/index.html">شامل 2</a>
-<a href="exam14/index.html">شامل 3</a>
-<a href="exam15/index.html">شامل 4</a>
-</details>
-
-<!-- ===== مبادئ إدارة ===== -->
-<details class="exam-btn man">
-<summary>
-    <div style="display:flex;align-items:center;">
-        <div class="icon man">🧠</div>
-        مبادئ إدارة
-    </div>
-    <span>▾</span>
-</summary>
-<a href="exam16/index.html">مراجعة أول 4 محاضرات</a>
-<a href="exam17/index.html">مراجعة باقي المنهج</a>
-<a href="exam18/index.html">بصموجة</a>
-<a href="exam19/index.html">شامل 1</a>
-<a href="exam20/index.html">شامل 2</a>
+<div class="content">
+    <a href="#">مراجعة</a>
+    <a href="#">شامل</a>
+</div>
 </details>
 
 <!-- ===== استراتيجيات ===== -->
 <details class="exam-btn str">
 <summary>
-    <div style="display:flex;align-items:center;">
+    <div class="title-wrap">
         <div class="icon str">🎯</div>
-        استراتيجيات
+        <div class="exam-title">استراتيجيات</div>
     </div>
-    <span>▾</span>
+    <span class="arrow">▾</span>
 </summary>
-<a href="exam21/index.html"> Introduction </a>
-<a href="exam22/index.html"> Teaching methods </a>
-<a href="exam23/index.html"> Teaching material(media)</a>
-<a href="exam24/index.html"> Active Learning </a>
-<a href="exam25/index.html"> مراجعة علي أول 4 محاضرات </a>
-<a href="exam26/index.html"> Case-Based Learning </a>
-<a href="exam27/index.html"> simulation based learning </a>
-<a href="exam28/index.html"> future trends </a>
-<a href="exam29/index.html"> role of nurse educator </a>
-<a href="exam30/index.html"> مراجعة علي ثان أربع محاضرات </a>
-<a href="exam31/index.html"> شـــــامــــــل 1</a>
-<a href="exam32/index.html">شـــــامــــــل 2</a>
+<div class="content">
+    <a href="#">Introduction</a>
+    <a href="#">Active Learning</a>
+    <a href="#">Case Based</a>
+</div>
 </details>
 
-<!-- ===== Telegram ===== -->
 <div class="telegram">
 <a href="https://t.me/nursing2bu" target="_blank">
 ✈️ Telegram انضم إلينا على
@@ -226,6 +238,20 @@ body{
 </div>
 
 </div>
+
+<!-- ===== One Open Only Script ===== -->
+<script>
+const details = document.querySelectorAll("details");
+details.forEach(d => {
+  d.addEventListener("toggle", () => {
+    if (d.open) {
+      details.forEach(o => {
+        if (o !== d) o.removeAttribute("open");
+      });
+    }
+  });
+});
+</script>
+
 </body>
 </html>
-
