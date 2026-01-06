@@ -5,86 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
-
 <style>
-/* ===== RESET & BASE (Mobile First) ===== */
-*{box-sizing:border-box}
 body{
     margin:0;
-    font-family:'Cairo',sans-serif;
+    font-family:Cairo,sans-serif;
     background:linear-gradient(180deg,#0b132b,#1c2541);
     color:#fff;
     text-align:center;
 }
 
-/* ===== HEADER ===== */
-.header{padding:24px 12px}
-.header h1{font-size:30px;margin:0}
+/* ===== Header ===== */
+.header{padding:30px 15px}
+.header h1{font-size:38px}
 .header span{color:red}
-.sub{opacity:.7;margin-top:6px}
+.sub{opacity:.7}
 
-/* ===== CONTAINER ===== */
-.container{width:94%;max-width:520px;margin:auto}
+/* ===== Container ===== */
+.container{width:92%;max-width:520px;margin:auto}
 
-/* ===== SECTION BUTTON ===== */
-.section{
-    margin:18px 0;
-    border-radius:28px;
+/* ===== Accordion ===== */
+.exam-btn{
+    margin:22px 0;
+    border-radius:30px;
     overflow:hidden;
 }
 
-.section-header{
-    padding:20px;
+/* ===== Summary ===== */
+.exam-btn summary{
+    list-style:none;
+    padding:24px;
+    cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    cursor:pointer;
 }
 
-.section-title{
-    font-size:24px;
-    font-weight:800;
+/* ===== Title ===== */
+.title-wrap{display:flex;align-items:center;flex:1}
+.exam-title{
     flex:1;
     text-align:center;
+    font-size:28px;
+    font-weight:800;
 }
 
+/* ===== Icon ===== */
 .icon{
-    width:42px;height:42px;
+    width:48px;height:48px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
-    margin-left:10px;
+    font-size:22px;
+    margin-left:12px;
 }
 
-.arrow{transition:.3s}
-
-/* ===== COLORS ===== */
-.ped .section-header{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
-.obs .section-header{background:linear-gradient(90deg,#d66efd,#ff5db1)}
-.nut .section-header{background:linear-gradient(90deg,#56ab2f,#a8e063)}
-.str .section-header{background:linear-gradient(90deg,#f59e0b,#f97316)}
+/* ===== Colors ===== */
+.ped summary{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
+.obs summary{background:linear-gradient(90deg,#d66efd,#ff5db1)}
+.nut summary{background:linear-gradient(90deg,#56ab2f,#a8e063)}
+.str summary{background:linear-gradient(90deg,#f59e0b,#f97316)}
 
 .icon.ped{background:#38bdf8}
 .icon.obs{background:#f472b6}
 .icon.nut{background:#4ade80}
 .icon.str{background:#fb923c}
 
-/* ===== CONTENT ===== */
-.section-content{
-    display:none;
+/* ===== Arrow ===== */
+.arrow{transition:.4s}
+.exam-btn[open] .arrow{transform:rotate(180deg) scale(1.2)}
+
+/* ===== Content ===== */
+.content{
     background:#020617;
-    padding:10px 0 18px;
+    padding:10px 0 20px;
+    animation:open .4s ease;
+}
+@keyframes open{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-.section.open .section-content{display:block}
-.section.open .arrow{transform:rotate(180deg)}
-
-/* ===== LINKS ===== */
-.section-content a{
+/* ===== Links ===== */
+.exam-btn a{
     display:block;
     margin:12px;
     padding:15px;
@@ -92,35 +95,24 @@ body{
     background:#111827;
     color:#fff;
     text-decoration:none;
-    font-weight:600;
+    transition:.3s;
 }
+.exam-btn a:hover{transform:scale(1.05)}
 
-.section-content a.final{
+/* ===== FINAL ===== */
+.exam-btn a.final{
     background:linear-gradient(90deg,#facc15,#f97316);
     color:#1f2937;
     font-weight:800;
 }
 
-/* ===== LECTURES (STRATEGIES) ===== */
-.lecture{
-    margin:14px;
-    background:#111827;
-    border-radius:24px;
-    padding:14px;
-}
-
-.lecture h3{
-    margin:0 0 10px;
-    font-size:18px;
-}
-
-/* ===== TELEGRAM ===== */
-.telegram{margin:40px auto}
+/* ===== Telegram ===== */
+.telegram{margin:55px auto}
 .telegram a{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:10px;
+    gap:12px;
     width:90%;
     max-width:360px;
     margin:auto;
@@ -130,12 +122,7 @@ body{
     color:#fff;
     text-decoration:none;
     font-size:18px;
-    font-weight:700;
-}
-
-/* ===== TABLET & UP ===== */
-@media(min-width:768px){
-    .section-title{font-size:26px}
+    font-weight:600;
 }
 </style>
 </head>
@@ -150,86 +137,195 @@ body{
 <div class="container">
 
 <!-- ===== طب أطفال ===== -->
-<div class="section ped">
-<div class="section-header">
+<details class="exam-btn ped main-details">
+<summary>
+<div class="title-wrap">
 <div class="icon ped">👶</div>
-<div class="section-title">طب أطفال</div>
-<div class="arrow">▾</div>
+<div class="exam-title">طب أطفال</div>
 </div>
-<div class="section-content">
-<a class="final" href="exam1/index.html">شامل 1</a>
-<a class="final" href="exam2/index.html">شامل 2</a>
-<a class="final" href="exam3/index.html">شامل 3</a>
-<a class="final" href="exam4/index.html">شامل 4</a>
-<a class="final" href="exam5/index.html">شامل 5</a>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam1/index.html" class="final">شامل 1</a>
+<a href="exam2/index.html" class="final">شامل 2</a>
+<a href="exam3/index.html" class="final">شامل 3</a>
+<a href="exam4/index.html" class="final">شامل 4</a>
+<a href="exam5/index.html" class="final">شامل 5</a>
 </div>
-</div>
+</details>
 
 <!-- ===== طب نسا ===== -->
-<div class="section obs">
-<div class="section-header">
+<details class="exam-btn obs main-details">
+<summary>
+<div class="title-wrap">
 <div class="icon obs">🤰</div>
-<div class="section-title">طب نسا</div>
-<div class="arrow">▾</div>
+<div class="exam-title">طب نسا</div>
 </div>
-<div class="section-content">
-<a class="final" href="exam6/index.html">شامل 1</a>
-<a class="final" href="exam7/index.html">شامل 2</a>
-<a class="final" href="exam8/index.html">شامل 3</a>
-<a class="final" href="exam9/index.html">شامل 4</a>
-<a class="final" href="exam10/index.html">شامل 5</a>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam6/index.html" class="final">شامل 1</a>
+<a href="exam7/index.html" class="final">شامل 2</a>
+<a href="exam8/index.html" class="final">شامل 3</a>
+<a href="exam9/index.html" class="final">شامل 4</a>
+<a href="exam10/index.html" class="final">شامل 5</a>
 </div>
-</div>
+</details>
 
 <!-- ===== تغذية ===== -->
-<div class="section nut">
-<div class="section-header">
+<details class="exam-btn nut main-details">
+<summary>
+<div class="title-wrap">
 <div class="icon nut">🥗</div>
-<div class="section-title">تغذية</div>
-<div class="arrow">▾</div>
+<div class="exam-title">تغذية</div>
 </div>
-<div class="section-content">
-<a class="final" href="exam11/index.html">مراجعة المنهج</a>
-<a class="final" href="exam12/index.html">شامل 1</a>
-<a class="final" href="exam13/index.html">شامل 2</a>
-<a class="final" href="exam14/index.html">شامل 3</a>
-<a class="final" href="exam15/index.html">شامل 4</a>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam11/index.html" class="final">مراجعة المنهج</a>
+<a href="exam12/index.html" class="final">شامل 1</a>
+<a href="exam13/index.html" class="final">شامل 2</a>
+<a href="exam14/index.html" class="final">شامل 3</a>
+<a href="exam15/index.html" class="final">شامل 4</a>
 </div>
-</div>
-
+</details>
 <!-- ===== استراتيجيات ===== -->
-<div class="section str">
-<div class="section-header">
+<details class="exam-btn str main-details">
+<summary>
+<div class="title-wrap">
 <div class="icon str">🎯</div>
-<div class="section-title">استراتيجيات</div>
-<div class="arrow">▾</div>
+<div class="exam-title">استراتيجيات</div>
 </div>
+<span class="arrow">▾</span>
+</summary>
 
-<div class="section-content">
-
-<div class="lecture">
-<h3>Introduction</h3>
-<a href="exam21/questions.html">❓ أسئلة</a>
-<a href="exam21/summary.html">📘 ملخص</a>
+<div class="content">
+<!-- ===== Lecture 1 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Introduction</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam21/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam21/summary.html">📘 ملخص للمحاضرة</a>
 <a href="exam21/mindmap.html">🧠 خريطة ذهنية</a>
 </div>
+</details>
 
-<div class="lecture">
-<h3>Teaching Methods</h3>
-<a href="exam22/questions.html">❓ أسئلة</a>
-<a href="exam22/summary.html">📘 ملخص</a>
+<!-- ===== Lecture 2 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Teaching Methods</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam22/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam22/summary.html">📘 ملخص للمحاضرة</a>
 <a href="exam22/mindmap.html">🧠 خريطة ذهنية</a>
 </div>
+</details>
 
-<div class="lecture">
-<h3>Teaching Material</h3>
-<a href="exam23/questions.html">❓ أسئلة</a>
-<a href="exam23/summary.html">📘 ملخص</a>
+<!-- ===== Lecture 3 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Teaching Material</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam23/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam23/summary.html">📘 ملخص للمحاضرة</a>
 <a href="exam23/mindmap.html">🧠 خريطة ذهنية</a>
 </div>
+</details>
 
+<!-- ===== Lecture 4 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Active Learning</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam24/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam24/summary.html">📘 ملخص للمحاضرة</a>
+<a href="exam24/mindmap.html">🧠 خريطة ذهنية</a>
 </div>
+</details>
+
+<!-- ===== Review First 4 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">مراجعة أول 4 محاضرات</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam25/questions.html">❓ أسئلة المراجعة</a>
 </div>
+</details>
+
+<!-- ===== Lecture 5 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Case-Based Learning</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam26/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam26/summary.html">📘 ملخص للمحاضرة</a>
+<a href="exam26/mindmap.html">🧠 خريطة ذهنية</a>
+</div>
+</details>
+
+<!-- ===== Lecture 6 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Simulation-Based Learning</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam27/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam27/summary.html">📘 ملخص للمحاضرة</a>
+<a href="exam27/mindmap.html">🧠 خريطة ذهنية</a>
+</div>
+</details>
+
+<!-- ===== Lecture 7 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Future Trends</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam28/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam28/summary.html">📘 ملخص للمحاضرة</a>
+<a href="exam28/mindmap.html">🧠 خريطة ذهنية</a>
+</div>
+</details>
+
+<!-- ===== Lecture 8 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">Role of Nurse Educator</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam29/questions.html">❓ أسئلة على المحاضرة</a>
+<a href="exam29/summary.html">📘 ملخص للمحاضرة</a>
+<a href="exam29/mindmap.html">🧠 خريطة ذهنية</a>
+</div>
+</details>
+
+<!-- ===== Review Second 4 ===== -->
+<details class="exam-btn">
+<summary>
+<div class="exam-title" style="font-size:20px">مراجعة ثاني 4 محاضرات</div>
+<span class="arrow">▾</span>
+</summary>
+<div class="content">
+<a href="exam30/questions.html">❓ أسئلة المراجعة</a>
+</div>
+</details>
+
 
 <div class="telegram">
 <a href="https://t.me/nursing2bu" target="_blank">✈️ انضم إلينا على Telegram</a>
@@ -237,14 +333,17 @@ body{
 
 </div>
 
+<!-- ===== JavaScript FIXED ===== -->
 <script>
-document.querySelectorAll('.section-header').forEach(h=>{
-  h.addEventListener('click',()=>{
-    const section = h.parentElement;
-    document.querySelectorAll('.section').forEach(s=>{
-      if(s!==section) s.classList.remove('open');
-    });
-    section.classList.toggle('open');
+const mains = document.querySelectorAll(".main-details");
+
+mains.forEach(d=>{
+  d.addEventListener("toggle", ()=>{
+    if(d.open){
+      mains.forEach(o=>{
+        if(o !== d) o.removeAttribute("open");
+      });
+    }
   });
 });
 </script>
