@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+  {"t": "What is the primary goal of Case-Based Learning (CBL) in nursing education?", "o": ["Memorization of medical terms", "Placing students in clinical decision-making roles", "Reducing the need for clinical rotations", "Replacing traditional textbooks"], "a": 1},
+  {"t": "Which educational philosophy suggests that learners actively construct knowledge through experience?", "o": ["Behaviorism", "Constructivism", "Positivism", "Essentialism"], "a": 1},
+  {"t": "CBL replicates clinical environments to make learning relevant. This is an application of:", "o": ["Situated Learning Theory", "Cognitive Load Theory", "Social Learning Theory", "Classical Conditioning"], "a": 0},
+  {"t": "According to Adult Learning Principles, adults are primarily motivated by:", "o": ["Abstract theories", "Relevance and practical solutions", "External rewards", "Passive observation"], "a": 1},
+  {"t": "In Bloom's Taxonomy, 'judging decisions and outcomes' refers to which level?", "o": ["Analysis", "Application", "Evaluation", "Creation"], "a": 2},
+  {"t": "Which component of CBL involves a detailed narrative of a patient's condition?", "o": ["Learning Objectives", "Case Scenario", "Problem Identification", "Reflection"], "a": 1},
+  {"t": "What is the purpose of 'Problem Identification' in a CBL session?", "o": ["To assign grades to students", "To identify key issues like diagnosis and complications", "To write a patient's discharge summary", "To replace the facilitator's role"], "a": 1},
+  {"t": "During 'Analysis and Discussion', what is the role of the facilitator?", "o": ["To provide all the answers immediately", "To guide discussion using open-ended questions", "To remain silent throughout the session", "To lecture for the entire duration"], "a": 1},
+  {"t": "Which type of case focuses on moral dilemmas and professional responsibilities?", "o": ["Clinical Case", "Psychosocial Case", "Ethical Case", "Interdisciplinary Case"], "a": 2},
+  {"t": "An 'Interdisciplinary Case' in nursing education typically involves:", "o": ["Only one nursing student", "Collaboration across various healthcare roles", "Focusing solely on lab results", "Ignoring the patient's family"], "a": 1},
+  {"t": "Which of the following is a benefit of CBL regarding 'Clinical Judgment'?", "o": ["It eliminates the need for clinical practice", "It develops reasoning skills for complex patient care", "It focuses only on simple, routine tasks", "It discourages students from asking questions"], "a": 1},
+  {"t": "What is a common challenge in implementing CBL?", "o": ["It requires less time than traditional lectures", "Evaluating reasoning and participation can be subjective", "Students find it too easy and boring", "It does not require any preparation"], "a": 1},
+  {"t": "How can 'Assessment Complexity' in CBL be addressed?", "o": ["By avoiding assessments altogether", "By using rubrics and peer evaluation", "By only using multiple-choice tests", "By letting students grade themselves without criteria"], "a": 1},
+  {"t": "In the 'Step-by-Step Guide' for designing CBL, what is the first step?", "o": ["Develop the Case Scenario", "Define Learning Objectives", "Prepare Supporting Materials", "Assign Tasks"], "a": 1},
+  {"t": "Which 'Case Type' would be most appropriate for a patient with sepsis?", "o": ["Psychosocial Case", "Clinical Case", "Ethical Case", "Interdisciplinary Case"], "a": 1},
+  {"t": "What does 'Reflection and Feedback' help students with?", "o": ["Memorizing the patient's name", "Enhancing insight and growth through the learning process", "Avoiding future clinical rotations", "Reducing the time spent in class"], "a": 1},
+  {"t": "Which philosophy is CBL most closely aligned with?", "o": ["Constructivism", "Objectivism", "Perennialism", "Realism"], "a": 0},
+  {"t": "CBL fosters which of the following essential nursing skills?", "o": ["Passive listening", "Critical thinking and ethical reasoning", "Rote memorization", "Isolation from other healthcare professionals"], "a": 1},
+  {"t": "A 'Psychosocial Case' might highlight which aspect of care?", "o": ["Surgical techniques", "Emotional, cultural, or social aspects", "Pharmacological dosages", "Advanced life support protocols"], "a": 1},
+  {"t": "What is a solution for 'Student Readiness' challenges in CBL?", "o": ["Providing pre-reading materials and scaffolded questions", "Canceling the session if students are unprepared", "Giving students the answers before the session", "Ignoring the lack of foundational knowledge"], "a": 0},
+  {"t": "Which level of Bloom's Taxonomy involves 'designing care plans'?", "o": ["Analysis", "Evaluation", "Creation", "Application"], "a": 2},
+  {"t": "In CBL, 'Decision-Making and Planning' requires students to:", "o": ["Follow a script provided by the teacher", "Propose a care plan and justify their choices", "Wait for the doctor to make all decisions", "Only focus on the patient's physical symptoms"], "a": 1},
+  {"t": "What is the impact of CBL on 'Communication Skills'?", "o": ["It has no impact", "It improves articulation, listening, and teamwork", "It makes students more hesitant to speak", "It focuses only on written communication"], "a": 1},
+  {"t": "Which of the following is NOT a component of a well-designed CBL activity?", "o": ["Case Scenario", "Learning Objectives", "Traditional Lecture-only format", "Reflection and Feedback"], "a": 2},
+  {"t": "CBL is described as a 'transformative educational strategy' because it:", "o": ["Changes the classroom into a hospital", "Immerses students in realistic clinical scenarios", "Replaces all nursing instructors with AI", "Makes nursing exams unnecessary"], "a": 1},
+  {"t": "What is the primary focus of a 'Clinical Case'?", "o": ["Legal issues in nursing", "Diagnosis, treatment, and nursing care", "Hospital architecture", "History of nursing education"], "a": 1},
+  {"t": "How does CBL support 'Ethical Sensitivity'?", "o": ["By teaching students to ignore patient values", "By encouraging reflection on moral and professional responsibilities", "By providing a single 'correct' answer for every dilemma", "By focusing only on technical skills"], "a": 1},
+  {"t": "Which strategy is used for 'Classroom Integration' of CBL?", "o": ["Dividing students into small groups for analysis", "Individual silent reading for the entire class", "Watching movies unrelated to nursing", "Avoiding any group discussion"], "a": 0},
+  {"t": "What is a suggested solution for 'Time and Resource Demands' in CBL?", "o": ["Hiring more staff", "Integrating CBL selectively and using blended formats", "Eliminating all other subjects", "Reducing the number of students"], "a": 1},
+  {"t": "In the sample case of 'Acute Chest Pain', which is a learning objective?", "o": ["Memorizing the hospital's address", "Initiating emergency interventions", "Cleaning the ER floor", "Ordering lunch for the cardiology team"], "a": 1},
+  {"t": "CBL prepares students for the 'unpredictable world of healthcare' by:", "o": ["Providing predictable and easy cases", "Transforming them into active problem-solvers", "Focusing only on historical cases", "Teaching them to avoid complex situations"], "a": 1},
+  {"t": "Which theory states that learning is most effective when embedded in authentic contexts?", "o": ["Situated Learning Theory", "Behavioral Theory", "Humanistic Theory", "Cognitive Theory"], "a": 0},
+  {"t": "What should a 'Case Scenario' include to be effective?", "o": ["Only the patient's age", "Patient history, clinical data, and potential complications", "A list of definitions from a textbook", "The facilitator's personal opinions"], "a": 1},
+  {"t": "What is the benefit of 'Confidence Building' in CBL?", "o": ["It makes students overconfident", "It prepares students for real-world clinical scenarios", "It ensures students never make mistakes", "It replaces the need for clinical supervision"], "a": 1},
+  {"t": "Which activity is part of the 'Reflect and Evaluate' step?", "o": ["Group debriefing and using rubrics", "Starting a new case immediately", "Taking a break without discussion", "Ignoring student feedback"], "a": 0},
+  {"t": "CBL aligns with Adult Learning Principles because adults are:", "o": ["Passive learners", "Self-directed and motivated by relevance", "Only interested in grades", "Unable to solve problems"], "a": 1},
+  {"t": "What is the 'Challenge' related to 'Case Design Quality'?", "o": ["Cases are too short", "Poorly written or unrealistic cases reduce effectiveness", "Cases are too expensive to buy", "Cases are only available in English"], "a": 1},
+  {"t": "In CBL, 'Analysis and Discussion' involves:", "o": ["Individual work only", "Group-based exploration of interventions and rationales", "The teacher giving a 2-hour lecture", "Students memorizing the case scenario"], "a": 1},
+  {"t": "Which case type involves 'End-of-life decisions in oncology'?", "o": ["Clinical Case", "Ethical Case", "Psychosocial Case", "Interdisciplinary Case"], "a": 1},
+  {"t": "What is the role of 'Multimedia elements' in online CBL?", "o": ["To distract students", "To incorporate videos, voice notes, and virtual labs", "To replace the need for a case scenario", "To make the course more expensive"], "a": 1},
+  {"t": "CBL fosters 'Interdisciplinary Collaboration' which is essential for:", "o": ["Modern nursing practice", "Individual study", "Passing a history exam", "Reducing the number of nurses"], "a": 0},
+  {"t": "What does 'Scaffolding learning' mean in the context of CBL?", "o": ["Building a physical structure in the classroom", "Providing guided questions to support students", "Making the case as difficult as possible from the start", "Letting students work without any help"], "a": 1},
+  {"t": "Which of the following is an example of a 'Probing Question' used by a facilitator?", "o": ["'What time is it?'", "'What is the most urgent issue?'", "'Did you read the chapter?'", "'Is the patient male or female?'"], "a": 1},
+  {"t": "CBL transforms students from 'passive learners' into:", "o": ["Active problem-solvers", "Medical doctors", "Hospital administrators", "Textbook authors"], "a": 0},
+  {"t": "Which component of CBL encourages 'prioritization and clinical reasoning'?", "o": ["Case Scenario", "Problem Identification", "Learning Objectives", "Reflection"], "a": 1},
+  {"t": "What is the impact of CBL on 'Engagement and Motivation'?", "o": ["It decreases interest", "It increases interest through relevant and challenging content", "It has no effect on motivation", "It makes students want to quit nursing"], "a": 1},
+  {"t": "In 'Online and Hybrid Learning', asynchronous discussion forums are used for:", "o": ["Socializing only", "Case analysis", "Taking attendance", "Replacing the case scenario"], "a": 1},
+  {"t": "Which step in designing a CBL session involves 'Charts, lab results, and medication lists'?", "o": ["Define Learning Objectives", "Prepare Supporting Materials", "Assign Tasks", "Reflect and Evaluate"], "a": 1},
+  {"t": "What is the focus of a 'Psychosocial Case' involving an elderly patient refusing medication?", "o": ["Pharmacology", "Emotional, cultural, or social aspects", "Surgical intervention", "Financial management"], "a": 1},
+  {"t": "CBL is a 'cornerstone' of modern nursing education because it prepares students for:", "o": ["The predictable world of healthcare", "The unpredictable and ethically complex world of healthcare", "A career in research only", "Working alone without a team"], "a": 1},
+  {"t": "Which level of Bloom's Taxonomy is 'Breaking down information into components'?", "o": ["Application", "Analysis", "Evaluation", "Creation"], "a": 1},
+  {"t": "What is a key feature of 'Situated Learning Theory'?", "o": ["Learning is abstract", "Learning is embedded in authentic contexts", "Learning happens only in a classroom", "Learning is independent of context"], "a": 1},
+  {"t": "In the 'Acute Chest Pain' sample case, 'Simulation of emergency response' is an:", "o": ["Objective", "Activity", "Evaluation", "Scenario"], "a": 1},
+  {"t": "What does 'Cultural and Ethical Integration' in CBL promote?", "o": ["Exclusivity", "Inclusivity and consideration of patient values", "Ignoring ethical dilemmas", "Standardizing all patient care"], "a": 1},
+  {"t": "Which of the following is a 'Solution' for 'Case Design Quality'?", "o": ["Using authentic, diverse, and well-structured scenarios", "Using the same case for every class", "Making cases as short as possible", "Avoiding the use of clinical data"], "a": 0},
+  {"t": "Case-Based Learning (CBL) is a traditional lecture-based method.", "o": ["True", "False"], "a": 1},
+  {"t": "Constructivist philosophy suggests that learners are passive recipients of knowledge.", "o": ["True", "False"], "a": 1},
+  {"t": "Situated Learning Theory emphasizes that learning is most effective in authentic contexts.", "o": ["True", "False"], "a": 0},
+  {"t": "Bloom's Taxonomy 'Application' level involves using knowledge in new situations.", "o": ["True", "False"], "a": 0},
+  {"t": "A Case Scenario should only include the patient's medical diagnosis.", "o": ["True", "False"], "a": 1},
+  {"t": "Problem Identification in CBL encourages prioritization and clinical reasoning.", "o": ["True", "False"], "a": 0},
+  {"t": "The facilitator in CBL should provide all the answers to the students.", "o": ["True", "False"], "a": 1},
+  {"t": "Ethical cases explore moral dilemmas and professional responsibilities.", "o": ["True", "False"], "a": 0},
+  {"t": "CBL can be integrated into both classroom and clinical settings.", "o": ["True", "False"], "a": 0},
+  {"t": "One of the benefits of CBL is that it decreases student engagement.", "o": ["True", "False"], "a": 1},
+  {"t": "CBL requires more time and preparation than traditional lectures.", "o": ["True", "False"], "a": 0},
+  {"t": "Rubrics can be used to make the assessment of CBL more objective.", "o": ["True", "False"], "a": 0},
+  {"t": "Scaffolding learning involves providing pre-reading materials to students.", "o": ["True", "False"], "a": 0},
+  {"t": "CBL is only suitable for online learning environments.", "o": ["True", "False"], "a": 1},
+  {"t": "Reflective writing helps students process their emotional responses to a case.", "o": ["True", "False"], "a": 0}
+
+];
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
