@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">05:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+               {t:"Which of the following is a primary driver of change in nursing education?",o:["Traditional learning philosophies","Technological advancements like AI and VR","Decreasing healthcare demands","Teacher-centered models"],a:1},
+            {t:"How does Artificial Intelligence (AI) personalize learning in nursing?",o:["By replacing human educators entirely","By tailoring content to individual student needs","By focusing only on theoretical knowledge","By eliminating the need for feedback"],a:1},
+            {t:"Which technology overlays digital information onto real-world settings?",o:["Virtual Reality (VR)","Augmented Reality (AR)","Gamification","Microlearning"],a:1},
+            {t:"What is the main focus of Competency-Based Education (CBE)?",o:["Time spent in the classroom","Mastery of real-world skills and clinical readiness","Memorizing historical nursing facts","Completing a fixed number of hours"],a:1},
+            {t:"Which strategy involves studying theory independently and using class time for discussion?",o:["Flipped Classroom","Traditional Lecture","Microlearning","Gamification"],a:0},
+            {t:"What is 'Green Nursing' primarily concerned with?",o:["Using only green-colored equipment","Caring for people and the planet simultaneously","Focusing solely on patient costs","Increasing hospital waste"],a:1},
+            {t:"Which role of the future nurse educator involves using analytics to track student progress?",o:["Facilitator of Innovation","Data-Informed Mentor","Global Collaborator","Ethical Guardian"],a:1},
+            {t:"What is a suggested solution for the 'Digital Divide' challenge?",o:["Use more expensive technology","Provide offline alternatives and institutional support","Ignore students without internet access","Focus only on high-tech simulations"],a:1},
+            {t:"Gamification in nursing education is used to:",o:["Reduce student engagement","Boost engagement through points, levels, and challenges","Replace clinical practice","Simplify complex theories into games only"],a:1},
+            {t:"Which of the following is a benefit of 'Microlearning'?",o:["It requires long hours of study","It is ideal for busy students and on-the-go revision","It focuses on broad, non-specific topics","It is only accessible via desktop computers"],a:1},
+            {t:"What does 'Ethical Guardian' mean for a nurse educator?",o:["Protect the school's budget","Ensuring tech-enhanced learning remains humane and inclusive","Monitoring student attendance","Designing virtual reality scenarios"],a:1},
+            {t:"Which global challenge highlights the need for culturally competent nurses?",o:["Decreasing migration","Pandemics and climate change","Stable aging populations","Uniform patient needs"],a:1},
+            {t:"In 'Green Nursing', what is a recommended role for nurses?",o:["Use single-use plastic trays","Recycle properly and separate medical waste","Increase energy consumption","Avoid teaching others about sustainability"],a:1},
+            {t:"Which technology allows students to practice procedures in a fully immersive environment?",o:["Augmented Reality (AR)","Virtual Reality (VR)","Mobile Learning","Chatbots"],a:1},
+            {t:"What is the 'Ethical Concern' related to AI in nursing education?",o:["High cost","AI Bias reinforcing stereotypes","Lack of engagement","Technical glitches"],a:1},
+            {t:"'Hybrid Classrooms' are characterized by:",o:["Only face-to-face learning","Combining online and face-to-face learning","Only online learning","Teacher-centered lectures"],a:1},
+            {t:"Which benefit refers to making learning more interactive and enjoyable?",o:["Personalized Learning","Enhanced Engagement","Global Competence","Skill Mastery"],a:1},
+            {t:"What is a key recommendation for educators preparing for the future?",o:["Avoid new technologies","Pilot innovations in small groups","Focus only on local health issues","Discourage digital literacy"],a:1},
+            {t:"'Green Nursing' helps protect public health by:",o:["Increasing pollution","Reducing waste and pollution","Using more toxic cleaners","Saving hospital space only"],a:1},
+            {t:"Which role involves engaging in international partnerships and virtual exchanges?",o:["Facilitator of Innovation","Global Collaborator","Ethical Guardian","Data-Informed Mentor"],a:1},
+            {t:"What is the primary goal of 'Competency-Based Education'?",o:["To ensure students spend enough time in class","To ensure students are truly ready for clinical practice","To reduce the number of exams","To focus on theoretical mastery only"],a:1},
+            {t:"Which of the following is an example of 'Green Nursing' in practice?",o:["Using single-use plastic gowns","Using reusable items like washable gowns","Leaving lights on in empty rooms","Mixing medical waste with regular trash"],a:1},
+            {t:"'Mobile Learning' is best described as:",o:["Learning while driving","Short modules accessible via smartphones","Learning in a moving classroom","Using only mobile robots for teaching"],a:1},
+            {t:"What is the 'Suggested Solution' for 'Over-reliance on Tech'?",o:["Stop using technology","Balance digital tools with interpersonal engagement","Use more advanced AI","Focus only on virtual reality"],a:1},
+            {t:"Which shift in educational philosophy is occurring in nursing?",o:["From learner-centered to teacher-centered","From teacher-centered to learner-centered","From lifelong learning to fixed-term learning","From competency-based to time-based"],a:1},
+            {t:"AI-powered chatbots in education provide:",o:["24/7 support and adaptive quizzes","Physical clinical supervision","Surgical assistance","Emotional counseling only"],a:0},
+            {t:"Which benefit ensures students are exposed to international health issues?",o:["Skill Mastery","Global Competence","Flexibility","Personalized Learning"],a:1},
+            {t:"'Privacy and Data Security' is an ethical consideration because:",o:["Technology is too expensive","Student data may be exposed or misused","Students don't like sharing data","It reduces engagement"],a:1},
+            {t:"What is the 'Vision' for the future of nursing education?",o:["Purely digital and automated","Human-centered, globally connected, and ethically grounded","Focused only on local clinical skills","Returning to traditional lecture models"],a:1},
+            {t:"In 'Green Nursing', nurses should choose:",o:["Toxic cleaners for better disinfection","Eco-friendly products like non-toxic cleaners","The cheapest products regardless of environment","Products with the most plastic packaging"],a:1},
+            {t:"Which technology is ideal for pharmacology and anatomy modules?",o:["Flipped Classroom","Gamification","Traditional textbooks","Teacher-centered lectures"],a:1},
+            {t:"'Flipped Classrooms' promote:",o:["Passive listening","Discussion and application during class time","Independent study only","Teacher-led lectures only"],a:1},
+            {t:"What is a driver of change related to 'Evolving Patient Needs'?",o:["Decreasing chronic diseases","Aging populations and mental health issues","Younger, healthier populations","Less specialized nursing care"],a:1},
+            {t:"'Data-Informed Mentors' use analytics to:",o:["Grade students faster","Track student progress and personalize support","Replace the need for mentors","Monitor teacher performance only"],a:1},
+            {t:"Which challenge is addressed by using 'transparent, inclusive data sets'?",o:["Digital Divide","AI Bias","Privacy","Over-reliance on Tech"],a:1},
+            {t:"'Green Nursing' saves money by:",o:["Using more resources","Using fewer resources and reducing waste","Hiring fewer nurses","Increasing patient fees"],a:1},
+            {t:"Which technology overlays digital info to enhance anatomy training?",o:["VR","AR","AI","CBE"],a:1},
+            {t:"'Lifelong Learning' is an emphasis of:",o:["Traditional philosophy","Modern educational philosophy","Teacher-centered models","Time-based progression"],a:1},
+            {t:"What is the role of 'Facilitator of Innovation'?",o:["To block new technologies","To adopt and integrate new technologies into teaching","To focus only on traditional methods","To manage the school's finances"],a:1},
+            {t:"'Flexibility' as a benefit is provided by:",o:["Traditional classrooms","Mobile and hybrid models","Fixed-time exams","Teacher-centered lectures"],a:1},
+            {t:"In 'Green Nursing', nurses should teach:",o:["Only other nurses","Patients and staff about sustainability","Only medical students","No one, as it's a private role"],a:1},
+            {t:"Which technology provides 'instant feedback'?",o:["Traditional textbooks","AI-powered platforms","Flipped classrooms","Hybrid models"],a:1},
+            {t:"'Global Health Challenges' include:",o:["Pandemics and migration","Local hospital staffing","Decreasing diversity","Stable climates"],a:0},
+            {t:"'Competency-Based Education' focuses on:",o:["Time spent","Mastery of skills","Number of lectures attended","Historical knowledge"],a:1},
+            {t:"'Gamification' uses elements like:",o:["Long essays","Points, levels, and challenges","Silent reading","Traditional quizzes"],a:1},
+            {t:"'Green Nursing' is also known as:",o:["Eco-conscious nursing","Financial nursing","Digital nursing","Traditional nursing"],a:0},
+            {t:"Which role ensures tech remains 'humane'?",o:["Global Collaborator","Ethical Guardian","Data-Informed Mentor","Facilitator of Innovation"],a:1},
+            {t:"'Microlearning' modules are:",o:["Long and comprehensive","Short and focused","Only for advanced students","Theoretical only"],a:1},
+            {t:"'Hybrid Classrooms' combine:",o:["Two different subjects","Online and face-to-face learning","Two different teachers","Theory and history"],a:1},
+            {t:"'Green Nursing' reduces:",o:["Hospital costs and pollution","Patient safety","Nurse salaries","Clinical effectiveness"],a:0},
+            {t:"'AI Bias' can reinforce:",o:["Positive learning","Stereotypes","Clinical skills","Engagement"],a:1},
+            {t:"'Flipped Classrooms' use class time for:",o:["Reading theory","Discussion and application","Silent exams","Watching videos"],a:1},
+            {t:"'Global Competence' is needed for:",o:["Local patients only","Diverse patient populations","Healthy populations only","Traditional nursing only"],a:1},
+            {t:"'Green Nursing' involves:",o:["Saving energy and water","Using more electricity","Ignoring water waste","Using toxic chemicals"],a:0},
+            {t:"The future of nursing education is:",o:["Only digital","Human-centered and ethically grounded","Teacher-centered","Time-based"],a:1},
+            {t:"Artificial Intelligence (AI) in nursing education is used to personalize learning paths and provide instant feedback.",o:["True","False"],a:0},
+            {t:"Virtual Reality (VR) overlays digital information onto real-world settings, while Augmented Reality (AR) is fully immersive.",o:["True","False"],a:1},
+            {t:"Competency-Based Education (CBE) focuses on the time a student spends in class rather than their mastery of skills.",o:["True","False"],a:1},
+            {t:"Flipped classrooms involve students studying theory independently before coming to class for discussion.",o:["True","False"],a:0},
+            {t:"Green Nursing means caring for patients while also protecting the environment by reducing waste and saving energy.",o:["True","False"],a:0},
+            {t:"One of the future roles of a nurse educator is to be a 'Data-Informed Mentor' who uses analytics to track student progress.",o:["True","False"],a:0},
+            {t:"The 'Digital Divide' refers to the equal access all students have to high-tech educational tools.",o:["True","False"],a:1},
+            {t:"Gamification uses game elements like points and levels to increase student engagement in subjects like pharmacology.",o:["True","False"],a:0},
+            {t:"Microlearning modules are long, comprehensive lessons that are only accessible on desktop computers.",o:["True","False"],a:1},
+            {t:"Ethical guardians in nursing education ensure that technology-enhanced learning remains inclusive and respectful.",o:["True","False"],a:0},
+            {t:"Green Nursing encourages the use of single-use plastic items to ensure maximum hygiene in hospitals.",o:["True","False"],a:1},
+            {t:"AI Bias is an ethical concern where algorithms may reinforce stereotypes in educational content.",o:["True","False"],a:0},
+            {t:"Hybrid classrooms combine online learning with face-to-face interaction for greater flexibility.",o:["True","False"],a:0},
+            {t:"Global health challenges like pandemics have decreased the need for culturally competent nurses.",o:["True","False"],a:1},
+            {t:"Nurses can contribute to Green Nursing by recycling properly and choosing eco-friendly products.",o:["True","False"],a:0}
+];
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=120*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
