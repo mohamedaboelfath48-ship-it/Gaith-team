@@ -228,7 +228,7 @@ button{
         <div class="progress-bar" id="progressBar"></div>
       </div>
     </div>
-    <div class="timer" id="timer">05:00</div>
+    <div class="timer" id="timer">60:00</div>
   </div>
 
   <div id="app"></div>
@@ -374,7 +374,7 @@ let answers = [];
 let wrongSet = [];
 
 /* ===== Timer ===== */
-let totalTime=120*60, timeLeft=totalTime;
+let totalTime=60*60, timeLeft=totalTime;
 const timerInt=setInterval(()=>{
   timeLeft--;
   let m=Math.floor(timeLeft/60), s=timeLeft%60;
@@ -495,4 +495,5 @@ show();
 </body>
 
 </html>
+
 
