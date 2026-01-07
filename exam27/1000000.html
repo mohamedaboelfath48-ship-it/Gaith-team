@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Learning Strategies in Nursing – Gaith Team</title>
+
+<style>
+/* ===== Reset ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* ===== Body ===== */
+body{
+  font-family: Arial, sans-serif;
+  background:#f8fbff;
+  line-height:1.8;
+  color:#0f172a;
+  padding:30px;
+}
+
+/* ===== HEADER ===== */
+.main-header{
+  position: relative;
+  height: 180px;
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+
+.main-header h1{
+  font-size: 40px;
+  font-weight: bold;
+  z-index:2;
+  animation: fadeSlide 1.2s ease forwards;
+}
+
+.main-header p{
+  font-size: 18px;
+  margin-top: 6px;
+  z-index:2;
+  animation: fadeSlide 1.6s ease forwards;
+}
+
+/* Fade + Slide */
+@keyframes fadeSlide{
+  from{opacity:0; transform: translateY(-20px);}
+  to{opacity:1; transform: translateY(0);}
+}
+
+/* Sparkles */
+.sparkles{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, white, transparent),
+    radial-gradient(2px 2px at 30% 60%, white, transparent),
+    radial-gradient(1.5px 1.5px at 50% 30%, white, transparent),
+    radial-gradient(2px 2px at 70% 70%, white, transparent),
+    radial-gradient(1.5px 1.5px at 90% 40%, white, transparent);
+  animation: sparklePulse 3s infinite alternate;
+  opacity:0.8;
+}
+
+@keyframes sparklePulse{
+  from{opacity:0.4;}
+  to{opacity:1;}
+}
+
+/* Stars */
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation: floatStar linear infinite;
+}
+
+@keyframes floatStar{
+  from{transform: translateY(180px); opacity:0;}
+  to{transform: translateY(-20px); opacity:1;}
+}
+
+/* ===== CONTENT ===== */
+h1,h2,h3{
+  color:#0284c7;
+}
+
+.section{
+  background:#ffffff;
+  padding:22px;
+  margin-bottom:22px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+
+.very-important{
+  background:#fee2e2;
+  border-left:7px solid #dc2626;
+  padding:14px;
+  margin:12px 0;
+  font-weight:bold;
+}
+
+.important{
+  background:#ffedd5;
+  border-left:7px solid #f97316;
+  padding:14px;
+  margin:12px 0;
+}
+
+.explain{
+  background:#e0f2fe;
+  border-left:7px solid #0284c7;
+  padding:14px;
+  margin:12px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ HEADER (أول حاجة في الـ body) -->
+<header class="main-header">
+  <div class="sparkles"></div>
+  <h1>✨ Gaith Team ✨</h1>
+  <p>الامتحان في جيبك</p>
+</header>
+
+<!-- ===== PAGE CONTENT ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SBL – Exam Notes</title>
+
+<style>
+:root{
+  --blue:#2563eb;
+  --green:#16a34a;
+  --orange:#ea580c;
+  --purple:#7c3aed;
+  --red:#dc2626;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --soft:#e0f2fe;
+  --text:#0f172a;
+}
+*{box-sizing:border-box}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:30px;
+  line-height:1.7;
+}
+h1{
+  text-align:center;
+  color:white;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:30px;
+}
+.section{
+  background:var(--card);
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
+.section h2{
+  margin-bottom:12px;
+  padding-bottom:6px;
+  border-bottom:3px solid var(--soft);
+}
+.def{color:var(--blue)}
+.key{color:var(--green); font-weight:bold}
+.exam{color:var(--red); font-weight:bold}
+.box{
+  background:var(--soft);
+  padding:14px;
+  border-radius:10px;
+  margin-top:10px;
+}
+.list li{margin-bottom:6px}
+.mnemonic{
+  background:#fef3c7;
+  border-left:6px solid var(--orange);
+  padding:12px;
+  margin-top:10px;
+  font-weight:bold;
+}
+.compare{
+  background:#ede9fe;
+  border-left:6px solid var(--purple);
+  padding:12px;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Simulation-Based Learning (SBL) – Exam Notes</h1>
+
+<!-- Definitions -->
+<div class="section">
+<h2 class="def">1. Definitions</h2>
+
+<p><span class="key">Simulation:</span> A teaching tool that imitates real clinical situations in a safe environment.</p>
+
+<p><span class="key">Simulation-Based Learning (SBL):</span> A teaching strategy that uses simulation to improve clinical skills, decision-making, and confidence.</p>
+
+<div class="box exam">
+Exam Focus: SBL bridges the gap between theory and practice.
+</div>
+</div>
+
+<!-- Characteristics -->
+<div class="section">
+<h2 class="key">2. Key Characteristics</h2>
+
+<ul class="list">
+  <li><b>S</b>afe – no risk to real patients</li>
+  <li><b>E</b>xperiential – learning by doing</li>
+  <li><b>R</b>eflective – includes debriefing</li>
+  <li><b>R</b>ealistic – similar to real clinical practice</li>
+</ul>
+
+<div class="mnemonic">Mnemonic: SERR</div>
+</div>
+
+<!-- Types -->
+<div class="section">
+<h2 style="color:var(--orange)">3. Types of Simulation</h2>
+
+<ul class="list">
+  <li><b>Low-fidelity:</b> Role-play, simple models</li>
+  <li><b>Medium-fidelity:</b> Mannequins with limited functions</li>
+  <li><b>High-fidelity:</b> Advanced mannequins with physiological responses</li>
+  <li><b>Virtual simulation:</b> Computer-based scenarios</li>
+  <li><b>Standardized patients:</b> Trained actors</li>
+</ul>
+
+<div class="mnemonic">Mnemonic: LMHVS</div>
+</div>
+
+<!-- Steps -->
+<div class="section">
+<h2 style="color:var(--purple)">4. Simulation Session Steps</h2>
+
+<ol class="list">
+  <li><b>Pre-briefing</b></li>
+  <li><b>Scenario execution</b></li>
+  <li><b>Debriefing</b></li>
+  <li><b>Evaluation</b></li>
+</ol>
+
+<div class="mnemonic">Mnemonic: PSDE</div>
+
+<div class="box exam">
+Exam Trap: Debriefing comes after the scenario.
+</div>
+</div>
+
+<!-- Benefits -->
+<div class="section">
+<h2 style="color:var(--green)">5. Benefits of SBL</h2>
+
+<ul class="list">
+  <li>Skills improvement</li>
+  <li>Confidence</li>
+  <li>Safe error management</li>
+  <li>Teamwork</li>
+  <li>Critical thinking</li>
+</ul>
+
+<div class="mnemonic">Mnemonic: SCETC</div>
+</div>
+
+<!-- Similarities -->
+<div class="section">
+<h2 style="color:var(--red)">6. Similarities & Differences</h2>
+
+<div class="compare">
+<b>Simulation:</b> Teaching tool <br>
+<b>SBL:</b> Teaching strategy
+</div>
+
+<div class="compare">
+<b>Debriefing:</b> Reflection and discussion <br>
+<b>Evaluation:</b> Assessment and grading
+</div>
+</div>
+
+<!-- Exam Statements -->
+<div class="section">
+<h2 class="exam">7. Very Common Exam Statements</h2>
+
+<ul class="list">
+  <li>Simulation is safe and realistic</li>
+  <li>SBL improves clinical performance</li>
+  <li>Debriefing enhances learning</li>
+  <li>High-fidelity simulation improves critical thinking</li>
+</ul>
+</div>
+
+</body>
+</html>
+
+
+<!-- ===== JS ===== -->
+<script>
+const header = document.querySelector('.main-header');
+
+for(let i=0;i<30;i++){
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.left = Math.random()*100 + '%';
+  star.style.animationDuration = (3 + Math.random()*5) + 's';
+  header.appendChild(star);
+}
+</script>
+
+</body>
+</html>
