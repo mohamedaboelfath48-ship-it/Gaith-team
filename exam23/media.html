@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">35:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+            {t:"What is the primary role of instructional media in the learning environment?", o:["To replace the instructor", "To enhance the learning environment", "To be used only for entertainment", "To make learning more difficult"], a:1},
+            {t:"According to the text, which combination of media is most effective for learner retention?", o:["Audio and text", "Visual and text", "Audio and visual", "None of the above"], a:2},
+            {t:"What is the definition of 'Teaching materials'?", o:["Only digital resources", "Materials that support the teaching and learning process", "Materials used only by students", "Books and articles only"], a:1},
+            {t:"Which of the following is NOT listed as an importance of using media in education?", o:["Provides information in less time", "Makes learning easy", "Reduces the need for instructors", "Brings the entire world to the students"], a:2},
+            {t:"Which of these is a characteristic of effective media?", o:["Should be expensive", "Should be well prepared", "Should ignore the learner's characteristics", "Should have a complex message"], a:1},
+            {t:"Which of the following is classified as a 'Print' material?", o:["Podcast", "Video", "Manuals", "Real objects"], a:2},
+            {t:"Cassettes, microphones, and podcasts are examples of which type of media?", o:["Print", "Visual", "Audio", "Audiovisual"], a:2},
+            {t:"Charts, real objects, and photographs belong to which media category?", o:["Audio", "Visual", "Print", "Electronic Interactive"], a:1},
+            {t:"Computers and tablets are examples of what type of media?", o:["Print", "Audio", "Visual", "Electronic Interactive"], a:3},
+            {t:"What is a key feature of a textbook?", o:["It is a very thin book with a paper cover", "It contains detailed information about a subject", "It is primarily for marketing purposes", "It uses only images"], a:1},
+            {t:"Which print material is described as a 'very thin book, with a paper cover' and is 'inexpensive to manufacture'?", o:["Textbook", "Manual", "Pamphlet", "Newspaper"], a:2},
+            {t:"A book that gives practical instructions on how to do or use something is called a:", o:["Pamphlet", "Newspaper", "Textbook", "Manual"], a:3},
+            {t:"What is a flashcard?", o:["A large poster with a single idea", "A card with a question on one side and the answer on the other", "A type of digital video", "A book of maps"], a:1},
+            {t:"Which of the following are called 'living textbooks'?", o:["Flashcards", "Manuals", "Newspapers & Magazines", "Pamphlets"], a:2},
+            {t:"Visual materials are used to convey information more effectively than:", o:["Audio material", "Textual material alone", "Audiovisual material", "Interactive material"], a:1},
+            {t:"What is the primary purpose of using a 'Model' in the classroom?", o:["To show a real substance that is easily available", "To represent a substance that cannot be brought into the classroom", "To replace the need for a textbook", "To provide audio information"], a:1},
+            {t:"When are maps typically used by teachers?", o:["To teach about climate change", "To show increasing or decreasing patterns", "To teach historical events and geographical elements", "To explain a scientific experiment"], a:2},
+            {t:"A teacher uses a ______ only when they have to show an increasing or decreasing pattern.", o:["Map", "Sketch", "Model", "Graph"], a:3},
+            {t:"In which of the following subjects is a 'Chart' NOT typically used?", o:["Medicine", "Nursing", "Geography", "None of the above"], a:3},
+            {t:"What is a flip chart?", o:["A single large poster", "A series of large papers attached at the top to be turned over", "A digital presentation", "A small handheld card"], a:1},
+            {t:"What is a key difference between a poster and a display?", o:["A poster has many ideas, a display has one", "A poster is interactive, a display is not", "A poster has one idea, a display has many", "There is no difference"], a:2},
+            {t:"Which of the following is an advantage of visual media?", o:["Relies only on the sense of seeing", "Easy to remember", "Lack of interaction", "Expensive"], a:1},
+            {t:"A disadvantage of visual media is:", o:["Participants feel more engaged", "It is inexpensive", "Lack of opportunity for interaction", "It is easy to follow"], a:2},
+            {t:"Radios, Audio CDs, and Audio cassettes are examples of:", o:["Visual materials", "Audio teaching methods", "Print materials", "Audiovisual materials"], a:1},
+            {t:"Which group of learners may find audio media especially beneficial?", o:["Visually-impaired learners", "Kinesthetic learners", "Learners who prefer reading", "Advanced learners"], a:0},
+            {t:"What is a primary disadvantage of audio media?", o:["It is expensive", "It is difficult to duplicate", "It relies only on the sense of hearing", "It is not widely available"], a:2},
+            {t:"Audio Visual Materials are a combination of:", o:["Print and Visual materials", "Audio and Print materials", "Auditory and Visual materials", "Audio and Interactive materials"], a:2},
+            {t:"Television, Film, and Motion Pictures are examples of:", o:["Audio Visual Materials", "Print Materials", "Audio Materials", "Visual Materials"], a:0},
+            {t:"Which of the following is an advantage of Audio/Visual media?", o:["Some forms are expensive", "Good for large rooms and audiences", "Requires a well-designed presentation", "Only uses the sense of hearing"], a:1},
+            {t:"A disadvantage of Audio/Visual media is that:", o:["It gets the attention of participants", "Some forms are expensive", "It is good for large audiences", "It allows for reference back to previous slides"], a:1},
+            {t:"The main purpose of educational media is to:", o:["Entertain students", "Facilitate student's achievement of instructional objectives", "Reduce teacher's workload", "Test student's memory"], a:1},
+            {t:"Which is NOT a listed characteristic of effective media?", o:["Should be well presented", "Should consider the class size", "Should be highly theoretical", "Should achieve the required objective"], a:2},
+            {t:"'Transparencies' are listed under which type of media?", o:["Audio", "Print", "Visual", "Audiovisual"], a:2},
+            {t:"What is the function of a flashcard in learning?", o:["To provide detailed subject information", "To develop cognitive recognition and recall", "To give practical instructions on using something", "To communicate authentic information immediately"], a:1},
+            {t:"According to the text, pictures can help students remember things for a long time because they can be:", o:["Easily shown in the classroom", "Used to explain climate", "Inexpensive to manufacture", "A source of authentic information"], a:0},
+            {t:"When would a teacher most likely use a sketch?", o:["When a real substance or model is not available", "To show a geographical location", "To present a decreasing pattern", "When teaching about a famous person"], a:0},
+            {t:"A graph is used in many subjects, including:", o:["Nursing and Civics", "Geography, history, and mathematics", "Medicine and Economics", "Only in Science"], a:1},
+            {t:"A 'display' is an arrangement of:", o:["Real objects, models, and pictures", "Only posters", "Only one idea", "Textbooks and manuals"], a:0},
+            {t:"Which sense does audio media primarily rely on?", o:["Sight", "Touch", "Hearing", "Smell"], a:2},
+            {t:"'Demonstration' is listed as a type of:", o:["Print Material", "Audio Material", "Visual Material", "Audio/Visual Material"], a:3},
+            {t:"What is a key benefit of combining audio and visual media?", o:["It is less expensive", "Significantly increased learner retention", "It requires less preparation", "It is only effective for small groups"], a:1},
+            {t:"'Help learning to remain in the minds of the learners for a longer time' is an importance of:", o:["Using media in education", "Print materials only", "Audio materials only", "The teacher's lecture"], a:0},
+            {t:"Which of the following helps a facilitator to deliver a lesson successfully and easily?", o:["Using expensive media", "Using media", "Avoiding visual aids", "Focusing only on textbooks"], a:1},
+            {t:"'Should be according to types and characteristic of learner' is a characteristic of:", o:["Ineffective media", "Print media only", "Effective media", "Audio media only"], a:2},
+            {t:"What type of media includes 'graphing calculators'?", o:["Print", "Audio", "Visual", "Electronic Interactive"], a:3},
+            {t:"A pamphlet is described as giving information about something, often for _________ purposes.", o:["Marketing", "Advanced study", "Practical instruction", "Cognitive recall"], a:0},
+            {t:"Which material is said to 'transmit knowledge, skills, attitudes and values to the teacher and student alike'?", o:["Pamphlet", "Textbook", "Flashcard", "Newspaper"], a:1},
+            {t:"The use of a 'Model' is appropriate when the actual substance is:", o:["Small and readily available", "Too large or not available", "A liquid", "A gas"], a:1},
+            {t:"A flip chart can be a board standing on:", o:["A table", "The floor", "Legs", "A wall"], a:2},
+            {t:"One of the main disadvantages of visual media is that it relies only on the sense of:", o:["Hearing", "Seeing", "Touch", "All of the above"], a:1},
+            {t:"Audio media is considered easy to:", o:["Create from scratch", "Use for visual learners", "Duplicate", "Interact with"], a:2},
+            {t:"Which is an advantage of Audio/Visual media for reviewing concepts?", o:["It is always cheap", "It is very effective for summarizing and reviewing", "It requires minimal design", "It is best for individual study"], a:1},
+            {t:"The text states that media can make lessons more:", o:["Difficult", "Interesting", "Complicated", "Abstract"], a:1},
+            {t:"What is one of the first characteristics of effective media mentioned?", o:["Should be complex", "Should be less expensive", "Should be text-heavy", "Should be for individual use only"], a:1},
+            {t:"Which of these is NOT an example of Print Materials?", o:["Flashcards", "Newspapers", "Magazines", "Films"], a:3},
+
+            // True/False
+            {t:"The combination of audio and visual media is less effective than using either medium alone.", o:["True", "False"], a:1},
+            {t:"Educational media only includes physical materials an instructor might use.", o:["True", "False"], a:1},
+            {t:"One of the benefits of media is that it can cover a wide range of information.", o:["True", "False"], a:0},
+            {t:"Effective media should be expensive to ensure quality.", o:["True", "False"], a:1},
+            {t:"Textbooks and pamphlets are examples of audiovisual media.", o:["True", "False"], a:1},
+            {t:"A flashcard has a question on one side and the answer on the other.", o:["True", "False"], a:0},
+            {t:"A model is used when the actual substance is easily available to bring to the classroom.", o:["True", "False"], a:1},
+            {t:"A graph is primarily used to show relationships between historical figures.", o:["True", "False"], a:1},
+            {t:"A poster and a display both contain many ideas.", o:["True", "False"], a:1},
+            {t:"A major advantage of audio media is that it provides visual stimulus.", o:["True", "False"], a:1},
+            {t:"Audio Visual materials are a combination of auditory and visual materials.", o:["True", "False"], a:0},
+            {t:"One advantage of audio/visual media is that it is good for large rooms and audiences.", o:["True", "False"], a:0},
+            {t:"Visual media offers many opportunities for interaction between the instructor and learner.", o:["True", "False"], a:1},
+            {t:"Newspapers are sometimes referred to as 'living textbooks'.", o:["True", "False"], a:0},
+            {t:"Media as a means of communication helps make ideas clear to children.", o:["True", "False"], a:0}
+
+];
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=35*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
