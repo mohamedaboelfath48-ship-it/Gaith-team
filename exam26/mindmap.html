@@ -15,82 +15,70 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: auto;
+            padding: 15px;
         }
 
         .container {
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 1400px;
-            width: 100%;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
         }
 
         h1 {
             text-align: center;
             color: #667eea;
-            margin-bottom: 40px;
-            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-size: 1.8em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .mindmap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            min-height: 800px;
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 25px;
         }
 
         .central-node {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 40px;
-            border-radius: 50%;
-            font-size: 1.4em;
+            padding: 25px;
+            border-radius: 20px;
+            font-size: 1.5em;
             font-weight: bold;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            position: absolute;
-            z-index: 10;
-            max-width: 250px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            margin-bottom: 25px;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .branch-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            50% { transform: scale(1.02); }
         }
 
         .branch {
-            position: absolute;
             background: white;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .branch:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        .branch:active {
+            transform: scale(0.98);
         }
 
         .branch h3 {
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .branch ul {
@@ -100,252 +88,212 @@
 
         .branch li {
             margin: 8px 0;
-            padding-left: 20px;
+            padding-left: 18px;
             position: relative;
             font-size: 0.9em;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .branch li:before {
-            content: "▸";
+            content: "â–¸";
             position: absolute;
             left: 0;
             font-weight: bold;
         }
 
-        /* Philosophy Branch - Top Left */
+        .branch strong {
+            font-weight: 600;
+        }
+
+        /* Philosophy Branch */
         .philosophy {
-            top: 50px;
-            left: 50px;
-            width: 280px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
 
         .philosophy li:before { color: #fff; }
 
-        /* Structure Branch - Top */
+        /* Structure Branch */
         .structure {
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
         }
 
         .structure li:before { color: #fff; }
 
-        /* Types Branch - Top Right */
+        /* Types Branch */
         .types {
-            top: 50px;
-            right: 50px;
-            width: 280px;
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             color: white;
         }
 
         .types li:before { color: #fff; }
 
-        /* Implementation Branch - Right */
+        /* Implementation Branch */
         .implementation {
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            width: 300px;
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: white;
         }
 
         .implementation li:before { color: #fff; }
 
-        /* Benefits Branch - Bottom Right */
+        /* Benefits Branch */
         .benefits {
-            bottom: 50px;
-            right: 50px;
-            width: 280px;
             background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
             color: white;
         }
 
         .benefits li:before { color: #fff; }
 
-        /* Challenges Branch - Bottom */
+        /* Challenges Branch */
         .challenges {
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             color: #333;
         }
 
         .challenges li:before { color: #667eea; }
 
-        /* Integration Branch - Bottom Left */
+        /* Integration Branch */
         .integration {
-            bottom: 50px;
-            left: 50px;
-            width: 280px;
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             color: #333;
         }
 
         .integration li:before { color: #f5576c; }
 
-        /* Design Branch - Left */
+        /* Design Branch */
         .design {
-            top: 50%;
-            left: 30px;
-            transform: translateY(-50%);
-            width: 300px;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             color: #333;
         }
 
         .design li:before { color: #f5576c; }
 
-        @media (max-width: 1200px) {
-            .mindmap {
-                min-height: 1500px;
-            }
-
-            .branch {
-                position: relative !important;
-                margin: 20px auto !important;
-                transform: none !important;
-                top: auto !important;
-                bottom: auto !important;
-                left: auto !important;
-                right: auto !important;
-            }
-
-            .central-node {
-                position: relative !important;
-                margin: 30px auto;
-            }
-
-            .branch-container {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+        .icon {
+            font-size: 1.3em;
         }
 
-        .subtitle {
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Footer */
+        .footer {
             text-align: center;
-            color: #666;
-            font-style: italic;
-            margin-top: 10px;
+            color: white;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎓 Case-Based Learning (CBL)</h1>
-        <p class="subtitle">Transformative Educational Strategy in Nursing</p>
+        <h1>ًںژ“ Case-Based Learning</h1>
+        <p class="subtitle"> ظ…ط¹ ط؛ظٹط« ط¨ط¨ط³ط§ط·ظ‡ ط¨ط¥ط°ظ† ط§ظ„ظ„ظ‡  </p>
         
-        <div class="mindmap">
-            <div class="central-node">
-                Case-Based<br>Learning<br>(CBL)
-            </div>
-
-            <div class="branch-container">
-                <!-- Philosophy Branch -->
-                <div class="branch philosophy">
-                    <h3>📚 Educational Philosophy</h3>
-                    <ul>
-                        <li>Constructivist Philosophy</li>
-                        <li>Situated Learning Theory</li>
-                        <li>Adult Learning Principles</li>
-                        <li>Bloom's Taxonomy (Application, Analysis, Evaluation, Creation)</li>
-                    </ul>
-                </div>
-
-                <!-- Structure Branch -->
-                <div class="branch structure">
-                    <h3>🏗️ Structure Components</h3>
-                    <ul>
-                        <li>Case Scenario (detailed narrative)</li>
-                        <li>Learning Objectives</li>
-                        <li>Problem Identification</li>
-                        <li>Analysis & Discussion</li>
-                        <li>Decision-Making & Planning</li>
-                        <li>Reflection & Feedback</li>
-                    </ul>
-                </div>
-
-                <!-- Types Branch -->
-                <div class="branch types">
-                    <h3>🔍 Types of Cases</h3>
-                    <ul>
-                        <li><strong>Clinical:</strong> Diagnosis & treatment</li>
-                        <li><strong>Ethical:</strong> Moral dilemmas</li>
-                        <li><strong>Psychosocial:</strong> Cultural aspects</li>
-                        <li><strong>Interdisciplinary:</strong> Team collaboration</li>
-                    </ul>
-                </div>
-
-                <!-- Implementation Branch -->
-                <div class="branch implementation">
-                    <h3>⚙️ Implementation Methods</h3>
-                    <ul>
-                        <li><strong>Classroom:</strong> Group analysis, role assignment</li>
-                        <li><strong>Clinical Setting:</strong> Real patient cases</li>
-                        <li><strong>Online/Hybrid:</strong> Interactive platforms, multimedia</li>
-                    </ul>
-                </div>
-
-                <!-- Benefits Branch -->
-                <div class="branch benefits">
-                    <h3>✨ Educational Benefits</h3>
-                    <ul>
-                        <li>Enhances Critical Thinking</li>
-                        <li>Develops Clinical Judgment</li>
-                        <li>Improves Communication Skills</li>
-                        <li>Encourages Ethical Sensitivity</li>
-                        <li>Increases Engagement</li>
-                        <li>Builds Confidence</li>
-                    </ul>
-                </div>
-
-                <!-- Challenges Branch -->
-                <div class="branch challenges">
-                    <h3>⚠️ Challenges & Solutions</h3>
-                    <ul>
-                        <li><strong>Quality:</strong> Use authentic scenarios</li>
-                        <li><strong>Time:</strong> Integrate selectively</li>
-                        <li><strong>Readiness:</strong> Provide pre-reading</li>
-                        <li><strong>Assessment:</strong> Use rubrics & reflection</li>
-                    </ul>
-                </div>
-
-                <!-- Integration Branch -->
-                <div class="branch integration">
-                    <h3>🌍 Cultural & Ethical</h3>
-                    <ul>
-                        <li>Culturally diverse cases</li>
-                        <li>Autonomy & consent issues</li>
-                        <li>Patient values consideration</li>
-                        <li>Confidentiality dilemmas</li>
-                    </ul>
-                </div>
-
-                <!-- Design Branch -->
-                <div class="branch design">
-                    <h3>📋 Design Steps</h3>
-                    <ul>
-                        <li>1. Define Learning Objectives</li>
-                        <li>2. Develop Case Scenario</li>
-                        <li>3. Prepare Supporting Materials</li>
-                        <li>4. Facilitate Group Discussion</li>
-                        <li>5. Assign Tasks</li>
-                        <li>6. Reflect & Evaluate</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="central-node">
+            Case-Based<br>Learning<br>(CBL)
         </div>
+
+        <!-- Philosophy Branch -->
+        <div class="branch philosophy">
+            <h3><span class="icon">ًں“ڑ</span> Educational Philosophy</h3>
+            <ul>
+                <li>Constructivist Philosophy</li>
+                <li>Situated Learning Theory</li>
+                <li>Adult Learning Principles</li>
+                <li>Bloom's Taxonomy (Application, Analysis, Evaluation, Creation)</li>
+            </ul>
+        </div>
+
+        <!-- Structure Branch -->
+        <div class="branch structure">
+            <h3><span class="icon">ًںڈ—ï¸ڈ</span> Structure Components</h3>
+            <ul>
+                <li>Case Scenario (detailed narrative)</li>
+                <li>Learning Objectives</li>
+                <li>Problem Identification</li>
+                <li>Analysis & Discussion</li>
+                <li>Decision-Making & Planning</li>
+                <li>Reflection & Feedback</li>
+            </ul>
+        </div>
+
+        <!-- Types Branch -->
+        <div class="branch types">
+            <h3><span class="icon">ًں”چ</span> Types of Cases</h3>
+            <ul>
+                <li><strong>Clinical:</strong> Diagnosis & treatment</li>
+                <li><strong>Ethical:</strong> Moral dilemmas</li>
+                <li><strong>Psychosocial:</strong> Cultural aspects</li>
+                <li><strong>Interdisciplinary:</strong> Team collaboration</li>
+            </ul>
+        </div>
+
+        <!-- Implementation Branch -->
+        <div class="branch implementation">
+            <h3><span class="icon">âڑ™ï¸ڈ</span> Implementation Methods</h3>
+            <ul>
+                <li><strong>Classroom:</strong> Group analysis, role assignment</li>
+                <li><strong>Clinical Setting:</strong> Real patient cases</li>
+                <li><strong>Online/Hybrid:</strong> Interactive platforms, multimedia</li>
+            </ul>
+        </div>
+
+        <!-- Benefits Branch -->
+        <div class="branch benefits">
+            <h3><span class="icon">âœ¨</span> Educational Benefits</h3>
+            <ul>
+                <li>Enhances Critical Thinking</li>
+                <li>Develops Clinical Judgment</li>
+                <li>Improves Communication Skills</li>
+                <li>Encourages Ethical Sensitivity</li>
+                <li>Increases Engagement</li>
+                <li>Builds Confidence</li>
+            </ul>
+        </div>
+
+        <!-- Challenges Branch -->
+        <div class="branch challenges">
+            <h3><span class="icon">âڑ ï¸ڈ</span> Challenges & Solutions</h3>
+            <ul>
+                <li><strong>Quality:</strong> Use authentic scenarios</li>
+                <li><strong>Time:</strong> Integrate selectively</li>
+                <li><strong>Readiness:</strong> Provide pre-reading</li>
+                <li><strong>Assessment:</strong> Use rubrics & reflection</li>
+            </ul>
+        </div>
+
+        <!-- Integration Branch -->
+        <div class="branch integration">
+            <h3><span class="icon">ًںŒچ</span> Cultural & Ethical Integration</h3>
+            <ul>
+                <li>Culturally diverse cases</li>
+                <li>Autonomy & consent issues</li>
+                <li>Patient values consideration</li>
+                <li>Confidentiality dilemmas</li>
+            </ul>
+        </div>
+
+        <!-- Design Branch -->
+        <div class="branch design">
+            <h3><span class="icon">ًں“‹</span> Design Steps</h3>
+            <ul>
+                <li>1. Define Learning Objectives</li>
+                <li>2. Develop Case Scenario</li>
+                <li>3. Prepare Supporting Materials</li>
+                <li>4. Facilitate Group Discussion</li>
+                <li>5. Assign Tasks</li>
+                <li>6. Reflect & Evaluate</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+ًں’“        ط£طھظ…ظ†ظٹ طھظƒظˆظ† ظپظ‡ظ…طھ 
+ًں‘€ ط¯ط¹ظˆط§طھظƒ 
     </div>
 </body>
 </html>
