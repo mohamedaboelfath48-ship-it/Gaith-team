@@ -3,538 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
-<title> Learning Strategies in Nursing </title>
+    <title>Learning Strategies in Nursing</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-    body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-}
 
-
-line-height: 1.6;
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-
-
-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        animation: fadeIn 0.8s ease-in;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        
-
-to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 {
-        text-align: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -
-
-webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 2.5em;
-        margin-bottom: 30px;
-        animation: slideDown 0.6s ease-out;
-  
-
-  }
-
-    @keyframes slideDown {
-        from { transform: translateY(-20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .section {
-        
-
-margin: 30px 0;
-        padding: 25px;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-        animation: slideUp 0.6s ease-out;
-        animation-fill-mode: both;
-   
-
- }
-
-    @keyframes slideUp {
-        from { transform: translateY(20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .section:nth-child(1) { 
-
-animation-delay: 0.1s; }
-    .section:nth-child(2) { animation-delay: 0.2s; }
-    .section:nth-child(3) { animation-delay: 0.3s; }
-    .section:nth-child(4) { animation-
-
-delay: 0.4s; }
-
-    .section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .purple-section {
-        background: 
-
-linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-        border-left: 5px solid #667eea;
-    }
-
-    .blue-section {
-        background: linear-gradient(135deg, 
-
-#4facfe15 0%, #00f2fe15 100%);
-        border-left: 5px solid #4facfe;
-    }
-
-    .green-section {
-        background: linear-gradient(135deg, #43e97b15 0%, 
-
-#38f9d715 100%);
-        border-left: 5px solid #43e97b;
-    }
-
-    .orange-section {
-        background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
-     
-
-   border-left: 5px solid #fa709a;
-    }
-
-    .pink-section {
-        background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
-        border-left: 5px solid 
-
-#f093fb;
-    }
-
-    .teal-section {
-        background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
-        border-left: 5px solid #00bcd4;
-    }
-
-    h2 {
-        
-
-color: #2d3748;
-        margin-bottom: 15px;
-        font-size: 1.8em;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    h3 {
-        color: #4a5568;
-        
-
-margin: 20px 0 10px 0;
-        font-size: 1.3em;
-    }
-
-    .mnemonic {
-        background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-        padding: 20px;
-       
-
- border-radius: 12px;
-        margin: 15px 0;
-        font-weight: bold;
-        font-size: 1.2em;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(253, 203, 
-
-110, 0.3);
-        transition: transform 0.3s ease;
-    }
-
-    .mnemonic:hover {
-        transform: scale(1.03);
-    }
-
-    .list-item {
-        background: white;
-        padding: 12px;
-  
-
-      margin: 8px 0;
-        border-radius: 8px;
-        border-left: 3px solid #667eea;
-        transition: all 0.3s ease;
-    }
-
-    .list-item:hover {
-        background: #f7fafc;
-       
-
- transform: translateX(5px);
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-
-    .advantage {
-        color: #38a169;
-        padding: 10px;
-        margin: 5px 0;
-        
-
-border-left: 3px solid #38a169;
-        background: #f0fff4;
-        border-radius: 5px;
-    }
-
-    .disadvantage {
-        color: #e53e3e;
-        padding: 10px;
-        margin: 
-
-5px 0;
-        border-left: 3px solid #e53e3e;
-        background: #fff5f5;
-        border-radius: 5px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-       
-
- margin: 20px 0;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    th {
-        background: linear-gradient
-
-(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px;
-        text-align: left;
-        font-weight: 600;
-    }
-
-    td {
-        padding: 15px;
-        
-
-border-bottom: 1px solid #e2e8f0;
-        transition: background 0.3s ease;
-    }
-
-    tr:hover td {
-        background: #f7fafc;
-    }
-
-    .highlight-box {
-        background: 
-
-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 25px;
-        border-radius: 15px;
-        margin: 20px 0;
-        box-shadow: 0 
-
-10px 30px rgba(102, 126, 234, 0.3);
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: 
-
-scale(1.02); }
-    }
-
-    .critical-fact {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        padding: 15px;
-        margin: 10px 0;
-        
-
-border-radius: 10px;
-        font-weight: 600;
-        box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .critical-fact:hover {
-        
-
-transform: translateX(10px);
-    }
-
-    .icon {
-        font-size: 1.5em;
-        animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-        0%, 100% { transform: 
-
-translateY(0); }
-        50% { transform: translateY(-5px); }
-    }
-
-    .emoji {
-        display: inline-block;
-        animation: rotate 3s infinite;
-    }
-
-    @keyframes rotate {
-    
-
-    0%, 100% { transform: rotate(0deg); }
-        25% { transform: rotate(-10deg); }
-        75% { transform: rotate(10deg); }
-    }
-
-    @media print {
-        body { 
-
-background: white; }
-        .container { box-shadow: none; }
-        .section:hover { transform: none; }
-    }
-</style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .purple-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+        }
+
+        .blue-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 5px solid #4facfe;
+        }
+
+        .green-section {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 5px solid #43e97b;
+        }
+
+        .orange-section {
+            background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+            border-left: 5px solid #fa709a;
+        }
+
+        .pink-section {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 5px solid #f093fb;
+        }
+
+        .teal-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 5px solid #00bcd4;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .mnemonic {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .mnemonic:hover {
+            transform: scale(1.03);
+        }
+
+        .list-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .list-item:hover {
+            background: #f7fafc;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .advantage {
+            color: #38a169;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #38a169;
+            background: #f0fff4;
+            border-radius: 5px;
+        }
+
+        .disadvantage {
+            color: #e53e3e;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #e53e3e;
+            background: #fff5f5;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s ease;
+        }
+
+        tr:hover td {
+            background: #f7fafc;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .critical-fact {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .critical-fact:hover {
+            transform: translateX(10px);
+        }
+
+        .icon {
+            font-size: 1.5em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: rotate 3s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .section:hover { transform: none; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <h1>📚  Teaching materials عمو غيث في الـ </h1>
         
-<h1>📚 Teaching materials عمو غيث في الـ </h1>
-    <div class="section purple-section">
-        <h2><span class="icon">🎯</span> Core Definition</h2>
-        <div 
-
-class="highlight-box">
-            <strong>Educational Media:</strong> Teaching materials and physical means used to implement instructions and facilitate students' 
-
-achievement of instructional objectives.
+        <div class="section purple-section">
+            <h2><span class="icon">🎯</span> Core Definition</h2>
+            <div class="highlight-box">
+                <strong>Educational Media:</strong> Teaching materials and physical means used to implement instructions and facilitate students' achievement of instructional objectives.
+            </div>
         </div>
-    </div>
 
-    <div class="section blue-section">
-        <h2><span class="icon">🌟</span> Importance of 
-
-Educational Media</h2>
-        <div class="mnemonic">
-            <span class="emoji">💡</span> بصموجة غيث: "I CAN HELP ME" <span class="emoji">💡</span>
-  
-
-      </div>
-        <div class="list-item"><strong>I</strong>nformation to large students quickly</div>
-        <div class="list-item"><strong>C</strong>overage 
-
-wide information</div>
-        <div class="list-item"><strong>A</strong>ccess entire world to students</div>
-        <div class="list-item"><strong>N</strong>ew 
-
-ideas made clear</div>
-        <div class="list-item"><strong>H</strong>elps learning stay longer in memory</div>
-        <div class="list-
-
-item"><strong>E</strong>asy learning process</div>
-        <div class="list-item"><strong>L</strong>essons become interesting</div>
-        <div class="list-
-
-item"><strong>P</strong>erfect delivery for facilitators</div>
-        <div class="list-item"><strong>M</strong>essages/concepts expressed 
-
-<strong>E</strong>ffectively</div>
-    </div>
-
-    <div class="section green-section">
-        <h2><span class="icon">✅</span> Characteristics of Effective 
-
-Media</h2>
-        <div class="mnemonic">
-            <span class="emoji">⭐</span> بصموجة غيث: "SPECIAL" <span class="emoji">⭐</span>
+        <div class="section blue-section">
+            <h2><span class="icon">🌟</span> Importance of Educational Media</h2>
+            <div class="mnemonic">
+                <span class="emoji">💡</span> بصموجة غيث: "I CAN HELP ME" <span class="emoji">💡</span>
+            </div>
+            <div class="list-item"><strong>I</strong>nformation to large students quickly</div>
+            <div class="list-item"><strong>C</strong>overage wide information</div>
+            <div class="list-item"><strong>A</strong>ccess entire world to students</div>
+            <div class="list-item"><strong>N</strong>ew ideas made clear</div>
+            <div class="list-item"><strong>H</strong>elps learning stay longer in memory</div>
+            <div class="list-item"><strong>E</strong>asy learning process</div>
+            <div class="list-item"><strong>L</strong>essons become interesting</div>
+            <div class="list-item"><strong>P</strong>erfect delivery for facilitators</div>
+            <div class="list-item"><strong>M</strong>essages/concepts expressed <strong>E</strong>ffectively</div>
         </div>
-        <div 
 
-class="list-item"><strong>S</strong>ize of class considered</div>
-        <div class="list-item"><strong>P</strong>repared well</div>
-        <div class="list-
-
-item"><strong>E</strong>xpense (less expensive)</div>
-        <div class="list-item"><strong>C</strong>haracteristic of learner matched</div>
-        <div 
-
-class="list-item"><strong>I</strong>ntellectual message included</div>
-        <div class="list-item"><strong>A</strong>chieve required objectives</div>
-        
-
-<div class="list-item"><strong>L</strong>ogically presented</div>
-    </div>
-
-    <div class="section orange-section">
-        <h2><span class="icon">📋</span> 
-
-Types of Teaching Materials</h2>
-        
-        <h3>🔷 1. PRINT MATERIALS</h3>
-        <div class="list-item"><strong>Textbooks:</strong> Detailed subject 
-
-information, transmits knowledge/skills/values</div>
-        <div class="list-item"><strong>Pamphlets:</strong> Thin books, inexpensive marketing</div>
-        <div 
-
-class="list-item"><strong>Manuals:</strong> Practical instructions (nursing procedures)</div>
-        <div class="list-item"><strong>Flashcards:</strong> 
-
-Question/answer cards for cognitive recall</div>
-        <div class="list-item"><strong>Newspapers & Magazines:</strong> "Living textbooks"</div>
-
-        <h3>🔷 
-
-2. VISUAL MATERIALS</h3>
-        <div class="mnemonic">
-            <span class="emoji">🎨</span> "I Must Map Sketchy Graph Charts Display" <span 
-
-class="emoji">🎨</span>
+        <div class="section green-section">
+            <h2><span class="icon">✅</span> Characteristics of Effective Media</h2>
+            <div class="mnemonic">
+                <span class="emoji">⭐</span> بصموجة غيث: "SPECIAL" <span class="emoji">⭐</span>
+            </div>
+            <div class="list-item"><strong>S</strong>ize of class considered</div>
+            <div class="list-item"><strong>P</strong>repared well</div>
+            <div class="list-item"><strong>E</strong>xpense (less expensive)</div>
+            <div class="list-item"><strong>C</strong>haracteristic of learner matched</div>
+            <div class="list-item"><strong>I</strong>ntellectual message included</div>
+            <div class="list-item"><strong>A</strong>chieve required objectives</div>
+            <div class="list-item"><strong>L</strong>ogically presented</div>
         </div>
-        <div class="list-item"><strong>I</strong>mage/Pictures - Long retention</div>
-        <div class="list-
 
-item"><strong>M</strong>odels - When actual substance unavailable</div>
-        <div class="list-item"><strong>Map</strong> - Historical events, 
-
-geography</div>
-        <div class="list-item"><strong>Sketch</strong> - Drawings on blackboard</div>
-        <div class="list-item"><strong>Graph</strong> - 
-
-Increasing/decreasing patterns</div>
-        <div class="list-item"><strong>Chart</strong> - Medicine, Nursing, Geography, History</div>
-        <div class="list-
-
-item"><strong>Display</strong> - Many ideas (vs Poster = one idea)</div>
-        
-        <div class="advantage">✅ Engaging, Easy to follow & remember, 
-
-Inexpensive</div>
-        <div class="disadvantage">❌ Only sense of seeing, No interaction</div>
-
-        <h3>🔷 3. AUDIO MATERIALS</h3>
-        <div 
-
-class="list-item">Radio, Audio CDs, Audio cassettes</div>
-        
-        <div class="advantage">✅ Widely available, Good for visually-impaired, Cheap & 
-
-portable</div>
-        <div class="disadvantage">❌ Only hearing, No interaction, No visual</div>
-
-        <h3>🔷 4. AUDIOVISUAL MATERIALS</h3>
-        <div 
-
-class="list-item">Television, Film, Video tapes, Demonstration</div>
-        <div class="highlight-box">
-            🔥 <strong>KEY PRINCIPLE:</strong> Audio + 
-
-Visual COMBINED is MORE EFFECTIVE than either alone!
-        </div>
-        
-        <div class="advantage">✅ Large audiences, Reference slides, Effective for 
-
-review, Gets attention</div>
-        <div class="disadvantage">❌ Can be expensive, Needs well-designed presentation</div>
-    </div>
-
-    <div class="section pink-
-
-section">
-        <h2><span class="icon">📊</span>مقارنة عمو غيث </h2>
-        <table>
-            <tr>
-                <th>Media Type</th>
-                <th>Main 
-
-Use</th>
-                <th>Key Advantage</th>
-                <th>Key Disadvantage</th>
-            </tr>
-            <tr>
-                <td><strong>Print</strong></td>
-         
-
-       <td>Detailed information</td>
-                <td>Transmits knowledge</td>
-                <td>Static</td>
-            </tr>
-            <tr>
-                
-
-<td><strong>Visual</strong></td>
-                <td>Show/demonstrate</td>
-                <td>Easy to remember</td>
-                <td>No interaction</td>
+        <div class="section orange-section">
+            <h2><span class="icon">📋</span> Types of Teaching Materials</h2>
             
+            <h3>🔷 1. PRINT MATERIALS</h3>
+            <div class="list-item"><strong>Textbooks:</strong> Detailed subject information, transmits knowledge/skills/values</div>
+            <div class="list-item"><strong>Pamphlets:</strong> Thin books, inexpensive marketing</div>
+            <div class="list-item"><strong>Manuals:</strong> Practical instructions (nursing procedures)</div>
+            <div class="list-item"><strong>Flashcards:</strong> Question/answer cards for cognitive recall</div>
+            <div class="list-item"><strong>Newspapers & Magazines:</strong> "Living textbooks"</div>
 
-</tr>
-            <tr>
-                <td><strong>Audio</strong></td>
-                <td>Hearing-based</td>
-                <td>Portable & cheap</td>
-                <td>No 
+            <h3>🔷 2. VISUAL MATERIALS</h3>
+            <div class="mnemonic">
+                <span class="emoji">🎨</span> "I Must Map Sketchy Graph Charts Display" <span class="emoji">🎨</span>
+            </div>
+            <div class="list-item"><strong>I</strong>mage/Pictures - Long retention</div>
+            <div class="list-item"><strong>M</strong>odels - When actual substance unavailable</div>
+            <div class="list-item"><strong>Map</strong> - Historical events, geography</div>
+            <div class="list-item"><strong>Sketch</strong> - Drawings on blackboard</div>
+            <div class="list-item"><strong>Graph</strong> - Increasing/decreasing patterns</div>
+            <div class="list-item"><strong>Chart</strong> - Medicine, Nursing, Geography, History</div>
+            <div class="list-item"><strong>Display</strong> - Many ideas (vs Poster = one idea)</div>
+            
+            <div class="advantage">✅ Engaging, Easy to follow & remember, Inexpensive</div>
+            <div class="disadvantage">❌ Only sense of seeing, No interaction</div>
 
-visual</td>
-            </tr>
-            <tr>
-                <td><strong>Audiovisual</strong></td>
-                <td>Combined experience</td>
-                <td>Most 
+            <h3>🔷 3. AUDIO MATERIALS</h3>
+            <div class="list-item">Radio, Audio CDs, Audio cassettes</div>
+            
+            <div class="advantage">✅ Widely available, Good for visually-impaired, Cheap & portable</div>
+            <div class="disadvantage">❌ Only hearing, No interaction, No visual</div>
 
-effective</td>
-                <td>Can be expensive</td>
-            </tr>
-        </table>
+            <h3>🔷 4. AUDIOVISUAL MATERIALS</h3>
+            <div class="list-item">Television, Film, Video tapes, Demonstration</div>
+            <div class="highlight-box">
+                🔥 <strong>KEY PRINCIPLE:</strong> Audio + Visual COMBINED is MORE EFFECTIVE than either alone!
+            </div>
+            
+            <div class="advantage">✅ Large audiences, Reference slides, Effective for review, Gets attention</div>
+            <div class="disadvantage">❌ Can be expensive, Needs well-designed presentation</div>
+        </div>
+
+        <div class="section pink-section">
+            <h2><span class="icon">📊</span> مقارنة عمو غيث </h2>
+            <table>
+                <tr>
+                    <th>Media Type</th>
+                    <th>Main Use</th>
+                    <th>Key Advantage</th>
+                    <th>Key Disadvantage</th>
+                </tr>
+                <tr>
+                    <td><strong>Print</strong></td>
+                    <td>Detailed information</td>
+                    <td>Transmits knowledge</td>
+                    <td>Static</td>
+                </tr>
+                <tr>
+                    <td><strong>Visual</strong></td>
+                    <td>Show/demonstrate</td>
+                    <td>Easy to remember</td>
+                    <td>No interaction</td>
+                </tr>
+                <tr>
+                    <td><strong>Audio</strong></td>
+                    <td>Hearing-based</td>
+                    <td>Portable & cheap</td>
+                    <td>No visual</td>
+                </tr>
+                <tr>
+                    <td><strong>Audiovisual</strong></td>
+                    <td>Combined experience</td>
+                    <td>Most effective</td>
+                    <td>Can be expensive</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section teal-section">
+            <h2><span class="icon">🔑</span> المهم الي تركز عليه من عمو غيث </h2>
+            <div class="critical-fact">✓ Combination of audio + visual = MOST EFFECTIVE</div>
+            <div class="critical-fact">✓ Flashcards = Cognitive recall development</div>
+            <div class="critical-fact">✓ Display has MANY ideas, Poster has ONE idea</div>
+            <div class="critical-fact">✓ Newspapers = "Living textbooks"</div>
+            <div class="critical-fact">✓ Models used when actual substance too large/unavailable</div>
+            <div class="critical-fact">✓ Charts used in: Medicine, Nursing, Geography, History, Economics, Civics, Math, Science</div>
+            <div class="critical-fact">✓ Flipchart = Series of large papers turned over one at a time</div>
+        </div>
+
+        <div class="highlight-box" style="text-align: center; font-size: 1.5em;">
+            <span class="emoji">🍀</span> مع غيث أنت في أمان بإذن الله ، بالتوفيق <span class="emoji">🍀</span>
+        </div>
     </div>
-
-    <div class="section teal-section">
-        <h2><span 
-
-class="icon">🔑</span> المهم الي تركز عليه من عمو غيث</h2>
-        <div class="critical-fact">✓ Combination of audio + visual = MOST EFFECTIVE</div>
-        <div 
-
-class="critical-fact">✓ Flashcards = Cognitive recall development</div>
-        <div class="critical-fact">✓ Display has MANY ideas, Poster has ONE idea</div>
-     
-
-   <div class="critical-fact">✓ Newspapers = "Living textbooks"</div>
-        <div class="critical-fact">✓ Models used when actual substance too 
-
-large/unavailable</div>
-        <div class="critical-fact">✓ Charts used in: Medicine, Nursing, Geography, History, Economics, Civics, Math, Science</div>
-        
-
-<div class="critical-fact">✓ Flipchart = Series of large papers turned over one at a time</div>
-    </div>
-
-    <div class="highlight-box" style="text-align: center; 
-
-font-size: 1.5em;">
-        <span class="emoji">🍀</span> مع غيث أنت في أمان بإذن الله ، بالتوفيق <span class="emoji">🍀</span>
-    </div>
-</div>
 </body>
 </html>
