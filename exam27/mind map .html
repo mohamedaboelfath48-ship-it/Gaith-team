@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation-Based Learning - Gaith team ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-size: 1.9em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .central-node {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: white;
+            padding: 30px 25px;
+            border-radius: 20px;
+            font-size: 1.6em;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.5);
+            margin-bottom: 25px;
+            animation: pulse 3s infinite, rotate 20s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .central-node::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 25px rgba(30, 60, 114, 0.5); }
+            50% { transform: scale(1.03); box-shadow: 0 12px 35px rgba(126, 34, 206, 0.6); }
+        }
+
+        @keyframes rotate {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .branch {
+            background: white;
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: slideIn 0.6s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .branch:active::before {
+            left: 100%;
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px) rotate(-5deg);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        .branch:nth-child(1) { animation-delay: 0.1s; }
+        .branch:nth-child(2) { animation-delay: 0.2s; }
+        .branch:nth-child(3) { animation-delay: 0.3s; }
+        .branch:nth-child(4) { animation-delay: 0.4s; }
+        .branch:nth-child(5) { animation-delay: 0.5s; }
+        .branch:nth-child(6) { animation-delay: 0.6s; }
+        .branch:nth-child(7) { animation-delay: 0.7s; }
+        .branch:nth-child(8) { animation-delay: 0.8s; }
+        .branch:nth-child(9) { animation-delay: 0.9s; }
+
+        .branch:active {
+            transform: scale(0.97) rotate(1deg);
+        }
+
+        .branch h3 {
+            margin-bottom: 12px;
+            font-size: 1.15em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .branch ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .branch li {
+            margin: 8px 0;
+            padding-left: 18px;
+            position: relative;
+            font-size: 0.9em;
+            line-height: 1.6;
+            animation: fadeInLeft 0.5s ease-out backwards;
+        }
+
+        .branch li:nth-child(1) { animation-delay: 0.1s; }
+        .branch li:nth-child(2) { animation-delay: 0.2s; }
+        .branch li:nth-child(3) { animation-delay: 0.3s; }
+        .branch li:nth-child(4) { animation-delay: 0.4s; }
+        .branch li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .branch li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .branch strong {
+            font-weight: 600;
+        }
+
+        /* Types Branch */
+        .types {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .types li:before { color: #fff; }
+
+        /* Foundations Branch */
+        .foundations {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .foundations li:before { color: #fff; }
+
+        /* Components Branch */
+        .components {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .components li:before { color: #fff; }
+
+        /* Benefits Branch */
+        .benefits {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+        .benefits li:before { color: #fff; }
+
+        /* Challenges Branch */
+        .challenges {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+        .challenges li:before { color: #fff; }
+
+        /* Design Branch */
+        .design {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+        }
+        .design li:before { color: #fff; }
+
+        /* Sample Branch */
+        .sample {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+        .sample li:before { color: #667eea; }
+
+        /* Ethics Branch */
+        .ethics {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+        .ethics li:before { color: #f5576c; }
+
+        /* Characteristics Branch */
+        .characteristics {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+        .characteristics li:before { color: #f5576c; }
+
+        .icon {
+            font-size: 1.4em;
+            animation: spin 3s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
+            animation: fadeIn 2s ease-in;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Floating particles effect */
+        .particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 70%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 90%; animation-delay: 3s; }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="container">
+        <h1>🏥 Simulation-Based Learning</h1>
+        <p class="subtitle"> مع غيث سهله بإذن الله</p>
+        
+        <div class="central-node">
+            Simulation-Based<br>Learning<br>(SBL)
+        </div>
+
+        <!-- Characteristics Branch -->
+        <div class="branch characteristics">
+            <h3><span class="icon">⭐</span> Key Characteristics</h3>
+            <ul>
+                <li>Safe and controlled environment</li>
+                <li>Experiential: Learning through doing</li>
+                <li>Reflective: Includes debriefing</li>
+                <li>Realistic: Replicates clinical complexity</li>
+            </ul>
+        </div>
+
+        <!-- Types Branch -->
+        <div class="branch types">
+            <h3><span class="icon">🔬</span> Types of Simulation</h3>
+            <ul>
+                <li><strong>Low-Fidelity:</strong> Basic models (hand hygiene)</li>
+                <li><strong>Medium-Fidelity:</strong> Limited features (injections)</li>
+                <li><strong>High-Fidelity:</strong> Advanced mannequins (cardiac arrest)</li>
+                <li><strong>Virtual:</strong> Computer-based scenarios</li>
+                <li><strong>Standardized Patients:</strong> Trained actors</li>
+            </ul>
+        </div>
+
+        <!-- Foundations Branch -->
+        <div class="branch foundations">
+            <h3><span class="icon">📚</span> Educational Foundations</h3>
+            <ul>
+                <li><strong>Experiential Learning (Kolb):</strong> Experience → Reflection → Conceptualization → Application</li>
+                <li><strong>Adult Learning Theory:</strong> Practical, problem-solving approach</li>
+                <li><strong>Situated Cognition:</strong> Knowledge in context</li>
+            </ul>
+        </div>
+
+        <!-- Components Branch -->
+        <div class="branch components">
+            <h3><span class="icon">🧩</span> Simulation Components</h3>
+            <ul>
+                <li><strong>1. Pre-briefing:</strong> Orientation & objectives</li>
+                <li><strong>2. Scenario Execution:</strong> Engage & respond</li>
+                <li><strong>3. Debriefing:</strong> Structured reflection</li>
+                <li><strong>4. Evaluation:</strong> Performance assessment</li>
+            </ul>
+        </div>
+
+        <!-- Benefits Branch -->
+        <div class="branch benefits">
+            <h3><span class="icon">✨</span> Learning Benefits</h3>
+            <ul>
+                <li>Skill Mastery through repeated practice</li>
+                <li>Clinical Confidence building</li>
+                <li>Error Management safely</li>
+                <li>Teamwork & Communication enhancement</li>
+                <li>Critical Thinking under pressure</li>
+                <li>Emotional Preparedness</li>
+            </ul>
+        </div>
+
+        <!-- Challenges Branch -->
+        <div class="branch challenges">
+            <h3><span class="icon">⚠️</span> Challenges & Solutions</h3>
+            <ul>
+                <li><strong>High Cost:</strong> Use blended models</li>
+                <li><strong>Faculty Training:</strong> Workshops & mentoring</li>
+                <li><strong>Student Anxiety:</strong> Pre-briefing & support</li>
+                <li><strong>Technical Issues:</strong> Regular maintenance</li>
+                <li><strong>Assessment:</strong> Use structured rubrics</li>
+            </ul>
+        </div>
+
+        <!-- Design Branch -->
+        <div class="branch design">
+            <h3><span class="icon">📋</span> Design Steps</h3>
+            <ul>
+                <li>1. Define Learning Objectives</li>
+                <li>2. Develop the Scenario</li>
+                <li>3. Prepare Equipment & Roles</li>
+                <li>4. Facilitate the Simulation</li>
+                <li>5. Conduct Debriefing</li>
+                <li>6. Evaluate Performance</li>
+            </ul>
+        </div>
+
+        <!-- Sample Branch -->
+        <div class="branch sample">
+            <h3><span class="icon">💡</span> Sample Scenario</h3>
+            <ul>
+                <li><strong>Title:</strong> Acute Respiratory Distress</li>
+                <li><strong>Patient:</strong> 60-year-old male with COPD</li>
+                <li><strong>Tasks:</strong> Assess, administer O₂, communicate</li>
+                <li><strong>Materials:</strong> High-fidelity mannequin</li>
+            </ul>
+        </div>
+
+        <!-- Ethics Branch -->
+        <div class="branch ethics">
+            <h3><span class="icon">🌍</span> Ethical & Cultural Considerations</h3>
+            <ul>
+                <li>Reflect diverse patient populations</li>
+                <li>Address ethical dilemmas (consent, end-of-life)</li>
+                <li>Promote respectful communication</li>
+                <li>Encourage empathy & cultural sensitivity</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+ 🥰أتمني تكون فهمت والدنيا تكون بسيطة 
+دعواتك 
+    </div>
+</body>
+</html>
