@@ -1,552 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Learning Strategies  – Gaith Team</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role of Nurse Educator by gaith </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-/* ===== Gaith Team Light Colors ===== */
-/* الأهم جدًا */
-.very{
-  border-left:8px solid #0ea5e9;
-  color:#075985;
-  font-weight:bold;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
 
-/* المهم */
-.imp{
-  border-left:8px solid #38bdf8;
-  color:#0c4a6e;
-}
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
 
-/* ===== Teaching Strategies Clean Style ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.strategy-title{
-  color:#0284c7;
-  font-weight:bold;
-  margin:18px 0 8px;
-}
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            animation: slideDown 0.6s ease-out;
+        }
 
-.strategy-list{
-  margin-left:20px;
-  margin-bottom:14px;
-}
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-.strategy-list li{
-  margin:6px 0;
-  color:#0f172a;
-}
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
 
-/* خط جانبي بسيط بدل الخلفية */
-.strategy-box{
-  border-left:4px solid #0ea5e9;
-  padding-left:14px;
-  margin-bottom:16px;
-}
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-/* ===== Reset ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+        .section:nth-child(8) { animation-delay: 0.8s; }
 
-/* ===== Body ===== */
-body{
-  font-family: Arial, sans-serif;
-  background:#f8fbff;
-  line-height:1.8;
-  color:#0f172a;
-  padding:30px;
-}
+        .purple-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+        }
 
-/* ===== HEADER ===== */
-.main-header{
-  position: relative;
-  height: 180px;
-background: #0ea5e9;
-  color: white;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  margin-bottom:30px;
-}
+        .blue-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #4facfe;
+        }
 
-.main-header h1{
-  font-size: 40px;
-  font-weight: bold;
-  z-index:2;
-  animation: fadeSlide 1.2s ease forwards;
-}
+        .green-section {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 4px solid #43e97b;
+        }
 
-.main-header p{
-  font-size: 18px;
-  margin-top: 6px;
-  z-index:2;
-  animation: fadeSlide 1.6s ease forwards;
-}
+        .orange-section {
+            background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+            border-left: 4px solid #fa709a;
+        }
 
-/* Fade + Slide */
-@keyframes fadeSlide{
-  from{opacity:0; transform: translateY(-20px);}
-  to{opacity:1; transform: translateY(0);}
-}
+        .pink-section {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 4px solid #f093fb;
+        }
 
-/* Sparkles */
-.sparkles{
-  position:absolute;
-  inset:0;
-  background-image:
-    radial-gradient(2px 2px at 10% 20%, white, transparent),
-    radial-gradient(2px 2px at 30% 60%, white, transparent),
-    radial-gradient(1.5px 1.5px at 50% 30%, white, transparent),
-    radial-gradient(2px 2px at 70% 70%, white, transparent),
-    radial-gradient(1.5px 1.5px at 90% 40%, white, transparent);
-  animation: sparklePulse 3s infinite alternate;
-  opacity:0.8;
-}
+        .teal-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #00bcd4;
+        }
 
-@keyframes sparklePulse{
-  from{opacity:0.4;}
-  to{opacity:1;}
-}
+        .red-section {
+            background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a6f15 100%);
+            border-left: 4px solid #ff6b6b;
+        }
 
-/* Stars */
-.star{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  animation: floatStar linear infinite;
-}
+        .yellow-section {
+            background: linear-gradient(135deg, #ffeaa715 0%, #fdcb6e15 100%);
+            border-left: 4px solid #fdcb6e;
+        }
 
-@keyframes floatStar{
-  from{transform: translateY(180px); opacity:0;}
-  to{transform: translateY(-20px); opacity:1;}
-}
+        h2 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* ===== CONTENT ===== */
-h1,h2,h3{
-  color:#0284c7;
-}
+        h3 {
+            color: #4a5568;
+            margin: 15px 0 8px 0;
+            font-size: 1.1em;
+        }
 
-.section{
-  background:#ffffff;
-  padding:22px;
-  margin-bottom:22px;
-  border-radius:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.06);
-}
+        .mnemonic {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+            transition: transform 0.3s ease;
+        }
 
-.very-important{
-  background:#fee2e2;
-  border-left:7px solid #dc2626;
-  padding:14px;
-  margin:12px 0;
-  font-weight:bold;
-}
+        .mnemonic:active {
+            transform: scale(0.98);
+        }
 
-.important{
-  background:#ffedd5;
-  border-left:7px solid #f97316;
-  padding:14px;
-  margin:12px 0;
-}
+        .list-item {
+            background: white;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
 
-.explain{
-  background:#e0f2fe;
-  border-left:7px solid #0284c7;
-  padding:14px;
-  margin:12px 0;
-}
-/* ===== Gaith Fingerprint Center ===== */
-.gaith-center{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-}
+        .list-item:active {
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
 
-.gaith-box{
-  animation: gaithZoom 1.2s ease forwards;
-}
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
+            font-size: 0.95em;
+        }
 
-.gaith-title{
-  font-size:48px;
-  font-weight:bold;
-  color:#7c3aed; /* لون البصموجة */
-  margin-bottom:14px;
-  animation: gaithDown 1s ease forwards;
-}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
 
-.gaith-sub{
-  font-size:24px;
-  color:#0ea5e9; /* لون مختلف للكلمة اللي تحتها */
-  animation: gaithUp 1.4s ease forwards;
-}
+        .critical-fact {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
 
-/* Animations */
-@keyframes gaithZoom{
-  from{opacity:0; transform:scale(0.85);}
-  to{opacity:1; transform:scale(1);}
-}
+        .critical-fact:active {
+            transform: translateX(5px);
+        }
 
-@keyframes gaithDown{
-  from{opacity:0; transform:translateY(-30px);}
-  to{opacity:1; transform:translateY(0);}
-}
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            border-top: 3px solid;
+            transition: all 0.3s ease;
+        }
 
-@keyframes gaithUp{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
+        .card:active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
 
-.center-title{
-  text-align:center;
-  font-size:34px;
-  margin:40px 0 30px;
-  color:#0284c7;
-  font-weight:bold;
-}
-/* ===== One Row Layout ===== */
-.one-row{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin:8px 0;
-  flex-wrap:wrap; /* عشان الموبايل */
-}
+        .card-purple { border-top-color: #667eea; }
+        .card-blue { border-top-color: #4facfe; }
+        .card-green { border-top-color: #43e97b; }
+        .card-orange { border-top-color: #fa709a; }
+        .card-pink { border-top-color: #f093fb; }
 
-.one-row .label{
-  font-weight:bold;
-  color:#0284c7;
-  min-width:90px;
-}
+        .role-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9em;
+        }
 
-.one-row .value{
-  color:#0f172a;
-}
+        .skill-box {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #43e97b;
+            font-size: 0.9em;
+        }
 
-</style>
+        .impact-box {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #f093fb;
+            font-size: 0.9em;
+        }
+
+        .best-practice-box {
+            background: linear-gradient(135deg, #ffeaa715 0%, #fdcb6e15 100%);
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border-left: 3px solid #fdcb6e;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.85em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:active td {
+            background: #f7fafc;
+        }
+
+        .icon {
+            font-size: 1.3em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: rotate 3s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin: 3px;
+            color: white;
+        }
+
+        .badge-purple { background: #667eea; }
+        .badge-blue { background: #4facfe; }
+        .badge-green { background: #43e97b; }
+        .badge-orange { background: #fa709a; }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; font-size: 13px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            .container { padding: 15px; }
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- ✅ HEADER (أول حاجة في الـ body) -->
-<header class="main-header">
-  <div class="sparkles"></div>
-  <h1>✨ Gaith Team ✨</h1>
-  <p>الامتحان في جيبك</p>
-</header>
-
-<!-- ===== PAGE CONTENT ===== -->
-<body>
-<h2 class="center-title">Role of Nurse Educator</h2>
-<div class="section">
-<h3>⭐ Who is the Nurse Educator?</h3>
-<div class="imp">
-A registered nurse with advanced education in teaching and curriculum development.
-</div>
-<ul>
-<li>Universities</li>
-<li>Nursing schools</li>
-<li>Hospitals</li>
-<li>Community health programs</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>⭐ Core Roles of Nurse Educator  ( مهمه كإمتحان ) </h3>
-
-<div class="very">Facilitator of Learning – Encourages active learning</div>
-<div class="very">Curriculum Developer – Designs and updates content</div>
-<div class="very">Evaluator – Assesses student performance</div>
-<div class="imp">Mentor & Role Model – Demonstrates ethics and professionalism</div>
-<div class="imp">Innovator – Uses new strategies and technologies</div>
-
-</div>
-
-<div class="section">
-<h3>⭐ Responsibilities in Implementing Teaching Strategies</h3>
-
-<div class="very">Planning – Align strategies with objectives & student needs</div>
-<div class="very">Execution – Deliver content using suitable methods</div>
-<div class="imp">Adaptation – Modify strategies based on feedback</div>
-<div class="imp">Evaluation – Measure effectiveness using assessments</div>
-<div class="exp">Support – Provide emotional and academic support</div>
-
-<div class="note">
-⚠️ Exam Note: Planning ≠ Execution ≠ Evaluation
-</div>
-
-</div>
-
-<div class="section">
-<h3>⭐ Skills Required for Effective Nurse Educators</h3>
-
-<div class="very">Pedagogical Skills – Learning theories & instructional design</div>
-<div class="very">Clinical Expertise – Integrating theory with practice</div>
-<div class="imp">Communication Skills – Clear, empathetic interaction</div>
-<div class="imp">Technological Proficiency – E-learning & simulation tools</div>
-<div class="exp">Ethical Leadership – Integrity, fairness, professionalism</div>
-
-</div>
-
-<div class="section">
-<h3>⭐ Role of Educator in Teaching Strategies</h3>
-
-<h3 class="strategy-title">Simulation-Based Learning</h3>
-<div class="strategy-box">
-  <ul class="strategy-list">
-    <li>Designs realistic scenarios</li>
-    <li>Conducts pre-briefing & debriefing</li>
-    <li>Ensures psychological safety</li>
-  </ul>
-</div>
-
-<h3 class="strategy-title">Case-Based Learning</h3>
-<div class="strategy-box">
-  <ul class="strategy-list">
-    <li>Selects relevant cases</li>
-    <li>Encourages critical thinking</li>
-    <li>Promotes ethical reflection</li>
-  </ul>
-</div>
-
-<h3 class="strategy-title">Collaborative Learning</h3>
-<div class="strategy-box">
-  <ul class="strategy-list">
-    <li>Organizes group roles</li>
-    <li>Ensures equal participation</li>
-    <li>Promotes teamwork</li>
-  </ul>
-</div>
-
-<h3 class="strategy-title">E-Learning</h3>
-<div class="strategy-box">
-  <ul class="strategy-list">
-    <li>Prepares digital content</li>
-    <li>Monitors engagement</li>
-    <li>Provides timely feedback</li>
-  </ul>
-</div>
-
-
-</div>
-
-<div class="section">
-<h3>⭐ Challenges Faced by Nurse Educators</h3>
-
-<div class="imp">Resistance to change – Evidence-based rationale</div>
-<div class="imp">Resource limitations – Low-cost alternatives</div>
-<div class="exp">Student diversity – Inclusive strategies</div>
-<div class="exp">Workload & burnout – Time management & support</div>
-
-</div>
-
-<div class="section">
-<h3>⭐ Impact of Educator Effectiveness</h3>
-
-<div class="very">Improves academic success</div>
-<div class="imp">Builds professional identity</div>
-<div class="imp">Enhances clinical readiness</div>
-<div class="exp">Increases motivation & retention</div>
-
-</div>
-
-<div class="section">
-<h3>🔁 متشابهات وإختلافات عمو غيث</h3>
-
-<div class="very">Facilitator ≠ Mentor</div>
-<div class="imp">Facilitator → Learning process</div>
-<div class="imp">Mentor → Guidance & professional behavior</div>
-
-<hr>
-
-<div class="very">Planning ≠ Evaluation</div>
-<div class="imp">Planning → Before teaching</div>
-<div class="imp">Evaluation → After teaching</div>
-
-<hr>
-
-<div class="very">Simulation-Based ≠ Case-Based Learning</div>
-<div class="imp">Simulation → Practical & realistic</div>
-<div class="imp">Case-Based → Discussion & critical thinking</div>
-
-<hr>
-
-<div class="very">Pedagogical ≠ Clinical Skills</div>
-<div class="imp">Pedagogical → How to teach</div>
-<div class="imp">Clinical → What to teach from practice</div>
-
-</div>
-
-<div class="gaith-center">
-  <div class="gaith-box">
-    <div class="gaith-title">بصموجة عمو غيث</div>
-    <div class="gaith-sub">مميّزة للشفوي أكثر بإذن الله</div>
-  </div>
-</div>
-
-<div class="section">
-<h3>1️⃣ Core Roles of Nurse Educator</h3>
-
-<div class="one-row">
-  <div class="value">
-    Facilitator – Curriculum Developer – Evaluator – Mentor – Innovator
-  </div>
-</div>
-
-<div class="very">
-Mnemonic: <span class="code">F C E M I</span>
-</div>
-
-<div class="imp">
-Facilitator – Curriculum Developer – Evaluator – Mentor – Innovator
-</div>
-
-<div class="section">
-<h3>2️⃣ Responsibilities in Implementing Teaching Strategies</h3>
-
-<div class="very">
-Mnemonic: <span class="code">P E A E S</span>
-</div>
-
-<div class="imp">
-Planning – Execution – Adaptation – Evaluation – Support
-</div>
-
-<div class="section">
-<h3>3️⃣ Planning vs Execution vs Evaluation</h3>
-
-<div class="very">
-Mnemonic: <span class="code">B – D – A</span>
-</div>
-
-<div class="imp">
-Before → Planning<br>
-During → Execution<br>
-After → Evaluation
-</div>
-
-<div class="exp">
-📌 Anything BEFORE teaching = Planning<br>
-📌 Anything AFTER teaching = Evaluation
-</div>
-</div>
-
-<div class="section">
-<h3>4️⃣ Skills Required for Effective Nurse Educators</h3>
-
-<div class="very">
-Mnemonic: <span class="code">P C C T E</span>
-</div>
-
-<div class="imp">
-Pedagogical – Clinical – Communication – Technological – Ethical
-</div>
-
-<div class="exp">
-📌 These are the FIVE skill categories in the lecture.
-</div>
-</div>
-
-<div class="section">
-<h3>5️⃣ Simulation-Based Learning (Educator Role)</h3>
-
-<div class="very">
-Mnemonic: <span class="code">S P D S</span>
-</div>
-
-<div class="imp">
-Scenarios – Pre-briefing – Debriefing – Safety
-</div>
-
-<div class="exp">
-📌 Directly taken from simulation section.
-</div>
-</div>
-
-<div class="section">
-<h3>6️⃣ Case-Based Learning (Educator Role)</h3>
-
-<div class="very">
-Mnemonic: <span class="code">S G E</span>
-</div>
-
-<div class="imp">
-Select cases – Guide discussion – Ethical reflection
-</div>
-
-<div class="exp">
-📌 Focus on discussion and ethics.
-</div>
-</div>
-
-<div class="section">
-<h3>7️⃣ Collaborative Learning (Educator Role)</h3>
-
-<div class="very">
-Mnemonic: <span class="code">O M P</span>
-</div>
-
-<div class="imp">
-Organize groups – Mediate conflicts – Participation
-</div>
-
-<div class="exp">
-📌 Teamwork & equal participation.
-</div>
-</div>
-
-<div class="section">
-<h3>8️⃣ E-Learning (Educator Role)</h3>
-
-<div class="very">
-Mnemonic: <span class="code">C M F</span>
-</div>
-
-<div class="imp">
-Curate content – Monitor progress – Feedback
-</div>
-
-<div class="exp">
-📌 E-learning = Content + Monitoring + Feedback.
-</div>
-</div>
-
-<div class="section">
-<h3>9️⃣ Challenges Faced by Nurse Educators</h3>
-
-<div class="very">
-Mnemonic: <span class="code">R R S W</span>
-</div>
-
-<div class="imp">
-Resistance to change – Resource limitations – Student diversity – Workload & burnout
-</div>
-
-<div class="exp">
-📌 Same order as lecture table.
-</div>
-</div>
-
-<!-- ===== JS ===== -->
-<script>
-const header = document.querySelector('.main-header');
-
-for(let i=0;i<30;i++){
-  const star = document.createElement('div');
-  star.classList.add('star');
-  star.style.left = Math.random()*100 + '%';
-  star.style.animationDuration = (3 + Math.random()*5) + 's';
-  header.appendChild(star);
-}
-</script>
-
+    <div class="container">
+        <h1>👨‍🏫 Role of Nurse Educator</h1>
+        
+        <div class="section purple-section">
+            <h2><span class="icon">📚</span> Who Is the Nurse Educator?</h2>
+            <div class="highlight-box">
+                <strong>Definition:</strong> A registered nurse with advanced education and training in teaching and curriculum development.
+                <br><br>
+                <strong>More Than:</strong> Knowledge transmitter → Mentor, Facilitator, Role Model, Strategist
+                <br><br>
+                <strong>Works In:</strong> Universities, Nursing schools, Hospitals, Community health programs
+            </div>
+        </div>
+
+        <div class="section blue-section">
+            <h2><span class="icon">🎯</span> Core Roles</h2>
+            <div class="mnemonic">
+                <span class="emoji">💡</span> بصموجة غيث"FCEMI" <span class="emoji">💡</span>
+            </div>
+
+            <div class="role-box">
+                <strong>F</strong>acilitator of Learning
+                <p>• Guides students through active engagement & inquiry</p>
+            </div>
+
+            <div class="role-box">
+                <strong>C</strong>urriculum Developer
+                <p>• Designs & updates educational content</p>
+            </div>
+
+            <div class="role-box">
+                <strong>E</strong>valuator
+                <p>• Assesses student performance & learning outcomes</p>
+            </div>
+
+            <div class="role-box">
+                <strong>M</strong>entor & Role Model
+                <p>• Demonstrates professional behavior & ethical practice</p>
+            </div>
+
+            <div class="role-box">
+                <strong>I</strong>nnovator
+                <p>• Adopts & adapts new teaching strategies & technologies</p>
+            </div>
+        </div>
+
+        <div class="section green-section">
+            <h2><span class="icon">📋</span> Responsibilities in Strategy Implementation</h2>
+            <div class="mnemonic">
+                <span class="emoji">🎯</span> بصموجة غيث "PEAES" <span class="emoji">🎯</span>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Responsibility</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Planning</strong></td>
+                    <td>Aligns teaching strategies with learning objectives & student needs</td>
+                </tr>
+                <tr>
+                    <td><strong>Execution</strong></td>
+                    <td>Delivers content using appropriate methods (simulation, case-based)</td>
+                </tr>
+                <tr>
+                    <td><strong>Adaptation</strong></td>
+                    <td>Modifies strategies based on feedback & classroom dynamics</td>
+                </tr>
+                <tr>
+                    <td><strong>Evaluation</strong></td>
+                    <td>Uses rubrics, reflective tools, assessments to measure effectiveness</td>
+                </tr>
+                <tr>
+                    <td><strong>Support</strong></td>
+                    <td>Provides emotional & academic support to students</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section orange-section">
+            <h2><span class="icon">🎓</span> Skills Required for Effective Educators</h2>
+            <div class="mnemonic">
+                <span class="emoji">🔑</span> بصموجة غيث "PCCTE" <span class="emoji">🔑</span>
+            </div>
+
+            <div class="skill-box">
+                <h3>1. <strong>P</strong>edagogical Skills</h3>
+                <p>• Understanding learning theories & instructional design</p>
+                <p>• Ability to select & apply diverse teaching strategies</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>2. <strong>C</strong>linical Expertise</h3>
+                <p>• Up-to-date knowledge of nursing practice & standards</p>
+                <p>• Ability to integrate theory with clinical realities</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>3. <strong>C</strong>ommunication Skills</h3>
+                <p>• Clear, respectful, empathetic interaction with students</p>
+                <p>• Active listening & constructive feedback</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>4. <strong>T</strong>echnological Proficiency</h3>
+                <p>• Use of e-learning platforms, simulation tools, digital resources</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>5. <strong>E</strong>thical Leadership</h3>
+                <p>• Promotes integrity, fairness, professionalism in all teaching aspects</p>
+            </div>
+        </div>
+
+        <div class="section pink-section">
+            <h2><span class="icon">🎬</span> Educator's Role in Specific Strategies</h2>
+
+            <div class="card card-purple">
+                <h3><span class="badge badge-purple">Simulation-Based</span></h3>
+                <div class="list-item">• Designs realistic scenarios</div>
+                <div class="list-item">• Facilitates pre-briefing & debriefing</div>
+                <div class="list-item">• Ensures psychological safety & ethical sensitivity</div>
+            </div>
+
+            <div class="card card-blue">
+                <h3><span class="badge badge-blue">Case-Based</span></h3>
+                <div class="list-item">• Selects relevant & diverse cases</div>
+                <div class="list-item">• Guides discussion & critical thinking</div>
+                <div class="list-item">• Encourages ethical reflection & interdisciplinary integration</div>
+            </div>
+
+            <div class="card card-green">
+                <h3><span class="badge badge-green">Collaborative</span></h3>
+                <div class="list-item">• Organizes group dynamics & roles</div>
+                <div class="list-item">• Mediates conflicts & ensures equal participation</div>
+                <div class="list-item">• Promotes teamwork & peer learning</div>
+            </div>
+
+            <div class="card card-orange">
+                <h3><span class="badge badge-orange">E-Learning</span></h3>
+                <div class="list-item">• Curates digital content & interactive modules</div>
+                <div class="list-item">• Monitors student engagement & progress</div>
+                <div class="list-item">• Provides timely feedback & technical support</div>
+            </div>
+        </div>
+
+        <div class="section red-section">
+            <h2><span class="icon">⚠️</span> Challenges & Responses</h2>
+            <table>
+                <tr>
+                    <th>Challenge</th>
+                    <th>Description</th>
+                    <th>Suggested Response</th>
+                </tr>
+                <tr>
+                    <td><strong>Resistance to Change</strong></td>
+                    <td>Faculty/students prefer traditional methods</td>
+                    <td>Evidence-based rationale & gradual integration</td>
+                </tr>
+                <tr>
+                    <td><strong>Resource Limitations</strong></td>
+                    <td>Lack of simulation labs/digital tools</td>
+                    <td>Low-cost alternatives & advocate for funding</td>
+                </tr>
+                <tr>
+                    <td><strong>Student Diversity</strong></td>
+                    <td>Varied learning styles, backgrounds, preparedness</td>
+                    <td>Differentiated instruction & inclusive strategies</td>
+                </tr>
+                <tr>
+                    <td><strong>Workload & Burnout</strong></td>
+                    <td>Balancing teaching, clinical duties, research</td>
+                    <td>Time management, delegation, institutional support</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section teal-section">
+            <h2><span class="icon">✨</span> Impact on Student Outcomes</h2>
+            <div class="mnemonic">
+                <span class="emoji">🌟</span> بصموجة غيث "APCR" <span class="emoji">🌟</span>
+            </div>
+
+            <div class="impact-box">
+                <strong>A</strong>cademic Success
+                <p>Students perform better when guided by skilled educators</p>
+            </div>
+
+            <div class="impact-box">
+                <strong>P</strong>rofessional Identity Formation
+                <p>Educators shape students' values & attitudes</p>
+            </div>
+
+            <div class="impact-box">
+                <strong>C</strong>linical Readiness
+                <p>Effective teaching strategies prepare for real-world practice</p>
+            </div>
+
+            <div class="impact-box">
+                <strong>R</strong>etention & Motivation
+                <p>Supportive educators reduce dropout rates & increase engagement</p>
+            </div>
+        </div>
+
+        <div class="section yellow-section">
+            <h2><span class="icon">⭐</span> Best Practices</h2>
+            <div class="mnemonic">
+                <span class="emoji">💪</span> بصموجة غيث "AFRCS" <span class="emoji">💪</span>
+            </div>
+
+            <div class="best-practice-box">
+                <strong>A</strong>lign strategies with course objectives & student needs
+            </div>
+
+            <div class="best-practice-box">
+                <strong>F</strong>oster respectful, inclusive, interactive learning environment
+            </div>
+
+            <div class="best-practice-box">
+                <strong>R</strong>eflective teaching to improve continuously
+            </div>
+
+            <div class="best-practice-box">
+                <strong>C</strong>ollaborate with peers for interdisciplinary integration
+            </div>
+
+            <div class="best-practice-box">
+                <strong>S</strong>tay updated with educational research & innovations
+            </div>
+        </div>
+
+        <div class="section green-section">
+            <h2><span class="icon">🔑</span> المهم الي تركز عليه من عمو غيث </h2>
+            <div class="critical-fact">✓ Nurse Educator = More than knowledge transmitter: Mentor, Facilitator, Role Model, Strategist</div>
+            <div class="critical-fact">✓ 5 Core Roles: FCEMI (Facilitator, Curriculum, Evaluator, Mentor, Innovator)</div>
+            <div class="critical-fact">✓ 5 Responsibilities: PEAES (Planning, Execution, Adaptation, Evaluation, Support)</div>
+            <div class="critical-fact">✓ 5 Required Skills: PCCTE (Pedagogical, Clinical, Communication, Technological, Ethical)</div>
+            <div class="critical-fact">✓ Specific Roles in 4 Strategies: Simulation, Case-Based, Collaborative, E-Learning</div>
+            <div class="critical-fact">✓ 4 Main Challenges: Resistance to Change, Resource Limitations, Student Diversity, Workload/Burnout</div>
+            <div class="critical-fact">✓ 4 Impact Areas: APCR (Academic, Professional, Clinical, Retention)</div>
+            <div class="critical-fact">✓ 5 Best Practices: AFRCS (Align, Foster, Reflective, Collaborate, Stay updated)</div>
+            <div class="critical-fact">✓ Simulation Role: Design scenarios, Pre-brief/Debrief, Psychological safety</div>
+            <div class="critical-fact">✓ Case-Based Role: Select cases, Guide discussion, Ethical reflection</div>
+            <div class="critical-fact">✓ Collaborative Role: Group dynamics, Mediate conflicts, Equal participation</div>
+            <div class="critical-fact">✓ E-Learning Role: Curate content, Monitor engagement, Timely feedback</div>
+            <div class="critical-fact">✓ Educators shape professional identity, values, and attitudes</div>
+            <div class="critical-fact">✓ Works in: Universities, Schools, Hospitals, Community programs</div>
+        </div>
+
+        <div class="highlight-box" style="text-align: center; font-size: 1.2em;">
+            <span class="emoji">🍀</span> مع غيث أنت في أمان بإذن الله ، بالتوفيق  <span class="emoji">🍀</span>
+        </div>
+    </div>
 </body>
 </html>
