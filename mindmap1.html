@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future of Nursing Education Mind Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-in;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-size: 2em;
+            animation: slideDown 1s ease-out, glow 2s infinite;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.8)); }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-style: italic;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        .central-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 25px;
+            font-size: 1.6em;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            margin-bottom: 25px;
+            animation: pulse 3s infinite, float 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .central-node::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5); 
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 15px 40px rgba(240, 147, 251, 0.7); 
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .branch {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: slideInUp 0.7s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .branch:active {
+            transform: scale(0.96) rotate(-1deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        }
+
+        .branch:active::before {
+            left: 100%;
+        }
+
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .branch:nth-child(1) { animation-delay: 0.1s; }
+        .branch:nth-child(2) { animation-delay: 0.2s; }
+        .branch:nth-child(3) { animation-delay: 0.3s; }
+        .branch:nth-child(4) { animation-delay: 0.4s; }
+        .branch:nth-child(5) { animation-delay: 0.5s; }
+        .branch:nth-child(6) { animation-delay: 0.6s; }
+        .branch:nth-child(7) { animation-delay: 0.7s; }
+        .branch:nth-child(8) { animation-delay: 0.8s; }
+        .branch:nth-child(9) { animation-delay: 0.9s; }
+        .branch:nth-child(10) { animation-delay: 1s; }
+
+        .branch h3 {
+            margin-bottom: 14px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .branch ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .branch li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.92em;
+            line-height: 1.7;
+            animation: fadeInLeft 0.6s ease-out backwards;
+        }
+
+        .branch li:nth-child(1) { animation-delay: 0.15s; }
+        .branch li:nth-child(2) { animation-delay: 0.25s; }
+        .branch li:nth-child(3) { animation-delay: 0.35s; }
+        .branch li:nth-child(4) { animation-delay: 0.45s; }
+        .branch li:nth-child(5) { animation-delay: 0.55s; }
+        .branch li:nth-child(6) { animation-delay: 0.65s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .branch li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            animation: pulse-arrow 2s infinite;
+        }
+
+        @keyframes pulse-arrow {
+            0%, 100% { opacity: 1; transform: translateX(0); }
+            50% { opacity: 0.6; transform: translateX(3px); }
+        }
+
+        .branch strong {
+            font-weight: 600;
+            color: inherit;
+        }
+
+        /* Drivers Branch */
+        .drivers {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .drivers li:before { color: #fff; }
+
+        /* Strategies Branch */
+        .strategies {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-color: #f093fb;
+        }
+        .strategies li:before { color: #fff; }
+
+        /* Roles Branch */
+        .roles {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-color: #4facfe;
+        }
+        .roles li:before { color: #fff; }
+
+        /* Benefits Branch */
+        .benefits {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            border-color: #43e97b;
+        }
+        .benefits li:before { color: #fff; }
+
+        /* Challenges Branch */
+        .challenges {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border-color: #fa709a;
+        }
+        .challenges li:before { color: #fff; }
+
+        /* Recommendations Branch */
+        .recommendations {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+            border-color: #30cfd0;
+        }
+        .recommendations li:before { color: #fff; }
+
+        /* Vision Branch */
+        .vision {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            border-color: #a8edea;
+        }
+        .vision li:before { color: #667eea; }
+
+        /* Green Nursing Branches */
+        .green-def {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            border-color: #56ab2f;
+        }
+        .green-def li:before { color: #fff; }
+
+        .green-importance {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border-color: #11998e;
+        }
+        .green-importance li:before { color: #fff; }
+
+        .green-role {
+            background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+            color: white;
+            border-color: #134e5e;
+        }
+        .green-role li:before { color: #fff; }
+
+        .icon {
+            font-size: 1.5em;
+            animation: bounce-icon 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce-icon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            75% { transform: translateY(-3px) rotate(-5deg); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 0.95em;
+            opacity: 0.95;
+            animation: fadeIn 2.5s ease-in;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glowing orbs effect */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+            animation: float-orb 8s ease-in-out infinite;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        .orb1 { 
+            width: 200px; 
+            height: 200px; 
+            background: #667eea; 
+            top: 10%; 
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb2 { 
+            width: 250px; 
+            height: 250px; 
+            background: #f093fb; 
+            bottom: 20%; 
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .orb3 { 
+            width: 180px; 
+            height: 180px; 
+            background: #43e97b; 
+            top: 50%; 
+            right: 20%;
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background elements -->
+    <div class="stars" id="stars"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="container">
+        <h1>🚀 Future of Nursing Education</h1>
+        <p class="subtitle"> مع غيث الدنيا هتكون بسيطة بإذن الله </p>
+        
+        <div class="central-node">
+            Future of<br>Nursing<br>Education
+        </div>
+
+        <!-- Drivers Branch -->
+        <div class="branch drivers">
+            <h3><span class="icon">⚡</span> Drivers of Change</h3>
+            <ul>
+                <li><strong>Technological Advancements:</strong> AI, VR, AR transforming education</li>
+                <li><strong>Global Health Challenges:</strong> Pandemics, climate change, migration</li>
+                <li><strong>Evolving Patient Needs:</strong> Chronic diseases, aging, mental health</li>
+                <li><strong>Educational Philosophy Shifts:</strong> Learner-centered, lifelong learning</li>
+            </ul>
+        </div>
+
+        <!-- Strategies Branch -->
+        <div class="branch strategies">
+            <h3><span class="icon">🎯</span> Emerging Teaching Strategies</h3>
+            <ul>
+                <li><strong>AI in Education:</strong> Personalized learning, instant feedback</li>
+                <li><strong>VR & AR:</strong> Immersive environments, enhanced training</li>
+                <li><strong>Gamification:</strong> Points, levels, challenges for engagement</li>
+                <li><strong>Microlearning:</strong> Short modules via smartphones</li>
+                <li><strong>Flipped/Hybrid Classrooms:</strong> Theory at home, practice in class</li>
+                <li><strong>Competency-Based Education:</strong> Progress by mastery</li>
+            </ul>
+        </div>
+
+        <!-- Roles Branch -->
+        <div class="branch roles">
+            <h3><span class="icon">👨‍🏫</span> Future Roles of Educators</h3>
+            <ul>
+                <li><strong>Facilitator of Innovation:</strong> Integrates new technologies</li>
+                <li><strong>Data-Informed Mentor:</strong> Uses analytics for personalization</li>
+                <li><strong>Global Collaborator:</strong> International partnerships</li>
+                <li><strong>Ethical Guardian:</strong> Ensures humane, inclusive learning</li>
+            </ul>
+        </div>
+
+        <!-- Benefits Branch -->
+        <div class="branch benefits">
+            <h3><span class="icon">✨</span> Benefits of Future Strategies</h3>
+            <ul>
+                <li><strong>Personalized Learning:</strong> AI tailors to individual needs</li>
+                <li><strong>Enhanced Engagement:</strong> Interactive & enjoyable</li>
+                <li><strong>Global Competence:</strong> Exposure to diverse cultures</li>
+                <li><strong>Skill Mastery:</strong> True clinical readiness</li>
+                <li><strong>Flexibility:</strong> Accommodates different lifestyles</li>
+            </ul>
+        </div>
+
+        <!-- Challenges Branch -->
+        <div class="branch challenges">
+            <h3><span class="icon">⚠️</span> Challenges & Solutions</h3>
+            <ul>
+                <li><strong>Digital Divide:</strong> Provide offline alternatives</li>
+                <li><strong>AI Bias:</strong> Use transparent, inclusive datasets</li>
+                <li><strong>Over-reliance on Tech:</strong> Balance with human connection</li>
+                <li><strong>Privacy & Security:</strong> Secure platforms, informed consent</li>
+            </ul>
+        </div>
+
+        <!-- Recommendations Branch -->
+        <div class="branch recommendations">
+            <h3><span class="icon">💡</span> Recommendations for Educators</h3>
+            <ul>
+                <li>Stay updated with continuous development</li>
+                <li>Pilot innovations in small groups first</li>
+                <li>Collaborate globally through forums</li>
+                <li>Empower students with digital literacy</li>
+                <li>Evaluate continuously using feedback</li>
+            </ul>
+        </div>
+
+        <!-- Vision Branch -->
+        <div class="branch vision">
+            <h3><span class="icon">🌟</span> Vision for the Future</h3>
+            <ul>
+                <li>Human-centered & globally connected</li>
+                <li>Ethically grounded education</li>
+                <li>Preserving core nursing values: compassion, integrity, service</li>
+                <li>Preparing visionary healthcare leaders</li>
+            </ul>
+        </div>
+
+        <!-- Green Nursing Definition -->
+        <div class="branch green-def">
+            <h3><span class="icon">🌱</span> Green Nursing - Definition</h3>
+            <ul>
+                <li><strong>What is it?</strong> Caring for people AND the planet</li>
+                <li>Eco-conscious nursing practices</li>
+                <li>Reducing waste, saving energy, protecting environment</li>
+                <li>Smart & sustainable healthcare delivery</li>
+            </ul>
+        </div>
+
+        <!-- Green Nursing Importance -->
+        <div class="branch green-importance">
+            <h3><span class="icon">🌍</span> Why Green Nursing Matters</h3>
+            <ul>
+                <li>Healthcare creates significant waste (plastic, chemicals)</li>
+                <li>Reduces pollution & protects public health</li>
+                <li>Saves money by using fewer resources</li>
+                <li>Promotes environmental sustainability</li>
+            </ul>
+        </div>
+
+        <!-- Green Nursing Role -->
+        <div class="branch green-role">
+            <h3><span class="icon">♻️</span> Role of Nurses in Green Nursing</h3>
+            <ul>
+                <li>Use reusable items (washable gowns)</li>
+                <li>Recycle properly - separate medical waste</li>
+                <li>Save energy & water - turn off when not needed</li>
+                <li>Choose eco-friendly products (non-toxic cleaners)</li>
+                <li>Teach sustainability to patients & staff</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        🥰أتمني تكون فهمت والدنيا تكون بسيطة 
+دعواتك 
+    </div>
+
+    <script>
+        // Create animated stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
