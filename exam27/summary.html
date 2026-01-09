@@ -1,238 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Learning Strategies in Nursing – Gaith Team</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation-Based Learning by Gaith </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-/* ===== Reset ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
 
-/* ===== Body ===== */
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  background:#f8fbff;
-  line-height:1.7;
-  color:#0f172a;
-  padding:30px;
-}
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
 
-/* ===== HEADER ===== */
-.main-header{
-  position: relative;
-  height: 180px;
-  background: linear-gradient(135deg, #0284c7, #0ea5e9);
-  color: white;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  margin-bottom:40px;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.main-header h1{
-  font-size: 40px;
-  font-weight: 900;
-  z-index:2;
-  animation: fadeSlide 1.2s ease forwards;
-}
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            animation: slideDown 0.6s ease-out;
+        }
 
-.main-header p{
-  font-size: 18px;
-  margin-top: 6px;
-  z-index:2;
-  animation: fadeSlide 1.6s ease forwards;
-}
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-/* Animations */
-@keyframes fadeSlide{
-  from{opacity:0; transform: translateY(-20px);}
-  to{opacity:1; transform: translateY(0);}
-}
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
 
-/* Sparkles */
-.sparkles{
-  position:absolute;
-  inset:0;
-  background-image:
-    radial-gradient(2px 2px at 10% 20%, white, transparent),
-    radial-gradient(2px 2px at 30% 60%, white, transparent),
-    radial-gradient(1.5px 1.5px at 50% 30%, white, transparent),
-    radial-gradient(2px 2px at 70% 70%, white, transparent),
-    radial-gradient(1.5px 1.5px at 90% 40%, white, transparent);
-  animation: sparklePulse 3s infinite alternate;
-  opacity:0.8;
-}
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-@keyframes sparklePulse{
-  from{opacity:0.4;}
-  to{opacity:1;}
-}
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+        .section:nth-child(8) { animation-delay: 0.8s; }
+        .section:nth-child(9) { animation-delay: 0.9s; }
 
-/* Stars */
-.star{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  animation: floatStar linear infinite;
-}
+        .purple-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+        }
 
-@keyframes floatStar{
-  from{transform: translateY(200px); opacity:0;}
-  to{transform: translateY(-30px); opacity:1;}
-}
+        .blue-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #4facfe;
+        }
 
-/* ===== CONTENT ===== */
-.section{
-  background:#ffffff;
-  padding:22px;
-  margin-bottom:25px;
-  border-radius:14px;
-  box-shadow:0 8px 22px rgba(0,0,0,0.06);
-}
+        .green-section {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 4px solid #43e97b;
+        }
 
-.section h2{
-  color:#0284c7;
-  margin-bottom:12px;
-}
+        .orange-section {
+            background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+            border-left: 4px solid #fa709a;
+        }
 
-.key{color:#16a34a; font-weight:bold}
-.exam{color:#dc2626; font-weight:bold}
+        .pink-section {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 4px solid #f093fb;
+        }
 
-.box{
-  background:#e0f2fe;
-  padding:14px;
-  border-radius:10px;
-  margin-top:10px;
-}
+        .teal-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #00bcd4;
+        }
 
-.mnemonic{
-  background:#fef3c7;
-  border-left:6px solid #ea580c;
-  padding:12px;
-  margin-top:10px;
-  font-weight:bold;
-}
+        .red-section {
+            background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a6f15 100%);
+            border-left: 4px solid #ff6b6b;
+        }
 
-.compare{
-  background:#ede9fe;
-  border-left:6px solid #7c3aed;
-  padding:12px;
-  margin-top:10px;
-}
+        .yellow-section {
+            background: linear-gradient(135deg, #ffeaa715 0%, #fdcb6e15 100%);
+            border-left: 4px solid #fdcb6e;
+        }
 
-ul,ol{padding-left:22px}
-li{margin-bottom:6px}
-</style>
+        h2 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin: 15px 0 8px 0;
+            font-size: 1.1em;
+        }
+
+        .mnemonic {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .mnemonic:active {
+            transform: scale(0.98);
+        }
+
+        .list-item {
+            background: white;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .list-item:active {
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
+            font-size: 0.95em;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .critical-fact {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .critical-fact:active {
+            transform: translateX(5px);
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            border-top: 3px solid;
+            transition: all 0.3s ease;
+        }
+
+        .card:active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-purple { border-top-color: #667eea; }
+        .card-blue { border-top-color: #4facfe; }
+        .card-green { border-top-color: #43e97b; }
+        .card-orange { border-top-color: #fa709a; }
+
+        .characteristic-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9em;
+        }
+
+        .benefit-box {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #43e97b;
+            font-size: 0.9em;
+        }
+
+        .step-box {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .step {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.85em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:active td {
+            background: #f7fafc;
+        }
+
+        .icon {
+            font-size: 1.3em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: rotate 3s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin: 3px;
+            color: white;
+        }
+
+        .badge-purple { background: #667eea; }
+        .badge-blue { background: #4facfe; }
+        .badge-green { background: #43e97b; }
+        .badge-orange { background: #fa709a; }
+        .badge-pink { background: #f093fb; }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; font-size: 13px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            .container { padding: 15px; }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <h1>🎮 Simulation-Based Learning (SBL)</h1>
+        
+        <div class="section purple-section">
+            <h2><span class="icon">📚</span> Definition</h2>
+            <div class="highlight-box">
+                <strong>Simulation:</strong> Use of tools, scenarios, and environments that mimic real clinical situations to enhance learning. Range: simple role-play → high-fidelity mannequins → virtual reality.
+                <br><br>
+                <strong>SBL:</strong> Dynamic educational strategy that replicates real-life clinical situations in a controlled, safe environment. Practice skills, make decisions, experience emotional/ethical dimensions WITHOUT risking patient safety.
+                <br><br>
+                <strong>Purpose:</strong> Bridge the gap between theory and practice
+            </div>
+        </div>
 
-<!-- ===== HEADER ===== -->
-<header class="main-header">
-  <div class="sparkles"></div>
-  <h1>✨ Gaith Team ✨</h1>
-  <p>الامتحان في جيبك</p>
-</header>
+        <div class="section blue-section">
+            <h2><span class="icon">🎯</span> Key Characteristics</h2>
+            <div class="mnemonic">
+                <span class="emoji">💡</span> بصموجة غيث "SERR" <span class="emoji">💡</span>
+            </div>
 
-<!-- ===== CONTENT ===== -->
+            <div class="characteristic-box">
+                <strong>S</strong>afe & Controlled
+                <p>• No harm to real patients</p>
+            </div>
 
-<div class="section">
-  <h2>1. Definitions</h2>
-  <p><span class="key">Simulation:</span> A teaching tool that imitates real clinical situations in a safe environment.</p>
-  <p><span class="key">Simulation-Based Learning (SBL):</span> A teaching strategy that uses simulation to improve clinical skills, decision-making, and confidence.</p>
-  <div class="box exam">
-    Exam Focus: SBL bridges the gap between theory and practice.
-  </div>
-</div>
+            <div class="characteristic-box">
+                <strong>E</strong>xperiential
+                <p>• Learning through doing</p>
+            </div>
 
-<div class="section">
-  <h2>2. Key Characteristics</h2>
-  <ul>
-    <li><b>S</b>afe – no risk to real patients</li>
-    <li><b>E</b>xperiential – learning by doing</li>
-    <li><b>R</b>eflective – includes debriefing</li>
-    <li><b>R</b>ealistic – similar to real clinical practice</li>
-  </ul>
-  <div class="mnemonic">Mnemonic: SERR</div>
-</div>
+            <div class="characteristic-box">
+                <strong>R</strong>eflective
+                <p>• Includes debriefing & feedback</p>
+            </div>
 
-<div class="section">
-  <h2>3. Types of Simulation</h2>
-  <ul>
-    <li><b>Low-fidelity:</b> Role-play, simple models</li>
-    <li><b>Medium-fidelity:</b> Mannequins with limited functions</li>
-    <li><b>High-fidelity:</b> Advanced mannequins</li>
-    <li><b>Virtual simulation:</b> Computer-based scenarios</li>
-    <li><b>Standardized patients:</b> Trained actors</li>
-  </ul>
-  <div class="mnemonic">Mnemonic: LMHVS</div>
-</div>
+            <div class="characteristic-box">
+                <strong>R</strong>ealistic
+                <p>• Replicates clinical complexity & urgency</p>
+            </div>
 
-<div class="section">
-  <h2>4. Simulation Session Steps</h2>
-  <ol>
-    <li>Pre-briefing</li>
-    <li>Scenario execution</li>
-    <li>Debriefing</li>
-    <li>Evaluation</li>
-  </ol>
-  <div class="mnemonic">Mnemonic: PSDE</div>
-  <div class="box exam">Exam Trap: Debriefing comes after the scenario.</div>
-</div>
+            <div class="benefit-box">
+                <strong>📝 Example:</strong> Student performs CPR on high-fidelity mannequin while managing team communication & medication administration
+            </div>
+        </div>
 
-<div class="section">
-  <h2>5. Benefits of SBL</h2>
-  <ul>
-    <li>Skills improvement</li>
-    <li>Confidence</li>
-    <li>Safe error management</li>
-    <li>Teamwork</li>
-    <li>Critical thinking</li>
-  </ul>
-  <div class="mnemonic">Mnemonic: SCETC</div>
-</div>
+        <div class="section green-section">
+            <h2><span class="icon">📊</span> Types of Simulation</h2>
+            <div class="mnemonic">
+                <span class="emoji">🎨</span> 5 Types: "LMHVS" <span class="emoji">🎨</span>
+            </div>
 
-<div class="section">
-  <h2>6. Similarities & Differences</h2>
-  <div class="compare">
-    <b>Simulation:</b> Teaching tool<br>
-    <b>SBL:</b> Teaching strategy
-  </div>
-  <div class="compare">
-    <b>Debriefing:</b> Reflection and discussion<br>
-    <b>Evaluation:</b> Assessment and grading
-  </div>
-</div>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example Scenario</th>
+                </tr>
+                <tr>
+                    <td><strong>Low-Fidelity</strong></td>
+                    <td>Basic models/role-play without technology</td>
+                    <td>Hand hygiene or vital signs</td>
+                </tr>
+                <tr>
+                    <td><strong>Medium-Fidelity</strong></td>
+                    <td>Mannequins with limited features & basic monitoring</td>
+                    <td>Injections or wound care</td>
+                </tr>
+                <tr>
+                    <td><strong>High-Fidelity</strong></td>
+                    <td>Advanced mannequins with physiological responses & software</td>
+                    <td>Cardiac arrest or labor delivery</td>
+                </tr>
+                <tr>
+                    <td><strong>Virtual Simulation</strong></td>
+                    <td>Computer-based scenarios with interactive decision-making</td>
+                    <td>Diagnosing & treating virtual patient</td>
+                </tr>
+                <tr>
+                    <td><strong>Standardized Patients</strong></td>
+                    <td>Actors trained to portray patients consistently</td>
+                    <td>Mental health assessments</td>
+                </tr>
+            </table>
+        </div>
 
-<div class="section">
-  <h2 class="exam">7. Very Common Exam Points</h2>
-  <ul>
-    <li>Simulation is safe and realistic</li>
-    <li>SBL improves clinical performance</li>
-    <li>Debriefing enhances learning</li>
-    <li>High-fidelity simulation improves critical thinking</li>
-  </ul>
-</div>
+        <div class="section orange-section">
+            <h2><span class="icon">🧠</span> Educational Foundations</h2>
+            <div class="mnemonic">
+                <span class="emoji">🔑</span> بصموجة غيث "EAS" <span class="emoji">🔑</span>
+            </div>
 
-<!-- ===== JS ===== -->
-<script>
-const header = document.querySelector('.main-header');
-for(let i=0;i<30;i++){
-  const star = document.createElement('div');
-  star.className = 'star';
-  star.style.left = Math.random()*100 + '%';
-  star.style.animationDuration = (3 + Math.random()*5) + 's';
-  header.appendChild(star);
-}
-</script>
+            <div class="card card-purple">
+                <h3>1. <strong>E</strong>xperiential Learning (Kolb)</h3>
+                <p>• Learn through experience, reflection, experimentation</p>
+                <p>• <strong>Kolb's Cycle:</strong> Experience → Reflection → Conceptualization → Application</p>
+            </div>
 
+            <div class="card card-blue">
+                <h3>2. <strong>A</strong>dult Learning Theory</h3>
+                <p>• Adults prefer practical, problem-solving learning</p>
+                <p>• Simulation offers: relevance, autonomy, immediate feedback</p>
+            </div>
+
+            <div class="card card-green">
+                <h3>3. <strong>S</strong>ituated Cognition</h3>
+                <p>• Knowledge best acquired in context</p>
+                <p>• Simulation replicates clinical environments → authentic learning</p>
+            </div>
+        </div>
+
+        <div class="section pink-section">
+            <h2><span class="icon">🎬</span> Components of Simulation Session</h2>
+            <div class="mnemonic">
+                <span class="emoji">🎯</span> 4 Components: "PSDE" <span class="emoji">🎯</span>
+            </div>
+
+            <div class="step-box">
+                <div class="step">
+                    <strong>1. P</strong>re-briefing
+                    <p>• Orientation to objectives, roles, equipment</p>
+                    <p>• Sets expectations & psychological safety</p>
+                </div>
+
+                <div class="step">
+                    <strong>2. S</strong>cenario Execution
+                    <p>• Students engage, respond to patient cues, make decisions</p>
+                    <p>• Involves teamwork, communication, emergency management</p>
+                </div>
+
+                <div class="step">
+                    <strong>3. D</strong>ebriefing
+                    <p>• Structured reflection led by instructor</p>
+                    <p>• Discusses: what happened, why, how to improve</p>
+                    <p>• Encourages emotional processing & professional growth</p>
+                </div>
+
+                <div class="step">
+                    <strong>4. E</strong>valuation
+                    <p>• Assessment of clinical performance, teamwork, decision-making</p>
+                    <p>• Includes: self-assessment, peer feedback, instructor grading</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section teal-section">
+            <h2><span class="icon">✨</span> Benefits of SBL</h2>
+            <div class="mnemonic">
+                <span class="emoji">🌟</span> بصموجة غيث "SCETCE" <span class="emoji">🌟</span>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Benefit</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Skill Mastery</strong></td>
+                    <td>Repeated practice improves psychomotor & cognitive skills</td>
+                </tr>
+                <tr>
+                    <td><strong>Clinical Confidence</strong></td>
+                    <td>Students feel more prepared for real patient care</td>
+                </tr>
+                <tr>
+                    <td><strong>Error Management</strong></td>
+                    <td>Learners can make mistakes safely & learn from them</td>
+                </tr>
+                <tr>
+                    <td><strong>Teamwork & Communication</strong></td>
+                    <td>Enhances collaboration & leadership</td>
+                </tr>
+                <tr>
+                    <td><strong>Critical Thinking</strong></td>
+                    <td>Promotes rapid decision-making under pressure</td>
+                </tr>
+                <tr>
+                    <td><strong>Emotional Preparedness</strong></td>
+                    <td>Exposes to stress, empathy, ethical dilemmas</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section red-section">
+            <h2><span class="icon">⚠️</span> Challenges & Solutions</h2>
+            <table>
+                <tr>
+                    <th>Challenge</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td><strong>High Cost</strong></td>
+                    <td>Use blended models & prioritize high-impact scenarios</td>
+                </tr>
+                <tr>
+                    <td><strong>Faculty Training</strong></td>
+                    <td>Provide workshops & peer mentoring for simulation facilitation</td>
+                </tr>
+                <tr>
+                    <td><strong>Student Anxiety</strong></td>
+                    <td>Use pre-briefing & supportive feedback to reduce stress</td>
+                </tr>
+                <tr>
+                    <td><strong>Technical Issues</strong></td>
+                    <td>Ensure regular maintenance & backup plans</td>
+                </tr>
+                <tr>
+                    <td><strong>Assessment Complexity</strong></td>
+                    <td>Use structured rubrics & multi-source feedback</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section yellow-section">
+            <h2><span class="icon">🛠️</span> Designing Effective Simulation</h2>
+            <div class="mnemonic">
+                <span class="emoji">🔧</span> Steps: "DDPFDE" <span class="emoji">🔧</span>
+            </div>
+
+            <div class="step-box">
+                <div class="step"><strong>D</strong>efine Learning Objectives</div>
+                <div class="step"><strong>D</strong>evelop the Scenario (patient data, vitals, labs, complications)</div>
+                <div class="step"><strong>P</strong>repare Equipment & Roles (mannequins, monitors, meds, team roles)</div>
+                <div class="step"><strong>F</strong>acilitate the Simulation (students lead care, decide, communicate)</div>
+                <div class="step"><strong>D</strong>ebrief (use structured models for reflection)</div>
+                <div class="step"><strong>E</strong>valuate Performance (checklists, rubrics, reflective writing)</div>
+            </div>
+        </div>
+
+        <div class="section blue-section">
+            <h2><span class="icon">📝</span> Sample Simulation Scenario</h2>
+            <div class="card card-orange">
+                <h3>Title: Managing Patient with Acute Respiratory Distress</h3>
+                
+                <p><strong>Scenario:</strong> 60-year-old male with COPD presents with shortness of breath, low oxygen saturation, confusion</p>
+                
+                <p><strong>Objectives:</strong></p>
+                <div class="list-item">• Assess respiratory status</div>
+                <div class="list-item">• Administer oxygen & medications</div>
+                <div class="list-item">• Communicate with physician & family</div>
+                
+                <p><strong>Materials:</strong> High-fidelity mannequin, oxygen setup, medication tray</p>
+                
+                <p><strong>Activities:</strong></p>
+                <div class="list-item">• Team-based simulation</div>
+                <div class="list-item">• Role-play nurse-family interaction</div>
+                <div class="list-item">• Debriefing & care plan development</div>
+            </div>
+        </div>
+
+        <div class="section green-section">
+            <h2><span class="icon">🌍</span> Ethical & Cultural Considerations</h2>
+            <div class="list-item">• Ensure simulations reflect diverse patient populations</div>
+            <div class="list-item">• Address ethical dilemmas: informed consent, end-of-life care, cultural beliefs</div>
+            <div class="list-item">• Promote respectful communication & empathy</div>
+        </div>
+
+        <div class="section purple-section">
+            <h2><span class="icon">🔑</span> المهم الي تركز عليه من عمو غيث </h2>
+            <div class="critical-fact">✓ SBL = Replicates real-life clinical situations in safe, controlled environment</div>
+            <div class="critical-fact">✓ 4 Key Characteristics: SERR (Safe, Experiential, Reflective, Realistic)</div>
+            <div class="critical-fact">✓ 5 Types of Simulation: LMHVS (Low, Medium, High, Virtual, Standardized patients)</div>
+            <div class="critical-fact">✓ 3 Educational Foundations: EAS (Experiential/Kolb, Adult Learning, Situated Cognition)</div>
+            <div class="critical-fact">✓ Kolb's Cycle: Experience → Reflection → Conceptualization → Application</div>
+            <div class="critical-fact">✓ 4 Session Components: PSDE (Pre-briefing, Scenario, Debriefing, Evaluation)</div>
+            <div class="critical-fact">✓ Debriefing = MOST IMPORTANT component (structured reflection)</div>
+            <div class="critical-fact">✓ 6 Benefits: SCETCE (Skill, Confidence, Error, Teamwork, Critical, Emotional)</div>
+            <div class="critical-fact">✓ 5 Challenges: High Cost, Faculty Training, Student Anxiety, Technical Issues, Assessment</div>
+            <div class="critical-fact">✓ 6 Design Steps: DDPFDE (Define, Develop, Prepare, Facilitate, Debrief, Evaluate)</div>
+            <div class="critical-fact">✓ High-Fidelity = Advanced mannequins with physiological responses & integrated software</div>
+            <div class="critical-fact">✓ Standardized Patients = Actors trained to portray patients consistently</div>
+            <div class="critical-fact">✓ Pre-briefing sets: expectations & psychological safety</div>
+            <div class="critical-fact">✓ Purpose: Bridge gap between theory & practice</div>
+            <div class="critical-fact">✓ Key Advantage: Practice WITHOUT risking patient safety</div>
+        </div>
+
+        <div class="highlight-box" style="text-align: center; font-size: 1.2em;">
+            <span class="emoji">🍀</span> مع غيث أنت في أمان بإذن الله ، بالتوفيق <span class="emoji">🍀</span>
+        </div>
+    </div>
 </body>
 </html>
