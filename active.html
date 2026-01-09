@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">35:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+   // MCQs (45 Questions)
+            {t:"What is the primary shift in focus when implementing active learning strategies in nursing?", o:["From clinical skills to theoretical knowledge", "From passive reception to active engagement", "From student-centered to teacher-centered", "From emotional intelligence to technical skills"], a:1},
+            {t:"Which of the following is defined as 'methods that teachers use to deliver course material in ways that keep students engaged'?", o:["Learning strategies", "Instructional strategies", "Rote memorization", "Curriculum design"], a:1},
+            {t:"How are 'Learning Strategies' specifically distinguished from teaching strategies in the text?", o:["They are used by teachers to grade students", "They are a set of skills students use to understand tasks", "They focus only on cognitive gain", "They are highly structured and inflexible"], a:1},
+            {t:"Traditional approaches to nursing education rely heavily on which of the following?", o:["Case analysis", "Multiple-choice examinations", "Peer teaching", "Reflective practice"], a:1},
+            {t:"Which characteristic is NOT associated with traditional teaching strategies?", o:["Teacher-centered", "Direct instruction", "Student-centered", "Memorization"], a:2},
+            {t:"Which of these is considered a 'Traditional' teaching strategy?", o:["Problem-solving", "Recitation", "Simulation", "Case analysis"], a:1},
+            {t:"Active learning in nursing requires students to participate in activities such as:", o:["Passive listening", "Rote memorization", "Case analysis and reflection", "Strict adherence to policies"], a:2},
+            {t:"Which key characteristic of active learning focuses on the needs and experiences of students?", o:["Interactive", "Reflective", "Experiential", "Learner-centered"], a:3},
+            {t:"The 'Reflective' characteristic of active learning primarily promotes:", o:["Direct instruction", "Self-assessment and critical thinking", "Technical skill mastery", "Memorization of facts"], a:1},
+            {t:"In the comparison table, what is the role of the educator in Active Learning?", o:["Knowledge transmitter", "Passive recipient", "Facilitator and guide", "Strict evaluator"], a:2},
+            {t:"What is the assessment focus in Traditional Learning compared to Active Learning?", o:["Application vs. Reasoning", "Memorization vs. Application", "Reflection vs. Recall", "Technical vs. Emotional"], a:1},
+            {t:"According to Constructivism (Piaget, Vygotsky), how do learners build knowledge?", o:["Through direct instruction only", "Through experience and social interaction", "By following strict policies", "By completing worksheets"], a:1},
+            {t:"Which theory describes learning as a cyclical process involving experience, reflection, and experimentation?", o:["Adult Learning Theory", "Constructivism", "Experiential Learning (Kolb)", "Bloom’s Taxonomy"], a:2},
+            {t:"Adult Learning Theory (Knowles) suggests that adults are motivated by:", o:["Rote memorization", "Relevance and prior experience", "Teacher-directed structures", "Simple-to-complex approaches"], a:1},
+            {t:"Which cognitive levels does active learning target according to Bloom’s Taxonomy?", o:["Recall and Recognition", "Analysis, Synthesis, and Evaluation", "Passive listening", "Simple understanding"], a:1},
+            {t:"Which strategy involves students analyzing real or hypothetical clinical cases to develop reasoning?", o:["Problem-Based Learning", "Case-Based Learning", "Peer Teaching", "Concept Mapping"], a:1},
+            {t:"Simulation-based learning is ideal for enhancing which of the following?", o:["Rote memorization", "Psychomotor skills and teamwork", "Worksheet completion", "Passive reception"], a:1},
+            {t:"In Problem-Based Learning (PBL), students work in groups to solve:", o:["Simple, closed-ended problems", "Complex, open-ended problems", "Multiple-choice questions", "Recitation tasks"], a:1},
+            {t:"Which strategy is best for building empathy and conflict resolution skills?", o:["Concept Mapping", "Role-Playing", "Traditional Lecture", "Rote memorization"], a:1},
+            {t:"What is an example of Peer Teaching provided in the text?", o:["A teacher demonstrating wound care", "Senior students mentoring juniors", "Students taking a quiz", "A student reading a textbook"], a:1},
+            {t:"The 'Think-Pair-Share' strategy encourages:", o:["Individual work only", "Participation and diverse perspectives", "Teacher-led discussion", "Silent reflection without sharing"], a:1},
+            {t:"Which visual tool helps students connect symptoms, diagnoses, and interventions?", o:["Worksheet", "Concept Mapping", "Flashcard", "Manual"], a:1},
+            {t:"Debates and structured discussions are used to develop:", o:["Technical skills", "Articulation and reasoning", "Memorization", "Speed in testing"], a:1},
+            {t:"What is a 'pedagogical luxury' that is now a necessity in nursing education?", o:["Traditional lecture", "Active learning", "Worksheets", "Rote memorization"], a:1},
+            {t:"Traditional curriculum designs are described as being:", o:["Highly flexible", "Relatively inflexible", "Student-led", "Based on emotional intelligence"], a:1},
+            {t:"Which of the following is a 'Traditional' approach focus?", o:["Reflective practice", "Cognitive gain and 'covering' content", "Social interaction", "Self-directed learning"], a:1},
+            {t:"In Active Learning, the student's role is that of an:", o:["Active participant", "Passive recipient", "Observer only", "Knowledge transmitter"], a:0},
+            {t:"Which theory emphasizes peer collaboration and contextual learning?", o:["Experiential Learning", "Constructivism", "Adult Learning Theory", "Bloom’s Taxonomy"], a:1},
+            {t:"Kolb's cycle is particularly ideal for which setting?", o:["Classroom lectures", "Clinical education and simulation", "Library research", "Policy review"], a:1},
+            {t:"Adult learners, according to Knowles, promote which of the following?", o:["Dependence on the teacher", "Autonomy and practical engagement", "Strict adherence to rules", "Passive learning"], a:1},
+            {t:"Managing a patient with multi-organ failure is an example of:", o:["Role-playing", "Case-Based Learning", "Peer Teaching", "Recitation"], a:1},
+            {t:"Investigating causes of medication errors in a hospital unit is an example of:", o:["Problem-Based Learning", "Traditional Lecture", "Worksheet", "Rote memorization"], a:0},
+            {t:"A nurse discussing terminal care options with a family is a scenario for:", o:["Concept Mapping", "Role-Playing", "Debate", "Simulation with mannequins"], a:1},
+            {t:"Which strategy reinforces understanding by having students teach each other?", o:["Peer Teaching", "Traditional Lecture", "Recitation", "Worksheet"], a:0},
+            {t:"In 'Think-Pair-Share', what is the first step?", o:["Discuss with a peer", "Share with the group", "Reflect individually", "Ask the teacher"], a:2},
+            {t:"Debating the use of restraints in psychiatric nursing helps develop:", o:["Psychomotor skills", "Respect for diverse views", "Technical speed", "Memorization"], a:1},
+            {t:"Active learning connects theory to practice through:", o:["Hands-on activities", "Reading textbooks", "Listening to lectures", "Taking MCQs"], a:0},
+            {t:"Which of the following is NOT a characteristic of active learning?", o:["Interactive", "Reflective", "Teacher-centered", "Experiential"], a:2},
+            {t:"Traditional learning environments are primarily:", o:["Student-centered", "Teacher-centered", "Collaborative", "Flexible"], a:1},
+            {t:"Which strategy uses virtual reality or standardized patients?", o:["Traditional Lecture", "Simulation-Based Learning", "Recitation", "Worksheet"], a:1},
+            {t:"The focus on 'efficiency' is a hallmark of:", o:["Active Learning", "Traditional Approaches", "Constructivism", "Experiential Learning"], a:1},
+            {t:"Which strategy involves 'visual tools to organize and connect ideas'?", o:["Debate", "Concept Mapping", "Role-play", "Peer teaching"], a:1},
+            {t:"Active learning strategies target higher-order thinking, which includes:", o:["Recall", "Synthesis", "Recognition", "Repetition"], a:1},
+            {t:"Instructional strategies are also known as:", o:["Learning strategies", "Teaching strategies", "Assessment strategies", "Policy strategies"], a:1},
+            {t:"The 'Traditional' role of the student is to be a:", o:["Facilitator", "Passive recipient", "Active participant", "Guide"], a:1},
+
+            // True/False (15 Questions)
+            {t:"Active learning is considered a pedagogical luxury in modern nursing education.", o:["True", "False"], a:1},
+            {t:"Teaching strategies and learning strategies refer to the exact same set of skills.", o:["True", "False"], a:1},
+            {t:"Traditional nursing education focuses heavily on 'covering' content and cognitive gain.", o:["True", "False"], a:0},
+            {t:"Rote memorization is a key component of active learning strategies.", o:["True", "False"], a:1},
+            {t:"In active learning, the educator acts as a knowledge transmitter rather than a facilitator.", o:["True", "False"], a:1},
+            {t:"Constructivism suggests that learners build knowledge through social interaction.", o:["True", "False"], a:0},
+            {t:"Kolb's Experiential Learning theory follows a cyclical process.", o:["True", "False"], a:0},
+            {t:"Adult learners are generally motivated by the relevance of the material to their lives.", o:["True", "False"], a:0},
+            {t:"Case-Based Learning is primarily used to develop psychomotor skills.", o:["True", "False"], a:1},
+            {t:"Problem-Based Learning involves solving complex, open-ended problems in groups.", o:["True", "False"], a:0},
+            {t:"Role-playing is an effective way to build empathy and communication skills.", o:["True", "False"], a:0},
+            {t:"Peer teaching is only effective when done without any teacher supervision.", o:["True", "False"], a:1},
+            {t:"Concept mapping is a visual tool used to connect symptoms and interventions.", o:["True", "False"], a:0},
+            {t:"Traditional learning assessment focuses on application and reasoning.", o:["True", "False"], a:1},
+            {t:"Active learning strategies shift the focus from passive reception to active engagement.", o:["True", "False"], a:0}
+];
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=35*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
