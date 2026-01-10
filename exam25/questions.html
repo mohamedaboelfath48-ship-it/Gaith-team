@@ -3,134 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulation-Based Learning – Flashcards</title>
+<title>SBL Flashcards</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
   font-family: Arial, sans-serif;
 }
 
-body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #4c1d95);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  color: white;
+body{
+  min-height:100vh;
+  background: linear-gradient(135deg,#0f172a,#4c1d95);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:15px;
+  color:#fff;
 }
 
-.app {
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
+.app{
+  width:100%;
+  max-width:420px;
+  text-align:center;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 5px;
+h1{
+  font-size:22px;
 }
 
-.sub {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 15px;
+.sub{
+  font-size:13px;
+  opacity:.8;
+  margin-bottom:10px;
 }
 
-.progress {
-  background: #444;
-  height: 6px;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 20px;
+.progress{
+  height:6px;
+  background:#333;
+  border-radius:5px;
+  overflow:hidden;
+  margin:15px 0;
 }
 
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(to right, #a855f7, #ec4899);
-  transition: width 0.3s;
+.progress-bar{
+  height:100%;
+  width:0%;
+  transition:.3s;
+  background:linear-gradient(to right,#a855f7,#ec4899);
 }
 
-/* Flashcard */
-.scene {
-  perspective: 1000px;
+/* Card */
+.scene{
+  perspective:1000px;
 }
 
-.card {
-  width: 100%;
-  height: 320px;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-  cursor: pointer;
+.card{
+  width:100%;
+  height:340px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:.6s;
 }
 
-.card.flip {
-  transform: rotateY(180deg);
+.card.flip{
+  transform:rotateY(180deg);
 }
 
-.face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 20px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+.face{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:22px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backface-visibility:hidden;
 }
 
-.back {
-  transform: rotateY(180deg);
+.back{
+  transform:rotateY(180deg);
 }
 
-.label {
-  font-size: 12px;
-  background: rgba(0,0,0,0.3);
-  padding: 5px 12px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  display: inline-block;
+.label{
+  font-size:12px;
+  padding:5px 14px;
+  border-radius:20px;
+  background:rgba(0,0,0,.35);
+  margin-bottom:10px;
+  display:inline-block;
 }
 
-.content {
-  font-size: 18px;
-  line-height: 1.6;
-  white-space: pre-line;
+.text{
+  font-size:17px;
+  line-height:1.6;
+  white-space:pre-line;
 }
 
 /* Controls */
-.controls {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+.controls{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
 }
 
-button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 12px;
-  border: none;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.2);
-  color: white;
-  font-size: 16px;
+button{
+  flex:1;
+  margin:0 5px;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  font-size:16px;
 }
 
-button:active {
-  transform: scale(0.95);
-}
-
-.footer {
-  margin-top: 15px;
-  font-size: 12px;
-  opacity: 0.7;
+.footer{
+  margin-top:12px;
+  font-size:12px;
+  opacity:.7;
 }
 </style>
 </head>
@@ -139,7 +132,7 @@ button:active {
 
 <div class="app">
   <h1>Simulation-Based Learning</h1>
-  <div class="sub">مراجعة غيث للشفوي</div>
+  <div class="sub">مراجعة غيث – شفوي</div>
 
   <div class="progress">
     <div class="progress-bar" id="progress"></div>
@@ -147,85 +140,123 @@ button:active {
 
   <div class="scene">
     <div class="card" id="card">
-      <div class="face front">
+      <div class="face front" id="front">
         <div>
           <div class="label">QUESTION</div>
-          <div class="content" id="question"></div>
+          <div class="text" id="question"></div>
         </div>
       </div>
-      <div class="face back">
+      <div class="face back" id="back">
         <div>
           <div class="label">ANSWER</div>
-          <div class="content" id="answer"></div>
+          <div class="text" id="answer"></div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="controls">
-    <button onclick="prevCard()">◀</button>
-    <button onclick="resetCards()">⟲</button>
-    <button onclick="nextCard()">▶</button>
+    <button onclick="prev()">◀</button>
+    <button onclick="resetAll()">⟲</button>
+    <button onclick="next()">▶</button>
   </div>
 
   <div class="footer">
-    اضغط على الكارت لعرض الإجابة • استخدم الأسهم للتنقل
+    اسحب يمين أو شمال • اضغط على الكارت للإجابة
   </div>
 </div>
 
 <script>
-const cards = [
-  {
-    q: "What is Simulation-Based Learning?",
-    a: "An educational strategy that simulates real clinical situations in a safe environment to enhance learning."
-  },
-  {
-    q: "Why is SBL important in nursing education?",
-    a: "It allows practice of skills, decision-making, and critical thinking without risk to real patients."
-  },
-  {
-    q: "What are the four characteristics of SBL?",
-    a: "Safe, experiential, reflective, and realistic."
-  },
-  {
-    q: "Why is debriefing essential?",
-    a: "Because deep learning happens through reflection, discussion, and feedback."
-  }
+const colors=[
+  ["#a855f7","#ec4899"],
+  ["#38bdf8","#6366f1"],
+  ["#34d399","#10b981"],
+  ["#fbbf24","#f97316"],
+  ["#fb7185","#e11d48"],
+  ["#22d3ee","#0ea5e9"]
 ];
 
-let index = 0;
-const card = document.getElementById("card");
-const question = document.getElementById("question");
-const answer = document.getElementById("answer");
-const progress = document.getElementById("progress");
+const cards=[
+{q:"What is Simulation-Based Learning (SBL)?",
+ a:"A teaching strategy that uses simulated clinical situations to allow safe practice of skills, decision-making, and critical thinking."},
 
-function loadCard() {
+{q:"Why is Simulation important in nursing education?",
+ a:"It bridges theory and practice, improves patient safety, builds confidence, and enhances clinical judgment."},
+
+{q:"List the four key characteristics of SBL.",
+ a:"• Safe and controlled\n• Experiential\n• Reflective\n• Realistic"},
+
+{q:"What is High-Fidelity simulation?",
+ a:"Simulation using advanced mannequins that mimic real physiological responses such as breathing, pulse, and heart sounds."},
+
+{q:"What is Low-Fidelity simulation?",
+ a:"Simple models or role-play used for basic skill practice like injections or vital signs."},
+
+{q:"Why is debriefing the most important part?",
+ a:"Because learning occurs through reflection, feedback, discussion, and analysis of performance."},
+
+{q:"What are the four phases of a simulation session?",
+ a:"Pre-briefing, Scenario execution, Debriefing, Evaluation."},
+
+{q:"What is psychological safety?",
+ a:"A learning environment where students feel safe to make mistakes without fear of punishment or embarrassment."},
+
+{q:"What are benefits of SBL?",
+ a:"• Skill mastery\n• Error management\n• Critical thinking\n• Teamwork\n• Confidence"},
+
+{q:"What are challenges of simulation?",
+ a:"High cost, faculty training needs, student anxiety, and technical problems."},
+
+{q:"What are Standardized Patients?",
+ a:"Actors trained to consistently portray patients for realistic communication and assessment practice."},
+
+{q:"How does Adult Learning Theory support simulation?",
+ a:"Adults prefer practical, relevant, problem-based learning with immediate feedback, all provided by simulation."},
+
+{q:"What is Virtual Simulation?",
+ a:"Computer-based interactive scenarios that simulate patient care without physical mannequins."},
+
+{q:"What is Situated Cognition?",
+ a:"Learning that occurs best in the context where it will be applied, such as realistic clinical environments."},
+
+{q:"Ethical considerations in simulation?",
+ a:"Respect confidentiality, include ethical dilemmas, ensure cultural sensitivity and diversity."}
+];
+
+let i=0;
+const card=document.getElementById("card");
+const q=document.getElementById("question");
+const a=document.getElementById("answer");
+const front=document.getElementById("front");
+const back=document.getElementById("back");
+const progress=document.getElementById("progress");
+
+function load(){
   card.classList.remove("flip");
-  question.textContent = cards[index].q;
-  answer.textContent = cards[index].a;
-  progress.style.width = ((index + 1) / cards.length) * 100 + "%";
+  q.textContent=cards[i].q;
+  a.textContent=cards[i].a;
+  let c=colors[i%colors.length];
+  front.style.background=`linear-gradient(135deg,${c[0]},${c[1]})`;
+  back.style.background=`linear-gradient(135deg,${c[0]},${c[1]})`;
+  progress.style.width=((i+1)/cards.length)*100+"%";
 }
 
-card.addEventListener("click", () => {
-  card.classList.toggle("flip");
+card.onclick=()=>card.classList.toggle("flip");
+
+function next(){ i=(i+1)%cards.length; load(); }
+function prev(){ i=(i-1+cards.length)%cards.length; load(); }
+function resetAll(){ i=0; load(); }
+
+/* Swipe */
+let startX=0;
+card.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+card.addEventListener("touchend",e=>{
+  let endX=e.changedTouches[0].clientX;
+  if(startX-endX>50) next();
+  if(endX-startX>50) prev();
 });
 
-function nextCard() {
-  index = (index + 1) % cards.length;
-  loadCard();
-}
-
-function prevCard() {
-  index = (index - 1 + cards.length) % cards.length;
-  loadCard();
-}
-
-function resetCards() {
-  index = 0;
-  loadCard();
-}
-
-loadCard();
+load();
 </script>
 
 </body>
