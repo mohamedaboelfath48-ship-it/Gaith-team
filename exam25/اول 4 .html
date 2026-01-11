@@ -1,0 +1,705 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+{t:"Which concept best reflects compression of knowledge in nursing education?",o:["Memorizing isolated facts","Integrating theory with practice","Passive listening to lectures","Learning without objectives"],a:1},
+
+{t:"Critical thinking in nursing education primarily enables students to:",o:["Follow routines without questioning","Analyze situations and make sound decisions","Depend only on instructors","Avoid ethical considerations"],a:1},
+
+{t:"A nurse educator using case-based learning is mainly promoting:",o:["Passive learning","Content memorization","Application of knowledge","Lecture dominance"],a:2},
+
+{t:"Which teaching approach best supports application of learning in clinical settings?",o:["Lecture-based instruction","Simulation and role play","Reading textbooks only","Written examinations"],a:1},
+
+{t:"Ethical reflection in nursing education helps students to:",o:["Ignore patient values","Focus only on technical skills","Make morally sound decisions","Avoid responsibility"],a:2},
+
+{t:"Compression in learning strategies means:",o:["Reducing course duration","Simplifying and organizing complex information","Skipping difficult topics","Eliminating clinical practice"],a:1},
+
+{t:"When students reflect on their clinical actions to improve future care, they are practicing:",o:["Passive learning","Ethical reflection","Rote memorization","Content delivery"],a:1},
+
+{t:"Which activity most enhances critical thinking?",o:["Copying notes","Group discussion on clinical cases","Listening silently","Repeating definitions"],a:1},
+
+{t:"The main goal of learner-centered education is to:",o:["Control students strictly","Encourage autonomy and critical thinking","Deliver maximum content","Limit student participation"],a:1},
+
+{t:"Application-based learning is best demonstrated when students:",o:["Recall theory only","Relate theory to patient situations","Memorize lecture slides","Study without practice"],a:1},
+
+{t:"Which factor links ethical reflection with patient safety?",o:["Ignoring patient rights","Mechanical task performance","Respecting values and confidentiality","Speed of care only"],a:2},
+
+{t:"Scaffolding in education mainly supports:",o:["Random learning","Gradual development of understanding","Immediate mastery without support","Learning without feedback"],a:1},
+
+{t:"Which strategy compresses learning while maintaining effectiveness?",o:["Breaking content into meaningful units","Increasing lecture hours","Avoiding clinical exposure","Overloading students"],a:0},
+
+{t:"Critical thinking is MOST evident when a nursing student:",o:["Accepts information without question","Analyzes alternatives before action","Depends on senior staff only","Avoids decision-making"],a:1},
+
+{t:"Ethical teaching in nursing emphasizes:",o:["Authority over learners","Professional role modeling","Punishment-based learning","Competition among students"],a:1},
+
+{t:"Simulation-based learning mainly improves:",o:["Theoretical memorization","Clinical application and decision-making","Note-taking skills","Lecture attendance"],a:1},
+
+{t:"Which element best supports ethical reflection?",o:["Ignoring emotions","Reflective discussions","Strict memorization","Time pressure"],a:1},
+
+{t:"Application of learning is MOST successful when education is:",o:["Disconnected from practice","Theory-focused only","Linked to real-life scenarios","Exam-oriented only"],a:2},
+
+{t:"Compression strategies are useful because they:",o:["Remove essential content","Help manage complex nursing knowledge","Limit critical thinking","Reduce learning outcomes"],a:1},
+
+{t:"Which role best describes the nurse educator in modern education?",o:["Content deliverer","Facilitator of learning","Exam controller","Authority figure"],a:1},
+
+
+{t:"Critical thinking is essential for safe and effective nursing practice.",o:["True","False"],a:0},
+
+{t:"Compression of learning means eliminating ethical discussions.",o:["True","False"],a:1},
+
+{t:"Application-based learning helps bridge theory and clinical practice.",o:["True","False"],a:0},
+
+{t:"Ethical reflection encourages nurses to consider patient rights and values.",o:["True","False"],a:0},
+
+{t:"Passive learning strategies are more effective than active learning in nursing.",o:["True","False"],a:1},
+
+{t:"Simulation supports critical thinking and clinical decision-making.",o:["True","False"],a:0},
+
+{t:"Learner-centered education discourages student autonomy.",o:["True","False"],a:1},
+
+{t:"Reflective practice contributes to professional growth in nursing.",o:["True","False"],a:0},
+
+{t:"Application of knowledge is unnecessary in nursing education.",o:["True","False"],a:1},
+
+{t:"Ethical teaching is a core principle of effective nursing education.",o:["True","False"],a:0},
+
+{t:"Teaching methods are best described as:",o:["Educational goals","Teaching outcomes","Systematic techniques used to facilitate learning","Assessment tools only"],a:2},
+
+{t:"The main link between educational goals and student outcomes is:",o:["Curriculum content","Teaching method","Learning environment","Assessment type"],a:1},
+
+{t:"Which benefit of teaching methods directly supports critical thinking?",o:["Increasing motivation","Developing problem-solving skills","Covering large content","Reducing teaching time"],a:1},
+
+{t:"Lecture method is classified as:",o:["Learner-centered","Collaborative","Teacher-centered","Experiential"],a:2},
+
+{t:"The BEST use of lecture method is when the goal is to:",o:["Teach psychomotor skills","Encourage ethical reflection","Introduce new theoretical concepts","Develop clinical decision-making"],a:2},
+
+{t:"One major limitation of the lecture method is that it:",o:["Consumes resources","Limits content coverage","Promotes passive learning","Requires technology"],a:2},
+
+{t:"Discussion method mainly promotes:",o:["Content compression","Passive listening","Critical thinking and interaction","Teacher control"],a:2},
+
+{t:"In discussion method, the role of the teacher is primarily to:",o:["Deliver information","Act as sole authority","Facilitate and guide learning","Evaluate silently"],a:2},
+
+{t:"Which discussion type allows opposing views to be argued?",o:["Brainstorming","Panel discussion","Debate","Small group discussion"],a:2},
+
+{t:"The main educational value of discussion method is its ability to:",o:["Save time","Cover many topics","Apply knowledge to real-life problems","Replace lectures completely"],a:2},
+
+{t:"Demonstration method is MOST effective for teaching:",o:["Ethical theories","Communication concepts","Psychomotor skills","Large theoretical units"],a:2},
+
+{t:"A key principle of demonstration method is:",o:["Teacher explanation only","Learning by seeing and doing","Independent self-study","Verbal memorization"],a:1},
+
+{t:"Return demonstration mainly helps to:",o:["Evaluate written knowledge","Ensure skill mastery","Reduce class size","Increase lecture efficiency"],a:1},
+
+{t:"Which method best reduces cognitive load by modeling steps clearly?",o:["Lecture","Discussion","Demonstration","Debate"],a:2},
+
+{t:"Blended learning is characterized by:",o:["Fully online teaching","Only face-to-face teaching","Integration of classroom and online learning","Simulation-based assessment"],a:2},
+
+{t:"One advantage of blended learning is:",o:["Eliminating teacher role","Flexibility with direct interaction","Reduced planning needs","No technology requirement"],a:1},
+
+{t:"OSCE mainly assesses:",o:["Memorization of facts","Clinical skills and decision-making","Group discussion skills","Lecture comprehension"],a:1},
+
+{t:"The objectivity of OSCE is enhanced through:",o:["Open discussion","Essay answers","Standardized checklists","Peer assessment"],a:2},
+
+{t:"Ethical reflection in teaching methods is supported when educators:",o:["Focus only on exams","Model professionalism and fairness","Avoid student feedback","Limit learner autonomy"],a:1},
+
+{t:"Compression of learning is BEST achieved when educators:",o:["Increase lecture duration","Organize content logically","Eliminate discussion","Avoid practice"],a:1},
+
+{t:"Teaching methods determine how learning objectives are achieved.",o:["True","False"],a:0},
+
+{t:"Lecture method is effective for teaching psychomotor skills.",o:["True","False"],a:1},
+
+{t:"Discussion method encourages higher-order thinking skills.",o:["True","False"],a:0},
+
+{t:"Demonstration method relies only on verbal explanation.",o:["True","False"],a:1},
+
+{t:"Return demonstration helps confirm correct skill performance.",o:["True","False"],a:0},
+
+{t:"Blended learning combines online and face-to-face teaching.",o:["True","False"],a:0},
+
+{t:"OSCE provides objective and standardized assessment.",o:["True","False"],a:0},
+
+{t:"Passive learning is a major disadvantage of lecture method.",o:["True","False"],a:0},
+
+{t:"Ethical teaching has no role in selecting teaching methods.",o:["True","False"],a:1},
+
+{t:"Effective teaching methods help develop lifelong learning skills.",o:["True","False"],a:0},
+
+{t:"Instructional media are mainly used in nursing education to:",o:["Replace the teacher","Clarify and demonstrate course content","Assess student performance only","Reduce class size"],a:1},
+
+{t:"Using both audio and visual media together mainly helps to:",o:["Reduce teaching time","Increase learner retention","Eliminate discussion","Avoid repetition"],a:1},
+
+{t:"Teaching materials are BEST defined as:",o:["Printed textbooks only","Electronic devices only","Aids that support teaching and learning","Assessment tools"],a:2},
+
+{t:"One major importance of instructional media is that it:",o:["Limits learner interaction","Provides wide coverage of information","Increases cost of teaching","Replaces ethical discussion"],a:1},
+
+{t:"Which characteristic is essential for effective teaching media?",o:["High cost","Complex design","Suitability to learner characteristics","Large class dependency"],a:2},
+
+{t:"Print media are BEST described as materials that:",o:["Use sound only","Use images only","Use written or printed words","Require technology"],a:2},
+
+{t:"Textbooks are important in nursing education because they:",o:["Only assess learners","Transmit knowledge, skills, and values","Replace clinical practice","Limit critical thinking"],a:1},
+
+{t:"Pamphlets are useful teaching materials mainly because they are:",o:["Detailed and lengthy","Expensive","Inexpensive and easy to distribute","Used only for exams"],a:2},
+
+{t:"Flashcards mainly help students to develop:",o:["Psychomotor skills","Cognitive recognition and recall","Ethical reasoning","Clinical judgment"],a:1},
+
+{t:"Newspapers are called living textbooks because they:",o:["Are used for exams","Contain outdated information","Provide authentic and immediate information","Replace textbooks"],a:2},
+
+{t:"Visual materials mainly enhance learning by:",o:["Appealing to hearing only","Using images to convey information","Replacing discussion","Increasing teacher workload"],a:1},
+
+{t:"Models are used in teaching when:",o:["Real objects are unavailable or too large","Learners are passive","Audio media fails","Textbooks are unclear"],a:0},
+
+{t:"Graphs are MOST useful when a teacher wants to explain:",o:["Historical events","Clinical procedures","Increasing or decreasing patterns","Ethical issues"],a:2},
+
+{t:"Flip charts are best described as:",o:["Electronic teaching tools","Series of large papers turned one at a time","Audio teaching aids","Assessment materials"],a:1},
+
+{t:"Displays differ from posters because displays:",o:["Present only one idea","Contain multiple ideas and objects","Are audio-based","Are only digital"],a:1},
+
+{t:"One advantage of visual media is that they:",o:["Rely on hearing","Are difficult to remember","Increase learner engagement","Limit understanding"],a:2},
+
+{t:"A major disadvantage of visual media is that it:",o:["Is expensive","Relies only on the sense of seeing","Cannot be used in nursing","Reduces motivation"],a:1},
+
+{t:"Audio media are particularly beneficial for learners who are:",o:["Visually impaired","Highly technical","Psychomotor learners","Independent learners"],a:0},
+
+{t:"Audio-visual materials are effective because they:",o:["Eliminate interaction","Combine auditory and visual learning","Replace demonstration","Reduce ethical awareness"],a:1},
+
+{t:"Demonstration is classified as an audio-visual material because it:",o:["Uses text only","Combines seeing and hearing","Relies only on sound","Avoids learner participation"],a:1},
+
+{t:"Teaching methods determine how learning objectives are achieved.",o:["True","False"],a:0},
+
+{t:"Lecture method is effective for teaching psychomotor skills.",o:["True","False"],a:1},
+
+{t:"Discussion method encourages higher-order thinking skills.",o:["True","False"],a:0},
+
+{t:"Demonstration method relies only on verbal explanation.",o:["True","False"],a:1},
+
+{t:"Return demonstration helps confirm correct skill performance.",o:["True","False"],a:0},
+
+{t:"Blended learning combines online and face-to-face teaching.",o:["True","False"],a:0},
+
+{t:"OSCE provides objective and standardized assessment.",o:["True","False"],a:0},
+
+{t:"Passive learning is a major disadvantage of lecture method.",o:["True","False"],a:0},
+
+{t:"Ethical teaching has no role in selecting teaching methods.",o:["True","False"],a:1},
+
+{t:"Effective teaching methods help develop lifelong learning skills.",o:["True","False"],a:0},
+
+{t:"Instructional media are mainly used in nursing education to:",o:["Replace the teacher","Clarify and demonstrate course content","Assess student performance only","Reduce class size"],a:1},
+
+{t:"Using both audio and visual media together mainly helps to:",o:["Reduce teaching time","Increase learner retention","Eliminate discussion","Avoid repetition"],a:1},
+
+{t:"Teaching materials are BEST defined as:",o:["Printed textbooks only","Electronic devices only","Aids that support teaching and learning","Assessment tools"],a:2},
+
+{t:"One major importance of instructional media is that it:",o:["Limits learner interaction","Provides wide coverage of information","Increases cost of teaching","Replaces ethical discussion"],a:1},
+
+{t:"Which characteristic is essential for effective teaching media?",o:["High cost","Complex design","Suitability to learner characteristics","Large class dependency"],a:2},
+
+{t:"Print media are BEST described as materials that:",o:["Use sound only","Use images only","Use written or printed words","Require technology"],a:2},
+
+{t:"Textbooks are important in nursing education because they:",o:["Only assess learners","Transmit knowledge, skills, and values","Replace clinical practice","Limit critical thinking"],a:1},
+
+{t:"Pamphlets are useful teaching materials mainly because they are:",o:["Detailed and lengthy","Expensive","Inexpensive and easy to distribute","Used only for exams"],a:2},
+
+{t:"Flashcards mainly help students to develop:",o:["Psychomotor skills","Cognitive recognition and recall","Ethical reasoning","Clinical judgment"],a:1},
+
+{t:"Newspapers are called living textbooks because they:",o:["Are used for exams","Contain outdated information","Provide authentic and immediate information","Replace textbooks"],a:2},
+
+{t:"Visual materials mainly enhance learning by:",o:["Appealing to hearing only","Using images to convey information","Replacing discussion","Increasing teacher workload"],a:1},
+
+{t:"Models are used in teaching when:",o:["Real objects are unavailable or too large","Learners are passive","Audio media fails","Textbooks are unclear"],a:0},
+
+{t:"Graphs are MOST useful when a teacher wants to explain:",o:["Historical events","Clinical procedures","Increasing or decreasing patterns","Ethical issues"],a:2},
+
+{t:"Flip charts are best described as:",o:["Electronic teaching tools","Series of large papers turned one at a time","Audio teaching aids","Assessment materials"],a:1},
+
+{t:"Displays differ from posters because displays:",o:["Present only one idea","Contain multiple ideas and objects","Are audio-based","Are only digital"],a:1},
+
+{t:"One advantage of visual media is that they:",o:["Rely on hearing","Are difficult to remember","Increase learner engagement","Limit understanding"],a:2},
+
+{t:"A major disadvantage of visual media is that it:",o:["Is expensive","Relies only on the sense of seeing","Cannot be used in nursing","Reduces motivation"],a:1},
+
+{t:"Audio media are particularly beneficial for learners who are:",o:["Visually impaired","Highly technical","Psychomotor learners","Independent learners"],a:0},
+
+{t:"Audio-visual materials are effective because they:",o:["Eliminate interaction","Combine auditory and visual learning","Replace demonstration","Reduce ethical awareness"],a:1},
+
+{t:"Demonstration is classified as an audio-visual material because it:",o:["Uses text only","Combines seeing and hearing","Relies only on sound","Avoids learner participation"],a:1},
+
+{t:"Instructional media enhance learning by making lessons more interesting.",o:["True","False"],a:0},
+
+{t:"Effective media should achieve the required learning objectives.",o:["True","False"],a:0},
+
+{t:"Print materials rely mainly on auditory learning.",o:["True","False"],a:1},
+
+{t:"Flashcards help improve recall and recognition.",o:["True","False"],a:0},
+
+{t:"Visual media rely on both hearing and seeing equally.",o:["True","False"],a:1},
+
+{t:"Models help explain concepts when real objects are unavailable.",o:["True","False"],a:0},
+
+{t:"Audio media provide strong visual stimulation.",o:["True","False"],a:1},
+
+{t:"Audio media are easy to duplicate and portable.",o:["True","False"],a:0},
+
+{t:"Audio-visual media are effective for introducing and reviewing concepts.",o:["True","False"],a:0},
+
+{t:"Some audio-visual materials may be expensive and require preparation.",o:["True","False"],a:0},
+
+{t:"Active learning in nursing education mainly focuses on:",o:["Passive reception of information","Memorization of content","Student engagement and participation","Strict curriculum control"],a:2},
+
+{t:"The main reason active learning is essential in nursing education is that it develops:",o:["Technical skills only","Critical thinking and adaptability","Memorization skills","Lecture efficiency"],a:1},
+
+{t:"In active learning, the role of the student is best described as:",o:["Passive recipient","Content recorder","Active participant","Knowledge transmitter"],a:2},
+
+{t:"Compared to traditional learning, active learning places the educator primarily as a:",o:["Lecturer","Authority figure","Facilitator and guide","Examiner"],a:2},
+
+{t:"Which characteristic is NOT a feature of active learning?",o:["Learner-centered","Interactive","Reflective","Teacher-dominated"],a:3},
+
+{t:"Active learning connects theory to practice mainly through:",o:["Lectures","Hands-on activities","Textbooks","Written exams"],a:1},
+
+{t:"Constructivism theory emphasizes learning through:",o:["Memorization","Experience and social interaction","Lecture delivery","Repetition"],a:1},
+
+{t:"Experiential learning is best described as:",o:["A linear process","A cycle of experience and reflection","Teacher-controlled instruction","Content transmission"],a:1},
+
+{t:"Adult learning theory supports active learning because adults are:",o:["Dependent learners","Motivated by relevance and experience","Focused on memorization","Externally controlled"],a:1},
+
+{t:"Bloom’s taxonomy in active learning encourages:",o:["Lower-level recall","Passive learning","Higher-order thinking","Teacher authority"],a:2},
+
+{t:"Case-based learning mainly develops:",o:["Rote memorization","Clinical reasoning and ethical judgment","Lecture efficiency","Content coverage"],a:1},
+
+{t:"Simulation-based learning is particularly effective for improving:",o:["Theoretical recall","Psychomotor skills and teamwork","Reading skills","Note-taking"],a:1},
+
+{t:"Problem-based learning (PBL) primarily promotes:",o:["Teacher-led instruction","Inquiry and self-directed learning","Passive listening","Content memorization"],a:1},
+
+{t:"Role-playing activities in nursing education help students to:",o:["Avoid emotional involvement","Build empathy and communication skills","Memorize policies","Reduce interaction"],a:1},
+
+{t:"Peer teaching benefits learners mainly by:",o:["Reducing teacher workload","Reinforcing understanding and leadership","Limiting discussion","Replacing instructors"],a:1},
+
+{t:"Think-Pair-Share strategy is designed to:",o:["Encourage silent learning","Promote individual memorization","Increase participation and discussion","Reduce peer interaction"],a:2},
+
+{t:"Concept mapping is mainly used to:",o:["Assess exams","Organize and link ideas visually","Deliver lectures","Test memorization"],a:1},
+
+{t:"Debates in nursing education are useful for developing:",o:["Technical skills only","Ethical reasoning and respect for diverse views","Speed of learning","Content recall"],a:1},
+
+{t:"Active learning strategies are most effective when they:",o:["Ignore learner experience","Encourage reflection and collaboration","Focus only on exams","Limit student autonomy"],a:1},
+
+{t:"Ethical reflection is MOST supported in active learning through:",o:["Lecture notes","Case discussions and role-play","Written tests","Rote memorization"],a:1},
+
+
+{t:"Active learning in nursing education mainly focuses on:",o:["Passive reception of information","Memorization of content","Student engagement and participation","Strict curriculum control"],a:2},
+
+{t:"The main reason active learning is essential in nursing education is that it develops:",o:["Technical skills only","Critical thinking and adaptability","Memorization skills","Lecture efficiency"],a:1},
+
+{t:"In active learning, the role of the student is best described as:",o:["Passive recipient","Content recorder","Active participant","Knowledge transmitter"],a:2},
+
+{t:"Compared to traditional learning, active learning places the educator primarily as a:",o:["Lecturer","Authority figure","Facilitator and guide","Examiner"],a:2},
+
+{t:"Which characteristic is NOT a feature of active learning?",o:["Learner-centered","Interactive","Reflective","Teacher-dominated"],a:3},
+
+{t:"Active learning connects theory to practice mainly through:",o:["Lectures","Hands-on activities","Textbooks","Written exams"],a:1},
+
+{t:"Constructivism theory emphasizes learning through:",o:["Memorization","Experience and social interaction","Lecture delivery","Repetition"],a:1},
+
+{t:"Experiential learning is best described as:",o:["A linear process","A cycle of experience and reflection","Teacher-controlled instruction","Content transmission"],a:1},
+
+{t:"Adult learning theory supports active learning because adults are:",o:["Dependent learners","Motivated by relevance and experience","Focused on memorization","Externally controlled"],a:1},
+
+{t:"Bloom’s taxonomy in active learning encourages:",o:["Lower-level recall","Passive learning","Higher-order thinking","Teacher authority"],a:2},
+
+{t:"Case-based learning mainly develops:",o:["Rote memorization","Clinical reasoning and ethical judgment","Lecture efficiency","Content coverage"],a:1},
+
+{t:"Simulation-based learning is particularly effective for improving:",o:["Theoretical recall","Psychomotor skills and teamwork","Reading skills","Note-taking"],a:1},
+
+{t:"Problem-based learning (PBL) primarily promotes:",o:["Teacher-led instruction","Inquiry and self-directed learning","Passive listening","Content memorization"],a:1},
+
+{t:"Role-playing activities in nursing education help students to:",o:["Avoid emotional involvement","Build empathy and communication skills","Memorize policies","Reduce interaction"],a:1},
+
+{t:"Peer teaching benefits learners mainly by:",o:["Reducing teacher workload","Reinforcing understanding and leadership","Limiting discussion","Replacing instructors"],a:1},
+
+{t:"Think-Pair-Share strategy is designed to:",o:["Encourage silent learning","Promote individual memorization","Increase participation and discussion","Reduce peer interaction"],a:2},
+
+{t:"Concept mapping is mainly used to:",o:["Assess exams","Organize and link ideas visually","Deliver lectures","Test memorization"],a:1},
+
+{t:"Debates in nursing education are useful for developing:",o:["Technical skills only","Ethical reasoning and respect for diverse views","Speed of learning","Content recall"],a:1},
+
+{t:"Active learning strategies are most effective when they:",o:["Ignore learner experience","Encourage reflection and collaboration","Focus only on exams","Limit student autonomy"],a:1},
+
+{t:"Ethical reflection is MOST supported in active learning through:",o:["Lecture notes","Case discussions and role-play","Written tests","Rote memorization"],a:1},
+
+
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
