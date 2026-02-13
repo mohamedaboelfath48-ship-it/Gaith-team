@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+  {t: "Which maneuver is used during the abdominal examination in the 1st stage of labor to determine fetal position?", o: ["Leopold maneuver", "Brandt-Andrews maneuver", "Mendelson maneuver", "REEDA scale"], a: 0},
+    {t: "To prevent Mendelson's syndrome during the active phase of labor, which of the following is administered?", o: ["Petheidine 100mg", "Intravenous fluids like glucose or saline", "Vitamin K1", "Ergometrine 0.5mg"], a: 1},
+    {t: "What is the recommended dose of Petheidine for analgesia during the first stage of labor?", o: ["10-20 mg I.M.", "200-300 mg I.M.", "50-100 mg I.M.", "5-10 mg I.M."], a: 2},
+    {t: "In the 1st stage of labor, the woman is encouraged to micturate every:", o: ["1 hour", "2-3 hours", "5-6 hours", "8 hours"], a: 1},
+    {t: "What is the primary sign indicating the onset of the second stage of labor?", o: ["Rupture of membranes", "Fetal crowning", "Full cervical dilatation", "Onset of mild contractions"], a: 2},
+    {t: "Crowning is defined as the moment when which fetal diameter passes through the vulval ring?", o: ["Sub-occipitobregmatic", "Bi-parietal diameter (B.P.D)", "Occipito-frontal", "Mento-vertical"], a: 1},
+    {t: "At what point during the second stage of labor should an episiotomy be performed?", o: ["Before crowning", "At crowning", "After the head is delivered", "When the cervix is 5cm dilated"], a: 1},
+    {t: "During the 3rd stage of labor, which medication is given to help uterine contraction and minimize blood loss?", o: ["Morphine", "Vitamin K1", "Ergometrine 0.5 mg", "Terramycin"], a: 2},
+    {t: "The Brandt-Andrews method is an active management technique used in which stage of labor?", o: ["1st stage", "2nd stage", "3rd stage", "4th stage"], a: 2},
+    {t: "In the 4th stage of labor, how often should vital signs be assessed during the first hour?", o: ["Every 5 minutes", "Every 15 minutes", "Every 30 minutes", "Once an hour"], a: 1},
+    {t: "The REEDA scale is used to assess which of the following?", o: ["Fetal heart sounds", "Cervical dilatation", "Perineum and episiotomy healing", "Apgar score"], a: 2},
+    {t: "What is the correct sequence for suctioning a newborn immediately after birth?", o: ["Nose then mouth", "Mouth then nose", "Both simultaneously", "Suction is not recommended"], a: 1},
+    {t: "Which Apgar score range indicates that a newborn is at 'High Risk'?", o: ["1-4", "5-7", "7-8", "10"], a: 0},
+    {t: "Vitamin K1 is administered to the newborn to prevent which condition?", o: ["Ophthalmia neonatorum", "Hemorrhagic disease of newborn", "Jaundice", "Hypothermia"], a: 1},
+    {t: "Which component is NOT part of the Apgar scoring system?", o: ["Heart rate", "Respiratory effort", "Birth weight", "Muscle tone"], a: 2},
+    {t: "Terramycin eye drops are applied to the newborn to avoid:", o: ["Conjunctivitis", "Ophthalmia neonatorum", "Glaucoma", "Cataracts"], a: 1},
+    {t: "During the 4th stage of labor, why is the woman encouraged to pass urine?", o: ["To measure kidney function", "To prevent uterine atony and postpartum hemorrhage", "To check for proteinuria", "To promote relaxation"], a: 1},
+    {t: "For painless labor, an epidural puncture is typically performed in the space between:", o: ["L1 and L2", "L2 and L3", "L4 and L5", "T12 and L1"], a: 1},
+    {t: "What is the initial dose of the drug solution for epidural analgesia?", o: ["5 mL", "10 mL", "20 mL", "50 mL"], a: 1},
+    {t: "Walking during the 1st stage of labor is allowed provided that:", o: ["The cervix is fully dilated", "The woman is in the active phase", "Membranes are intact and there is no bleeding", "The fetal head is at station +2"], a: 2},
+    {t: "Vaginal examination in the 1st stage of labor helps detect cervical dilatation and effacement.", o: ["True", "False"], a: 0},
+    {t: "The rectum is evacuated by enema during the 1st stage of labor.", o: ["True", "False"], a: 0},
+    {t: "In the second stage of labor, the woman should be placed in the Trendelenburg position.", o: ["True", "False"], a: 1},
+    {t: "Staff attending the delivery should wear sterile masks, caps, and gloves to maintain asepsis.", o: ["True", "False"], a: 0},
+    {t: "After crowning, upward pressure should be applied to the occiput to speed up delivery.", o: ["True", "False"], a: 1},
+    {t: "Apgar scoring is performed at one and five minutes after birth.", o: ["True", "False"], a: 0},
+    {t: "Cord care involves spraying the stump with 70% alcohol.", o: ["True", "False"], a: 0},
+    {t: "The newborn's footprints and the mother's thumbprint are taken for identification purposes.", o: ["True", "False"], a: 0},
+    {t: "Breastfeeding should be delayed for at least 24 hours after delivery.", o: ["True", "False"], a: 1},
+    {t: "Mendelson's syndrome refers to the pulmonary aspiration of vomitus during general anesthesia.", o: ["True", "False"], a: 0}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=15*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
