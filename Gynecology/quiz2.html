@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gaith Team Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --main:#0891b2;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --qbg:#cffafe;
+  --opt:#f0f9ff;
+  --sel:#67e8f9;
+  --ok:#16a34a;
+  --bad:#dc2626;
+}
+body{margin:0;font-family:Segoe UI,Arial;background:var(--bg)}
+header{
+  background:var(--main);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+}
+.logo{font-size:26px;font-weight:900}
+.slogan{font-size:18px;font-weight:800;margin-top:6px}
+.timer{font-size:18px;font-weight:800;margin-top:6px}
+
+.container{max-width:900px;margin:auto;padding:20px}
+
+.counter{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.card{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.question{
+  background:var(--qbg);
+  padding:18px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.option{
+  background:var(--opt);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.selected{background:var(--sel)}
+.option.disabled{opacity:.6;cursor:not-allowed}
+
+.feedback{margin-top:12px;font-size:18px;font-weight:900}
+.correct{color:var(--ok)}
+.wrong{color:var(--bad)}
+
+.nav{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+.nav button{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:900;
+}
+.next{background:var(--main);color:#fff}
+.prev{background:#e0f2fe}
+.next:disabled{background:#7dd3fc}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Gaith Team</div>
+  <div class="slogan">الإمتحان في جيبك</div>
+  <div class="timer" id="timer">40:00</div>
+</header>
+
+<div class="container">
+
+<div class="counter">
+  <div>Answered: <span id="answered">0</span></div>
+  <div>Remaining: <span id="remaining">0</span></div>
+</div>
+
+<div class="card" id="box"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQ()">Previous</button>
+  <button class="next" id="nextBtn" onclick="nextQ()" disabled>Next</button>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* EASY (1–25) */
+{t:"Pregnancy normally lasts about 40 weeks from the first day of last menstrual period.",a:true},
+{t:"Fertilization occurs immediately after ovulation.",a:false},
+{t:"The ovum remains viable for about 24 hours after ovulation.",a:true},
+{t:"Sperm can survive in the female genital tract for up to 5 days.",a:true},
+{t:"Implantation usually occurs 6–7 days after fertilization.",a:true},
+{t:"The decidua basalis forms the maternal part of the placenta.",a:true},
+{t:"Chorionic villi increase the surface area for exchange.",a:true},
+{t:"The placenta acts as a respiratory organ for the fetus.",a:true},
+{t:"Oxygen passes from mother to fetus through simple diffusion.",a:true},
+{t:"Glucose is the main nutrient transferred to the fetus.",a:true},
+{t:"The placenta secretes progesterone.",a:true},
+{t:"Human chorionic gonadotropin maintains the corpus luteum.",a:true},
+{t:"Estrogen is responsible for uterine growth during pregnancy.",a:true},
+{t:"The umbilical vein carries oxygenated blood.",a:true},
+{t:"The umbilical arteries carry blood from fetus to placenta.",a:true},
+{t:"Amniotic fluid volume decreases gradually until term.",a:false},
+{t:"Amniotic fluid allows free fetal movement.",a:true},
+{t:"Fetal urine contributes to amniotic fluid in late pregnancy.",a:true},
+{t:"Fetal membranes include amnion and chorion.",a:true},
+{t:"The chorion is the inner fetal membrane.",a:false},
+{t:"Antenatal visits should start after delivery.",a:false},
+{t:"Weight gain is monitored during antenatal care.",a:true},
+{t:"Normal pregnancy may cause nausea and vomiting.",a:true},
+{t:"Ptyalism means excessive salivation.",a:true},
+{t:"Leg cramps are common during pregnancy.",a:true},
+
+/* MODERATE (26–55) */
+{t:"Progesterone relaxes smooth muscles during pregnancy.",a:true},
+{t:"Increased progesterone may cause constipation.",a:true},
+{t:"Frequent urination in pregnancy is due to pressure on the bladder.",a:true},
+{t:"Varicose veins are uncommon in pregnancy.",a:false},
+{t:"Supine hypotension syndrome occurs due to vena cava compression.",a:true},
+{t:"Abortion is loss of pregnancy before 24 weeks.",a:true},
+{t:"Fetal viability is reached at 37 weeks.",a:false},
+{t:"Ectopic pregnancy is a cause of bleeding in early pregnancy.",a:true},
+{t:"Vesicular mole is a cause of first trimester bleeding.",a:true},
+{t:"Threatened abortion has a good prognosis in most cases.",a:true},
+{t:"Reassurance is important in management of threatened abortion.",a:true},
+{t:"Inevitable abortion cannot be stopped.",a:true},
+{t:"Severe bleeding may occur in inevitable abortion.",a:true},
+{t:"In complete abortion, uterus is empty on ultrasound.",a:true},
+{t:"Septic abortion is commonly caused by poor aseptic techniques.",a:true},
+{t:"Fever is a sign of septic abortion.",a:true},
+{t:"Missed abortion may be discovered accidentally on ultrasound.",a:true},
+{t:"Coagulation profile is important in missed abortion.",a:true},
+{t:"Recurrent abortion is defined as two abortions.",a:false},
+{t:"Uterine abnormalities may cause recurrent abortion.",a:true},
+{t:"Cervical cerclage is used for cervical incompetence.",a:true},
+{t:"Preterm labor occurs between 24 and 37 weeks.",a:true},
+{t:"Lack of antenatal care increases preterm labor risk.",a:true},
+{t:"Anemia is a maternal risk factor for preterm labor.",a:true},
+{t:"Multiple pregnancy increases uterine overdistension.",a:true},
+{t:"PROM stands for premature rupture of membranes.",a:true},
+{t:"Bloody vaginal discharge may indicate preterm labor.",a:true},
+{t:"Cervical dilatation of 4 cm suggests established labor.",a:true},
+{t:"Preterm babies lack adequate subcutaneous fat.",a:true},
+{t:"Hypothermia is a risk in premature infants.",a:true},
+
+/* HARD (56–80) */
+{t:"Surfactant deficiency is a cause of respiratory distress syndrome.",a:true},
+{t:"Preterm infants are more prone to intracranial hemorrhage.",a:true},
+{t:"Hypoglycemia is common in low birth weight babies.",a:true},
+{t:"Long umbilical cord increases risk of cord prolapse.",a:true},
+{t:"Short umbilical cord may cause placental separation.",a:true},
+{t:"True knots of the cord always cause fetal death.",a:false},
+{t:"Velamentous insertion exposes vessels to rupture.",a:true},
+{t:"White infarction of placenta is physiological.",a:true},
+{t:"Red infarction of placenta is pathological.",a:true},
+{t:"Placental tumors include chorioangioma.",a:true},
+{t:"Placenta previa causes painless vaginal bleeding.",a:true},
+{t:"Abruptio placenta causes painful vaginal bleeding.",a:true},
+{t:"Tocolytics are contraindicated in fetal death.",a:true},
+{t:"Tocolysis requires cervical dilatation less than 4 cm.",a:true},
+{t:"Beta-agonists may cause pulmonary edema.",a:true},
+{t:"Indomethacin is a prostaglandin synthesis inhibitor.",a:true},
+{t:"Nifedipine is a calcium channel blocker.",a:true},
+{t:"Magnesium sulfate can cause respiratory depression.",a:true},
+{t:"Preterm infants have immature immune systems.",a:true},
+{t:"Infection is a leading cause of neonatal mortality.",a:true},
+{t:"Incubator humidity should be maintained for preterm babies.",a:true},
+{t:"Early breastfeeding improves survival of preterm infants.",a:true},
+{t:"Excess oxygen may cause retinopathy of prematurity.",a:true},
+{t:"Kangaroo mother care helps regulate infant temperature.",a:true},
+{t:"Good antenatal care reduces maternal and fetal complications.",a:true}
+];
+
+let i=0;
+let answers=Array(questions.length).fill(null);
+let time=40*60;
+
+setInterval(()=>{
+  let m=Math.floor(time/60),s=time%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  time--; if(time<0)finish();
+},1000);
+
+function updateCounter(){
+  answered.innerText=answers.filter(a=>a!==null).length;
+  remaining.innerText=questions.length-answered.innerText;
+}
+
+function showQ(){
+  let q=questions[i],sel=answers[i];
+  nextBtn.disabled=sel===null;
+  let h=`<div class="question">${q.t}</div>
+  <div class="option ${sel===true?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(true)">True</div>
+  <div class="option ${sel===false?"selected":""} ${sel!==null?"disabled":""}" onclick="choose(false)">False</div>`;
+  if(sel!==null){
+    h+=`<div class="feedback ${sel===q.a?"correct":"wrong"}">
+      ${sel===q.a?"✔️ Correct":"😞 Wrong"}
+    </div>`;
+  }
+  box.innerHTML=h;
+  updateCounter();
+}
+
+function choose(v){if(answers[i]!==null)return;answers[i]=v;showQ();}
+function nextQ(){if(i<questions.length-1){i++;showQ();}else finish();}
+function prevQ(){if(i>0){i--;showQ();}}
+
+function finish(){
+  let c=0;answers.forEach((a,idx)=>{if(a===questions[idx].a)c++;});
+  document.body.innerHTML=`
+  <header><div class="logo">Gaith Team</div><div class="slogan">الإمتحان في جيبك</div></header>
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <p style="color:green;font-size:22px;font-weight:900">Correct: ${c}</p>
+      <p style="color:red;font-size:22px;font-weight:900">Wrong: ${questions.length-c}</p>
+      <p style="font-size:20px">Score: ${Math.round(c/questions.length*100)}%</p>
+      <p style="margin-top:14px;font-size:22px;font-weight:900;color:#0891b2">
+        فخورين بيك وأشطر شطور 🌟
+      </p>
+    </div>
+  </div>`;
+}
+
+showQ();
+</script>
+
+</body>
+</html>
